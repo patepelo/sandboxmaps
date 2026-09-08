@@ -26,7 +26,7 @@ def getCommitMessage() {
   return run(['git', '--no-pager', 'show', '-s', '--format=%s%n%n%b', 'HEAD']).trim()
 }
 
-project.ext.appId = 'app.comaps'
+project.ext.appId = 'app.sandboxmaps'
 project.ext.appName = 'Sandbox Maps'
 
 
@@ -92,7 +92,7 @@ android {
       applicationIdSuffix '.google'
       versionName = android.defaultConfig.versionName + '-Google'
       buildConfigField 'String', 'SUPPORT_MAIL', '"gplay@comaps.app"'
-      buildConfigField 'String', 'REVIEW_URL', '"market://details?id=app.comaps.google"'
+      buildConfigField 'String', 'REVIEW_URL', '"market://details?id=app.sandboxmaps.google"'
     }
 
     // Distributed directly by the project, e.g. in repo releases, chats, etc.
@@ -115,7 +115,7 @@ android {
       versionName = android.defaultConfig.versionName + '-Huawei'
       versionCode = HUAWEI_VERSION_CODE_BASE + android.defaultConfig.versionCode
       buildConfigField 'String', 'SUPPORT_MAIL', '"huawei@comaps.app"'
-      buildConfigField 'String', 'REVIEW_URL', '"appmarket://details?id=app.comaps"'
+      buildConfigField 'String', 'REVIEW_URL', '"appmarket://details?id=app.sandboxmaps"'
     }
   }
 
