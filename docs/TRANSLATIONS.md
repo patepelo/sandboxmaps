@@ -1,5 +1,8 @@
 # Translations
 
+> **Note:** This document describes the upstream [CoMaps](https://codeberg.org/comaps/comaps) project, not the Sandbox Maps fork.
+> Sandbox Maps is not accepting contributions - see [CONTRIBUTING.md](../CONTRIBUTING.md).
+
 Translations are managed through [Codeberg Translate][codeberg_translate], which is based on Weblate. Please [contribute][contribute] translations via the [Codeberg Translate][codeberg_translate], and the system and maintainers will handle the rest.
 
 ## Components

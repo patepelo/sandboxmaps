@@ -1,5 +1,8 @@
 # Reviews
 
+> **Note:** This document describes the upstream [CoMaps](https://codeberg.org/comaps/comaps) project, not the Sandbox Maps fork.
+> Sandbox Maps is not accepting contributions - see [CONTRIBUTING.md](../CONTRIBUTING.md).
+
 This file documents how place reviews are handled in CoMaps. It contains both the ops instructions and pointers
 to the relevant parts of the codebase. If you're primarily interested in generating MWM files with reviews, see
 the [Operation](#operation) section. If you'd like to make changes to where the reviews are sourced, how they are stored

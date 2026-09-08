@@ -1,5 +1,8 @@
 # Contributing
 
+> **Note:** This document describes the upstream [CoMaps](https://codeberg.org/comaps/comaps) project, not the Sandbox Maps fork.
+> Sandbox Maps is not accepting contributions - see [CONTRIBUTING.md](../CONTRIBUTING.md).
+
 Thank you for your interest in contributing to CoMaps!
 
 ## How Can I Contribute?

@@ -1,10 +1,10 @@
 # Deploy your maps files server
 
-This doc explains how to deploy your own instance of a CoMaps server with files from official CDNs (We are working to be able to download maps files without hardcoded countries.txt file embedded in the app)
+This doc explains how to deploy your own instance of a Sandbox Maps server with files from official CDNs (We are working to be able to download maps files without hardcoded countries.txt file embedded in the app)
 We explain how to deploy with minimal config, but each tool has different options to change server port or choose maps files that you want to download.
 
 ## Deploy a server
-Our community has developed different tools to deploy easily an instance of a CoMaps server:
+Our community has developed different tools to deploy easily an instance of a Sandbox Maps server:
 - [comaps-map-distributor](https://codeberg.org/gedankenstuecke/comaps-map-distributor)
 - [comaps-server](https://github.com/myanesp/comaps-server)
 
@@ -19,7 +19,7 @@ Prerequisites
 - Launch the tool with this command `comaps-map-distributor download-maps`
 - Choose map files you want to download from official CDNs
 - Run `comaps-map-distributor serve-maps`
-- Go to your mobile device -> CoMaps -> settings -> Advanced -> Custom Maps server
+- Go to your mobile device -> Sandbox Maps -> settings -> Advanced -> Custom Maps server
 - Edit URL with your URL server and enjoy
 
 ### Deploy comaps-server
@@ -38,7 +38,7 @@ Prerequisites
   -e OUTPUT_DIR=/maps \
   -p "80:80" \
   ghcr.io/myanesp/comaps-server:latest```
-- Go to your mobile device -> CoMaps -> settings -> Advanced -> Custom Maps server
+- Go to your mobile device -> Sandbox Maps -> settings -> Advanced -> Custom Maps server
 - Edit URL with your URL server and enjoy   
 
 #### Docker compose

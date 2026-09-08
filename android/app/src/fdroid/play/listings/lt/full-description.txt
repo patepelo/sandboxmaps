@@ -1,4 +1,4 @@
-Bendruomenės vystoma nemokama atvirojo kodo žemėlapių programa, pagrįsta „OpenStreetMap“ duomenimis ir sustiprinta įsipareigojimu užtikrinti skaidrumą, privatumą ir pelno nesiekimą. „CoMaps“ programa yra kilusi iš „Organic Maps“, o pastaroji – iš programos „Maps.ME“.
+Bendruomenės vystoma nemokama atvirojo kodo žemėlapių programa, pagrįsta „OpenStreetMap“ duomenimis ir sustiprinta įsipareigojimu užtikrinti skaidrumą, privatumą ir pelno nesiekimą. „Sandbox Maps“ programa yra kilusi iš „Organic Maps“, o pastaroji – iš programos „Maps.ME“.
 
 Apie šio projekto kilmę, jos priežastis ir palaikomą kryptį galite paskaityti adresu <b><i>codeberg.org/comaps</i></b>.
 Prisijunkite prie bendruomenės ir padėkite sukurti geriausią žemėlapių programą

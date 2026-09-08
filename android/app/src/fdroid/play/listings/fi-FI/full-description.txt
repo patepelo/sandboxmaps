@@ -1,4 +1,4 @@
-Yhteisön johtama vapaa ja avoimeen lähdekoodiin perustuva karttasovellus, jonka karttadata perustuu OpenStreetMap:n avoimeen dataan. Sovelluksessa painottuu vahva sitoutuminen läpinäkyvyyteen, yksityisyyteen ja voittoa tavoittelemattomaan toimintaan. CoMaps on haarautunut Organic Maps:sta, joka taas omalta osaltaan on haarautunut Maps.ME:stä.
+Yhteisön johtama vapaa ja avoimeen lähdekoodiin perustuva karttasovellus, jonka karttadata perustuu OpenStreetMap:n avoimeen dataan. Sovelluksessa painottuu vahva sitoutuminen läpinäkyvyyteen, yksityisyyteen ja voittoa tavoittelemattomaan toimintaan. Sandbox Maps on haarautunut Organic Maps:sta, joka taas omalta osaltaan on haarautunut Maps.ME:stä.
 
 Lue tarkemmin projektin syistä ja sen suunnasta osoitteesta <b><i>codeberg.org/comaps</i></b>.
 Liity yhteisöön ja auta kehittämään parasta karttasovellusta

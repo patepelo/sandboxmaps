@@ -1,4 +1,4 @@
-Kogukonna juhitud vaba, avatud ja tasuta kaardirakendus, mis kasutab OpenStreetMapi kaardiandmeid ja on kantud meie kohustusest toimida läbipaistvalt, privaatselt ja kasumit mittetaotlevana. CoMaps on loodud Organic Mapsi põhjal, mis omakorda on loodud Maps.ME põhjal.
+Kogukonna juhitud vaba, avatud ja tasuta kaardirakendus, mis kasutab OpenStreetMapi kaardiandmeid ja on kantud meie kohustusest toimida läbipaistvalt, privaatselt ja kasumit mittetaotlevana. Sandbox Maps on loodud Organic Mapsi põhjal, mis omakorda on loodud Maps.ME põhjal.
 
 Selgitust selle projektiga alustamisele ning teavet meie edaspidiste plaanide kohta leiad <b><i>codeberg.org/comaps</i></b> lehelt.
 Liitu kogukonnaga ja aita luua parimat kaardirakendust:

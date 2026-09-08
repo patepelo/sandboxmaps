@@ -1,1 +1,1 @@
-Лесна навигация - Открийте повече от вашето пътуване - Подкрепен от общността
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

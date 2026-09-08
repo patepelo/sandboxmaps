@@ -1,4 +1,4 @@
-O aplicație de hărți gratuită & open source, condusă de comunitate, bazată pe date OpenStreetMap și întărită prin angajament față de transparență, confidențialitate și statut non-profit. CoMaps este un fork/spin-off al Organic Maps, care la rândul său este un fork al Maps.ME.
+O aplicație de hărți gratuită & open source, condusă de comunitate, bazată pe date OpenStreetMap și întărită prin angajament față de transparență, confidențialitate și statut non-profit. Sandbox Maps este un fork/spin-off al Organic Maps, care la rândul său este un fork al Maps.ME.
 
 Citește mai multe despre motivele proiectului și direcția sa pe <b><i>codeberg.org/comaps</i></b>.
 Alătură-te comunității de acolo și ajută la crearea celei mai bune aplicații de hărți:

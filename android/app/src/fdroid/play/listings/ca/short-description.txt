@@ -1,1 +1,1 @@
-Navegació intuïtiva - Descobreix el teu camí - El poder de la comunitat
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

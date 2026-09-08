@@ -1,1 +1,1 @@
-Find let vej med kortet - Oplev mere af din rejse - Drevet af fællesskabet
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

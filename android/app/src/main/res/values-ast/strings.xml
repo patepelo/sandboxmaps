@@ -33,7 +33,7 @@
     <string name="no">Non</string>
     <string name="network">Rede: %s</string>
     <string name="export_file_gpx">Esportar GPX</string>
-    <string name="about_menu_title">Tocante a CoMaps</string>
+    <string name="about_menu_title">Tocante a Sandbox Maps</string>
     <string name="search_show_on_map">Ver nel mapa</string>
     <string name="downloader_delete_map">Desaniciar mapa</string>
     <string name="edit">Editar</string>
@@ -66,7 +66,7 @@
     <string name="editor_edit_place_name_hint">Nome del llugar</string>
     <string name="current_location_unknown_error_title">Desconózse l’allugamientu actual.</string>
     <string name="elevation_profile_ascent">Ascensu</string>
-    <string name="traffic_update_app">Anueva CoMaps</string>
+    <string name="traffic_update_app">Anueva Sandbox Maps</string>
     <string name="placepage_add_stop">Amestar parada</string>
     <string name="placepage_remove_stop">Desaniciar parada</string>
     <string name="prefs_group_privacy">Privacidá</string>
@@ -162,6 +162,5 @@
     <string name="panoramax">Panoramax Foto</string>
     <string name="app_site_url">https://comaps.app/</string>
     <string name="saved">Archivos</string>
-    <string name="about_proposition_3">• Offline, rápidu y compactu</string>
     <string name="back">Atrás</string>
 </resources>

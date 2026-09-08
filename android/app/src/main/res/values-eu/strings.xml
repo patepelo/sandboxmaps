@@ -34,24 +34,14 @@
     <string name="country_status_download_failed">Deskargak huts egin du</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Saiatu berriro</string>
-    <string name="about_menu_title">CoMaps-i buruz</string>
-    <!-- Text in About screen -->
-    <string name="about_headline">Proiektu irekia, auzolanean egina</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• Erabiltzeko erraza eta leundua</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">• Pribatutasunean zentratua eta iragarkirik gabea</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• Offline, azkarra eta minimalista</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Guztiz kode irekikoa, irabazi asmorik gabea, erabaki eta finantza gardenak.</string>
+    <string name="about_menu_title">Sandbox Maps-i buruz</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Kokapen ezarpenak</string>
     <string name="close">Itxi</string>
     <string name="unsupported_phone">Aplikazioak hardwarez azeleratutako OpenGL behar du. Zoritxarrez, zure gailuak ez du hau eskaintzen.</string>
     <string name="download">Deskargatu</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disconnect_usb_cable">Mesedez, deskonektatu USB kablea edo sartu SD memoria CoMaps erabiltzeko</string>
+    <string name="disconnect_usb_cable">Mesedez, deskonektatu USB kablea edo sartu SD memoria Sandbox Maps erabiltzeko</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="not_enough_free_space_on_sdcard">Mesedez, egin lekua SD memorian/USB biltegian aplikazioa erabiltzeko</string>
     <string name="download_resources">Hasi aurretik deskargatu mesedez mundu-mapa orokorra zure gailura. \nMemorian %s erabiliko ditu.</string>
@@ -148,8 +138,8 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">Oharrak</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">CoMaps markagailuak zurekin partekatu dira</string>
-    <string name="share_bookmarks_email_body">Kaixo! \nNire markagailuak CoMaps aplikazioan erantsi ditut. Mesedez, ireki itzazu CoMaps instalatuta baduzu. Edo, ez baduzu, deskargatu aplikazioa zure iOS edo Android gailurako esteka hau jarraituz: https://www.comaps.app/download/ \n \nGozatu bidaiatzen CoMaps-ekin!</string>
+    <string name="share_bookmarks_email_subject">Sandbox Maps markagailuak zurekin partekatu dira</string>
+    <string name="share_bookmarks_email_body">Kaixo! \nNire markagailuak Sandbox Maps aplikazioan erantsi ditut. Mesedez, ireki itzazu Sandbox Maps instalatuta baduzu. Edo, ez baduzu, deskargatu aplikazioa zure iOS edo Android gailurako esteka hau jarraituz: https://www.comaps.app/download/ \n \nGozatu bidaiatzen Sandbox Maps-ekin!</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Gogokoak kargatzen</string>
     <!-- Kmz file successful loading -->
@@ -158,7 +148,7 @@
     <string name="load_kmz_failed">Ezin izan dira markagailuak kargatu. Fitxategia hondatuta edo akastuna izan daiteke.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">Aplikazioak ez du fitxategi mota ezagutzen: \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">Ezin izan da fitxategia ireki %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">Editatu</string>
@@ -169,9 +159,9 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">Mapak deskargatzen ari dira</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">Ikusi nire uneko kokapena CoMaps-en! %1$s edo %2$s Ez al duzu lineaz kanpoko maparik? Deskargatu hemendik: https://www.comaps.app/download/</string>
+    <string name="my_position_share_sms">Ikusi nire uneko kokapena Sandbox Maps-en! %1$s edo %2$s Ez al duzu lineaz kanpoko maparik? Deskargatu hemendik: https://www.comaps.app/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Ikusi nire uneko kokapena CoMaps mapan!</string>
+    <string name="my_position_share_email_subject">Ikusi nire uneko kokapena Sandbox Maps mapan!</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">Partekatu</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -192,7 +182,7 @@
     <string name="prefs_group_route">Nabigazioa</string>
     <string name="pref_zoom_title">Zoom botoiak</string>
     <string name="pref_zoom_summary">Erakutsi mapan</string>
-    <string name="download_resources_custom_url_message">Gainidatzi erabiltzen den mapa deskargatzeko zerbitzari lehenetsia. Utzi hutsik CoMaps zerbitzari lehenetsia erabiltzeko.</string>
+    <string name="download_resources_custom_url_message">Gainidatzi erabiltzen den mapa deskargatzeko zerbitzari lehenetsia. Utzi hutsik Sandbox Maps zerbitzari lehenetsia erabiltzeko.</string>
     <string name="download_resources_custom_url_summary_none">Ezarri gabe</string>
     <string name="download_resources_custom_url_error_scheme">Sartu http:// edo https://-rekin hasten den URL bat</string>
     <!-- Settings «Map» category: «Night style» title -->
@@ -230,7 +220,7 @@
     <string name="menu">Menua</string>
     <!-- Text in menu -->
     <string name="website">Webgunea</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">Albisteak</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">Eritzia</string>
@@ -243,7 +233,7 @@
     <!-- Button in the main menu -->
     <string name="donate">Dohaintza eman</string>
     <!-- Button in the main Help dialog -->
-    <string name="how_to_support_us">Izan bolondres eta hobetu CoMaps</string>
+    <string name="how_to_support_us">Izan bolondres eta hobetu Sandbox Maps</string>
     <!-- Button in the main Help dialog -->
     <string name="copyright">Egile eskubideak</string>
     <!-- Text in menu + Button in the main Help dialog -->
@@ -456,7 +446,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Komunitateak sortutako OpenStreetMap datuak %s-tik aurrera. Lortu informazio gehiago mapa editatu eta eguneratzeari buruz OpenStreetMap.org helbidean</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) mapa libre eta irekia eraikitzeko komunitateko proiektu bat da. CoMaps-en mapen datuen iturri nagusia da eta Wikipediaren antzera funtzionatzen du. Tokiak gehitu edo edita ditzakezu eta mundu osoko milioika erabiltzailerentzat eskuragarri egongo dira. \nSartu komunitatean eta lagundu mapa hobea egiten guztiontzat!</string>
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) mapa libre eta irekia eraikitzeko komunitateko proiektu bat da. Sandbox Maps-en mapen datuen iturri nagusia da eta Wikipediaren antzera funtzionatzen du. Tokiak gehitu edo edita ditzakezu eta mundu osoko milioika erabiltzailerentzat eskuragarri egongo dira. \nSartu komunitatean eta lagundu mapa hobea egiten guztiontzat!</string>
     <string name="login_to_make_edits_visible">Sortu OpenStreetMap kontu bat edo hasi saioa zure maparen aldaketak munduan argitaratzeko</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%1$d/%2$d</string>
@@ -470,7 +460,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">OpenStreetMap-eko boluntarioentzako oharra (aukerakoa)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Deskribatu mapan akatsak edo CoMaps erabiliz editatu ezin dena</string>
+    <string name="editor_note_hint">Deskribatu mapan akatsak edo Sandbox Maps erabiliz editatu ezin dena</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Zure aldaketak <a href="https://wiki.openstreetmap.org/wiki/About_OpenStreetMap">OpenStreetMap</a> datu-base publikora kargatzen dira. Mesedez, ez gehitu informazio pertsonalik edo copyrightdun informaziorik.</string>
     <string name="editor_more_about_osm">OpenStreetMap-i buruzko informazio gehiago</string>
@@ -480,7 +470,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Operadorea: %s</string>
     <string name="editor_category_unsuitable_title">Ezin duzu kategoria egokirik aurkitu?</string>
-    <string name="editor_category_unsuitable_text">CoMaps-ek puntu kategoria soilak gehitzeko aukera ematen du, hau da, ez da herririk, errepiderik, lakurik, eraikinen eskemarik, etab. Gehitu kategoria horiek zuzenean <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Begiratu gure <a href="https://www.comaps.app/support/advanced-map-editing/">gida</a> urratsez urrats argibide zehatzak lortzeko.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps-ek puntu kategoria soilak gehitzeko aukera ematen du, hau da, ez da herririk, errepiderik, lakurik, eraikinen eskemarik, etab. Gehitu kategoria horiek zuzenean <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Begiratu gure <a href="https://www.comaps.app/support/advanced-map-editing/">gida</a> urratsez urrats argibide zehatzak lortzeko.</string>
     <string name="downloader_no_downloaded_maps_title">Ez duzu maparik deskargatu</string>
     <string name="downloader_no_downloaded_maps_message">Deskargatu mapak kokapena aurkitzeko eta lineaz kanpo nabigatzeko</string>
     <string name="current_location_unknown_error_title">Uneko kokapena ezezaguna da</string>
@@ -533,7 +523,7 @@
     <string name="mobile_data_option_ask">Galdetu beti</string>
     <string name="traffic_update_maps_text">Trafiko datuak bistaratzeko, mapak eguneratu behar dira</string>
     <string name="increase_font_size">Handitu letra tamaina mapan</string>
-    <string name="traffic_update_app">Eguneratu CoMaps</string>
+    <string name="traffic_update_app">Eguneratu Sandbox Maps</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Trafiko datuak ez daude eskuragarri</string>
     <string name="enable_logging">Historia gaitu</string>
@@ -615,7 +605,7 @@
     <string name="power_managment_setting_never">Inoiz ez</string>
     <string name="power_managment_setting_auto">Automatikoa</string>
     <string name="power_managment_setting_manual_max">Energia aurrezpen handiena</string>
-    <string name="enable_logging_warning_message">Aukera hau diagnostiko helburua duten erregistro ekintzetarako gaituta dago. Honek gure taldeari aplikazioarekin arazoak identifikatzen laguntzen dio. Gaitu aukera CoMaps laguntzari eskatuta soilik.</string>
+    <string name="enable_logging_warning_message">Aukera hau diagnostiko helburua duten erregistro ekintzetarako gaituta dago. Honek gure taldeari aplikazioarekin arazoak identifikatzen laguntzen dio. Gaitu aukera Sandbox Maps laguntzari eskatuta soilik.</string>
     <string name="routing_options_title">Bideratzeko aukerak</string>
     <!-- Recommended length for CarPlay and Android Auto is around 25-27 characters -->
     <string name="avoid_tolls">Bidesariak saihestea</string>
@@ -741,9 +731,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">Gure helburu nagusia maite dituzun mapa azkarrak, pribatutasunari begira eta erabilerrazak sortzea da.</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">CoMaps telefonoaren pantailan erabiltzen ari zara</string>
+    <string name="car_used_on_the_phone_screen">Sandbox Maps telefonoaren pantailan erabiltzen ari zara</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">CoMaps autoaren pantailan erabiltzen ari zara</string>
+    <string name="car_used_on_the_car_screen">Sandbox Maps autoaren pantailan erabiltzen ari zara</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">Android Auto-ra konektatuta zaude</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -751,11 +741,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">Autoaren pantailara</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMaps-ek kokapenerako sarbidea behar du. Seguru dagoenean, egiaztatu zure telefonoko jakinarazpena.</string>
+    <string name="aa_location_permissions_request">Sandbox Maps-ek kokapenerako sarbidea behar du. Seguru dagoenean, egiaztatu zure telefonoko jakinarazpena.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">Aplikazio honek zure baimena behar du</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">Android Auto-ko CoMaps-ek kokapen-baimena behar du eraginkortasunez funtzionatzeko</string>
+    <string name="aa_request_permission_activity_text">Android Auto-ko Sandbox Maps-ek kokapen-baimena behar du eraginkortasunez funtzionatzeko</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">Eman baimenak</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
@@ -864,7 +854,7 @@
     <string name="editor_mark_business_vacant_description">Erabili hau negozioa mugitu bada eta espazioa hutsik eta maizter berri baterako prest badago.</string>
     <string name="place_page_map_too_old_title">Maparen datuak zaharkituta</string>
     <string name="place_page_map_too_old_description">Zure egungo maparen datuak oso zaharrak dira, eguneratu mapa.</string>
-    <string name="place_page_app_too_old_description">Zure egungo maparen datuak oso zaharrak dira, eguneratu CoMaps aplikazioa.</string>
+    <string name="place_page_app_too_old_description">Zure egungo maparen datuak oso zaharrak dira, eguneratu Sandbox Maps aplikazioa.</string>
     <string name="place_page_update_too_old_map">Eguneratu eskualdeko mapa</string>
     <string name="place_page_too_old_to_edit">OpenStreetMap edizioa desgaituta dago maparen datuak zaharregiak direlako.</string>
     <string name="osm_note_hint">Edo, bestela, utzi ohar bat OpenStreetMap komunitatearentzat, beste norbaitek hemen toki bat gehitu edo konpondu dezan.</string>
@@ -963,7 +953,7 @@
     <string name="not_following_route">Ibilbidea jarraitu gabe</string>
     <string name="route_recalculating">Ibilbidea birkalkulatzen…</string>
     <string name="pref_openexternallinks_title">Ireki automatikoki hirugarrenen estekak</string>
-    <string name="pref_openexternallinks_summary">Ireki hirugarrenen estekak CoMaps-en lehenespenez</string>
+    <string name="pref_openexternallinks_summary">Ireki hirugarrenen estekak Sandbox Maps-en lehenespenez</string>
     <string name="pref_aa_support_title">Android Auto</string>
     <string name="pref_aa_support_summary_yes">Aplikazioa Google Play-tik instalatu da, zure autoan erabil dezakezu.</string>
     <string name="pref_aa_support_summary_no">Aplikazioa ez da Google Play-tik instalatu, ezin duzu autoan erabili. Sakatu ezarpenak gure ohiko galderetan xehetasun gehiago lortzeko.</string>
@@ -978,6 +968,6 @@
     <string name="capacity_charging">Kargagailua duten aparkalekuak: %s</string>
     <string name="capacity_charging_yes">Kargagailua duten espazioak ditu</string>
     <string name="capacity_charging_no">Ez dago lekurik kargagailuekin</string>
-    <string name="permission_read_navigation_label">Irakurri CoMaps nabigazio-datuak</string>
+    <string name="permission_read_navigation_label">Irakurri Sandbox Maps nabigazio-datuak</string>
     <string name="permission_read_navigation_description">irakurri zuzeneko nabigazio-informazioa, hala nola datozen biraketak edo zoazen errepidearen izena</string>
 </resources>

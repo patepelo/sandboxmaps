@@ -1,4 +1,4 @@
-He polokalamu palapala ʻāina manuahi a wehe ʻia i alakaʻi ʻia e ke kaiāulu e pili ana i ka ʻikepili OpenStreetMap a hoʻoikaika ʻia me ka hoʻokō ʻana i ka transparency, ka pilikino a me ka ʻole o ka loaʻa kālā. ʻO CoMaps kahi ʻāpana/spin-off o Organic Maps, ʻo ia hoʻi kahi ʻāpana o Maps.ME.
+He polokalamu palapala ʻāina manuahi a wehe ʻia i alakaʻi ʻia e ke kaiāulu e pili ana i ka ʻikepili OpenStreetMap a hoʻoikaika ʻia me ka hoʻokō ʻana i ka transparency, ka pilikino a me ka ʻole o ka loaʻa kālā. ʻO Sandbox Maps kahi ʻāpana/spin-off o Organic Maps, ʻo ia hoʻi kahi ʻāpana o Maps.ME.
 
 E heluhelu e pili ana i nā kumu no ka papahana a me kona kuhikuhi ma <b><i>codeberg.org/comaps</i></b>.
 

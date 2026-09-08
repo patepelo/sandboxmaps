@@ -1,4 +1,4 @@
-Una aplicación de mapas gratuita y de código abierto liderada por la comunidad, basada en los datos de OpenStreetMap y reforzada con un compromiso con la transparencia, la privacidad y la ausencia de fines de lucro. CoMaps es un fork o derivado de Organic Maps, que a su vez es un fork de Maps.ME.
+Una aplicación de mapas gratuita y de código abierto liderada por la comunidad, basada en los datos de OpenStreetMap y reforzada con un compromiso con la transparencia, la privacidad y la ausencia de fines de lucro. Sandbox Maps es un fork o derivado de Organic Maps, que a su vez es un fork de Maps.ME.
 
 <br><br>
 

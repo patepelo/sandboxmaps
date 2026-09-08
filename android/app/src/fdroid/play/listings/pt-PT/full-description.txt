@@ -1,4 +1,4 @@
-Uma aplicação pela comunidade, grátis e ‘open-source’, de mapas baseada em dados do OpenStreetMap e reforçada com compromisso para transparência, privacidade e sem fins lucrativos. CoMaps é um fork/spin-off de Organic Maps, que, por sua vez, é um fork de Maps.ME
+Uma aplicação pela comunidade, grátis e ‘open-source’, de mapas baseada em dados do OpenStreetMap e reforçada com compromisso para transparência, privacidade e sem fins lucrativos. Sandbox Maps é um fork/spin-off de Organic Maps, que, por sua vez, é um fork de Maps.ME
 
 Leia sobre as razões deste projeto e a sua direção em <b><i>codeberg.org/comaps</i></b>.
 Junte-se à comunidade e ajude a fazer a melhor aplicação de mapas

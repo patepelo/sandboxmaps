@@ -1,4 +1,4 @@
-Aplikasi peta gratis & sumber terbuka yang dipimpin komunitas, berbasis data OpenStreetMap dan diperkuat dengan komitmen terhadap transparansi, privasi, serta non-profit. CoMaps adalah turunan dari Organic Maps, yang merupakan turunan dari Maps.ME.
+Aplikasi peta gratis & sumber terbuka yang dipimpin komunitas, berbasis data OpenStreetMap dan diperkuat dengan komitmen terhadap transparansi, privasi, serta non-profit. Sandbox Maps adalah turunan dari Organic Maps, yang merupakan turunan dari Maps.ME.
 
 Baca lebih lanjut tentang alasan proyek ini dan arahnya di <b><i>codeberg.org/comaps</i></b>.
 Bergabunglah dengan komunitas dan bantu menjadikan aplikasi peta terbaik

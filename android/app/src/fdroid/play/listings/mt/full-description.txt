@@ -1,4 +1,4 @@
-App għall-mapep b'xejn u b'sors miftuħ (open source) immexxi mill-komunità bbażata fuq dejta minn OpenStreetMap, b'impenn għal trasparenza, privatezza u mhux għal-profitt. CoMaps hija fork ta' Organic Maps, li min-naħa tagħha hija fork ta' Maps.ME.
+App għall-mapep b'xejn u b'sors miftuħ (open source) immexxi mill-komunità bbażata fuq dejta minn OpenStreetMap, b'impenn għal trasparenza, privatezza u mhux għal-profitt. Sandbox Maps hija fork ta' Organic Maps, li min-naħa tagħha hija fork ta' Maps.ME.
 
 Kompli aqra dwar ir-raġunijiet għall-proġett u d-direzzjoni tiegħu hawn <b><i>codeberg.org/comaps</i></b>.
 Ingħaqad mal-komunità u għin biex toħloq l-aqwa app tal-mapep

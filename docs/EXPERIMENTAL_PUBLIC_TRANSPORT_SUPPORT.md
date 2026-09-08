@@ -8,7 +8,7 @@ At the moment our app does not have full support for public transport. What we h
 - The "Subway layer" for visual representation of the OSM transit.
 - "Subway navigation" - OSM transit routing.
 
-:bus: But you can turn on the experimental feature of [GTFS](https://developers.google.com/transit/gtfs/reference) public transport and use it inside the CoMaps app. It includes all [transit types definded by GTFS specification:](https://developers.google.com/transit/gtfs/reference/extended-route-types) bus, train, ferry, aerial lifts of different kinds, trolleybus and much more. Let's call this version of transit data **GTFS transit** from now on.
+:bus: But you can turn on the experimental feature of [GTFS](https://developers.google.com/transit/gtfs/reference) public transport and use it inside the Sandbox Maps app. It includes all [transit types definded by GTFS specification:](https://developers.google.com/transit/gtfs/reference/extended-route-types) bus, train, ferry, aerial lifts of different kinds, trolleybus and much more. Let's call this version of transit data **GTFS transit** from now on.
 
 To mix in the experimental GTFS transit into the OSM transit data you should follow these steps:
 
@@ -71,7 +71,7 @@ TRANSIT_URL: file:///home/result_json_dir
 
 Run generator tool [as usual](../tools/python/maps_generator) with this ini config. After it is done you'll have mwms with transit section in experimental GTFS format.
 
-:checkered_flag: Use the resulting mwms in your app. Enjoy the experimental public transport in CoMaps!
+:checkered_flag: Use the resulting mwms in your app. Enjoy the experimental public transport in Sandbox Maps!
 
 ## If you have questions
 

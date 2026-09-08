@@ -1,4 +1,4 @@
-Komunum-gvidata senpaga kaj malfermkoda mapapliko bazita sur OpenStreetMap-datumoj kaj fortigita per komitado al transparencio, privateco kaj ne-lucro. CoMaps estas forko/spin-off de Organic Maps, kiu turne estas forko de Maps.ME.
+Komunum-gvidata senpaga kaj malfermkoda mapapliko bazita sur OpenStreetMap-datumoj kaj fortigita per komitado al transparencio, privateco kaj ne-lucro. Sandbox Maps estas forko/spin-off de Organic Maps, kiu turne estas forko de Maps.ME.
 
 Legu plu pri la kialoj por la projekto kaj ĝia direkto ĉe <b><i>codeberg.org/comaps</i></b>.
 Aliĝu al la komunumo tie kaj helpu fari la plej bonan mapaplikon

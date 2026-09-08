@@ -1,4 +1,4 @@
-Aplicación de mapas gratuíta, de código aberto e xestionada pola comunidade, obtén os datos desde OpenStreetMap e co compromiso reforzado coa transparencia, privacidade e non ter o beneficio económico como obxectivo. CoMaps é unha bifurcación ou derivada de Organic Maps, que pola súa parte ven sendo unha bifurcación de Maps.ME.
+Aplicación de mapas gratuíta, de código aberto e xestionada pola comunidade, obtén os datos desde OpenStreetMap e co compromiso reforzado coa transparencia, privacidade e non ter o beneficio económico como obxectivo. Sandbox Maps é unha bifurcación ou derivada de Organic Maps, que pola súa parte ven sendo unha bifurcación de Maps.ME.
 
 Vai a <b><i>codeberg.org/comaps</i></b> e coñece as razóns da necesidade deste proxecto e as decisións tomadas.
 Únete alí á comunidade e axuda a que teñamos a mellor aplicación de mapas

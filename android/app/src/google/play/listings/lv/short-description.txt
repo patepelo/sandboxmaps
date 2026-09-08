@@ -1,1 +1,1 @@
-Vienkārša kartes navigācija - Atklāj vairāk par savu ceļojumu - Darbina kopiena
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

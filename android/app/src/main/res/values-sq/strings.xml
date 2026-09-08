@@ -10,7 +10,6 @@
     <string name="app_site_url">https://comaps.app/</string>
     <string name="kilometres">Kilometra</string>
     <string name="saved">U ruajt</string>
-    <string name="about_proposition_3">• Jashtë linje, i shpejtë dhe kompakt</string>
     <string name="offline_explanation_title">Harta Jashtë Linje</string>
     <string name="offline_explanation_text">Një hartë e caktuar duhet shkarkuar që të mund të shihet një zonë dhe të udhëtoni aty.\nShkarkoni hartat për zonat ku dëshironi të udhëtoni.</string>
     <string name="editor_place_doesnt_exist_description">Përshkruani si duket vendi tani për të dërguar një shënim saktësimi për komunitetin OpenStreetMap</string>
@@ -34,7 +33,6 @@
     <string name="search">Kërko</string>
     <string name="zoom_to_country">Trego në hartë</string>
     <string name="country_status_download_failed">Shkarkimi dështoi</string>
-    <string name="about_headline">Projekt i hapur i mundësuar nga komuniteti</string>
     <string name="close">Mbyll</string>
     <string name="download">Shkarko</string>
     <string name="continue_button">Vazhdo</string>
@@ -70,7 +68,7 @@
     <string name="load_kmz_successful">Vendet e pëlqyera u ngarkuan me sukses! Mund t\'i gjeni ato në hartë ose te Të pëlqyerat.</string>
     <string name="edit">Redakto</string>
     <string name="unknown_current_position">Vendndodhja juaj nuk është caktuar akoma</string>
-    <string name="my_position_share_email_subject">Hej, shiko vendndodhjen time aktuale në hartën e CoMaps!</string>
+    <string name="my_position_share_email_subject">Hej, shiko vendndodhjen time aktuale në hartën e Sandbox Maps!</string>
     <string name="email">Posta Elektronike</string>
     <string name="done">Përfundo</string>
     <string name="tracks_title">Itineraret</string>

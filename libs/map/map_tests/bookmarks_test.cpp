@@ -1472,7 +1472,7 @@ UNIT_CLASS_TEST(Runner, ExportSingleUnicode)
     ZipFileReader::FileList files;
     ZipFileReader::FilesList(kmz, files);
     TEST_EQUAL(1, files.size(), ());
-    TEST_EQUAL("CoMaps.kml", files.at(0).first, ());
+    TEST_EQUAL("SandboxMaps.kml", files.at(0).first, ());
     auto tmpPath = base::JoinPath(GetPlatform().TmpDir(), "tmp.xml");
     ZipFileReader::UnzipFile(kmz, files.at(0).first, tmpPath);
     TEST(base::DeleteFileX(kmz), ());

@@ -1,1 +1,1 @@
-Jednoduchá navigácia - Objav viac zo svojej cesty - Funguje vďaka komunite
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

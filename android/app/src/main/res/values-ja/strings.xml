@@ -34,24 +34,14 @@
     <string name="country_status_download_failed">ダウンロードに失敗しました</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">再実行</string>
-    <string name="about_menu_title">CoMapsについて</string>
-    <!-- Text in About screen -->
-    <string name="about_headline">コミュニティ主導のオープンプロジェクト</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• 広告、追跡なし、データ収集なし</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">• プライバシー重視で広告なし</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• オフライン、高速、簡潔</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">愛好家とボランティアによって作成されたオープンソースアプリケーション。</string>
+    <string name="about_menu_title">Sandbox Mapsについて</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">ロケーション設定</string>
     <string name="close">閉じる</string>
     <string name="unsupported_phone">ハードウェアアクセラレーションされたOpenGLが必要です。残念ながらご利用中のデバイスではサポートされていません。</string>
     <string name="download">ダウンロード</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disconnect_usb_cable">CoMapsを利用するにはUSBケーブルを抜くかメモリーカードを挿入してください</string>
+    <string name="disconnect_usb_cable">Sandbox Mapsを利用するにはUSBケーブルを抜くかメモリーカードを挿入してください</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="not_enough_free_space_on_sdcard">アプリを起動するにはSDカード/USBストレージの空き容量を確保する必要があります</string>
     <string name="download_resources">利用を開始する前におおまかな世界地図をダウンロードします。\nこれには%sの空き容量が必要です。</string>
@@ -148,8 +138,8 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">メモ</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">CoMapsのお気に入りリストが共有されました</string>
-    <string name="share_bookmarks_email_body">こんにちは！ \n \n添付ファイルCoMapsのお気に入りリストです。もしインストールされていない場合はここからダウンロードができます： https://www.comaps.app/download/ \n \n旅行を楽しむときはCoMapsを使用してください!</string>
+    <string name="share_bookmarks_email_subject">Sandbox Mapsのお気に入りリストが共有されました</string>
+    <string name="share_bookmarks_email_body">こんにちは！ \n \n添付ファイルSandbox Mapsのお気に入りリストです。もしインストールされていない場合はここからダウンロードができます： https://www.comaps.app/download/ \n \n旅行を楽しむときはSandbox Mapsを使用してください!</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">お気に入りをロード中</string>
     <!-- Kmz file successful loading -->
@@ -158,7 +148,7 @@
     <string name="load_kmz_failed">お気に入りのロードに失敗しました。ファイルが破損していた、または問題があった可能性があります。</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">ファイルタイプがアプリに認識されない： \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">ファイルを開けなかった %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">編集</string>
@@ -169,9 +159,9 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">ダウンロード中です。</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">CoMaps で私の現在地が見れます！%1$s または %2$s オフラインマップはまだインストールしていないですか？ここからダウンロード： https://www.comaps.app/download/</string>
+    <string name="my_position_share_sms">Sandbox Maps で私の現在地が見れます！%1$s または %2$s オフラインマップはまだインストールしていないですか？ここからダウンロード： https://www.comaps.app/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">CoMapsで現在地を確認！</string>
+    <string name="my_position_share_email_subject">Sandbox Mapsで現在地を確認！</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">共有</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -227,7 +217,7 @@
     <string name="menu">メニュー</string>
     <!-- Text in menu -->
     <string name="website">ウェブサイト</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">ニュース</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">フィードバック</string>
@@ -457,7 +447,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">コミュニティが作成した%s時点の OpenStreetMap のデータ。地図の編集や更新の方法については、OpenStreetMap.org を参照してください</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org(OSM)は、フリーでオープンな地図を構築するコミュニティ・プロジェクトです。OSMは、CoMapsの地図データの主要なソースであり、ウィキペディアと同じように機能します。あなたが場所を追加したり編集したりすると、世界中の何百万人ものユーザーがその場所を利用できるようになります。\nコミュニティに参加して、より良い地図を一緒に作りましょう！</string>
+    <string name="login_osm_presentation">OpenStreetMap.org(OSM)は、フリーでオープンな地図を構築するコミュニティ・プロジェクトです。OSMは、Sandbox Mapsの地図データの主要なソースであり、ウィキペディアと同じように機能します。あなたが場所を追加したり編集したりすると、世界中の何百万人ものユーザーがその場所を利用できるようになります。\nコミュニティに参加して、より良い地図を一緒に作りましょう！</string>
     <string name="login_to_make_edits_visible">OpenStreetMapのアカウントを作成するかログインして、あなたの地図編集を世界中に公開しましょう。</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%2$dのうち%1$d</string>
@@ -471,7 +461,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">OpenStreetMapボランティアへの注意（オプション）</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">地図上のエラーやCoMapsで編集できないものについて説明します</string>
+    <string name="editor_note_hint">地図上のエラーやSandbox Mapsで編集できないものについて説明します</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">あなたの編集は公開されている<a href="https://wiki.openstreetmap.org/wiki/JA:参加する">OpenStreetMap</a>データベースにアップロードされます。個人情報や著作権のある情報は追加しないでください。</string>
     <string name="editor_more_about_osm">OpenStreetMapについての詳細</string>
@@ -534,7 +524,7 @@
     <string name="mobile_data_option_ask">常に確認</string>
     <string name="traffic_update_maps_text">交通データを表示するには、地図を更新する必要があります。</string>
     <string name="increase_font_size">地図上のフォントサイズを大きくする</string>
-    <string name="traffic_update_app">CoMaps をアップデートしてください</string>
+    <string name="traffic_update_app">Sandbox Maps をアップデートしてください</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">交通データは利用できません</string>
     <string name="enable_logging">ログを有効化</string>
@@ -613,7 +603,7 @@
     <string name="power_managment_setting_never">無効</string>
     <string name="power_managment_setting_auto">自動</string>
     <string name="power_managment_setting_manual_max">最大電力節約</string>
-    <string name="enable_logging_warning_message">このオプションは診断目的でのデータ記録を有効にします。これはこのアプリケーションのトラブルシューティングを担当する当社のサポートスタッフの助けになります。このオプションはCoMapsにリクエストされた場合にのみ有効にしてください。</string>
+    <string name="enable_logging_warning_message">このオプションは診断目的でのデータ記録を有効にします。これはこのアプリケーションのトラブルシューティングを担当する当社のサポートスタッフの助けになります。このオプションはSandbox Mapsにリクエストされた場合にのみ有効にしてください。</string>
     <string name="routing_options_title">経路オプション</string>
     <!-- Recommended length for CarPlay and Android Auto is around 25-27 characters -->
     <string name="avoid_tolls">有料道路を避ける</string>
@@ -739,9 +729,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">私たちの主な目標は、ユーザーに気に入っていただける、プライバシーを重視した使いやすいマップを高速に構築することです。</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">端末の画面でCoMapsを使用している</string>
+    <string name="car_used_on_the_phone_screen">端末の画面でSandbox Mapsを使用している</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">あなたは今、車の画面でCoMapsを使用している</string>
+    <string name="car_used_on_the_car_screen">あなたは今、車の画面でSandbox Mapsを使用している</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">Android Autoに接続している</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -749,11 +739,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">車のスクリーンへ</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMapsは位置情報へのアクセスを必要とする。安全になったら、携帯電話の通知をチェックしよう。</string>
+    <string name="aa_location_permissions_request">Sandbox Mapsは位置情報へのアクセスを必要とする。安全になったら、携帯電話の通知をチェックしよう。</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">このアプリはあなたの許可を必要とする</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">Android AutoのCoMapsを有効に機能させるには、位置情報の許可が必要です</string>
+    <string name="aa_request_permission_activity_text">Android AutoのSandbox Mapsを有効に機能させるには、位置情報の許可が必要です</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">許可を与える</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->

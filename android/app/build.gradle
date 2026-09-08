@@ -27,7 +27,7 @@ def getCommitMessage() {
 }
 
 project.ext.appId = 'app.comaps'
-project.ext.appName = 'CoMaps'
+project.ext.appName = 'Sandbox Maps'
 
 
 java {
@@ -203,7 +203,7 @@ android {
       versionNameSuffix '-debug'
       zipAlignEnabled true
       signingConfig = signingConfigs.debug
-      resValue 'string', 'app_name', 'CoMaps Debug'
+      resValue 'string', 'app_name', 'Sandbox Maps Debug'
       packagingOptions.jniLibs.useLegacyPackaging true
       android.packagingOptions.jniLibs.keepDebugSymbols += '**/liborganicmaps.so'
     }
@@ -247,7 +247,7 @@ android {
       // To learn more, go to the documentation section about R8 configuration files.
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
       matchingFallbacks = ['release'] // use dependencies of "release" build type
-      resValue 'string', 'app_name', 'CoMaps Test'
+      resValue 'string', 'app_name', 'Sandbox Maps Test'
       android.packagingOptions.jniLibs.keepDebugSymbols += '**/liborganicmaps.so'
     }
   }

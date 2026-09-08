@@ -1,1 +1,1 @@
-Navigacyon mappa es - Trovya moy a dha kerdh - Selys war'n gemeneth
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

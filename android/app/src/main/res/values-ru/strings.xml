@@ -34,17 +34,7 @@
     <string name="country_status_download_failed">Ошибка загрузки</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Попробуйте ещё раз</string>
-    <string name="about_menu_title">Про CoMaps</string>
-    <!-- Text in About screen -->
-    <string name="about_headline">Открытый проект, создаваемый сообществом</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• Прост в использовании</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">• Без рекламы и сбора данных пользователей</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• Работает офлайн, экономит батерею</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Некоммерческий, с прозрачным управлением и финансами, исходный код полностью открыт.</string>
+    <string name="about_menu_title">Про Sandbox Maps</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Настройки местоположения</string>
     <string name="close">Закрыть</string>
@@ -148,8 +138,8 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">Примечание</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">Мои избранные места в CoMaps</string>
-    <string name="share_bookmarks_email_body">Здравствуйте! \n \nВ прикреплённом файле мои избранные места; откройте их в CoMaps. Если у вас не установлен CoMaps, приложение можно скачать отсюда: https://www.comaps.app/download/ \n \nПриятного путешествия с CoMaps!</string>
+    <string name="share_bookmarks_email_subject">Мои избранные места в Sandbox Maps</string>
+    <string name="share_bookmarks_email_body">Здравствуйте! \n \nВ прикреплённом файле мои избранные места; откройте их в Sandbox Maps. Если у вас не установлен Sandbox Maps, приложение можно скачать отсюда: https://www.comaps.app/download/ \n \nПриятного путешествия с Sandbox Maps!</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Загрузка избранных</string>
     <!-- Kmz file successful loading -->
@@ -158,7 +148,7 @@
     <string name="load_kmz_failed">Файл с избранными не был загружен. Возможно, файл повреждён или неисправен.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">Тип файла не поддерживается приложением: \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">Не удалось открыть файл %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">Редактировать</string>
@@ -171,7 +161,7 @@
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
     <string name="my_position_share_sms">Смотри где я сейчас! Жми %1$s или %2$s Нету автономных карт? Скачай тут https://www.comaps.app/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Смотри моё текущее местоположение на карте CoMaps!</string>
+    <string name="my_position_share_email_subject">Смотри моё текущее местоположение на карте Sandbox Maps!</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">Поделиться</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -194,7 +184,7 @@
     <string name="pref_zoom_summary">Показать на карте</string>
     <string name="prefs_group_advanced">Расширенные</string>
     <string name="download_resources_custom_url_title">Альтернативный сервер карт</string>
-    <string name="download_resources_custom_url_message">Переопределить сервер карт по умолчанию, используемый для их загрузки. Оставьте поле пустым, чтобы использовать сервер CoMaps по умолчанию.</string>
+    <string name="download_resources_custom_url_message">Переопределить сервер карт по умолчанию, используемый для их загрузки. Оставьте поле пустым, чтобы использовать сервер Sandbox Maps по умолчанию.</string>
     <string name="download_resources_custom_url_summary_none">Не настроено</string>
     <string name="download_resources_custom_url_error_scheme">Пожалуйста, введите URL, начинающийся с http:// или https://</string>
     <!-- Settings «Map» category: «Night style» title -->
@@ -232,7 +222,7 @@
     <string name="menu">Меню</string>
     <!-- Text in menu -->
     <string name="website">Веб-сайт</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">Новости</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">Обратная связь</string>
@@ -245,7 +235,7 @@
     <!-- Button in the main menu -->
     <string name="donate">Поддержать деньгами</string>
     <!-- Button in the main Help dialog -->
-    <string name="how_to_support_us">Помочь и улучшить CoMaps</string>
+    <string name="how_to_support_us">Помочь и улучшить Sandbox Maps</string>
     <!-- Button in the main Help dialog -->
     <string name="copyright">Копирайт</string>
     <!-- Text in menu + Button in the main Help dialog -->
@@ -462,7 +452,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Созданные сообществом данные OpenStreetMap по состоянию на %s. Узнайте больше о том, как редактировать и обновлять карту на сайте OpenStreetMap.org</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) - это открытый проект сообщества по созданию бесплатной карты. Он является основным источником картографических данных в CoMaps и работает как Википедия. Кто угодно может добавлять или редактировать места, которые позже увидят миллионы пользователей по всему миру. \nПрисоединяйтесь к сообществу и помогите сделать лучшую карту для всех!</string>
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) - это открытый проект сообщества по созданию бесплатной карты. Он является основным источником картографических данных в Sandbox Maps и работает как Википедия. Кто угодно может добавлять или редактировать места, которые позже увидят миллионы пользователей по всему миру. \nПрисоединяйтесь к сообществу и помогите сделать лучшую карту для всех!</string>
     <string name="login_to_make_edits_visible">Создайте учётную запись OpenStreetMap или войдите в неё, чтобы опубликовать свои правки на карте для всего мира</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%1$d из %2$d</string>
@@ -476,7 +466,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">Примечание для волонтеров OpenStreetMap (необязательно)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Опишите ошибки на карте или то, что нельзя редактировать с помощью CoMaps</string>
+    <string name="editor_note_hint">Опишите ошибки на карте или то, что нельзя редактировать с помощью Sandbox Maps</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Ваши правки будут загружены в общедоступную базу данных <a href="https://wiki.openstreetmap.org/wiki/RU:О_проекте">OpenStreetMap</a>. Пожалуйста, не добавляйте личную информацию или информацию, защищенную авторским правом.</string>
     <string name="editor_more_about_osm">Подробнее об OpenStreetMap</string>
@@ -486,7 +476,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Оператор: %s</string>
     <string name="editor_category_unsuitable_title">Нет подходящей категории?</string>
-    <string name="editor_category_unsuitable_text">CoMaps может добавлять на карту только простые типы объектов. Города, дороги, озёра, контуры зданий, и т.д. через CoMaps добавить нельзя. Пожалуйста, добавляйте такие категории напрямую на сайте <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Ознакомьтесь с нашим <a href="https://www.comaps.app/support/advanced-map-editing/">гайдом</a> для подробных пошаговых инструкций.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps может добавлять на карту только простые типы объектов. Города, дороги, озёра, контуры зданий, и т.д. через Sandbox Maps добавить нельзя. Пожалуйста, добавляйте такие категории напрямую на сайте <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Ознакомьтесь с нашим <a href="https://www.comaps.app/support/advanced-map-editing/">гайдом</a> для подробных пошаговых инструкций.</string>
     <string name="downloader_no_downloaded_maps_title">У вас нет загруженных карт</string>
     <string name="downloader_no_downloaded_maps_message">Скачайте необходимые карты, чтобы находить места и пользоваться ведением без интернета</string>
     <string name="current_location_unknown_error_title">Текущее местоположение неизвестно</string>
@@ -539,7 +529,7 @@
     <string name="mobile_data_option_ask">Всегда спрашивать</string>
     <string name="traffic_update_maps_text">Для отображения пробок необходимо обновить карты</string>
     <string name="increase_font_size">Увеличить шрифт на карте</string>
-    <string name="traffic_update_app">Обновите CoMaps</string>
+    <string name="traffic_update_app">Обновите Sandbox Maps</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Данные о пробках недоступны</string>
     <string name="enable_logging">Включить запись логов</string>
@@ -761,9 +751,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">Наша главная цель — создать быстрые, конфиденциальные и простые в использовании карты, которые вам понравятся.</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">Сейчас Вы используете CoMaps на экране телефона</string>
+    <string name="car_used_on_the_phone_screen">Сейчас Вы используете Sandbox Maps на экране телефона</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">Сейчас Вы используете CoMaps на экране автомобиля</string>
+    <string name="car_used_on_the_car_screen">Сейчас Вы используете Sandbox Maps на экране автомобиля</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">Вы подключены к Android Auto</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -771,11 +761,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">Продолжить в авто</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMaps нужен доступ к местоположению. Когда будет безопасно, проверьте уведомление на телефоне.</string>
+    <string name="aa_location_permissions_request">Sandbox Maps нужен доступ к местоположению. Когда будет безопасно, проверьте уведомление на телефоне.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">Этому приложению нужно ваше разрешение</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">CoMaps в Android Auto для эффективной работы необходимо разрешение на определение местоположения</string>
+    <string name="aa_request_permission_activity_text">Sandbox Maps в Android Auto для эффективной работы необходимо разрешение на определение местоположения</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">Разрешить</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
@@ -923,11 +913,11 @@
     <string name="pref_speedlimit_title">Отображать ограничения скорости</string>
     <string name="pref_alt_map_lang_handling">Альтернативные языки карты</string>
     <string name="pref_openexternallinks_title">Автоматически открывать сторонние ссылки</string>
-    <string name="pref_openexternallinks_summary">Открывать сторонние ссылки в CoMaps по умолчанию</string>
+    <string name="pref_openexternallinks_summary">Открывать сторонние ссылки в Sandbox Maps по умолчанию</string>
     <string name="pref_alt_map_lang_handling_ignore_alternatives">Не использовать альтернативные</string>
     <string name="pref_alt_map_lang_handling_system_order">Использовать в соответствие с системой</string>
     <string name="place_page_map_too_old_description">Ваши текущие данные карт слишком устаревшие, пожалуйста, обновите их.</string>
-    <string name="place_page_app_too_old_description">Ваши текущие данные карт слишком устаревшие, пожалуйста, обновите приложение CoMaps.</string>
+    <string name="place_page_app_too_old_description">Ваши текущие данные карт слишком устаревшие, пожалуйста, обновите приложение Sandbox Maps.</string>
     <string name="prefs_speed_cameras_information">Предупреждения про камеры фиксации скорости отключены в тех странах, где это запрещено местным законодательством.</string>
     <string name="location_privacy_info">Приложения получают данные местоположения из вашего системного провайдера местоположения, который может выдать ваше местоположение Google и/или производителю вашего устройства. Используйте кастомные прошивки Android, ориентированные на приватность, чтобы избежать этого.</string>
     <string name="building_route">Прокладка маршрута…</string>
@@ -998,7 +988,7 @@
     <string name="capacity_charging">С зарядкой для электромобилей: %s</string>
     <string name="capacity_charging_yes">Есть зарядка электромобилей</string>
     <string name="capacity_charging_no">Нет зарядки для электромобилей</string>
-    <string name="permission_read_navigation_label">Разрешить чтение навигационных данных CoMaps</string>
+    <string name="permission_read_navigation_label">Разрешить чтение навигационных данных Sandbox Maps</string>
     <string name="permission_read_navigation_description">Доступ к навигационной информации в реальном времени, включая предстоящие маневры и названия улиц</string>
     <string name="charge_socket_type1_combo">Комбинированный разъем Type 1</string>
 </resources>

@@ -1,5 +1,8 @@
 # Pull Request Guidelines
 
+> **Note:** This document describes the upstream [CoMaps](https://codeberg.org/comaps/comaps) project, not the Sandbox Maps fork.
+> Sandbox Maps is not accepting contributions - see [CONTRIBUTING.md](../CONTRIBUTING.md).
+
 This document gives some guidelines to write and review PR with essential elements.
 
 ## Writing a Pull Request (PR):

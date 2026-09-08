@@ -1,6 +1,6 @@
 # Qt Creator
 
-As mentioned in [Building](INSTALL.md), there are several IDEs which can be used for CoMaps development. At the time of this writing, Qt Creator is the only FOSS IDE known to work with the CoMaps C++ codebase.
+As mentioned in [Building](INSTALL.md), there are several IDEs which can be used for Sandbox Maps development. At the time of this writing, Qt Creator is the only FOSS IDE known to work with the Sandbox Maps C++ codebase.
 
 Qt Creator supports C++, JavaScript, Python and QML, but it lacks support for Java and Swift. A workaround is to use Qt Creator for core development, including testing the desktop version, and a different IDE (e.g. Android Studio, Xcode) for languages not supported by Qt Creator.
 
@@ -20,7 +20,7 @@ Start Qt Creator. In the Welcome screen, click **New Project**.
 
 In the dialog, select **Import Project** in the left column and **Import Existing Project** in the middle column, then click **Choose...**.
 
-In the **Location** step of the wizard dialog, enter a name for the project (e.g. `comaps`) and choose the root folder of the CoMaps source code. Click **Next**.
+In the **Location** step of the wizard dialog, enter a name for the project (e.g. `comaps`) and choose the root folder of the Sandbox Maps source code. Click **Next**.
 
 In the **Files** step of the wizard dialog, accept the default settings by clicking **Next**.
 
@@ -35,10 +35,10 @@ Next, we need to tell Qt Creator how to build the artifacts.
 
 You can now modify the existing build configuration, or add new ones. The default build configuration is not very helpful, therefore it is safe to mess with or just delete.
 
-The build configuration for a release version of CoMaps (Linux desktop) is as follows:
+The build configuration for a release version of Sandbox Maps (Linux desktop) is as follows:
 
 * Generic Manager:
-  * Build directory: the directory where the CoMaps source code resides, e.g. `/home/user/src/comaps`.
+  * Build directory: the directory where the Sandbox Maps source code resides, e.g. `/home/user/src/comaps`.
 * Build Steps:
   * Custom Process Step:
     * Command: `./tools/unix/build_omim.sh`
@@ -64,7 +64,7 @@ Qt Creator defines some variables which can be used in paths and command lines, 
 
 Now we need to tell Qt Creator how to run the artifact we have built. This is very similar to setting up a build configuration.
 
-The following example is for running the release version of CoMaps (Linux desktop):
+The following example is for running the release version of Sandbox Maps (Linux desktop):
 
 * Run:
   * Executable: the fully qualified path to the executable, e.g. `/home/user/src/omim-build-release/CoMaps`.
@@ -95,10 +95,10 @@ The output pane at the bottom of the screen lets you view results of the process
 
 ### Building artifacts with CMake
 
-If you want to build an artifact with CMake, here’s how. The following example is for building `traff_assessment_tool` (a tool on the `traffic` branch). It uses a build dir named `build`, which must be created beforehand, in your CoMaps source dir. Then set up a build configuration as follows:
+If you want to build an artifact with CMake, here’s how. The following example is for building `traff_assessment_tool` (a tool on the `traffic` branch). It uses a build dir named `build`, which must be created beforehand, in your Sandbox Maps source dir. Then set up a build configuration as follows:
 
 * Generic Manager:
-  * Build directory: the directory where the CoMaps source code resides, e.g. `/home/user/src/comaps`.
+  * Build directory: the directory where the Sandbox Maps source code resides, e.g. `/home/user/src/comaps`.
 * Build Steps:
   * Custom Process Step:
     * Command: `cmake`

@@ -2,12 +2,12 @@
 
 [CLion](https://www.jetbrains.com/clion/) is a C/C++ IDE from JetBrains. It will be familiar to Android developers -
 Android Studio comes from the same IDE family. It is a proprietary, commercial IDE, but a non-commercial CLion licence
-is available and can be used for CoMaps development. The IDE can be set up so that accurate static analysis is available
+is available and can be used for Sandbox Maps development. The IDE can be set up so that accurate static analysis is available
 for C++ and Python code. It also supports step-by-step debugging.
 
 ## Setup
 
-First, follow the [installation steps](INSTALL.md) to verify that CoMaps builds okay from the command line.
+First, follow the [installation steps](INSTALL.md) to verify that Sandbox Maps builds okay from the command line.
 
 ### Automatic CMake Configuration
 
@@ -19,10 +19,10 @@ away.
 
 If we wanted to follow the official build process as closely as possible, we can set up custom targets and run
 configurations that use `tools/unix/build_omim.sh` and the binaries output to `../omim-build-{release|debug}`. For
-example, for the CoMaps desktop app:
+example, for the Sandbox Maps desktop app:
 
 1. set up custom target in Settings → Build, Execution, Deployment → Custom Build Targets:
-    1. Name: `CoMaps (debug)`
+    1. Name: `Sandbox Maps (debug)`
     2. Toolchain: leave on _Use Default_
     3. Build: press ellipsis and add a tool:
         1. Name: `build_omim.sh -d desktop`
@@ -35,11 +35,11 @@ example, for the CoMaps desktop app:
         3. Arguments: `-d clean`
         4. Working directory: `$ProjectFileDir$`
 2. set up Run/Debug Configuration of type _Custom Build Application_:
-    1. Name: `CoMaps`
-    2. Target: `CoMaps (debug)`
+    1. Name: `Sandbox Maps`
+    2. Target: `Sandbox Maps (debug)`
     3. Executable: `../omim-build-debug/CoMaps`
 
-Building this configuration will then execute the custom CoMaps build tooling, and the IDE will still be able to run a
+Building this configuration will then execute the custom Sandbox Maps build tooling, and the IDE will still be able to run a
 step-by-step debugging session using the resultant binary.
 
 ### Python

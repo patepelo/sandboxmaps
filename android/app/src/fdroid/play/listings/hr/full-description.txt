@@ -1,4 +1,4 @@
-Besplatna aplikacija otvorenog koda koju vodi zajednica i temelji se na podacima OpenStreetMap-a, usmjerana transparentnosti, privatnosti i neprofitnosti. CoMaps je fork Organic Maps aplikacije, koja je pak fork Maps.ME.
+Besplatna aplikacija otvorenog koda koju vodi zajednica i temelji se na podacima OpenStreetMap-a, usmjerana transparentnosti, privatnosti i neprofitnosti. Sandbox Maps je fork Organic Maps aplikacije, koja je pak fork Maps.ME.
 
 Pročitajte o razlozima za projekt i njegovom smjeru na <b><i>codeberg.org/comaps</i></b>.
 Pridružite se otvorenoj zajednici i pomozite izraditi najbolju aplikaciju za karte

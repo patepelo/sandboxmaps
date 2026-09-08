@@ -1,6 +1,6 @@
 # Eclipse
 
-As mentioned in [Building](INSTALL.md), there are several IDEs which can be used for CoMaps development. With the refactoring of the code that happened in August 2025, Eclipse finally can be used to work with the CoMaps C++ and Java codebase. (Code in other languages is untested.)
+As mentioned in [Building](INSTALL.md), there are several IDEs which can be used for Sandbox Maps development. With the refactoring of the code that happened in August 2025, Eclipse finally can be used to work with the Sandbox Maps C++ and Java codebase. (Code in other languages is untested.)
 
 Eclipse natively supports Java, thus it can be used to edit the entire Android codebase. However, although Eclipse was once the tool for Android development, the Android plug-ins (ADT and its fork, Andmore) are no longer being actively developed. Therefore, although you can edit Java code for Android in Eclipse, you will get warnings about missing Android-specific dependencies. Building and debugging the Android app is not possible (or will require a lot of tinkering to get it to work).
 
@@ -34,7 +34,7 @@ In the dialog that opens, select **C/C++ > Existing Code as Classic Makefile Pro
 In the next dialog:
 
 * Set the **Project Name** (we recommend using the name of the subdir)
-* Set the path for the **Existing Code Location** (a subdir of the CoMaps code dir, such as `libs`, `qt` or `tools`)
+* Set the path for the **Existing Code Location** (a subdir of the Sandbox Maps code dir, such as `libs`, `qt` or `tools`)
 * Ensure both C and C++ are selected under **Languages**
 * Under **Toolchain for Indexer Settings**, select **CMake driven**.
 * Click **Finish**.
@@ -51,7 +51,7 @@ In the dialog that opens, select **General > File System** and click **Next**.
 
 In the **File System** dialog:
 
-* In **From Directory**, enter (or browse to) the root dir of the CoMaps sources.
+* In **From Directory**, enter (or browse to) the root dir of the Sandbox Maps sources.
 * In the list of files below, check all header files (at the time of this writing, `defines.hpp`, `omim_config.h`, `precompiled_headers.hpp` and `private.h`).
 * Under **Options**, click **Advanced**.
 * Check **Create links in workspace**.
@@ -70,7 +70,7 @@ In the dialog that opens, select **C/C++ General > Paths and Symbols** from the 
 Click the **Includes** tab and add the following paths:
 
 * The standard include paths of your system (these can be obtained by running `echo | g++ -v -x c++ -E -` and looking for the line which reads `#include <...> search starts here:`)
-* The following subdirs of `3party` (in the CoMaps source dir):
+* The following subdirs of `3party` (in the Sandbox Maps source dir):
   * `boost`
   * `pugixml/pugixml/src`
   * For other dependencies, figure out where the header files are and how they are included – for example, if one of the source files includes `<foo/foo_base.hpp>` and you find the file in `3party/libfoo/headers/foo/foo_base.hpp`, include `3party/libfo/headers`
