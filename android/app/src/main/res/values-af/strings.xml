@@ -34,20 +34,12 @@
     <string name="country_status_download_failed">Aflaai het misluk</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Probeer weer</string>
-    <string name="about_menu_title">Oor CoMaps</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• Geen advertensies, geen nasporing, geen dataversameling</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">• Geen battery dreineer, werk vanlyn</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• Vanlyn, vinnig en kompak</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Oopbrontoepassing geskep deur entoesiaste en vrywilligers.</string>
+    <string name="about_menu_title">Oor Sandbox Maps</string>
     <string name="close">Sluit</string>
     <string name="unsupported_phone">’n Apparatuurversnelde OpenGL is nodig vir die toep. U toestel word ongelukkig nie gesteun nie.</string>
     <string name="download">Laai af</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disconnect_usb_cable">Ontkoppel die USB-kabel of gebruik ’n geheuekaart om CoMaps te gebruik</string>
+    <string name="disconnect_usb_cable">Ontkoppel die USB-kabel of gebruik ’n geheuekaart om Sandbox Maps te gebruik</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="not_enough_free_space_on_sdcard">Maak asb. eers spasie op die SD-kaart/USB-berging beskikbaar om die kaart te kan gebruik</string>
     <string name="download_resources">Voordat u die toep begin gebruik, moet u asb. die algemene wêreldkaart na u toestel aflaai. \nDit sal %s se spasie opneem.</string>
@@ -142,8 +134,8 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">Notas</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">CoMaps-boekmerke is met u gedeel</string>
-    <string name="share_bookmarks_email_body">Hallo! \n \nMy boekmerke is aangeheg; open dit asb. in CoMaps. Indien dit nie geïnstalleer is nie, kan u dit hier aflaai: https://www.comaps.app/download/ \n \nGeniet dit om met CoMaps te reis!</string>
+    <string name="share_bookmarks_email_subject">Sandbox Maps-boekmerke is met u gedeel</string>
+    <string name="share_bookmarks_email_body">Hallo! \n \nMy boekmerke is aangeheg; open dit asb. in Sandbox Maps. Indien dit nie geïnstalleer is nie, kan u dit hier aflaai: https://www.comaps.app/download/ \n \nGeniet dit om met Sandbox Maps te reis!</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Laai tans boekmerke</string>
     <!-- Kmz file successful loading -->
@@ -152,7 +144,7 @@
     <string name="load_kmz_failed">Kon nie boekmerke laai nie. Die lêer is dalk gekorrupteer of defektief.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">Die lêertipe word nie deur die toepassing herken nie: \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">Kon nie lêer oopmaak nie %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">Wysig</string>
@@ -163,9 +155,9 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">Die kaart word tans afgelaai.</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">Kyk my huidige posisie in CoMaps! %1$s of %2$s Het u nie vanlyn kaarte nie? Laai hier af: https://www.comaps.app/download/</string>
+    <string name="my_position_share_sms">Kyk my huidige posisie in Sandbox Maps! %1$s of %2$s Het u nie vanlyn kaarte nie? Laai hier af: https://www.comaps.app/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Hallo, sien my huidige ligging op die CoMaps-toep!</string>
+    <string name="my_position_share_email_subject">Hallo, sien my huidige ligging op die Sandbox Maps-toep!</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">Deel</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -211,7 +203,7 @@
     <string name="menu">Kieslys</string>
     <!-- Text in menu -->
     <string name="website">Webwerf</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">Nuus</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">Terugvoer</string>
@@ -435,7 +427,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Gemeenskap-geskepte OpenStreetMap-data vanaf %s. Kom meer te wete oor hoe om die kaart te redigeer en op te dateer by OpenStreetMap.org</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) is \'n gemeenskapsprojek om \'n gratis en oop kaart te bou. Dit is die hoofbron van kaartdata in CoMaps en werk soortgelyk aan Wikipedia. Jy kan plekke byvoeg of wysig en hulle word beskikbaar vir miljoene gebruikers regoor die wêreld. \nSluit aan by die gemeenskap en help om \'n beter kaart vir almal te maak!</string>
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) is \'n gemeenskapsprojek om \'n gratis en oop kaart te bou. Dit is die hoofbron van kaartdata in Sandbox Maps en werk soortgelyk aan Wikipedia. Jy kan plekke byvoeg of wysig en hulle word beskikbaar vir miljoene gebruikers regoor die wêreld. \nSluit aan by die gemeenskap en help om \'n beter kaart vir almal te maak!</string>
     <string name="login_to_make_edits_visible">Skep \'n OpenStreetMap-rekening of meld aan om jou kaartwysigings aan die wêreld te publiseer.</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%1$d van %2$d</string>
@@ -449,7 +441,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">Nota aan OpenStreetMap-vrywilligers (opsioneel)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Beskryf foute in die kaart of wat nie met CoMaps geredigeer kan word nie</string>
+    <string name="editor_note_hint">Beskryf foute in die kaart of wat nie met Sandbox Maps geredigeer kan word nie</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Jou wysigings word opgelaai na die publieke <a href="https://wiki.openstreetmap.org/wiki/About_OpenStreetMap">OpenStreetMap</a>-databasis. Moet asseblief nie persoonlike of kopiereginligting byvoeg nie.</string>
     <string name="editor_more_about_osm">Meer oor OpenStreetMap</string>
@@ -459,7 +451,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Operateur: %s</string>
     <string name="editor_category_unsuitable_title">Kan u nie \'n geskikte kategorie vind nie?</string>
-    <string name="editor_category_unsuitable_text">CoMaps laat toe om slegs eenvoudige puntkategorieë by te voeg, dit beteken geen dorpe, paaie, mere, gebouomlynings, ens. Voeg asseblief sulke kategorieë direk by <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Gaan ons <a href="https://www.comaps.app/support/advanced-map-editing/">gids</a> na vir gedetailleerde stap-vir-stap-instruksies.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps laat toe om slegs eenvoudige puntkategorieë by te voeg, dit beteken geen dorpe, paaie, mere, gebouomlynings, ens. Voeg asseblief sulke kategorieë direk by <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Gaan ons <a href="https://www.comaps.app/support/advanced-map-editing/">gids</a> na vir gedetailleerde stap-vir-stap-instruksies.</string>
     <string name="downloader_no_downloaded_maps_title">U het geen kaarte afgelaai nie</string>
     <string name="downloader_no_downloaded_maps_message">Laai kaarte af om die ligging te soek en vanlyn te navigeer.</string>
     <string name="current_location_unknown_error_title">Huidige ligging is onbekend.</string>
@@ -511,7 +503,7 @@
     <string name="mobile_data_option_ask">Vra altyd</string>
     <string name="traffic_update_maps_text">Kaarte moet bygewerk word om verkeersdata te vertoon.</string>
     <string name="increase_font_size">Vergroot lettergrootte op kaart</string>
-    <string name="traffic_update_app">Werk CoMaps asb. by</string>
+    <string name="traffic_update_app">Werk Sandbox Maps asb. by</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Verkeersdata is nie beskikbaar nie</string>
     <string name="enable_logging">Staan logboekinskrywing toe</string>
@@ -681,11 +673,11 @@
     <!-- App tip #04 -->
     <string name="app_tip_04">Tik enige plek op die kaart om enigiets te kies. Tik lank om te versteek en om die koppelvlak terug te wys.</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMaps benodig liggingtoegang. Gaan die kennisgewing op jou foon na wanneer dit veilig is.</string>
+    <string name="aa_location_permissions_request">Sandbox Maps benodig liggingtoegang. Gaan die kennisgewing op jou foon na wanneer dit veilig is.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">Hierdie toepassing benodig jou toestemming</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">CoMaps in Android Auto het \'n liggingtoestemming nodig om effektief te werk</string>
+    <string name="aa_request_permission_activity_text">Sandbox Maps in Android Auto het \'n liggingtoestemming nodig om effektief te werk</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
     <string name="button_layer_outdoor">Stap</string>
     <!-- Text displayed when a webview or a browser are disabled, and external links can't be opened. -->

@@ -1,1 +1,1 @@
-Easy map navigation - Discover more of your journey - Powered by the community
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

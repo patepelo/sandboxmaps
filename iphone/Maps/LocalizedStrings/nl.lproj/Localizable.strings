@@ -32,13 +32,13 @@
 /* Message to display at the center of the screen when the country download has failed */
 "country_status_download_failed" = "Downloaden is mislukt";
 /* Text in About screen */
-"about_headline" = "Open project gedreven door de community";
+"about_headline" = "An experimental fork of CoMaps";
 /* Text in About screen */
-"about_proposition_1" = "Offline, snel en gebruiksvriendelijk";
+"about_proposition_1" = "Offline, fast and ads-free";
 /* Text in About screen */
-"about_proposition_2" = "Privacygericht en reclamevrij";
+"about_proposition_2" = "A sandbox for AI-assisted experiments";
 /* Text in About screen */
-"about_proposition_3" = "Transparant en zonder winstoogmerk";
+"about_proposition_3" = "Unofficial — use at your own risk";
 "close" = "Sluiten";
 "download" = "Downloaden";
 /* REMOVE THIS STRING AFTER REFACTORING */
@@ -107,7 +107,7 @@
 "category_water" = "Water";
 /* Search category for RV facilities; any changes should be duplicated in categories.txt @category_rv! */
 "category_rv" = "Camperfaciliteiten";
-"share_bookmarks_email_body" = "Hallo! \n \nBijgevoegd zijn mijn favorieten; te openen in CoMaps. Als u dit niet geïnstalleerd hebt, dan kunt u het hier downloaden: https://www.comaps.app/download/ \n \nGeniet van het reizen met CoMaps!";
+"share_bookmarks_email_body" = "Hallo! \n \nBijgevoegd zijn mijn favorieten; te openen in Sandbox Maps. Als u dit niet geïnstalleerd hebt, dan kunt u het hier downloaden: https://www.comaps.app/download/ \n \nGeniet van het reizen met Sandbox Maps!";
 /* message title of loading file */
 "load_kmz_title" = "Favorieten laden";
 /* Kmz file successful loading */
@@ -119,9 +119,9 @@
 /* Warning message when doing search around current position */
 "unknown_current_position" = "Uw locatie is nog niet vastgesteld";
 /* Subject for emailed bookmark */
-"bookmark_share_email_subject" = "Hey, bekijk mijn pin op CoMaps!";
+"bookmark_share_email_subject" = "Hey, bekijk mijn pin op Sandbox Maps!";
 /* Subject for emailed position */
-"my_position_share_email_subject" = "Hoi, bekijk mijn huidige locatie op CoMaps!";
+"my_position_share_email_subject" = "Hoi, bekijk mijn huidige locatie op Sandbox Maps!";
 /* Share by email button text, also used in editor and About. */
 "email" = "E-mail";
 /* Text for message to copy something */
@@ -133,7 +133,7 @@
 /* Used for bookmark editing */
 "done" = "Klaar";
 /* Prints version number in About dialog */
-"version" = "CoMaps versie: %@";
+"version" = "Sandbox Maps versie: %@";
 "version %@ (%@)" = "Versie %@ (%@)";
 "version: %@ (%@)\nmap data: %@" = "Versie: %@ (%@)\nKaartgegevens: %@";
 /* Title for tracks category in bookmarks manager */
@@ -186,7 +186,7 @@
 "search_show_on_map" = "Weergeven op kaart";
 /* Text in menu */
 "website" = "Website";
-/* Text in About menu, opens CoMaps news website */
+/* Text in About menu, opens Sandbox Maps news website */
 "news" = "Nieuws";
 /* Text in the about screen */
 "social_codeberg" = "Codeberg";
@@ -229,7 +229,7 @@
 /* Button in the About screen */
 "report_incorrect_map_bug" = "Rapporteer of repareer onjuiste kaartgegevens";
 /* Button in the About screen */
-"volunteer" = "Draag bij en verbeter CoMaps";
+"volunteer" = "Draag bij en verbeter Sandbox Maps";
 /* "Social media" section header in the About screen */
 "follow_us" = "Blijf met ons in contact";
 /* Alert text */
@@ -411,7 +411,7 @@
 /* OpenStreetMap Profile */
 "osm_profile" = "OpenStreetMap-profiel";
 "osm_profile_promt" = "Maak een OpenStreetMap-account aan of log in om uw kaartbewerkingen voor de wereld te publiceren.";
-"osm_profile_explanation" = "[OpenStreetMap.org](https://openstreetmap.org) (OSM) is een gemeenschapsproject om een vrije en open kaart te bouwen. Het is de belangrijkste bron van kaartgegevens in CoMaps en werkt ongeveer hetzelfde als Wikipedia. U kunt plaatsen toevoegen of bewerken en deze worden dan beschikbaar voor miljoenen gebruikers over de hele wereld. \nSluit u aan bij de gemeenschap en help mee om een betere kaart voor iedereen te maken!";
+"osm_profile_explanation" = "[OpenStreetMap.org](https://openstreetmap.org) (OSM) is een gemeenschapsproject om een vrije en open kaart te bouwen. Het is de belangrijkste bron van kaartgegevens in Sandbox Maps en werkt ongeveer hetzelfde als Wikipedia. U kunt plaatsen toevoegen of bewerken en deze worden dan beschikbaar voor miljoenen gebruikers over de hele wereld. \nSluit u aan bij de gemeenschap en help mee om een betere kaart voor iedereen te maken!";
 "osm_profile_login" = "Inloggen bij OpenStreetMap-account";
 "osm_profile_reauthorize_promt" = "Het OpenStreetMap-account is losgekoppeld van deze app";
 "osm_profile_reauthorize" = "Opnieuw verbinden met OpenStreetMap";
@@ -468,7 +468,7 @@
 "message_invalid_feature_position" = "Hier kan geen object worden geplaatst";
 /* Error dialog no space */
 "migration_no_space_message" = "Om te kunnen downloaden, heb je meer ruimte nodig. Verwijder overbodige gegevens.";
-"editor_sharing_title" = "Ik heb de CoMaps-kaarten verbeterd";
+"editor_sharing_title" = "Ik heb de Sandbox Maps-kaarten verbeterd";
 /* Downloaded 10 **of** 20 <- it is that "of" */
 "downloader_of" = "%1$d van %2$d";
 "download_over_mobile_header" = "Downloaden via mobiele internetverbinding?";
@@ -484,13 +484,13 @@
 /* Title for OSM note section in the editor */
 "editor_other_info" = "Opmerking voor OpenStreetMap-vrijwilligers (optioneel)";
 "editor_detailed_description_hint" = "Gedetailleerde reactie";
-"editor_detailed_description" = "Uw voorgestelde wijzigingen worden naar de OpenStreetMap-gemeenschap gestuurd. Beschrijf details die niet in CoMaps kunnen worden bewerkt.";
+"editor_detailed_description" = "Uw voorgestelde wijzigingen worden naar de OpenStreetMap-gemeenschap gestuurd. Beschrijf details die niet in Sandbox Maps kunnen worden bewerkt.";
 "editor_more_about_osm" = "Meer over OpenStreetMap";
 "editor_operator" = "Exploitant";
 /* To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... */
 "operator" = "Exploitant: %@";
 "editor_category_unsuitable_title" = "Geen passende categorie gevonden?";
-"editor_category_unsuitable_text" = "CoMaps kan alleen eenvoudige puntcategorieën toevoegen, dus geen steden, wegen, meren, contouren van gebouwen, enz. Voeg dergelijke categorieën direct toe aan <a href=\"https://www.openstreetmap.org\">OpenStreetMap.org</a>. Lees onze <a href=\"https://www.comaps.app/support/advanced-map-editing/\">handleiding</a> voor gedetailleerde stapsgewijze instructies.";
+"editor_category_unsuitable_text" = "Sandbox Maps kan alleen eenvoudige puntcategorieën toevoegen, dus geen steden, wegen, meren, contouren van gebouwen, enz. Voeg dergelijke categorieën direct toe aan <a href=\"https://www.openstreetmap.org\">OpenStreetMap.org</a>. Lees onze <a href=\"https://www.comaps.app/support/advanced-map-editing/\">handleiding</a> voor gedetailleerde stapsgewijze instructies.";
 "downloader_no_downloaded_maps_title" = "U hebt geen kaarten gedownload";
 "downloader_no_downloaded_maps_message" = "Download kaarten om offline te zoeken en navigeren.";
 "current_location_unknown_error_title" = "Huidige locatie is onbekend.";
@@ -504,7 +504,7 @@
 "location_services_disabled_on_device_2" = "2. Selecteer Privacy en beveiliging";
 "location_services_disabled_on_device_3" = "3. Selecteer Locatievoorzieningen";
 "location_services_disabled_on_device_4" = "4. Locatiediensten inschakelen";
-"location_services_disabled_on_device_additional_message" = "Of blijf CoMaps gebruiken zonder locatie";
+"location_services_disabled_on_device_additional_message" = "Of blijf Sandbox Maps gebruiken zonder locatie";
 /* abbreviation for meters */
 "m" = "m";
 /* abbreviation for kilometers */
@@ -552,7 +552,7 @@
 "off_recent_track_background_button" = "Schakel uit";
 /* For sharing via SMS and so on */
 "sharing_call_action_look" = "Bekijk";
-"recent_track_background_dialog_message" = "CoMaps gebruikt uw locatie op de achtergrond om uw onlangs afgelegde route vast te leggen.";
+"recent_track_background_dialog_message" = "Sandbox Maps gebruikt uw locatie op de achtergrond om uw onlangs afgelegde route vast te leggen.";
 "general_settings" = "Algemene instellingen";
 /* For the first routing */
 "accept" = "Accepteren";
@@ -692,7 +692,7 @@
 "ok" = "Oké";
 "speedcams_alert_title_carplay_1" = "Snelheidscamera's";
 "speedcams_alert_title_carplay_2" = "Over snelheidscamera's";
-"download_map_carplay" = "Download kaarten in de CoMaps app op uw apparaat";
+"download_map_carplay" = "Download kaarten in de Sandbox Maps app op uw apparaat";
 "carplay_roundabout_exit" = "Afrit nr. %@";
 /* max. 10 symbols, both iOS and Android */
 "sort" = "Sorteren…";
@@ -781,9 +781,9 @@
 /* App tip #09 */
 "app_tip_09" = "Ons belangrijkste doel is om snelle, op privacygerichte, gebruiksvriendelijke kaarten te maken waar u van houdt.";
 /* Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen */
-"car_used_on_the_phone_screen" = "U gebruikt nu CoMaps op het telefoonscherm";
+"car_used_on_the_phone_screen" = "U gebruikt nu Sandbox Maps op het telefoonscherm";
 /* Text on the phone placeholder screen that maps are displayed on the car screen */
-"car_used_on_the_car_screen" = "U gebruikt nu CoMaps op het autoscherm";
+"car_used_on_the_car_screen" = "U gebruikt nu Sandbox Maps op het autoscherm";
 /* Displayed on the phone screen. Button to display maps on the phone screen instead of a car */
 "car_continue_on_the_phone" = "Ga verder op de telefoon";
 /* Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! */
@@ -798,7 +798,7 @@
 /* Restaurant or other food place's menu URL field in the Editor */
 "website_menu" = "Link naar menu";
 /* Message for the bug report alert. */
-"bugreport_alert_message" = "Wil je een bugrapport naar de ontwikkelaars sturen?\nWe zijn afhankelijk van onze gebruikers, omdat CoMaps niet automatisch foutgegevens verzamelt. Alvast bedankt voor je steun aan CoMaps!";
+"bugreport_alert_message" = "Wil je een bugrapport naar de ontwikkelaars sturen?\nWe zijn afhankelijk van onze gebruikers, omdat Sandbox Maps niet automatisch foutgegevens verzamelt. Alvast bedankt voor je steun aan Sandbox Maps!";
 /* Title for the iCloud synchronization setting */
 "icloud_sync" = "iCloud synchronisatie (bèta)";
 /* Title for the "Enable iCloud Synchronization" alert. */

@@ -1,6 +1,6 @@
 # Unit Testing
 
-This guide covers how to build and run C++ unit tests for the CoMaps codebase. See [INSTALL.md](INSTALL.md) for how to set up the build environment. 
+This guide covers how to build and run C++ unit tests for the Sandbox Maps codebase. See [INSTALL.md](INSTALL.md) for how to set up the build environment. 
 
 For user/beta testing of app releases, see [TESTING.md](TESTING.md).
 

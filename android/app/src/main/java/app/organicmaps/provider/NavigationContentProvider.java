@@ -52,8 +52,8 @@ public class NavigationContentProvider extends ContentProvider
   @Override
   public String getType(@NonNull Uri uri) {
     return switch (URI_MATCHER.match(uri)) {
-      case LIVE_NAVIGATION_DATA_CODE -> "vnd.android.cursor.item/app.comaps.navigation.routinginfo";
-      case ROUTE_GEOMETRY_CODE -> "vnd.android.cursor.dir/app.comaps.navigation.routepoint";
+      case LIVE_NAVIGATION_DATA_CODE -> "vnd.android.cursor.item/app.sandboxmaps.navigation.routinginfo";
+      case ROUTE_GEOMETRY_CODE -> "vnd.android.cursor.dir/app.sandboxmaps.navigation.routepoint";
       default -> null;
     };
   }

@@ -1,1 +1,1 @@
-Jednostavna navigacija - Otkrijte više o svom putovanju - Pokreće zajednica
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

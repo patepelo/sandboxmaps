@@ -34,17 +34,7 @@
     <string name="country_status_download_failed">Помилка завантаження</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Спробуйте ще раз</string>
-    <string name="about_menu_title">Про CoMaps</string>
-    <!-- Text in About screen -->
-    <string name="about_headline">Відкритий проєкт, що створюється спільнотою</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• Простий у використанні та відшліфований</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">• Орієнтований на приватність і без реклами</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• Автономний, швидкий та компактний</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Повністю відкритий код, некомерційний, прозоре прийняття рішень та фінанси.</string>
+    <string name="about_menu_title">Про Sandbox Maps</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Налаштування місцеположення</string>
     <string name="close">Закрити</string>
@@ -148,8 +138,8 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">Примітка</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">Мої улюблені місця в CoMaps</string>
-    <string name="share_bookmarks_email_body">Привіт! \n \nДодаю мої улюблені; відкрийте їх у CoMaps. Якщо застосунок не встановлено, ви можете завантажити його тут: https://www.comaps.app/download/ \n \nНасолоджуйтесь подорожами з CoMaps!</string>
+    <string name="share_bookmarks_email_subject">Мої улюблені місця в Sandbox Maps</string>
+    <string name="share_bookmarks_email_body">Привіт! \n \nДодаю мої улюблені; відкрийте їх у Sandbox Maps. Якщо застосунок не встановлено, ви можете завантажити його тут: https://www.comaps.app/download/ \n \nНасолоджуйтесь подорожами з Sandbox Maps!</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Завантаження улюблених</string>
     <!-- Kmz file successful loading -->
@@ -158,7 +148,7 @@
     <string name="load_kmz_failed">Не вдалося завантажити обране. Файл може бути пошкодженим або несправним.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">Тип файлу не розпізнається програмою: \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">Не вдалося відкрити файл %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">Редагувати</string>
@@ -169,9 +159,9 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">Зараз відбувається завантаження мапи</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">Перевірте моє поточне розташування в CoMaps! %1$s або %2$s Немає автономних мап? Завантаж тут: https://www.comaps.app/download/</string>
+    <string name="my_position_share_sms">Перевірте моє поточне розташування в Sandbox Maps! %1$s або %2$s Немає автономних мап? Завантаж тут: https://www.comaps.app/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Поглянь на моє поточне розташування на мапі CoMaps!</string>
+    <string name="my_position_share_email_subject">Поглянь на моє поточне розташування на мапі Sandbox Maps!</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">Подiлитись</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -194,7 +184,7 @@
     <string name="pref_zoom_summary">Відображення на екрані</string>
     <string name="prefs_group_advanced">Розширена</string>
     <string name="download_resources_custom_url_title">Власний сервер мап</string>
-    <string name="download_resources_custom_url_message">Змінити типовий сервер для завантаження мап. Залиште порожнім, аби використовувати стандартний сервер CoMaps.</string>
+    <string name="download_resources_custom_url_message">Змінити типовий сервер для завантаження мап. Залиште порожнім, аби використовувати стандартний сервер Sandbox Maps.</string>
     <string name="download_resources_custom_url_summary_none">Не налаштовано</string>
     <string name="download_resources_custom_url_error_scheme">Введіть URL-адресу, що починається з http:// або https://</string>
     <!-- Settings «Map» category: «Night style» title -->
@@ -232,7 +222,7 @@
     <string name="menu">Меню</string>
     <!-- Text in menu -->
     <string name="website">Вебсайт</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">Новини</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">Відгук</string>
@@ -245,7 +235,7 @@
     <!-- Button in the main menu -->
     <string name="donate">Підтримати грошима</string>
     <!-- Button in the main Help dialog -->
-    <string name="how_to_support_us">Станьте волонтером та покращте CoMaps</string>
+    <string name="how_to_support_us">Станьте волонтером та покращте Sandbox Maps</string>
     <!-- Button in the main Help dialog -->
     <string name="copyright">Копірайт</string>
     <!-- Text in menu + Button in the main Help dialog -->
@@ -455,7 +445,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Дані OpenStreetMap, створені спільнотою, станом на %s. Дізнайтеся більше про те, як редагувати та оновлювати мапу на OpenStreetMap.org</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) — це громадський проєкт зі створення вільної та відкритої мапи. Це основне джерело картографічних даних в CoMaps і працює подібно до Вікіпедії. Ви можете додавати або редагувати місця, і вони стають доступними мільйонам користувачів по всьому світу. \nПриєднуйтесь до спільноти і допоможіть зробити мапу кращою для всіх!</string>
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) — це громадський проєкт зі створення вільної та відкритої мапи. Це основне джерело картографічних даних в Sandbox Maps і працює подібно до Вікіпедії. Ви можете додавати або редагувати місця, і вони стають доступними мільйонам користувачів по всьому світу. \nПриєднуйтесь до спільноти і допоможіть зробити мапу кращою для всіх!</string>
     <string name="login_to_make_edits_visible">Створіть обліковий запис OpenStreetMap або увійдіть до нього, щоб опублікувати свої редагування мапи для всього світу</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%1$d з %2$d</string>
@@ -469,7 +459,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">Примітка для волонтерів OpenStreetMap (необов\'язково)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Опишіть помилки на мапі або те, що не можна редагувати за допомогою CoMaps</string>
+    <string name="editor_note_hint">Опишіть помилки на мапі або те, що не можна редагувати за допомогою Sandbox Maps</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Ваші правки завантажуються до публічної бази даних <a href="https://wiki.openstreetmap.org/wiki/Uk:Про_проект">OpenStreetMap</a>. Будь ласка, не додавайте особисту або захищену авторським правом інформацію.</string>
     <string name="editor_more_about_osm">Більше про OpenStreetMap</string>
@@ -479,7 +469,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Оператор: %s</string>
     <string name="editor_category_unsuitable_title">Не можете знайти відповідну категорію?</string>
-    <string name="editor_category_unsuitable_text">CoMaps дозволяє додавати лише прості категорії точок; він не підтримує додавання міст, доріг, озер, контурів будівель тощо. Додавайте такі категорії безпосередньо на <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Ознайомтеся з нашим <a href="https://www.comaps.app/support/advanced-map-editing/">посібником</a>, щоб отримати докладні покрокові інструкції.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps дозволяє додавати лише прості категорії точок; він не підтримує додавання міст, доріг, озер, контурів будівель тощо. Додавайте такі категорії безпосередньо на <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Ознайомтеся з нашим <a href="https://www.comaps.app/support/advanced-map-editing/">посібником</a>, щоб отримати докладні покрокові інструкції.</string>
     <string name="downloader_no_downloaded_maps_title">Ви не маєте завантажених мап</string>
     <string name="downloader_no_downloaded_maps_message">Завантажте необхідні мапи для пошуку та навігацією без iнтернету</string>
     <string name="current_location_unknown_error_title">Розташування не знайдено</string>
@@ -532,7 +522,7 @@
     <string name="mobile_data_option_ask">Завжди питати</string>
     <string name="traffic_update_maps_text">Для показу інформації про трафік необхідно оновити мапи</string>
     <string name="increase_font_size">Збільшити розмір шрифту на мапі</string>
-    <string name="traffic_update_app">Будь ласка, встановіть оновлення CoMaps</string>
+    <string name="traffic_update_app">Будь ласка, встановіть оновлення Sandbox Maps</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Дані про трафік недоступні</string>
     <string name="enable_logging">Увімкнути журналювання</string>
@@ -748,9 +738,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">Наша головна мета – створити швидкі, приватні та прості у використанні мапи, які вам сподобаються.</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">Зараз ви використовуєте CoMaps на екрані телефону</string>
+    <string name="car_used_on_the_phone_screen">Зараз ви використовуєте Sandbox Maps на екрані телефону</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">Ви використовуєте CoMaps на екрані автомобіля</string>
+    <string name="car_used_on_the_car_screen">Ви використовуєте Sandbox Maps на екрані автомобіля</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">Ви під\'єднанні до Android Auto</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -758,11 +748,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">На екран автомобіля</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">Для роботи CoMaps потрібен доступ до розташування. Коли це буде безпечно, перевірте сповіщення на телефоні.</string>
+    <string name="aa_location_permissions_request">Для роботи Sandbox Maps потрібен доступ до розташування. Коли це буде безпечно, перевірте сповіщення на телефоні.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">Ця програма потребує вашого дозволу</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">Для ефективної роботи CoMaps в Android Auto потрібні дозвіли на розташування</string>
+    <string name="aa_request_permission_activity_text">Для ефективної роботи Sandbox Maps в Android Auto потрібні дозвіли на розташування</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">Надавати дозволи</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
@@ -861,7 +851,7 @@
     <string name="error_enter_correct_bluesky_page">Введіть дійсне ім\'я користувача Bluesky або вебадресу</string>
     <string name="place_page_map_too_old_title">Дані мапи застаріли</string>
     <string name="place_page_map_too_old_description">Ваші поточні картографічні дані дуже застарілі, оновіть мапу.</string>
-    <string name="place_page_app_too_old_description">Ваші поточні картографічні дані дуже застарілі, оновіть застосунок CoMaps.</string>
+    <string name="place_page_app_too_old_description">Ваші поточні картографічні дані дуже застарілі, оновіть застосунок Sandbox Maps.</string>
     <string name="place_page_update_too_old_map">Оновити регіон мапи</string>
     <string name="place_page_too_old_to_edit">Редагування OpenStreetMap вимкнено, оскільки дані мапи застаріли.</string>
     <string name="osm_note_hint">Або залиште примітку для спільноти OpenStreetMap, аби хтось інший міг додати або виправити це місце.</string>
@@ -942,7 +932,7 @@
     <string name="not_following_route">Відхилення від маршруту</string>
     <string name="route_recalculating">Перерахунок маршруту…</string>
     <string name="pref_openexternallinks_title">Автоматично відкривати сторонні посилання</string>
-    <string name="pref_openexternallinks_summary">Типово відкривати сторонні посилання в CoMaps</string>
+    <string name="pref_openexternallinks_summary">Типово відкривати сторонні посилання в Sandbox Maps</string>
     <string name="population">Населення: %s</string>
     <string name="change_app_locale">Мова застосунку</string>
     <string name="downloader_check_updates_button">Перевірити наявність оновлень</string>

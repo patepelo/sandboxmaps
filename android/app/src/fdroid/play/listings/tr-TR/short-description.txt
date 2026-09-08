@@ -1,1 +1,1 @@
-Kullanımı kolay harita - Yolculuğun ötesine geçin - topluluğun katkılarıyla
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

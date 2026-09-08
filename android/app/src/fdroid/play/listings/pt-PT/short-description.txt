@@ -1,1 +1,1 @@
-Navegação fácil nos mapas - Descubra mais sobre o seu percurso - Feito por todos
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

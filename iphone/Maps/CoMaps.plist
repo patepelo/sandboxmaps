@@ -117,7 +117,7 @@
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<true/>
 			<key>NSUbiquitousContainerName</key>
-			<string>CoMaps</string>
+			<string>Sandbox Maps</string>
 			<key>NSUbiquitousContainerSupportedFolderLevels</key>
 			<string>ANY</string>
 		</dict>
@@ -126,7 +126,7 @@
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<true/>
 			<key>NSUbiquitousContainerName</key>
-			<string>CoMapsDEBUG</string>
+			<string>SandboxMapsDEBUG</string>
 			<key>NSUbiquitousContainerSupportedFolderLevels</key>
 			<string>ANY</string>
 		</dict>

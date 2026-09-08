@@ -1,1 +1,1 @@
-Egyszerű térképnavigáció – Fedezze fel utazását – A közösség támogatásával
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

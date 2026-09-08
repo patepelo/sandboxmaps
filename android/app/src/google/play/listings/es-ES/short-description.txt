@@ -1,1 +1,1 @@
-Navegación sencilla - Descubre más en tu camino - Creado por la comunidad
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

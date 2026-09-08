@@ -1,6 +1,6 @@
 # Subway layer generation
 
-For the subway layer to be available in CoMaps, a `SUBWAY_URL`
+For the subway layer to be available in Sandbox Maps, a `SUBWAY_URL`
 parameter ought to be provided to the
 [map generator](https://codeberg.org/comaps/comaps/src/branch/main/tools/python/maps_generator).
 Normally you can specify this link https://cdn.comaps.app/subway.json,

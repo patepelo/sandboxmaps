@@ -9,17 +9,17 @@
 
 ## System requirements
 
-To build and run CoMaps you'll need a machine with at least 4Gb of RAM and 20-30Gb of disk space depending on your target platform. Expect to download 2-5Gb of files.
+To build and run Sandbox Maps you'll need a machine with at least 4Gb of RAM and 20-30Gb of disk space depending on your target platform. Expect to download 2-5Gb of files.
 
 ## Getting sources
 
-First of all get the source code. The full CoMaps sources repository is ~3Gb in size, there are various [clone options](#special-cases-options) to reduce the download size to suit your needs.
+First of all get the source code. The full Sandbox Maps sources repository is ~3Gb in size, there are various [clone options](#special-cases-options) to reduce the download size to suit your needs.
 
 Clone the repository including all submodules (see [Special cases options](#special-cases-options) below)
 
 (if you plan to contribute and propose pull requests then use a web interface at https://codeberg.org/comaps/comaps to fork the repository first and use your fork's URL in the command below)
 
-Follow the instructions for your OS, and afterwards the repository is prepared to build a CoMaps app!
+Follow the instructions for your OS, and afterwards the repository is prepared to build a Sandbox Maps app!
 
 ## Setting up to your OS of development
 
@@ -195,7 +195,7 @@ If you really need them (e.g. to build a very old app version) then refer to ful
 
 ### Preparing
 
-Linux, MacOS, or Windows should work to build CoMaps for Android.
+Linux, MacOS, or Windows should work to build Sandbox Maps for Android.
 
 Ensure that you have at least 30GB of free space and Python 3 installed.
 
@@ -307,7 +307,7 @@ The default location is:
 [I]: Attached!
 ```
 
-CoMaps icon will appear in the application list in DHU.
+Sandbox Maps icon will appear in the application list in DHU.
 
 ### More options
 
@@ -443,13 +443,13 @@ Example of command line for running system tracing:
 
 ### Preparing
 
-Building CoMaps for iOS requires a Mac.
+Building Sandbox Maps for iOS requires a Mac.
 
 Ensure that you have at least 20GB of free space.
 
 Perform the steps in [getting all sources](#getting-sources), including configuring the repository
 
-Enroll in the [Apple Developer Program](https://developer.apple.com/programs/) (you can run CoMaps in Simulator without this step).
+Enroll in the [Apple Developer Program](https://developer.apple.com/programs/) (you can run Sandbox Maps in Simulator without this step).
 
 ### Configuring Xcode
 
@@ -475,7 +475,7 @@ Reconfigure the project to use your developer signing keys:
 - Click on "CoMapsWidgetExtension" target.
 - Choose a unique bundle identifier based on the one you chose previously (e.g. app.comapsdev.debug.widgetextension) and your team.
 
-If you want to run CoMaps on a real device, you have to remove the CarPlay entitlement. Open `iphone/Maps/CoMaps-Debug.entitlements`
+If you want to run Sandbox Maps on a real device, you have to remove the CarPlay entitlement. Open `iphone/Maps/CoMaps-Debug.entitlements`
 and remove the `com.apple.developer.carplay-maps` entry. Now you can sign your app again in the "Signing & Capabilities" tab. Testing CarPlay
 on a real device requires [requesting entitlements from Apple](https://developer.apple.com/documentation/carplay/requesting_carplay_entitlements).
 

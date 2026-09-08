@@ -1,4 +1,7 @@
 # Release Management
+
+> **Note:** This document describes the upstream [CoMaps](https://codeberg.org/comaps/comaps) project, not the Sandbox Maps fork.
+> Sandbox Maps is not accepting contributions - see [CONTRIBUTING.md](../CONTRIBUTING.md).
  
  Details to prepare and push a release are available in the [Wiki](https://codeberg.org/comaps/comaps/wiki/Release-process)
 	

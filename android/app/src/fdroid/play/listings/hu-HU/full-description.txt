@@ -1,4 +1,4 @@
-Egy közösség által vezetett, ingyenes és nyílt forráskódú térképalkalmazás, amely az OpenStreetMap adatain alapul, és amelynek alapelvei a átláthatóság, az adatvédelem és a nonprofit működés. A CoMaps az Organic Maps alkalmazás egyik változata, amely viszont a Maps.ME alkalmazás egyik változata.
+Egy közösség által vezetett, ingyenes és nyílt forráskódú térképalkalmazás, amely az OpenStreetMap adatain alapul, és amelynek alapelvei a átláthatóság, az adatvédelem és a nonprofit működés. A Sandbox Maps az Organic Maps alkalmazás egyik változata, amely viszont a Maps.ME alkalmazás egyik változata.
 
 A projekt előzményeiről és fejlesztési irányáról bővebben a <b><i>codeberg.org/comaps</i></b> oldalon olvashat.
 Csatlakozzon a közösséghez, és segítsen a legjobb térképalkalmazás létrehozásában

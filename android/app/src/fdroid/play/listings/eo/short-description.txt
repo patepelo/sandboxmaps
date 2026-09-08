@@ -1,1 +1,1 @@
-Facila mapnaviĝado - Malkovru pli de via vojaĝo - Subtenata de la komunumo
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

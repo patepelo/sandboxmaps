@@ -145,7 +145,7 @@ brew install cmake ninja qt@6
   <summary><span style="font-size: 1.5em; font-weight: bold;">Windows</span></summary>
 
 
-We haven't compiled CoMaps on Windows *natively* in a long time, somes adaptations is required to support Windows.
+We haven't compiled Sandbox Maps on Windows *natively* in a long time, somes adaptations is required to support Windows.
 You'll need to have python3, cmake, ninja, and QT6 in the PATH, and Visual Studio 2022 or Visual Studio 2022 Build Tools installed. Use [Visual Studio Developer Command Prompt](https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022) or generate Visual Studio project files with CMake to build the project.
 
 However, it is possible to use the WSL (Windows Subsystem for Linux) to run GUI applications.
@@ -340,7 +340,7 @@ brew install llvm
 
 ### Debug commands
 
-CoMaps has some "hidden" debug commands that you can trigger by entering them into the search box.
+Sandbox Maps has some "hidden" debug commands that you can trigger by entering them into the search box.
 
 For example you can switch theme which is very useful for checking [styles](STYLES.md) changes.
 
@@ -348,7 +348,7 @@ There are also other commands for turning on/off isolines, anti-aliasing, etc. C
 
 ### Debugging in an IDE
 
-To harness the power of an IDE for debugging, you can set up [Qt Creator](QT_CREATOR.md) to work with CoMaps code. This gives you options such as setting breakpoints, examining variables while the code is running, examining call stacks and using debugging tools such as Valgrind.
+To harness the power of an IDE for debugging, you can set up [Qt Creator](QT_CREATOR.md) to work with Sandbox Maps code. This gives you options such as setting breakpoints, examining variables while the code is running, examining call stacks and using debugging tools such as Valgrind.
 
 ### More options
 

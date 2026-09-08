@@ -1,1 +1,1 @@
-Navigazzjoni ta' mapep faċli - Skopri iktar mill-vjaġġ - Imsaħħaħ mill-komunita`
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

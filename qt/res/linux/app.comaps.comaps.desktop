@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Version=1.0
-Name=CoMaps
+Name=Sandbox Maps
 Comment=Detailed Offline Maps of the World
 Comment[ast]=Mapes detallaos del mundu ensin conexón
 Comment[bg]=Детайлни офлайн карти на света
@@ -19,5 +19,5 @@ Icon=comaps
 TryExec=CoMaps
 Exec=CoMaps
 Categories=Maps;Education;Geography;Geoscience;Qt;
-Keywords=Map;Maps;Offline Maps;CoMaps;OSM;OpenStreetMap;
+Keywords=Map;Maps;Offline Maps;Sandbox Maps;CoMaps;OSM;OpenStreetMap;
 X-KDE-FormFactor=desktop;tablet;handset;

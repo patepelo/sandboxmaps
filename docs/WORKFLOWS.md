@@ -1,5 +1,8 @@
 # How works CI?
 
+> **Note:** This document describes the upstream [CoMaps](https://codeberg.org/comaps/comaps) project, not the Sandbox Maps fork.
+> Sandbox Maps is not accepting contributions - see [CONTRIBUTING.md](../CONTRIBUTING.md).
+
 We use our own server to execute our CI on Codeberg.
 
 - [Android CI](https://codeberg.org/comaps/comaps/src/branch/main/.forgejo/workflows/android-check.yaml)

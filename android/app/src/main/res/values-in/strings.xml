@@ -34,22 +34,14 @@
     <string name="country_status_download_failed">Unduhan gagal</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Coba Lagi</string>
-    <string name="about_menu_title">Tentang CoMaps</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• Mudah digunakan dan dipoles</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">• Berfokus pada privasi dan bebas iklan</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• Luar jaringan (offline), cepat, dan ringkas</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Sepenuhnya sumber terbuka, nirlaba, pengambilan keputusan dan keuangan yang transparan.</string>
+    <string name="about_menu_title">Tentang Sandbox Maps</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Pengaturan Lokasi</string>
     <string name="close">Tutup</string>
     <string name="unsupported_phone">Aplikasi ini membutuhkan akselerasi perangkat keras OpenGL. Sayangnya, perangkat Anda tidak didukung.</string>
     <string name="download">Unduh</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disconnect_usb_cable">Silakan cabut kabel USB atau masukkan kartu memori untuk menggunakan CoMaps</string>
+    <string name="disconnect_usb_cable">Silakan cabut kabel USB atau masukkan kartu memori untuk menggunakan Sandbox Maps</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="not_enough_free_space_on_sdcard">Silakan kosongkan ruang di kartu SD/penyimpanan USB terlebih dahulu untuk menggunakan aplikasi ini</string>
     <string name="download_resources">Sebelum mulai menggunakan aplikasi, silakan unduh peta tinjauan dunia ke perangkat Anda. \nIni akan menggunakan %s penyimpanan.</string>
@@ -142,7 +134,7 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">Catatan</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">Favorit CoMaps Saya</string>
+    <string name="share_bookmarks_email_subject">Favorit Sandbox Maps Saya</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Memuat Favorit</string>
     <!-- Kmz file successful loading -->
@@ -151,7 +143,7 @@
     <string name="load_kmz_failed">Gagal memuat Favorit. File mungkin rusak atau cacat.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">Jenis file tidak dikenali oleh aplikasi: \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">Gagal membuka file %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">Edit</string>
@@ -162,9 +154,9 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">Unduhan peta sedang berlangsung</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">Lihat lokasi saya saat ini di CoMaps! %1$s atau %2$s Belum punya peta offline? Unduh di sini: https://www.comaps.app/download/</string>
+    <string name="my_position_share_sms">Lihat lokasi saya saat ini di Sandbox Maps! %1$s atau %2$s Belum punya peta offline? Unduh di sini: https://www.comaps.app/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Hei, lihat lokasi saya saat ini di peta CoMaps!</string>
+    <string name="my_position_share_email_subject">Hei, lihat lokasi saya saat ini di peta Sandbox Maps!</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">Bagikan</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -185,7 +177,7 @@
     <string name="pref_zoom_summary">Tampilkan di peta</string>
     <string name="prefs_group_advanced">Lanjutan</string>
     <string name="download_resources_custom_url_title">Server Peta Kustom</string>
-    <string name="download_resources_custom_url_message">Ganti server unduhan peta default yang digunakan. Biarkan kosong untuk menggunakan server default CoMaps.</string>
+    <string name="download_resources_custom_url_message">Ganti server unduhan peta default yang digunakan. Biarkan kosong untuk menggunakan server default Sandbox Maps.</string>
     <string name="download_resources_custom_url_summary_none">Tidak diatur</string>
     <string name="download_resources_custom_url_error_scheme">Silakan masukkan URL yang dimulai dengan http:// atau https://</string>
     <!-- Settings «Map» category: «Night style» title -->
@@ -221,7 +213,7 @@
     <string name="search_show_on_map">Lihat di peta</string>
     <!-- Text in menu -->
     <string name="website">Situs Web</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">Berita</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">Umpan Balik</string>
@@ -234,7 +226,7 @@
     <!-- Button in the main menu -->
     <string name="donate">Donasi</string>
     <!-- Button in the main Help dialog -->
-    <string name="how_to_support_us">Menjadi sukarelawan dan perbaiki CoMaps</string>
+    <string name="how_to_support_us">Menjadi sukarelawan dan perbaiki Sandbox Maps</string>
     <!-- Button in the main Help dialog -->
     <string name="copyright">Hak Cipta</string>
     <!-- Text in menu + Button in the main Help dialog -->
@@ -442,7 +434,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Data OpenStreetMap buatan komunitas per %s. Pelajari lebih lanjut tentang cara mengedit dan memperbarui peta di OpenStreetMap.org</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) adalah proyek komunitas untuk membangun peta yang gratis dan terbuka. Ini adalah sumber utama data peta di CoMaps dan bekerja mirip dengan Wikipedia. Anda dapat menambah atau mengedit tempat dan itu akan tersedia bagi jutaan pengguna di seluruh dunia. \nBergabunglah dengan komunitas dan bantu membuat peta yang lebih baik untuk semua orang!</string>
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) adalah proyek komunitas untuk membangun peta yang gratis dan terbuka. Ini adalah sumber utama data peta di Sandbox Maps dan bekerja mirip dengan Wikipedia. Anda dapat menambah atau mengedit tempat dan itu akan tersedia bagi jutaan pengguna di seluruh dunia. \nBergabunglah dengan komunitas dan bantu membuat peta yang lebih baik untuk semua orang!</string>
     <string name="login_to_make_edits_visible">Buat akun OpenStreetMap atau masuk untuk mempublikasikan pengeditan peta Anda ke dunia</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%1$d dari %2$d</string>
@@ -456,7 +448,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">Catatan untuk sukarelawan OpenStreetMap (opsional)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Jelaskan kesalahan pada peta atau hal-hal yang tidak dapat diedit dengan CoMaps</string>
+    <string name="editor_note_hint">Jelaskan kesalahan pada peta atau hal-hal yang tidak dapat diedit dengan Sandbox Maps</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Hasil edit Anda diunggah ke basis data publik <a href="https://wiki.openstreetmap.org/wiki/About_OpenStreetMap">OpenStreetMap</a>. Harap jangan menambahkan informasi pribadi atau berhak cipta.</string>
     <string name="editor_more_about_osm">Lebih lanjut tentang OpenStreetMap</string>
@@ -466,7 +458,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Operator: %s</string>
     <string name="editor_category_unsuitable_title">Tidak dapat menemukan kategori yang sesuai?</string>
-    <string name="editor_category_unsuitable_text">CoMaps hanya dapat menambahkan kategori titik sederhana, tidak dapat menambahkan kota, jalan, danau, garis bangunan, dll. Silakan tambahkan kategori tersebut langsung ke <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Periksa <a href="https://www.comaps.app/support/advanced-map-editing/">panduan</a> kami untuk instruksi langkah demi langkah yang terperinci.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps hanya dapat menambahkan kategori titik sederhana, tidak dapat menambahkan kota, jalan, danau, garis bangunan, dll. Silakan tambahkan kategori tersebut langsung ke <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Periksa <a href="https://www.comaps.app/support/advanced-map-editing/">panduan</a> kami untuk instruksi langkah demi langkah yang terperinci.</string>
     <string name="downloader_no_downloaded_maps_title">Anda belum mengunduh peta apa pun</string>
     <string name="downloader_no_downloaded_maps_message">Unduh peta untuk mencari dan menavigasi secara offline</string>
     <string name="current_location_unknown_error_title">Lokasi saat ini tidak diketahui</string>
@@ -512,7 +504,7 @@
     <string name="mobile_data_option_ask">Selalu Tanya</string>
     <string name="traffic_update_maps_text">Untuk menampilkan data lalu lintas, peta harus diperbarui</string>
     <string name="increase_font_size">Tingkatkan ukuran label peta</string>
-    <string name="traffic_update_app">Silakan perbarui CoMaps</string>
+    <string name="traffic_update_app">Silakan perbarui Sandbox Maps</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Data lalu lintas tidak tersedia</string>
     <string name="enable_logging">Aktifkan pencatatan (logging)</string>
@@ -702,9 +694,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">Tujuan utama kami adalah membangun peta yang cepat, berfokus pada privasi, dan mudah digunakan yang akan Anda sukai.</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">Anda sekarang menggunakan CoMaps di layar ponsel</string>
+    <string name="car_used_on_the_phone_screen">Anda sekarang menggunakan Sandbox Maps di layar ponsel</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">Anda sekarang menggunakan CoMaps di layar mobil</string>
+    <string name="car_used_on_the_car_screen">Anda sekarang menggunakan Sandbox Maps di layar mobil</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">Anda terhubung ke Android Auto</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -712,11 +704,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">Ke layar mobil</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMaps membutuhkan akses lokasi. Jika sudah aman, periksa notifikasi di ponsel Anda.</string>
+    <string name="aa_location_permissions_request">Sandbox Maps membutuhkan akses lokasi. Jika sudah aman, periksa notifikasi di ponsel Anda.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">Aplikasi ini memerlukan izin Anda</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">CoMaps di Android Auto memerlukan izin lokasi agar dapat bekerja secara efektif</string>
+    <string name="aa_request_permission_activity_text">Sandbox Maps di Android Auto memerlukan izin lokasi agar dapat bekerja secara efektif</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">Berikan Izin</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
@@ -776,7 +768,6 @@
     <string name="saved">Tersimpan</string>
     <string name="offline_explanation_text">Peta perlu diunduh untuk melihat dan menavigasi area tersebut.\nUnduh peta untuk area yang ingin Anda kunjungi.</string>
     <string name="offline_explanation_title">Peta Offline</string>
-    <string name="about_headline">Proyek terbuka yang didukung oleh komunitas</string>
     <string name="maps_storage_free_size">%1$s bebas dari %2$s</string>
     <string name="move_maps_error">Kesalahan saat memindahkan file peta</string>
     <string name="prefs_group_information">Informasi</string>
@@ -785,7 +776,7 @@
     <string name="read_in_wikipedia">Wikipedia</string>
     <string name="opens_in">Buka dalam %s</string>
     <string name="closes_in">Tutup dalam %s</string>
-    <string name="share_bookmarks_email_body">Halo! \n \nTerlampir adalah Favorit saya; silakan buka di CoMaps. Jika Anda belum memasangnya, Anda dapat mengunduhnya di sini: https://www.comaps.app/download/ \n \nSelamat melakukan perjalanan dengan CoMaps!</string>
+    <string name="share_bookmarks_email_body">Halo! \n \nTerlampir adalah Favorit saya; silakan buka di Sandbox Maps. Jika Anda belum memasangnya, Anda dapat mengunduhnya di sini: https://www.comaps.app/download/ \n \nSelamat melakukan perjalanan dengan Sandbox Maps!</string>
     <string name="bookmark_share_email_subject">Ikuti tautan ini %1$s atau tempel koordinat ini %2$s ke aplikasi peta Anda untuk melihat lokasi ini.</string>
     <string name="my_position_share_email">Ikuti tautan ini %1$s atau tempel koordinat ini %2$s ke aplikasi peta Anda untuk melihat lokasi saya.</string>
     <string name="wikimedia_commons">Wikimedia Commons</string>
@@ -819,7 +810,7 @@
     <string name="error_enter_correct_bluesky_page">Masukkan nama pengguna atau alamat web Bluesky yang valid</string>
     <string name="place_page_map_too_old_title">Data peta sudah usang</string>
     <string name="place_page_map_too_old_description">Data peta Anda saat ini sangat lama, silakan perbarui peta.</string>
-    <string name="place_page_app_too_old_description">Data peta Anda saat ini sangat lama, silakan perbarui aplikasi CoMaps.</string>
+    <string name="place_page_app_too_old_description">Data peta Anda saat ini sangat lama, silakan perbarui aplikasi Sandbox Maps.</string>
     <string name="place_page_update_too_old_map">Perbarui wilayah peta</string>
     <string name="place_page_too_old_to_edit">Pengeditan OpenStreetMap dinonaktifkan karena data peta terlalu lama.</string>
     <string name="osm_note_hint">Atau, sebagai alternatif, tinggalkan catatan untuk komunitas OpenStreetMap agar orang lain dapat menambah atau memperbaiki tempat di sini.</string>
@@ -917,5 +908,5 @@
     <string name="not_following_route">Tidak mengikuti rute</string>
     <string name="route_recalculating">Menghitung ulang rute…</string>
     <string name="pref_openexternallinks_title">Buka tautan pihak ketiga secara otomatis</string>
-    <string name="pref_openexternallinks_summary">Buka tautan pihak ketiga di CoMaps secara default</string>
+    <string name="pref_openexternallinks_summary">Buka tautan pihak ketiga di Sandbox Maps secara default</string>
 </resources>

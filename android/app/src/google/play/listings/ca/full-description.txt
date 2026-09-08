@@ -1,4 +1,4 @@
-CoMaps és una aplicació de mapes lliure i de codi obert a càrrec de la comunitat que es basa en les dades OpenStreetMap i es fonamenta en el compromís amb la transparència i la privadesa sense ànim de lucre.
+Sandbox Maps és una aplicació de mapes lliure i de codi obert a càrrec de la comunitat que es basa en les dades OpenStreetMap i es fonamenta en el compromís amb la transparència i la privadesa sense ànim de lucre.
 
 Uneix-te a la comunitat i ajuda a crear la millor aplicació de mapes.
 • Fes servir l'aplicació i recomana-la.

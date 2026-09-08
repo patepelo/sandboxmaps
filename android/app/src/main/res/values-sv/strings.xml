@@ -34,22 +34,14 @@
     <string name="country_status_download_failed">Nedladdningen misslyckades</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Försök igen</string>
-    <string name="about_menu_title">Om CoMaps</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• Lättanvändlig och finslipad</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">Låg batteriförbrukning, fungerar utan uppkoppling</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• Offline, snabb och kompakt</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Fullständigt öppen källkod, icke-vinstdrivande, transparent beslutsfattande och ekonomi.</string>
+    <string name="about_menu_title">Om Sandbox Maps</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Platsinställningar</string>
     <string name="close">Stäng</string>
     <string name="unsupported_phone">Hårdvaruaccelererad OpenGL krävs. Din enhet stöds tyvärr inte.</string>
     <string name="download">Ladda ner</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disconnect_usb_cable">Vänligen koppla ifrån USB-kabeln eller sätt in ett minneskort för att använda CoMaps</string>
+    <string name="disconnect_usb_cable">Vänligen koppla ifrån USB-kabeln eller sätt in ett minneskort för att använda Sandbox Maps</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="not_enough_free_space_on_sdcard">Vänligen frigör utrymme på SD-kortet/USB-lagringen först för att använda appen</string>
     <string name="download_resources">Innan du börjar, ladda gärna ner den översiktliga världskartan på din enhet. \nDen behöver %s lagringsutrymme.</string>
@@ -142,7 +134,7 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">Anteckningar</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">Mina CoMaps-favoriter</string>
+    <string name="share_bookmarks_email_subject">Mina Sandbox Maps-favoriter</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Läser in favoriter</string>
     <!-- Kmz file successful loading -->
@@ -151,7 +143,7 @@
     <string name="load_kmz_failed">Inläsningen av favoriterna misslyckades. Filen kan vara skadad eller defekt.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">Filtypen känns inte igen av appen: \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">Det gick inte att öppna filen %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">Redigera</string>
@@ -162,9 +154,9 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">Kartan har börjat laddas ner</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">Hej, kolla på min nuvarande position på CoMaps! %1$s eller %2$s Har du inte offline-kartor? Ladda ner här: https://www.comaps.app/download/</string>
+    <string name="my_position_share_sms">Hej, kolla på min nuvarande position på Sandbox Maps! %1$s eller %2$s Har du inte offline-kartor? Ladda ner här: https://www.comaps.app/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Hej, kolla på min nuvarande position på CoMaps kartan!</string>
+    <string name="my_position_share_email_subject">Hej, kolla på min nuvarande position på Sandbox Maps kartan!</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">Dela</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -219,7 +211,7 @@
     <string name="search_show_on_map">Visa på kartan</string>
     <!-- Text in menu -->
     <string name="website">Webbplats</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">Nyheter</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">Återkoppling</string>
@@ -440,7 +432,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Community-skapade OpenStreetMap-data från och med %s. Läs mer om hur du redigerar och uppdaterar kartan på OpenStreetMap.org</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) är ett community-projekt för att bygga en fri och öppen karta. Det är den huvudsakliga källan till kartdata i CoMaps och fungerar på samma sätt som Wikipedia. Du kan lägga till eller redigera platser och de blir tillgängliga för miljontals användare över hela världen. \nGå med i samhället och hjälp till att skapa en bättre karta för alla!</string>
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) är ett community-projekt för att bygga en fri och öppen karta. Det är den huvudsakliga källan till kartdata i Sandbox Maps och fungerar på samma sätt som Wikipedia. Du kan lägga till eller redigera platser och de blir tillgängliga för miljontals användare över hela världen. \nGå med i samhället och hjälp till att skapa en bättre karta för alla!</string>
     <string name="login_to_make_edits_visible">Skapa ett OpenStreetMap-konto eller logga in för att publicera dina kartredigeringar till hela världen</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%1$d av %2$d</string>
@@ -454,7 +446,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">Meddelande till OpenStreetMap-volontärer (valfritt)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Beskriv fel på kartan eller saker som inte kan redigeras med CoMaps</string>
+    <string name="editor_note_hint">Beskriv fel på kartan eller saker som inte kan redigeras med Sandbox Maps</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Dina redigeringar laddas upp till den offentliga <a href="https://wiki.openstreetmap.org/wiki/Sv:Om_OpenStreetMap">OpenStreetMap</a>-databasen. Lägg inte till personlig eller upphovsrättsskyddad information.</string>
     <string name="editor_more_about_osm">Mer om OpenStreetMap</string>
@@ -464,7 +456,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Operatör: %s</string>
     <string name="editor_category_unsuitable_title">Hittar du ingen lämplig kategori?</string>
-    <string name="editor_category_unsuitable_text">CoMaps tillåter endast att lägga till enkla punktkategorier, det betyder inga städer, vägar, sjöar, byggnadskonturer etc. Lägg till sådana kategorier direkt till <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Kontrollera vår <a href="https://www.comaps.app/support/advanced-map-editing/">guide</a> för detaljerade steg-för-steg-instruktioner.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps tillåter endast att lägga till enkla punktkategorier, det betyder inga städer, vägar, sjöar, byggnadskonturer etc. Lägg till sådana kategorier direkt till <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Kontrollera vår <a href="https://www.comaps.app/support/advanced-map-editing/">guide</a> för detaljerade steg-för-steg-instruktioner.</string>
     <string name="downloader_no_downloaded_maps_title">Du har inte laddat ner några kartor</string>
     <string name="downloader_no_downloaded_maps_message">Ladda ner kartor för att hitta platsen och navigera offline</string>
     <string name="current_location_unknown_error_title">Den nuvarande platsen är okänd</string>
@@ -510,7 +502,7 @@
     <string name="mobile_data_option_ask">Fråga alltid</string>
     <string name="traffic_update_maps_text">Kartor måste uppdateras för att visa trafikdata</string>
     <string name="increase_font_size">Öka teckenstorlek på kartan</string>
-    <string name="traffic_update_app">Uppdatera CoMaps</string>
+    <string name="traffic_update_app">Uppdatera Sandbox Maps</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Trafikdata är inte tillgänglig</string>
     <string name="enable_logging">Aktivera loggning</string>
@@ -592,7 +584,7 @@
     <string name="power_managment_setting_never">Aldrig</string>
     <string name="power_managment_setting_auto">Vid lågt batteri</string>
     <string name="power_managment_setting_manual_max">Alltid</string>
-    <string name="enable_logging_warning_message">Aktivera denna funktion för att logga detaljer för diagnostiska ändamål. Detta hjälper utvecklarna att identifiera problem med appen. Slå på funktionen endast på begäran av CoMaps supporttjänst.</string>
+    <string name="enable_logging_warning_message">Aktivera denna funktion för att logga detaljer för diagnostiska ändamål. Detta hjälper utvecklarna att identifiera problem med appen. Slå på funktionen endast på begäran av Sandbox Maps supporttjänst.</string>
     <string name="routing_options_title">Ruttinställningar</string>
     <!-- Recommended length for CarPlay and Android Auto is around 25-27 characters -->
     <string name="avoid_tolls">Undvik avgiftsbelagda vägar</string>
@@ -703,9 +695,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">Vårt huvudmål är att bygga snabba, integritetsfokuserade, lättanvända kartor som du kommer att älska.</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">Du använder nu CoMaps på telefonens skärm</string>
+    <string name="car_used_on_the_phone_screen">Du använder nu Sandbox Maps på telefonens skärm</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">Du använder nu CoMaps på bilskärmen</string>
+    <string name="car_used_on_the_car_screen">Du använder nu Sandbox Maps på bilskärmen</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">Du är ansluten till Android Auto</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -713,11 +705,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">Till bilens skärm</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMaps behöver platsåtkomst. När det är säkert kan du kontrollera aviseringen på din telefon.</string>
+    <string name="aa_location_permissions_request">Sandbox Maps behöver platsåtkomst. När det är säkert kan du kontrollera aviseringen på din telefon.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">Denna app behöver ditt tillstånd</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">CoMaps i Android Auto behöver ett platstillstånd för att fungera effektivt</string>
+    <string name="aa_request_permission_activity_text">Sandbox Maps i Android Auto behöver ett platstillstånd för att fungera effektivt</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">Tilldela behörigheter</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
@@ -785,7 +777,7 @@
     <string name="connection_failure">Anslutningen bröts</string>
     <string name="disk_error_title">Diskfel</string>
     <string name="enable_show_on_lock_screen">Visa på låsskärmen</string>
-    <string name="share_bookmarks_email_body">Hej! \n \nJag bifogar mina favoriter, öppna gärna dem med CoMaps. Om du inte redan har appen installerad, kan du ladda ner den här: https://www.comaps.app/download/ \n \nTrevlig resa med CoMaps!</string>
+    <string name="share_bookmarks_email_body">Hej! \n \nJag bifogar mina favoriter, öppna gärna dem med Sandbox Maps. Om du inte redan har appen installerad, kan du ladda ner den här: https://www.comaps.app/download/ \n \nTrevlig resa med Sandbox Maps!</string>
     <string name="instagram_url">https://www.instagram.com/comaps.app/</string>
     <string name="telegram_url">https://t.me/CoMapsApp/</string>
     <string name="osm_wiki_about_url">https://wiki.openstreetmap.org/wiki/Sv:Om_OpenStreetMap</string>
@@ -852,7 +844,6 @@
     <string name="editor_place_doesnt_exist_description">Beskriv hur platsen ser ut nu för att skicka en felanmälan till OpenStreetMap community</string>
     <string name="editor_mark_business_vacant_description">Använd denna om företaget har flyttat och lokalen är ledig.</string>
     <string name="error_enter_correct_instagram_page">Ange ett giltigt Instagram-användarnamn eller en webbadress</string>
-    <string name="about_headline">Ett öppet projekt drivet av communityn</string>
     <string name="prefs_group_map_appearance">Kartans utseende</string>
     <string name="prefs_group_map_appearance_summary">Kartspråk, teckenstorlek, 2D/3D byggnader</string>
     <string name="prefs_group_interface">Gränssnitt</string>

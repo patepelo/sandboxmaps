@@ -32,13 +32,13 @@
 /* Message to display at the center of the screen when the country download has failed */
 "country_status_download_failed" = "Изтеглянето се провали";
 /* Text in About screen */
-"about_headline" = "Отворен проект, захранван от общността";
+"about_headline" = "An experimental fork of CoMaps";
 /* Text in About screen */
-"about_proposition_1" = "Офлайн, бърз и лесен за използване";
+"about_proposition_1" = "Offline, fast and ads-free";
 /* Text in About screen */
-"about_proposition_2" = "Фокус върху поверителността и без реклами";
+"about_proposition_2" = "A sandbox for AI-assisted experiments";
 /* Text in About screen */
-"about_proposition_3" = "Прозрачен и не за печалба";
+"about_proposition_3" = "Unofficial — use at your own risk";
 "close" = "Затваряне";
 "download" = "Изтегляне";
 /* REMOVE THIS STRING AFTER REFACTORING */
@@ -107,7 +107,7 @@
 "category_water" = "Вода";
 /* Search category for RV facilities; any changes should be duplicated in categories.txt @category_rv! */
 "category_rv" = "За RV";
-"share_bookmarks_email_body" = "Здравей!\n\nПрикачени са отметките ми; моля отвори ги в CoMaps. Ако го нямаш инсталирано, можеш да го изтеглиш тук: https://www.comaps.app/download/\n\nПриятно пътуване с CoMaps!";
+"share_bookmarks_email_body" = "Здравей!\n\nПрикачени са отметките ми; моля отвори ги в Sandbox Maps. Ако го нямаш инсталирано, можеш да го изтеглиш тук: https://www.comaps.app/download/\n\nПриятно пътуване с Sandbox Maps!";
 /* message title of loading file */
 "load_kmz_title" = "Зареждане на отметки";
 /* Kmz file successful loading */
@@ -119,9 +119,9 @@
 /* Warning message when doing search around current position */
 "unknown_current_position" = "Местоположението ви още не е определено";
 /* Subject for emailed bookmark */
-"bookmark_share_email_subject" = "Хей, виж какво съм отбелязал в CoMaps!";
+"bookmark_share_email_subject" = "Хей, виж какво съм отбелязал в Sandbox Maps!";
 /* Subject for emailed position */
-"my_position_share_email_subject" = "Хей, виж текущото ми местоположение на картата в CoMaps!";
+"my_position_share_email_subject" = "Хей, виж текущото ми местоположение на картата в Sandbox Maps!";
 /* Share by email button text, also used in editor and About. */
 "email" = "Имейл";
 /* Text for message to copy something */
@@ -133,7 +133,7 @@
 /* Used for bookmark editing */
 "done" = "Готово";
 /* Prints version number in About dialog */
-"version" = "Версия на CoMaps: %@";
+"version" = "Версия на Sandbox Maps: %@";
 "version %@ (%@)" = "Версия %@ (%@)";
 "version: %@ (%@)\nmap data: %@" = "Версия: %@ (%@)\nКартографски данни: %@";
 /* Title for tracks category in bookmarks manager */
@@ -186,7 +186,7 @@
 "search_show_on_map" = "Преглед на картата";
 /* Text in menu */
 "website" = "Уебсайт";
-/* Text in About menu, opens CoMaps news website */
+/* Text in About menu, opens Sandbox Maps news website */
 "news" = "Новини";
 /* Text in the about screen */
 "social_codeberg" = "Codeberg";
@@ -229,7 +229,7 @@
 /* Button in the About screen */
 "report_incorrect_map_bug" = "Докладване или поправяне на неправилни данни на картата";
 /* Button in the About screen */
-"volunteer" = "Доброволчество и подобряване на CoMaps";
+"volunteer" = "Доброволчество и подобряване на Sandbox Maps";
 /* "Social media" section header in the About screen */
 "follow_us" = "Свържете се с нас";
 /* Alert text */
@@ -411,7 +411,7 @@
 /* OpenStreetMap Profile */
 "osm_profile" = "Профил в OpenStreetMap";
 "osm_profile_promt" = "Създайте акаунт в OpenStreetMap или влезте в него, за да публикувате своите редакции на картата в света.";
-"osm_profile_explanation" = "[OpenStreetMap.org](https://openstreetmap.org) (OSM) е общностен проект за създаване на безплатна и отворена карта. Той е основният източник на картографски данни в CoMaps и работи подобно на Wikipedia. Можете да добавяте или редактирате места и те стават достъпни за милиони потребители по целия свят. \nПрисъединете се към общността и помогнете за създаването на по-добра карта за всички!";
+"osm_profile_explanation" = "[OpenStreetMap.org](https://openstreetmap.org) (OSM) е общностен проект за създаване на безплатна и отворена карта. Той е основният източник на картографски данни в Sandbox Maps и работи подобно на Wikipedia. Можете да добавяте или редактирате места и те стават достъпни за милиони потребители по целия свят. \nПрисъединете се към общността и помогнете за създаването на по-добра карта за всички!";
 "osm_profile_login" = "Влизане в акаунт в OpenStreetMap";
 "osm_profile_reauthorize_promt" = "Акаунтът в OpenStreetMap е прекъснат от това приложение";
 "osm_profile_reauthorize" = "Свързване отново с OpenStreetMap";
@@ -468,7 +468,7 @@
 "message_invalid_feature_position" = "Тук не може да бъде намерен обект";
 /* Error dialog no space */
 "migration_no_space_message" = "За изтегляне ви е необходимо повече място. Моля, изтрийте всички ненужни данни.";
-"editor_sharing_title" = "Подобрих картите на CoMaps";
+"editor_sharing_title" = "Подобрих картите на Sandbox Maps";
 /* Downloaded 10 **of** 20 <- it is that "of" */
 "downloader_of" = "%1$d от %2$d";
 "download_over_mobile_header" = "Изтегляне чрез мобилни данни?";
@@ -484,13 +484,13 @@
 /* Title for OSM note section in the editor */
 "editor_other_info" = "Забележка към доброволците на OpenStreetMap (по избор)";
 "editor_detailed_description_hint" = "Подробен коментар";
-"editor_detailed_description" = "Предложените от вас промени по картата ще бъдат изпратени до общността на OpenStreetMap. Опишете всички допълнителни подробности, които не могат да бъдат въведени в CoMaps.";
+"editor_detailed_description" = "Предложените от вас промени по картата ще бъдат изпратени до общността на OpenStreetMap. Опишете всички допълнителни подробности, които не могат да бъдат въведени в Sandbox Maps.";
 "editor_more_about_osm" = "Повече за OpenStreetMap";
 "editor_operator" = "Оператор";
 /* To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... */
 "operator" = "Оператор: %@";
 "editor_category_unsuitable_title" = "Не можете да намерите подходяща категория?";
-"editor_category_unsuitable_text" = "CoMaps позволява да се добавят само прости категории точки, т.е. без градове, пътища, езера, очертания на сгради и т.н. Моля, добавяйте такива категории директно в <a href=\"https://www.openstreetmap.org\">OpenStreetMap.org</a>. Вижте нашето <a href=\"https://www.comaps.app/support/advanced-map-editing/\">ръководство</a> за подробни инструкции стъпка по стъпка.";
+"editor_category_unsuitable_text" = "Sandbox Maps позволява да се добавят само прости категории точки, т.е. без градове, пътища, езера, очертания на сгради и т.н. Моля, добавяйте такива категории директно в <a href=\"https://www.openstreetmap.org\">OpenStreetMap.org</a>. Вижте нашето <a href=\"https://www.comaps.app/support/advanced-map-editing/\">ръководство</a> за подробни инструкции стъпка по стъпка.";
 "downloader_no_downloaded_maps_title" = "Не сте изтеглили никакви карти";
 "downloader_no_downloaded_maps_message" = "Изтеглете картите, от които се нуждаете, за да намирате места и да навигирате без интернет.";
 "current_location_unknown_error_title" = "Настоящото местоположение е неизвестно.";
@@ -504,7 +504,7 @@
 "location_services_disabled_on_device_2" = "2. Изберете Privacy";
 "location_services_disabled_on_device_3" = "3. Изберете Услуги за местоположение";
 "location_services_disabled_on_device_4" = "4. Включете услугите за местоположение";
-"location_services_disabled_on_device_additional_message" = "Или продължете да използвате CoMaps без местоположение";
+"location_services_disabled_on_device_additional_message" = "Или продължете да използвате Sandbox Maps без местоположение";
 /* abbreviation for meters */
 "m" = "м";
 /* abbreviation for kilometers */
@@ -552,7 +552,7 @@
 "off_recent_track_background_button" = "Деактивиране";
 /* For sharing via SMS and so on */
 "sharing_call_action_look" = "Виж";
-"recent_track_background_dialog_message" = "CoMaps използва геопозицията ви във фонов режим за записване на последния ви маршрут.";
+"recent_track_background_dialog_message" = "Sandbox Maps използва геопозицията ви във фонов режим за записване на последния ви маршрут.";
 "general_settings" = "Общи настройки";
 /* For the first routing */
 "accept" = "Приемане";
@@ -781,9 +781,9 @@
 /* App tip #09 */
 "app_tip_09" = "Нашата основна цел е да създаваме бързи, фокусирани върху поверителността, лесни за използване карти, които ще харесате.";
 /* Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen */
-"car_used_on_the_phone_screen" = "Вече използвате CoMaps на екрана на телефона";
+"car_used_on_the_phone_screen" = "Вече използвате Sandbox Maps на екрана на телефона";
 /* Text on the phone placeholder screen that maps are displayed on the car screen */
-"car_used_on_the_car_screen" = "Вече използвате CoMaps на екрана на автомобила";
+"car_used_on_the_car_screen" = "Вече използвате Sandbox Maps на екрана на автомобила";
 /* Displayed on the phone screen. Button to display maps on the phone screen instead of a car */
 "car_continue_on_the_phone" = "Продължете в телефона";
 /* Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! */
@@ -798,7 +798,7 @@
 /* Restaurant or other food place's menu URL field in the Editor */
 "website_menu" = "Връзка към менюто";
 /* Message for the bug report alert. */
-"bugreport_alert_message" = "Искате ли да изпратите доклад за грешка на разработчиците?\nРазчитаме на нашите потребители, тъй като CoMaps не събира информация за грешки автоматично. Благодарим ви предварително, че подкрепяте CoMaps!";
+"bugreport_alert_message" = "Искате ли да изпратите доклад за грешка на разработчиците?\nРазчитаме на нашите потребители, тъй като Sandbox Maps не събира информация за грешки автоматично. Благодарим ви предварително, че подкрепяте Sandbox Maps!";
 /* Title for the iCloud synchronization setting */
 "icloud_sync" = "iCloud Syncronization (Beta)";
 /* Title for the "Enable iCloud Synchronization" alert. */

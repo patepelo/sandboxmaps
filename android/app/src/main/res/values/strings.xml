@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Project only name, app_name is added to strings in build.gradle & can contain "Debug" etc. prefixes. -->
-    <string name="project_name" translatable="false">CoMaps</string>
+    <string name="project_name" translatable="false">Sandbox Maps</string>
     <string name="app_site_url">https://comaps.app/</string>
     <!-- SECTION: Strings -->
     <!-- Button text (should be short) -->
@@ -37,24 +37,24 @@
     <string name="country_status_download_failed">Download has failed</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Try Again</string>
-    <string name="about_menu_title">About CoMaps</string>
+    <string name="about_menu_title">About Sandbox Maps</string>
     <!-- Text in About screen -->
-    <string name="about_headline">Open project powered by the community</string>
+    <string name="about_headline">An experimental fork of CoMaps</string>
     <!-- Text in About screen -->
-    <string name="about_proposition_1">• Easy to use and polished</string>
+    <string name="about_proposition_1">Just for fun</string>
     <!-- Text in About screen -->
-    <string name="about_proposition_2">• Privacy-focused and ads-free</string>
+    <string name="about_proposition_2">Testing things around</string>
     <!-- Text in About screen -->
-    <string name="about_proposition_3">• Offline, fast and compact</string>
+    <string name="about_proposition_3">• Unofficial — use at your own risk</string>
     <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Fully open source, not for profit, transparent decision-making and finances.</string>
+    <string name="about_developed_by_enthusiasts">Built on CoMaps, Organic Maps and MAPS.ME, under the Apache 2.0 license. Not endorsed by the CoMaps project.</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Location Settings</string>
     <string name="close">Close</string>
     <string name="unsupported_phone">The app requires hardware accelerated OpenGL. Unfortunately, your device is not supported.</string>
     <string name="download">Download</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disconnect_usb_cable">Please disconnect USB cable or insert memory card to use CoMaps</string>
+    <string name="disconnect_usb_cable">Please disconnect USB cable or insert memory card to use Sandbox Maps</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="not_enough_free_space_on_sdcard">Please free up some space on the SD card/USB storage first in order to use the app</string>
     <string name="download_resources">Before you start using the app, please download the world overview map to your device.
@@ -156,12 +156,12 @@
     <!-- Notes field in Favorites view -->
     <string name="description">Notes</string>
     <!-- Email Subject when sharing Favorite list -->
-    <string name="share_bookmarks_email_subject">My CoMaps Favorites</string>
+    <string name="share_bookmarks_email_subject">My Sandbox Maps Favorites</string>
     <string name="share_bookmarks_email_body">Hello!
 \n
-\nAttached are my Favorites; please open them in CoMaps. If you don\'t have it installed you can download it here: https://www.comaps.app/download/
+\nAttached are my Favorites; please open them in Sandbox Maps. If you don\'t have it installed you can download it here: https://www.comaps.app/download/
 \n
-\nEnjoy travelling with CoMaps!</string>
+\nEnjoy travelling with Sandbox Maps!</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Loading Favorites</string>
     <!-- Kmz file successful loading -->
@@ -171,7 +171,7 @@
     <!-- Failed to recognize the format of a Favorites or tracks file. -->
     <string name="unknown_file_type">The file type is not recognized by the app:
 \n%1$s</string>
-    <!-- Failed to open a Favorites file in CoMaps. -->
+    <!-- Failed to open a Favorites file in Sandbox Maps. -->
     <string name="failed_to_open_file">Failed to open file %1$s
 \n
 \n%2$s</string>
@@ -184,11 +184,11 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">Map download is in progress now</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">Check out my current location in CoMaps! %1$s or %2$s Don\'t have offline maps? Download here: https://www.comaps.app/download/</string>
+    <string name="my_position_share_sms">Check out my current location in Sandbox Maps! %1$s or %2$s Don\'t have offline maps? Download here: https://www.comaps.app/download/</string>
     <!-- Share a position using EMail, %1$@ is https://comaps.at link WITH NAME and %2$@ is the geo url containing only coordinates.  -->
     <string name="bookmark_share_email_subject">Follow this link %1$s or paste these coordinates %2$s into your maps app to see this location.</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Hey, check out my current location on the CoMaps map!</string>
+    <string name="my_position_share_email_subject">Hey, check out my current location on the Sandbox Maps map!</string>
     <!-- Share my position using EMail, %1$@ is https://comaps.at link WITHOUT NAME and %2$@ is the geo url  -->
     <string name="my_position_share_email">Follow this link %1$s or paste these coordinates %2$s into your maps app to see my location.</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
@@ -201,7 +201,7 @@
     <string name="done">Done</string>
     <!-- Data version in «About» screen, %@ is replaced by a local, human readable date. -->
     <string name="data_version">OpenStreetMap data: %s</string>
-    <!-- Summary of the "About CoMaps" settings row -->
+    <!-- Summary of the "About Sandbox Maps" settings row -->
     <string name="pref_about_summary">Report issues, get help, donate\nVersion: v%1$s</string>
     <!-- Title for tracks category in Favorites manager -->
     <string name="tracks_title">Tracks</string>
@@ -223,7 +223,7 @@
     <string name="prefs_group_advanced">Advanced</string>
     <string name="prefs_group_advanced_summary">Enable logging</string>
     <string name="download_resources_custom_url_title">Custom Map Server</string>
-    <string name="download_resources_custom_url_message">Override the default map download server used for map downloads. Leave empty to use CoMaps default server.</string>
+    <string name="download_resources_custom_url_message">Override the default map download server used for map downloads. Leave empty to use Sandbox Maps default server.</string>
     <string name="download_resources_custom_url_summary_none">Not set</string>
     <string name="download_resources_custom_url_error_scheme">Please enter a URL starting with http:// or https://</string>
     <!-- Settings «Map» category: «Night style» title -->
@@ -265,7 +265,7 @@
     <string name="menu">Menu</string>
     <!-- Text in menu -->
     <string name="website">Website</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">News</string>
     <!-- Text on the place page -->
     <string name="panoramax">Panoramax Picture</string>
@@ -280,7 +280,7 @@
     <!-- Button in the main menu -->
     <string name="donate">Donate</string>
     <!-- Button in the main Help dialog -->
-    <string name="how_to_support_us">Volunteer and improve CoMaps</string>
+    <string name="how_to_support_us">Volunteer and improve Sandbox Maps</string>
     <!-- Button in the main Help dialog -->
     <string name="copyright">Copyright</string>
     <!-- Text in menu + Button in the main Help dialog -->
@@ -527,7 +527,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Community-created OpenStreetMap data as of %s. Learn more about how to edit and update the map at OpenStreetMap.org</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) is a community project to build a free and open map. It\'s the main source of map data in CoMaps and works similar to Wikipedia. You can add or edit places and they become available to millions of users all over the World.
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) is a community project to build a free and open map. It\'s the main source of map data in Sandbox Maps and works similar to Wikipedia. You can add or edit places and they become available to millions of users all over the World.
 \nJoin the community and help to make a better map for everyone!</string>
     <string name="login_to_make_edits_visible">Create an OpenStreetMap account or log in to publish your map edits to the world</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
@@ -543,7 +543,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">Note to OpenStreetMap volunteers (optional)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Describe errors on the map or things that cannot be edited with CoMaps</string>
+    <string name="editor_note_hint">Describe errors on the map or things that cannot be edited with Sandbox Maps</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Your edits are uploaded to the public <a href="https://wiki.openstreetmap.org/wiki/About_OpenStreetMap">OpenStreetMap</a> database. Please do not add personal or copyrighted information.</string>
     <string name="editor_more_about_osm">More about OpenStreetMap</string>
@@ -553,7 +553,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Operator: %s</string>
     <string name="editor_category_unsuitable_title">Can\'t find a suitable category?</string>
-    <string name="editor_category_unsuitable_text">CoMaps is only able to add simple point categories, it isn\'t able to add towns, roads, lakes, building outlines, etc. Please add such categories directly to <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Check our <a href="https://www.comaps.app/support/advanced-map-editing/">guide</a> for detailed step by step instructions.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps is only able to add simple point categories, it isn\'t able to add towns, roads, lakes, building outlines, etc. Please add such categories directly to <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Check our <a href="https://www.comaps.app/support/advanced-map-editing/">guide</a> for detailed step by step instructions.</string>
     <string name="downloader_no_downloaded_maps_title">You haven\'t downloaded any maps</string>
     <string name="downloader_no_downloaded_maps_message">Download maps to search and navigate offline</string>
     <string name="current_location_unknown_error_title">Current location is unknown</string>
@@ -601,7 +601,7 @@
     <!-- Description of info shown when the map is older than 3 months -->
     <string name="place_page_map_too_old_description"> Your current map data is very old, please update the map.</string>
     <!-- Description of info shown when the app and the map are older than 6 months -->
-    <string name="place_page_app_too_old_description"> Your current map data is very old, please update the CoMaps app.</string>
+    <string name="place_page_app_too_old_description"> Your current map data is very old, please update the Sandbox Maps app.</string>
     <!-- Button to update map region, part of the map too old info -->
     <string name="place_page_update_too_old_map">Update map region</string>
     <!-- Toast shown after pressing add place / edit OpenStreetMap when editing is disabled -->
@@ -633,7 +633,7 @@
     <string name="pref_font_size">Font size for map labels</string>
     <string name="increase_font_size">Increase map label size</string>
     <string name="decrease_font_size">Decrease map label size</string>
-    <string name="traffic_update_app">Please update CoMaps</string>
+    <string name="traffic_update_app">Please update Sandbox Maps</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Traffic data is not available</string>
     <string name="enable_logging">Enable logging</string>
@@ -877,9 +877,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">Our main goal is to build fast, privacy-focused, easy-to-use maps that you will love.</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">You are now using CoMaps on the phone screen</string>
+    <string name="car_used_on_the_phone_screen">You are now using Sandbox Maps on the phone screen</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">You are now using CoMaps on the car screen</string>
+    <string name="car_used_on_the_car_screen">You are now using Sandbox Maps on the car screen</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">You are connected to Android Auto</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -887,11 +887,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">To the car screen</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMaps needs location access. When it\'s safe, check the notification on your phone.</string>
+    <string name="aa_location_permissions_request">Sandbox Maps needs location access. When it\'s safe, check the notification on your phone.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">This app needs your permission</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">CoMaps in Android Auto needs location permissions to work effectively</string>
+    <string name="aa_request_permission_activity_text">Sandbox Maps in Android Auto needs location permissions to work effectively</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">Grant Permissions</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
@@ -1034,7 +1034,7 @@
     <!-- Should match TTS string with the same id, eg. data/sound-strings/en.json/localize.json -->
     <string name="route_recalculating">Recalculating the route…</string>
     <string name="pref_openexternallinks_title">Automatically open third-party links</string>
-    <string name="pref_openexternallinks_summary">Open third-party links in CoMaps by default</string>
+    <string name="pref_openexternallinks_summary">Open third-party links in Sandbox Maps by default</string>
     <string name="pref_aa_support_title">Android Auto</string>
     <string name="pref_aa_support_summary_yes">The app has been installed from Google Play, you can use it in your car.</string>
     <string name="pref_aa_support_summary_no">The app has not been installed from Google Play, you can\'t use it in your car. Press the setting to get more details on our FAQ.</string>
@@ -1053,7 +1053,7 @@
     <string name="capacity_charging_yes">Has spaces with chargers</string>
     <string name="capacity_charging_no">No spaces with chargers</string>
     <!-- Permission descriptions -->
-    <string name="permission_read_navigation_label">Read CoMaps navigation data</string>
+    <string name="permission_read_navigation_label">Read Sandbox Maps navigation data</string>
     <string name="permission_read_navigation_description">read live navigation information such as upcoming turns or the name of the road you are on</string>
     <!-- Reviews -->
     <string name="place_reviews_title">Place Reviews</string>

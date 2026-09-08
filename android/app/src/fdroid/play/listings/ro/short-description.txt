@@ -1,1 +1,1 @@
-Navigare ușoară - Descoperă mai mult din călătoria ta - Susținut de comunitate
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

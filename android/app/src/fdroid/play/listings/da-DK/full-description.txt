@@ -1,4 +1,4 @@
-En fællesskabdrevet og åben source kortapp, baseret på kortdata fra OpenStreetMap og styrket i forpligtelsen til værdierne gennemsigtighed, privatlivets fred, og non-profit. CoMaps udspringer af Organic Maps, som selv udsprang af Maps.ME.
+En fællesskabdrevet og åben source kortapp, baseret på kortdata fra OpenStreetMap og styrket i forpligtelsen til værdierne gennemsigtighed, privatlivets fred, og non-profit. Sandbox Maps udspringer af Organic Maps, som selv udsprang af Maps.ME.
 
 Læs mere om grundlaget for projektet og dets udviklingsretnign på <b><i>codeberg.org/comaps</i></b>.
 Slut dig til fælleskabet og hjælp til med at bygge den bedste kortapp i verden.

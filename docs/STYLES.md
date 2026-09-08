@@ -16,7 +16,7 @@ An overview of currently used icons can be found in the [Wiki](https://codeberg.
 
 ## Requirements
 
-To work with styles first [clone the CoMaps repository](INSTALL.md#getting-sources)
+To work with styles first [clone the Sandbox Maps repository](INSTALL.md#getting-sources)
 and run `./configure.sh`. That sets up a local `.venv` in the repository root with
 the required Python `protobuf` version, which the style generation scripts pick up
 automatically. To manage `protobuf` via your system Python instead, set
@@ -65,7 +65,7 @@ They are stored in [`data/styles/default/light/symbols/`](../data/styles/default
 ## How to add a new icon
 
 1. Add an svg icon to `data/styles/default/light/symbols/` (and to `dark` too)
-preferably look for icons in [collections CoMaps uses already](../data/copyright.html#icons)
+preferably look for icons in [collections Sandbox Maps uses already](../data/copyright.html#icons)
 2. Add icon rendering/visibility rules into `data/styles/default/include/Icons.mapcss` and to "navigation style" `data/styles/vehicle/include/Icons.mapcss`
 3. Rebuild the app
     * Or run `tools/unix/generate_symbols.sh` to add new icons into skin files and `tools/unix/generate_drules.sh` to generate drawing rules for the new icons
@@ -73,7 +73,7 @@ preferably look for icons in [collections CoMaps uses already](../data/copyright
 
 ## How to add a new map feature / POI type
 
-1. Add it into `data/mapcss-mapping.csv` (or better replace existing `deprecated` line) to make CoMaps import it from OSM
+1. Add it into `data/mapcss-mapping.csv` (or better replace existing `deprecated` line) to make Sandbox Maps import it from OSM
 2. If necessary merge similar tags in via `data/replaced_tags.txt`
 3. Define a priority for the new feature type in e.g. [`priorities_4_overlays.prio.txt`](../data/styles/default/include/priorities_4_overlays.prio.txt) and/or other priorities files
 4. Add a new icon (see [above](#how-to-add-a-new-icon)) and/or other styling (area, line..)

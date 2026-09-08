@@ -1,1 +1,1 @@
-Paprasta ir patogi navigacija – Turiningesnės kelionės – Vystoma bendruomenės
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

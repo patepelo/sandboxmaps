@@ -160,7 +160,7 @@
     <string name="elevation_profile_descent">Disgyniad</string>
     <string name="yes_available">Ie</string>
     <string name="try_again">Ceisio Eto</string>
-    <string name="about_menu_title">CoMaps</string>
+    <string name="about_menu_title">Sandbox Maps</string>
     <string name="location_settings">Gosodiadau Lleoliad</string>
     <string name="maps_storage_downloaded">Mapiau wedi\'u lawrlwytho</string>
     <string name="move_maps">Symud mapiau?</string>
@@ -255,7 +255,6 @@
     <string name="close">Cau</string>
     <string name="zoom_to_country">Dangos ar y map</string>
     <string name="country_status_download_failed">Methwyd â lawrlwytho</string>
-    <string name="about_headline">Prosiect agored a bwerwyd gan y gymuned</string>
     <string name="maps_storage_free_size">%1$s yn rhydd o %2$s</string>
     <string name="download">Lawrlwytho</string>
     <string name="continue_button">Parhau</string>
@@ -301,7 +300,6 @@
     <string name="dialog_routing_location_turn_on">Galluogi gwasanaethau lleoli</string>
     <string name="dialog_routing_change_start">Newid man cychwyn</string>
     <string name="dialog_routing_try_again">Ceisiwch eto</string>
-    <string name="about_proposition_3">• All-lein, cyflym a chryno</string>
     <string name="download_resources_continue">Mynd i\'r Map</string>
     <string name="download_country_ask">Lawrlwytho %1$s? (%2$s)</string>
     <string name="update_country_ask">Diweddaru %1$s? (%2$s)</string>
@@ -309,5 +307,5 @@
     <string name="move_maps_error">Gwall wrth symud ffeiliau map</string>
     <string name="wait_several_minutes">Gall hyn gymryd ychydig funudau. \nArhoswch…</string>
     <string name="measurement_units_summary">Dewis rhwng milltiroedd a chilomedrau</string>
-    <string name="share_bookmarks_email_subject">Fy Ffefrynnau CoMaps</string>
+    <string name="share_bookmarks_email_subject">Fy Ffefrynnau Sandbox Maps</string>
 </resources>

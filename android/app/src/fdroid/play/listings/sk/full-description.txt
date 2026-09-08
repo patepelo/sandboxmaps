@@ -1,4 +1,4 @@
-Bezplatná mapová aplikácia s otvoreným zdrojovým kódom, ktorú vedie komunita, založená na údajoch OpenStreetMap a vyznačujúca sa dôrazom na transparentnosť, ochranu súkromia a neziskový charakter. CoMaps je odnožou projektu Organic Maps, ktorý je sám o sebe odnožou projektu Maps.ME.
+Bezplatná mapová aplikácia s otvoreným zdrojovým kódom, ktorú vedie komunita, založená na údajoch OpenStreetMap a vyznačujúca sa dôrazom na transparentnosť, ochranu súkromia a neziskový charakter. Sandbox Maps je odnožou projektu Organic Maps, ktorý je sám o sebe odnožou projektu Maps.ME.
 
 Viac informácií o dôvodoch vzniku projektu a jeho smerovaní nájdete na stránkach <b><i>codeberg.org/comaps</i></b>.
 Pripojte sa k tamojšej komunite a pomôžte vytvoriť najlepšiu mapovú aplikáciu

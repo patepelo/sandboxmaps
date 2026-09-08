@@ -1,1 +1,1 @@
-Navigation facile - Vivez de grands voyages - Propulsé par la communauté
+Experimental fork of CoMaps - offline maps, AI-assisted, use at your own risk

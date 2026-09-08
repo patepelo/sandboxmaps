@@ -34,24 +34,14 @@
     <string name="country_status_download_failed">Downloaden is mislukt</string>
     <!-- Button text for the button under the country_status_download_failed message -->
     <string name="try_again">Opnieuw proberen</string>
-    <string name="about_menu_title">Over CoMaps</string>
-    <!-- Text in About screen -->
-    <string name="about_headline">Open project gedreven door de community</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_1">• Gebruiksvriendelijk en afgewerkt</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_2">• Privacygericht en reclamevrij</string>
-    <!-- Text in About screen -->
-    <string name="about_proposition_3">• Offline, snel en compact</string>
-    <!-- Text in About screen -->
-    <string name="about_developed_by_enthusiasts">Volledig open source, non-profit, met transparante besluitvorming en financiën.</string>
+    <string name="about_menu_title">Over Sandbox Maps</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Locatie-instellingen</string>
     <string name="close">Sluiten</string>
     <string name="unsupported_phone">De app vereist hardwareversnelde OpenGL. Helaas wordt dit apparaat niet ondersteund.</string>
     <string name="download">Downloaden</string>
     <!-- Used in DownloadResources startup screen -->
-    <string name="disconnect_usb_cable">Verwijder de USB-kabel of plaats een geheugenkaart om CoMaps te gebruiken</string>
+    <string name="disconnect_usb_cable">Verwijder de USB-kabel of plaats een geheugenkaart om Sandbox Maps te gebruiken</string>
     <!-- Used in DownloadResources startup screen -->
     <string name="not_enough_free_space_on_sdcard">Maak eerst ruimte vrij op de SD-kaart/USB-opslag om de app te gebruiken</string>
     <string name="download_resources">Laten we, voor de eerste start, de algemene wereldkaart downloaden. \nDeze gebruikt %s aan opslag.</string>
@@ -148,8 +138,8 @@
     <!-- Notes field in Bookmarks view -->
     <string name="description">Notities</string>
     <!-- Email Subject when sharing bookmark list -->
-    <string name="share_bookmarks_email_subject">Mijn CoMaps-favorieten</string>
-    <string name="share_bookmarks_email_body">Hallo! \n \nBijgevoegd zijn mijn favorieten. Je kunt ze openen in CoMaps. Heb je CoMaps niet geïnstalleerd? Download het dan hier: https://www.comaps.app/nl/download/ \n \nVeel plezier met CoMaps en een goede reis!</string>
+    <string name="share_bookmarks_email_subject">Mijn Sandbox Maps-favorieten</string>
+    <string name="share_bookmarks_email_body">Hallo! \n \nBijgevoegd zijn mijn favorieten. Je kunt ze openen in Sandbox Maps. Heb je Sandbox Maps niet geïnstalleerd? Download het dan hier: https://www.comaps.app/nl/download/ \n \nVeel plezier met Sandbox Maps en een goede reis!</string>
     <!-- message title of loading file -->
     <string name="load_kmz_title">Favorieten laden</string>
     <!-- Kmz file successful loading -->
@@ -158,7 +148,7 @@
     <string name="load_kmz_failed">Favorieten laden is mislukt. Het bestand is mogelijk beschadigd.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
     <string name="unknown_file_type">Het bestandstype wordt niet herkend door de app: \n%1$s</string>
-    <!-- Failed to open a bookmarks or tracks file in CoMaps. -->
+    <!-- Failed to open a bookmarks or tracks file in Sandbox Maps. -->
     <string name="failed_to_open_file">Bestand openen is mislukt %1$s \n \n%2$s</string>
     <!-- resource for context menu -->
     <string name="edit">Bewerken</string>
@@ -169,9 +159,9 @@
     <!-- Alert message that downloading is in progress. -->
     <string name="downloading_is_active">De kaart wordt nu gedownload</string>
     <!-- Share my position using SMS, %1$@ contains om:// and %2$@ https://comaps.app link WITHOUT NAME. @NOTE non-ascii symbols in the link will result in max 70 characters SMS instead of 140. -->
-    <string name="my_position_share_sms">Bekijk mijn huidige locatie op CoMaps! %1$s of %2$s Heb je geen offline kaarten? Download ze hier: https://www.comaps.app/nl/download/</string>
+    <string name="my_position_share_sms">Bekijk mijn huidige locatie op Sandbox Maps! %1$s of %2$s Heb je geen offline kaarten? Download ze hier: https://www.comaps.app/nl/download/</string>
     <!-- Subject for emailed position -->
-    <string name="my_position_share_email_subject">Hoi, bekijk mijn huidige locatie op CoMaps!</string>
+    <string name="my_position_share_email_subject">Hoi, bekijk mijn huidige locatie op Sandbox Maps!</string>
     <!-- Share button text which opens menu with more buttons, like Message, EMail, Facebook etc. -->
     <string name="share">Delen</string>
     <!-- Share by email button text, also used in editor and About. -->
@@ -194,7 +184,7 @@
     <string name="pref_zoom_summary">Toon op de kaart</string>
     <string name="prefs_group_advanced">Geavanceerd</string>
     <string name="download_resources_custom_url_title">Aangepaste kaartserver</string>
-    <string name="download_resources_custom_url_message">Overschrijf de standaard server voor het downloaden van kaarten. Laat leeg om de standaardserver van CoMaps te gebruiken.</string>
+    <string name="download_resources_custom_url_message">Overschrijf de standaard server voor het downloaden van kaarten. Laat leeg om de standaardserver van Sandbox Maps te gebruiken.</string>
     <string name="download_resources_custom_url_summary_none">Niet ingesteld</string>
     <string name="download_resources_custom_url_error_scheme">Voer een URL in beginnend met https:// of http://</string>
     <!-- Settings «Map» category: «Night style» title -->
@@ -230,7 +220,7 @@
     <string name="search_show_on_map">Weergeven op kaart</string>
     <!-- Text in menu -->
     <string name="website">Website</string>
-    <!-- Text in About menu, opens CoMaps news website -->
+    <!-- Text in About menu, opens Sandbox Maps news website -->
     <string name="news">Nieuws</string>
     <!-- Settings: Send feedback button and dialog title -->
     <string name="feedback">Reacties</string>
@@ -243,7 +233,7 @@
     <!-- Button in the main menu -->
     <string name="donate">Doneren</string>
     <!-- Button in the main Help dialog -->
-    <string name="how_to_support_us">Help mee en verbeter CoMaps</string>
+    <string name="how_to_support_us">Help mee en verbeter Sandbox Maps</string>
     <!-- Button in the main Help dialog -->
     <string name="copyright">Auteursrechten</string>
     <!-- Text in menu + Button in the main Help dialog -->
@@ -456,7 +446,7 @@
     <!-- Text in About and OSM Login screens. First %@ is replaced by a local, human readable date. -->
     <string name="osm_presentation">Door de gemeenschap samengestelde OpenStreetMap-gegevens tot %s. Lees meer over hoe je de kaart kunt bewerken en bijwerken op OpenStreetMap.org</string>
     <!-- OSM explanation on Android login screen -->
-    <string name="login_osm_presentation">OpenStreetMap.org (OSM) is een gemeenschapsproject om een vrije en open kaart te bouwen. Het is de belangrijkste bron van kaartgegevens in CoMaps en werkt vergelijkbaar met Wikipedia. U kunt plaatsen toevoegen of bewerken, waarna deze beschikbaar worden voor miljoenen gebruikers wereldwijd.\nSluit u aan bij de gemeenschap en help mee om de kaart voor iedereen beter te maken!</string>
+    <string name="login_osm_presentation">OpenStreetMap.org (OSM) is een gemeenschapsproject om een vrije en open kaart te bouwen. Het is de belangrijkste bron van kaartgegevens in Sandbox Maps en werkt vergelijkbaar met Wikipedia. U kunt plaatsen toevoegen of bewerken, waarna deze beschikbaar worden voor miljoenen gebruikers wereldwijd.\nSluit u aan bij de gemeenschap en help mee om de kaart voor iedereen beter te maken!</string>
     <string name="login_to_make_edits_visible">Maak een OpenStreetMap-account aan of log in om uw kaartbewerkingen voor de wereld te publiceren</string>
     <!-- Downloaded 10 **of** 20 <- it is that "of" -->
     <string name="downloader_of">%1$d van %2$d</string>
@@ -470,7 +460,7 @@
     <!-- Title for OSM note section in the editor -->
     <string name="editor_other_info">Opmerking voor OpenStreetMap-vrijwilligers (optioneel)</string>
     <!-- Hint of the input field in the OSM note section of the editor -->
-    <string name="editor_note_hint">Beschrijf fouten op de kaart of dingen die niet bewerkt kunnen worden met CoMaps</string>
+    <string name="editor_note_hint">Beschrijf fouten op de kaart of dingen die niet bewerkt kunnen worden met Sandbox Maps</string>
     <!-- Information about OSM at the top of the editing page -->
     <string name="editor_about_osm">Uw bewerkingen worden geüpload naar de openbare <a href="https://wiki.openstreetmap.org/wiki/NL:About">OpenStreetMap</a> database. Voeg geen persoonlijke of auteursrechtelijk beschermde informatie toe.</string>
     <string name="editor_more_about_osm">Meer over OpenStreetMap</string>
@@ -480,7 +470,7 @@
     <!-- To indicate the operator of ATMs, bicycle rentals, electric vehicle charging stations... -->
     <string name="operator">Exploitant: %s</string>
     <string name="editor_category_unsuitable_title">Geen passende categorie gevonden?</string>
-    <string name="editor_category_unsuitable_text">CoMaps kan alleen eenvoudige puntcategorieën toevoegen, dus geen steden, wegen, meren, contouren van gebouwen, enz. Voeg dergelijke categorieën direct toe aan <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Lees onze <a href="https://www.comaps.app/support/advanced-map-editing/">handleiding</a> voor gedetailleerde stapsgewijze instructies.</string>
+    <string name="editor_category_unsuitable_text">Sandbox Maps kan alleen eenvoudige puntcategorieën toevoegen, dus geen steden, wegen, meren, contouren van gebouwen, enz. Voeg dergelijke categorieën direct toe aan <a href="https://www.openstreetmap.org">OpenStreetMap.org</a>. Lees onze <a href="https://www.comaps.app/support/advanced-map-editing/">handleiding</a> voor gedetailleerde stapsgewijze instructies.</string>
     <string name="downloader_no_downloaded_maps_title">U hebt geen kaarten gedownload</string>
     <string name="downloader_no_downloaded_maps_message">Download kaarten om offline te zoeken en navigeren</string>
     <string name="current_location_unknown_error_title">Huidige locatie is onbekend</string>
@@ -533,7 +523,7 @@
     <string name="mobile_data_option_ask">Vraag altijd</string>
     <string name="traffic_update_maps_text">Om verkeersgegevens weer te geven, moeten de kaarten bijgewerkt worden</string>
     <string name="increase_font_size">Vergroot lettergrootte op de kaart</string>
-    <string name="traffic_update_app">Werk CoMaps bij</string>
+    <string name="traffic_update_app">Werk Sandbox Maps bij</string>
     <!-- "traffic" as in "road congestion" -->
     <string name="traffic_data_unavailable">Verkeersgegevens zijn niet beschikbaar</string>
     <string name="enable_logging">Logboekregistratie inschakelen</string>
@@ -743,9 +733,9 @@
     <!-- App tip #09 -->
     <string name="app_tip_09">Ons belangrijkste doel is om snelle, op privacygerichte, gebruiksvriendelijke kaarten te maken waar u van houdt.</string>
     <!-- Text on the Android Auto or CarPlay placeholder screen that maps are displayed on the phone screen -->
-    <string name="car_used_on_the_phone_screen">U gebruikt nu CoMaps op het telefoonscherm</string>
+    <string name="car_used_on_the_phone_screen">U gebruikt nu Sandbox Maps op het telefoonscherm</string>
     <!-- Text on the phone placeholder screen that maps are displayed on the car screen -->
-    <string name="car_used_on_the_car_screen">U gebruikt nu CoMaps op het autoscherm</string>
+    <string name="car_used_on_the_car_screen">U gebruikt nu Sandbox Maps op het autoscherm</string>
     <!-- Displayed on the phone screen. Android Auto connected -->
     <string name="aa_connected_title">U bent verbonden met Android Auto</string>
     <!-- Displayed on the phone screen. Button to display maps on the phone screen instead of a car -->
@@ -753,11 +743,11 @@
     <!-- Displayed on the Android Auto or CarPlay screen. Button to display maps on the car screen instead of a phone. Must be no more than 18 symbols! -->
     <string name="car_continue_in_the_car">Naar het autoscherm</string>
     <!-- Ask user to grant location permissions -->
-    <string name="aa_location_permissions_request">CoMaps heeft locatietoegang nodig. Controleer, als het veilig kan, de melding op uw telefoon.</string>
+    <string name="aa_location_permissions_request">Sandbox Maps heeft locatietoegang nodig. Controleer, als het veilig kan, de melding op uw telefoon.</string>
     <!-- Notification title for permission request from AA. -->
     <string name="aa_request_permission_notification">Deze app heeft uw toestemming nodig</string>
     <!-- The text in the activity for location permission request. -->
-    <string name="aa_request_permission_activity_text">CoMaps in Android Auto heeft locatietoestemming nodig om effectief te werken</string>
+    <string name="aa_request_permission_activity_text">Sandbox Maps in Android Auto heeft locatietoestemming nodig om effectief te werken</string>
     <!-- Grant Permissions button. -->
     <string name="aa_grant_permissions">Geef toestemming</string>
     <!-- Outdoors/hiking map style (activity) name in the Styles and Layers dialog -->
@@ -906,7 +896,7 @@
     <string name="navigation_start_tts_disabled_message">Spraakinstructies uitgeschakeld: TTS-engine niet beschikbaar</string>
     <string name="place_page_map_too_old_title">Kaartgegevens verouderd</string>
     <string name="place_page_map_too_old_description">Uw huidige kaartgegevens zijn erg oud. Werk de kaart bij.</string>
-    <string name="place_page_app_too_old_description">Uw huidige kaartgegevens zijn erg oud. Update de CoMaps-app.</string>
+    <string name="place_page_app_too_old_description">Uw huidige kaartgegevens zijn erg oud. Update de Sandbox Maps-app.</string>
     <string name="place_page_update_too_old_map">Kaartregio bijwerken</string>
     <string name="place_page_too_old_to_edit">Het bewerken van OpenStreetMap is uitgeschakeld omdat de kaartgegevens te oud zijn.</string>
     <string name="pref_maplanguage_local">Plaatselijke taal</string>
@@ -923,7 +913,7 @@
     <string name="route_finished">Route voltooid</string>
     <string name="not_following_route">Afwijking van route</string>
     <string name="pref_openexternallinks_title">Links van derden automatisch openen</string>
-    <string name="pref_openexternallinks_summary">Links van derden automatisch in CoMaps openen</string>
+    <string name="pref_openexternallinks_summary">Links van derden automatisch in Sandbox Maps openen</string>
     <string name="pref_alt_map_lang_handling">Alternatieve kaarttalen</string>
     <string name="pref_alt_map_lang_handling_ignore_alternatives">Geen alternatieven gebruiken</string>
     <string name="pref_alt_map_lang_handling_system_order">Gebruik in systeemvolgorde</string>
@@ -965,7 +955,7 @@
     <string name="prefs_group_route_summary">Eenheden, spraakinstructies, routeringsopties</string>
     <string name="prefs_group_privacy_summary">Zoekgeschiedenis</string>
     <string name="prefs_group_power_summary">Scherm-time-out, mobiele gegevens</string>
-    <string name="permission_read_navigation_label">CoMaps navigatiegegevens lezen</string>
+    <string name="permission_read_navigation_label">Sandbox Maps navigatiegegevens lezen</string>
     <string name="permission_read_navigation_description">lees live navigatie-informatie zoals aankomende bochten of de naam van de weg waarop u zich bevindt</string>
     <string name="prefs_group_map_appearance">Kaartuiterlijk</string>
     <string name="prefs_group_map_appearance_summary">Kaarttaal, labelgrootte, 2D/3D-gebouwen</string>
