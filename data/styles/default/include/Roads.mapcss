@@ -1089,8 +1089,8 @@ line|z18[highway=footway][bicycle=designated],
 line|z19-[highway=footway][bicycle=designated],
 {width: 4.2; dashes: 20,20; opacity: 1;}
 
-/* Don't display sidewalks and pedestrian crossings on z15. */
-line|z15[highway=footway][footway=sidewalk],
+/* Don't display pedestrian crossings on z15; sidewalks only from z20. */
+line|z15-19[highway=footway][footway=sidewalk],
 line|z15[highway=footway][footway=crossing],
 {width: 0;}
 
@@ -1348,8 +1348,8 @@ line|z18[highway=footway][bicycle=designated]::border,
 line|z19-[highway=footway][bicycle=designated]::border,
 {width: 5.2; dashes: 20,20;}
 
-/* Don't display sidewalks and pedestrian crossings on z15. */
-line|z15[highway=footway][footway=sidewalk]::border,
+/* Don't display pedestrian crossings on z15; sidewalks only from z20. */
+line|z15-19[highway=footway][footway=sidewalk]::border,
 line|z15[highway=footway][footway=crossing]::border,
 {width: 0;}
 
