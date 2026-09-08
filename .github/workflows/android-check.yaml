@@ -38,6 +38,11 @@ jobs:
   android-check:
     name: Build Android apps
     runs-on: ubuntu-latest
+    # The repo default is read-only, which makes upload-artifact fail with a
+    # 403 on FinalizeArtifact. Grant just enough to write the artifact.
+    permissions:
+      contents: read
+      actions: write
     strategy:
       fail-fast: false
       matrix:
