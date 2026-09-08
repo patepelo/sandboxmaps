@@ -1,1 +1,1 @@
-See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
+Contributing is not open or intended for now. Please do so upstream.
