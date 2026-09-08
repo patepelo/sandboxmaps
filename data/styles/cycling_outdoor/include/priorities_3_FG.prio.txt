@@ -65,7 +65,7 @@
 # barrier-guard_rail                                # line z16-
 # barrier-hedge                                     # line z16-
 # barrier-wall                                      # line z15-
-# barrier-yes                                       # line z15- (also has icon z16-, caption(optional) z16-)
+# barrier-yes                                       # line z15- (also has icon z18-, caption(optional) z18-)
 # railway-funicular                                 # line z12-
 # railway-funicular-bridge                          # line z12-
 # railway-funicular-tunnel                          # line z12-
@@ -610,9 +610,9 @@
 
 # amenity-prison                                    # area z12- (also has icon z17-, caption(optional) z17-)
 # boundary-aboriginal_lands                         # line z10- and area z10-16 (also has caption z10-16)
-# boundary-national_park                            # line z10- and area z10-17 (also has icon z10-17, caption(optional) z11-17)
-# boundary-protected_area-1                         # line z10- and area z10-17 (also has icon z10-17, caption(optional) z11-17)
-# leisure-nature_reserve                            # area z10-17 (also has icon z10-17, caption(optional) z11-17, caption z18-)
+# boundary-national_park                            # line z10- and area z10-17 (also has icon z10-17, caption(optional) z10-17)
+# boundary-protected_area-1                         # line z10- and area z10-17 (also has icon z10-17, caption(optional) z10-17)
+# leisure-nature_reserve                            # area z10-17 (also has icon z10-17, caption(optional) z10-17, caption z18-)
 # === 20
 
 # piste:type-downhill-advanced-area                 # area z13-
