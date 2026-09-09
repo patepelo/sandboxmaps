@@ -26,6 +26,48 @@ Findings from reading the renderer, so we don't rebuild what's there:
 So the shader end is done. The gap is that visibility is binary and there is no
 per-overlay alpha to drive.
 
+## Phase 1 checkpoint: PASSED
+
+Temporarily forced `m_opacity = 0.5f` for the overlay programs only. Icons and
+labels rendered half-transparent while roads, buildings and land stayed opaque.
+`u_opacity` reaches the overlay shaders, so the fragment-shader end needs no
+work. Smoke test has been removed.
+
+## Correction: text and icons hide by different mechanisms
+
+The original plan assumed both overlay kinds could reuse the per-frame
+mutation path. That is only true for text.
+
+`RenderBucket::Render()` applies two independent mechanisms:
+
+```cpp
+if (handle->IndexesRequired()) {
+  if (handle->IsVisible())
+    handle->GetElementIndexes(rfpIndex);   // icons: hidden by dropping indices
+  hasIndexMutation = true;
+}
+if (handle->HasDynamicAttributes())
+  handle->GetAttributeMutation(rfpAttrib); // text: hidden by zeroing vertices
+```
+
+- **Text** uses `TextHandle`, which owns a dynamic stream
+  (`gpu::TextDynamicVertex` = position + normal). Hiding memsets it to zero,
+  collapsing the quad. Adding an alpha here is cheap: extend the struct, the
+  binding, and the vertex shader.
+- **Icons** use plain `dp::SquareHandle` with `gpu::SolidTexturingVertex` /
+  `MaskedTexturingVertex`, which are **static** streams. There is no dynamic
+  attribute and no `GetAttributeMutation` override — the base one is a no-op.
+  Icons disappear because their indices are omitted from the index buffer.
+
+So fading icons needs a new dynamic alpha stream on the symbol path plus keeping
+their indices alive during the fade. That is a bigger change than fading text,
+and it is the part the user notices most.
+
+**Revised sequencing:** do text first (Phase 2a). It exercises the alpha
+plumbing and, more importantly, the overlay-tree lifetime problem in Phase 3,
+which is the real risk. If lifetime handling turns out to be unworkable, we
+learn it before paying for the icon vertex-format work.
+
 ## The key constraint
 
 `m_opacity` is a **per-draw-call uniform**, set once per render group
