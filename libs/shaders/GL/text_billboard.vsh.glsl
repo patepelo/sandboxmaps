@@ -2,6 +2,7 @@ layout (location = 0) in vec2 a_colorTexCoord;
 layout (location = 1) in vec2 a_maskTexCoord;
 layout (location = 2) in vec4 a_position;
 layout (location = 3) in vec2 a_normal;
+layout (location = 4) in float a_fadeAlpha;
 
 #ifdef ENABLE_VTF
 layout (location = 0) out LOW_P vec4 v_color;
@@ -9,6 +10,7 @@ layout (location = 0) out LOW_P vec4 v_color;
 layout (location = 1) out vec2 v_colorTexCoord;
 #endif
 layout (location = 2) out vec2 v_maskTexCoord;
+layout (location = 3) out float v_fadeAlpha;
 
 layout (binding = 0) uniform UBO
 {
@@ -36,4 +38,5 @@ void main()
   v_colorTexCoord = a_colorTexCoord;
 #endif
   v_maskTexCoord = a_maskTexCoord;
+  v_fadeAlpha = a_fadeAlpha;
 }

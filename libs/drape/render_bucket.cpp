@@ -128,7 +128,10 @@ void RenderBucket::Render(ref_ptr<GraphicsContext> context, bool drawAsLine)
     {
       if (handle->IndexesRequired())
       {
-        if (handle->IsVisible())
+        // Keep geometry in the index buffer while an overlay is fading out,
+        // otherwise it would vanish instantly and there would be nothing for
+        // the fade to act on.
+        if (handle->IsVisible() || handle->IsFadingOut())
           handle->GetElementIndexes(rfpIndex);
         hasIndexMutation = true;
       }

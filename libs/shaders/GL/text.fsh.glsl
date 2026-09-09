@@ -5,6 +5,7 @@ layout (location = 1) in vec2 v_colorTexCoord;
 layout (binding = 1) uniform sampler2D u_colorTex;
 #endif
 layout (location = 2) in vec2 v_maskTexCoord;
+layout (location = 3) in float v_fadeAlpha;
 
 layout (location = 0) out vec4 v_FragColor;
 
@@ -30,7 +31,7 @@ void main()
   LOW_P vec4 glyphColor = texture(u_colorTex, v_colorTexCoord);
 #endif
   float dist = texture(u_maskTex, v_maskTexCoord).r;
-  float alpha = smoothstep(u_contrastGamma.x - u_contrastGamma.y, u_contrastGamma.x + u_contrastGamma.y, dist) * u_opacity;
+  float alpha = smoothstep(u_contrastGamma.x - u_contrastGamma.y, u_contrastGamma.x + u_contrastGamma.y, dist) * u_opacity * v_fadeAlpha;
   glyphColor.a *= alpha;
   v_FragColor = glyphColor;
 }
