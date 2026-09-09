@@ -133,17 +133,17 @@
 
 /* 4.4 Buildings */
 
-@building0: #D5D6D2;
-@building1: #D0D1CC;
-@building_border0: #A1A096;
-@building_border1: #9B9A8F;
+@building0: #E3E3E3;
+@building1: #DEDEDE;
+@building_border0: #C6C6C6;
+@building_border1: #C0C0C0;
 @historic_wall: #AEAD9E;
 
 /* 5.ROADS */
 /* 5.1 All roads */
 
-@motorway0: #F57A00;
-@motorway1: #F08800;
+@motorway0: #FF962E;
+@motorway1: #FF962E;
 @trunk0: #F29718;
 @trunk1: #F29E30;
 @primary0: #F5B74E;
@@ -161,7 +161,7 @@
 @path: #8E4E1D;
 @path_expert: #3D2617;
 @bridleway: #3D361E;
-@motorway1_border: #D87A00;
+@motorway1_border: #E07E1F;
 @trunk1_border: #DA8F2B;
 @primary1_border: #E1A93A;
 @primary2_border: #E1AF4E;
@@ -177,7 +177,7 @@
 
 /* 5.3 Tunnels */
 
-@motorway_tunnel: #F2A540;
+@motorway_tunnel: #FFB366;
 @motorway_tunnel_casing: #808080;
 @trunk_tunnel: #F6BB5F;
 @trunk_tunnel_casing: #808080;

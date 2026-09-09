@@ -95,7 +95,11 @@ details on how to build and execute it.
 To test on Android or iOS device either re-build the app or put
 the compiled style files (e.g. `drules_proto_walking_light.bin`) into
 a `styles/` subfolder of maps directory on the device
-(e.g. `Android/data/app.comaps/files/styles/`).
+(e.g. `Android/data/app.sandboxmaps/files/styles/`).
+
+The directory is named after the build's application id, so use the
+variant you actually installed, e.g. `app.sandboxmaps.test` for a beta
+build or `app.sandboxmaps.debug` for a debug one.
 
 Changing display zoom level for features (e.g. from z16- to z14-) might
 not take effect until map's visibility/scale index is rebuilt:
