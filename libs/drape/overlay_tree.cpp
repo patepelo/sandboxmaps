@@ -15,7 +15,7 @@
 
 namespace dp
 {
-int constexpr kMinFrameUpdatePeriod = 5;
+int constexpr kMinFrameUpdatePeriod = 8;
 int constexpr kAvgFrameUpdatePeriod = 10;
 int constexpr kMaxFrameUpdatePeriod = 15;
 uint32_t constexpr kMinHandlesCount = 100;
@@ -42,6 +42,19 @@ public:
 
     if (priorityLeft == priorityRight)
     {
+      // Hysteresis (exp/overlay-fade): at equal priority, prefer whichever
+      // overlay is already on screen. Without this the winner is decided
+      // purely by geometry, so two labels competing for the same space swap
+      // slots every time the view shifts slightly - which reads as blinking.
+      // Priority still dominates, so this cannot let a minor label outrank
+      // an important one.
+      float const fadeLeft = l->GetFadeAlpha();
+      float const fadeRight = r->GetFadeAlpha();
+      if (fadeLeft > fadeRight)
+        return true;
+      if (fadeLeft < fadeRight)
+        return false;
+
       auto const & hashLeft = l->GetOverlayID();
       auto const & hashRight = r->GetOverlayID();
 
