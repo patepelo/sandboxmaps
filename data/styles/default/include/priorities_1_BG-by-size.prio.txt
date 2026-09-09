@@ -31,14 +31,14 @@ landuse-religious                                   # area z13-
 === 240
 
 amenity-doctors                                     # area z15- (also has icon z18-, caption(optional) z18-)
-leisure-swimming_pool                               # area z13- (also has icon z17-, caption(optional) z17-)
-leisure-swimming_pool-private                       # area z13- (also has icon z17-, caption(optional) z17-)
+leisure-swimming_pool                               # area z13- (also has icon z18-, caption z17, caption(optional) z18-)
+leisure-swimming_pool-private                       # area z13- (also has icon z18-, caption z17, caption(optional) z18-)
 === 230
 
 landuse-landfill                                    # area z13- (also has icon z15-, caption(optional) z15-)
 === 220
 
-leisure-playground                                  # area z15- (also has icon z17-, caption(optional) z17-)
+leisure-playground                                  # area z15- (also has icon z18-, caption z17, caption(optional) z18-)
 === 200
 
 amenity-fountain                                    # area z16- (also has icon z16-, caption(optional) z16-)
@@ -74,7 +74,7 @@ leisure-sports_centre-sport-shooting                # area z13- (also has icon z
 leisure-sports_centre-sport-skateboard              # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-skiing                  # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-soccer                  # area z13- (also has icon z16-, caption(optional) z16-)
-leisure-sports_centre-sport-swimming                # area z13- (also has icon z15-, caption(optional) z15-)
+leisure-sports_centre-sport-swimming                # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-table_tennis            # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-tennis                  # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-volleyball              # area z13- (also has icon z16-, caption(optional) z16-)
@@ -88,19 +88,19 @@ landuse-cemetery-christian                          # area z10- (also has icon z
 === 180
 
 amenity-car_wash                                    # area z15- (also has icon z17-, caption(optional) z17-)
-amenity-charging_station                            # area z16- (also has icon z16-, caption(optional) z16-)
-amenity-charging_station-bicycle                    # area z16- (also has icon z16-, caption(optional) z16-)
-amenity-charging_station-carless                    # area z16- (also has icon z16-, caption(optional) z16-)
-amenity-charging_station-motorcar                   # area z15- (also has icon z14-, caption(optional) z14-)
-amenity-charging_station-motorcycle                 # area z16- (also has icon z16-, caption(optional) z16-)
-amenity-charging_station-small                      # area z15- (also has icon z15-, caption(optional) z16-)
+amenity-charging_station                            # area z16- (also has icon z19-, caption(optional) z19-)
+amenity-charging_station-bicycle                    # area z16- (also has icon z19-, caption(optional) z19-)
+amenity-charging_station-carless                    # area z16- (also has icon z19-, caption(optional) z19-)
+amenity-charging_station-motorcar                   # area z15- (also has icon z19-, caption(optional) z19-)
+amenity-charging_station-motorcycle                 # area z16- (also has icon z19-, caption(optional) z19-)
+amenity-charging_station-small                      # area z15- (also has icon z19-, caption(optional) z19-)
 amenity-courthouse                                  # area z15- (also has icon z17-, caption(optional) z17-)
 amenity-fire_station                                # area z15- (also has icon z16-, caption(optional) z17-)
 amenity-fuel                                        # area z15- (also has icon z14-, caption(optional) z14-)
 amenity-marketplace                                 # area z15- (also has icon z16-, caption(optional) z16-)
 amenity-police                                      # area z15- (also has icon z16-, caption(optional) z17-)
 amenity-ranger_station                              # area z13- (also has icon z16-, caption z15, caption(optional) z16-)
-amenity-recycling-centre                            # area z15- (also has icon z16-, caption(optional) z16-)
+amenity-recycling-centre                            # area z15- (also has icon z19-, caption(optional) z19-)
 amenity-social_facility                             # area z15- (also has icon z17-, caption(optional) z17-)
 amenity-stage                                       # area z17- (also has icon z17-, caption(optional) z17-)
 amenity-vehicle_inspection                          # area z15- (also has icon z16-, caption(optional) z16-)
@@ -110,13 +110,13 @@ highway-pedestrian-square                           # area z14- (also has line z
 highway-rest_area                                   # area z13- (also has icon z15-, caption(optional) z15-)
 highway-services                                    # area z13- (also has icon z14-, caption(optional) z14-)
 landuse-garages                                     # area z13- (also has caption z15-)
-leisure-dog_park                                    # area z15- (also has icon z16-, caption(optional) z16-)
-leisure-resort                                      # area z13- (also has icon z16-, caption(optional) z17-)
+leisure-dog_park                                    # area z15- (also has icon z18-, caption z17, caption(optional) z18-)
+leisure-resort                                      # area z13- (also has icon z18-, caption z17, caption(optional) z18-)
 leisure-water_park                                  # area z13- (also has icon z16-, caption(optional) z16-)
 office-diplomatic                                   # area z15- (also has icon z17-, caption(optional) z17-)
 tourism-camp_site                                   # area z13- (also has icon z16-, caption(optional) z16-)
-tourism-information-office                          # area z15- (also has icon z17-, caption(optional) z17-)
-tourism-information-visitor_centre                  # area z13- (also has icon z17-, caption(optional) z17-)
+tourism-information-office                          # area z15- (also has icon z19-, caption z18, caption(optional) z19-)
+tourism-information-visitor_centre                  # area z13- (also has icon z19-, caption z18, caption(optional) z19-)
 === 170
 
 highway-footway-area                                # area z14- (also has line z15-, line::border z15-, pathtext z15-)
@@ -149,17 +149,17 @@ railway-platform                                    # area z16- (also has captio
 amenity-bicycle_parking                             # area z15- (also has icon z19-, caption(optional) z19-)
 amenity-bicycle_parking-covered                     # area z15- (also has icon z19-, caption(optional) z19-)
 amenity-car_pooling                                 # area z15- (also has icon z16-, caption(optional) z18-)
-amenity-motorcycle_parking                          # area z15- (also has icon z17-, caption(optional) z17-)
-amenity-parking                                     # area z15- (also has icon z16-, caption(optional) z18-)
-amenity-parking-fee                                 # area z15- (also has icon z16-, caption(optional) z18-)
+amenity-motorcycle_parking                          # area z15- (also has icon z19-, caption(optional) z19-)
+amenity-parking                                     # area z15- (also has icon z18-, caption(optional) z18-)
+amenity-parking-fee                                 # area z15- (also has icon z18-, caption(optional) z18-)
 amenity-parking-lane                                # area z17- (also has icon z18-, caption(optional) z18-)
 amenity-parking-lane-fee                            # area z17- (also has icon z18-, caption(optional) z18-)
 amenity-parking-lane-private                        # area z17- (also has icon z19-, caption(optional) z19-)
-amenity-parking-multi-storey                        # area z15- (also has icon z16-, caption(optional) z18-)
-amenity-parking-multi-storey-fee                    # area z15- (also has icon z16-, caption(optional) z18-)
+amenity-parking-multi-storey                        # area z15- (also has icon z18-, caption(optional) z18-)
+amenity-parking-multi-storey-fee                    # area z15- (also has icon z18-, caption(optional) z18-)
 amenity-parking-no-access                           # area z15- (also has icon z18-, caption(optional) z18-)
-amenity-parking-park_and_ride                       # area z15- (also has icon z16-, caption(optional) z18-)
-amenity-parking-permissive                          # area z15- (also has icon z16-, caption(optional) z18-)
+amenity-parking-park_and_ride                       # area z15- (also has icon z18-, caption(optional) z18-)
+amenity-parking-permissive                          # area z15- (also has icon z18-, caption(optional) z18-)
 amenity-parking-private                             # area z17- (also has icon z18-, caption(optional) z18-)
 amenity-parking-street_side                         # area z17- (also has icon z18-, caption(optional) z18-)
 amenity-parking-street_side-fee                     # area z17- (also has icon z18-, caption(optional) z18-)
@@ -188,7 +188,7 @@ landuse-orchard                                     # area z12- (also has captio
 landuse-recreation_ground                           # area z12- (also has caption z15-)
 landuse-village_green                               # area z12-
 landuse-vineyard                                    # area z12- (also has caption z15-)
-leisure-fitness_station                             # area z15- (also has icon z17-, caption(optional) z17-)
+leisure-fitness_station                             # area z15- (also has icon z19-, caption z17-18, caption(optional) z19-)
 leisure-pitch                                       # area z15- (also has icon z17-, caption(optional) z17-)
 natural-bare_rock                                   # area z11- (also has caption z14-)
 natural-scree                                       # area z11-
@@ -196,7 +196,7 @@ natural-shingle                                     # area z12-
 === 80
 
 landuse-plant_nursery                               # area z12- (also has icon z17-, caption(optional) z17-)
-leisure-garden                                      # area z12- (also has icon z16-, caption(optional) z16-)
+leisure-garden                                      # area z12- (also has icon z19-, caption z16-18, caption(optional) z19-)
 leisure-garden-residential                          # area z12-
 leisure-park                                        # area z10- (also has icon z14-, caption(optional) z14-)
 leisure-park-no-access                              # area z10- (also has icon z14-, caption(optional) z14-)
@@ -232,11 +232,11 @@ power-plant-wind                                    # area z13- (also has icon z
 power-substation                                    # area z13- (also has icon z17-, caption(optional) z18-)
 === 50
 
-amenity-childcare                                   # area z13- (also has icon z17-, caption(optional) z17-)
+amenity-childcare                                   # area z13- (also has icon z18-, caption(optional) z18-)
 amenity-clinic                                      # area z13- (also has icon z18-, caption(optional) z18-)
 amenity-college                                     # area z13- (also has icon z16-, caption(optional) z16-)
 amenity-hospital                                    # area z13- (also has icon z14-, caption(optional) z15-)
-amenity-kindergarten                                # area z13- (also has icon z17-, caption(optional) z17-)
+amenity-kindergarten                                # area z13- (also has icon z18-, caption(optional) z18-)
 amenity-school                                      # area z13- (also has icon z16-, caption(optional) z16-)
 amenity-university                                  # area z13- (also has icon z14-, caption(optional) z14-)
 === 40
