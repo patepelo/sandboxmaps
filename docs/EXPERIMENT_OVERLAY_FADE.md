@@ -1,6 +1,6 @@
 # Experiment: fading overlays on zoom change
 
-**Branch:** `exp/overlay-fade` · **Status:** plan only, nothing implemented
+**Branch:** `exp/overlay-fade` · **Status:** text overlays done, icons not started
 
 ## Goal
 
@@ -149,3 +149,43 @@ If Phase 1's half-transparency checkpoint doesn't work cleanly, or Phase 3 shows
 measurable frame-time regression in a dense city, stop and revert. The map
 popping is a cosmetic annoyance; a stuttering renderer is not worth trading for
 it.
+
+
+## Result
+
+Text overlays fade in and out, and the blinking is much reduced. Confirmed by
+eye in the Designer app.
+
+Two things the plan did not anticipate, both found by testing rather than
+reading:
+
+**The fade froze when the map stopped moving.** `StepFade()` runs from
+`GetAttributeMutation()`, which only happens when a frame is drawn, and drape
+skips frames when nothing changes. A fade started by a zoom would stall
+partway. Fixed by flagging an in-flight fade and folding it into
+`isActiveFrame` in `FrontendRenderer`, next to the existing animation checks.
+
+**Fading was not the whole problem.** The visible annoyance was labels
+blinking and fighting for space, which is overlay-tree churn, not transition
+sharpness. The tree re-decided winners from scratch every placement pass with
+no hysteresis. Adding "prefer the incumbent at equal priority" addressed the
+cause; the fade addresses the symptom. Both were needed.
+
+Phase 3 (lifetime) turned out to be a two-line change in `RenderBucket` -
+keep a fading overlay's indices - rather than the blocker the plan expected.
+
+### Debugging note
+
+"Feels the same" was reported twice before the alpha path was verified. Two
+diagnostics settled it quickly and should have come first: pin alpha to a
+constant to prove the plumbing, then set an absurdly slow fade to prove the
+logic. Guessing at tuning while the mechanism was unverified wasted a cycle.
+
+### Not done
+
+- **Icons still pop.** They are plain `SquareHandle`s with static vertices and
+  need their own dynamic alpha stream, as described above.
+- **GL only.** `libs/shaders/Metal/map.metal` needs the same vertex change
+  before iOS renders this correctly.
+- **Battery.** Fades keep the render loop awake, so a longer fade means more
+  awake frames. Worth measuring on device before shipping the current ~3.3s.
