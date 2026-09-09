@@ -322,7 +322,7 @@
 # amenity-theatre                                   # icon z14- (also has caption(optional) z14-)
 # historic-battlefield                              # icon z15- (also has caption(optional) z15-)
 # historic-city_gate                                # icon z13- (also has caption(optional) z15-)
-# historic-memorial-war_memorial                    # icon z15- (also has caption(optional) z15-)
+# historic-memorial-war_memorial                    # icon z20- (also has caption(optional) z20-)
 # leisure-water_park                                # icon z16- (also has caption(optional) z16-, area z13-)
 # shop-mall                                         # icon z14- (also has caption(optional) z14-)
 # tourism-aquarium                                  # icon z16- (also has caption(optional) z16-)
@@ -367,7 +367,7 @@
 # === 4450
 
 # amenity-ranger_station                            # icon z13- (also has caption(optional) z14-, area z13-)
-# historic-monument                                 # icon z13- (also has caption(optional) z13-)
+# historic-monument                                 # icon z18- (also has caption(optional) z18-)
 # tourism-information-office                        # icon z13- (also has caption(optional) z14-, area z15-)
 # tourism-information-visitor_centre                # icon z13- (also has caption(optional) z14-, area z13-)
 # === 4400
@@ -404,7 +404,7 @@
 # === 4200
 
 # amenity-place_of_worship                          # icon z14- (also has caption(optional) z14-, area z13-)
-# historic-memorial                                 # icon z15- (also has caption(optional) z15-)
+# historic-memorial                                 # icon z20- (also has caption(optional) z20-)
 # === 4150
 
 # amenity-cafe                                      # icon z18- (also has caption(optional) z18-)
@@ -797,10 +797,10 @@
 # amenity-taxi                                      # icon z19- (also has caption(optional) z19-)
 # === 2600
 
-# historic-memorial-sculpture                       # icon z15- (also has caption(optional) z15-)
-# historic-memorial-statue                          # icon z15- (also has caption(optional) z15-)
+# historic-memorial-sculpture                       # icon z20- (also has caption(optional) z20-)
+# historic-memorial-statue                          # icon z20- (also has caption(optional) z20-)
 # tourism-artwork-sculpture                         # icon z19- and caption z18 (also has caption(optional) z19-)
-# tourism-artwork-statue                            # icon z19- and caption z18 (also has caption(optional) z19-)
+# tourism-artwork-statue                            # icon z18- (also has caption(optional) z18-)
 # === 2590
 
 # tourism-motel                                     # icon z18- (also has caption(optional) z18-)
@@ -965,7 +965,7 @@
 # railway-platform                                  # caption z16- (also has area z16-)
 # === 1650
 
-# leisure-sports_centre-sport-swimming              # icon z15- (also has caption(optional) z15-, area z13-)
+# leisure-sports_centre-sport-swimming              # icon z16- (also has caption(optional) z16-, area z13-)
 # === 1620
 
 # leisure-fitness_centre-sport-yoga                 # icon z16- (also has caption(optional) z17-, area z16-)
@@ -1082,8 +1082,8 @@
 # shop-perfumery                                    # icon z18- (also has caption(optional) z18-)
 # shop-pet                                          # icon z16- (also has caption(optional) z16-)
 # shop-photo                                        # icon z16- (also has caption(optional) z16-)
-# shop-rental                                       # icon z16- (also has caption(optional) z16-)
-# shop-rental-bike                                  # icon z16- (also has caption(optional) z16-)
+# shop-rental                                       # icon z18- (also has caption(optional) z18-)
+# shop-rental-bike                                  # icon z18- (also has caption(optional) z18-)
 # shop-sewing                                       # icon z16- (also has caption(optional) z16-)
 # shop-tattoo                                       # icon z16- (also has caption(optional) z16-)
 # shop-ticket                                       # icon z16- (also has caption(optional) z16-)
@@ -1101,7 +1101,7 @@
 # historic-archaeological_site                      # icon z17- (also has caption(optional) z17-)
 # historic-boundary_stone                           # icon z16- (also has caption(optional) z18-)
 # historic-gallows                                  # icon z16- (also has caption(optional) z17-)
-# historic-memorial-cross                           # icon z17- (also has caption(optional) z17-)
+# historic-memorial-cross                           # icon z20-
 # historic-pillory                                  # icon z16- (also has caption(optional) z17-)
 # historic-tomb                                     # icon z16- (also has caption(optional) z18-)
 # historic-wayside_cross                            # icon z16- (also has caption(optional) z18-)
@@ -1116,7 +1116,7 @@
 # amenity-shelter-public_transport                  # icon z14- (also has caption(optional) z14-)
 # emergency-lifeguard                               # icon z14- (also has caption(optional) z18-)
 # leisure-bandstand                                 # icon z17- (also has caption(optional) z17-)
-# leisure-fitness_station                           # icon z17- (also has caption(optional) z17-, area z15-)
+# leisure-fitness_station                           # icon z19- and caption z17-18 (also has caption(optional) z19-, area z15-)
 # leisure-playground                                # icon z18- and caption z17 (also has caption(optional) z18-, area z15-)
 # natural-cliff                                     # pathtext z14- (also has line z12-)
 # === 1500
@@ -1176,7 +1176,7 @@
 # leisure-sports_hall                               # icon z17- (also has caption(optional) z17-)
 # === 1250
 
-# amenity-compressed_air                            # icon z18- (also has caption(optional) z19-)
+# amenity-compressed_air                            # icon z19- (also has caption(optional) z19-)
 # amenity-parcel_locker                             # icon z17- (also has caption(optional) z17-)
 # amenity-payment_terminal                          # icon z17- (also has caption(optional) z17-)
 # amenity-vending_machine-fuel                      # icon z18- (also has caption(optional) z18-)
@@ -1392,14 +1392,14 @@
 
 # historic-anchor                                   # icon z18- (also has caption(optional) z18-)
 # historic-cannon                                   # icon z18- (also has caption(optional) z18-)
-# historic-memorial-plaque                          # icon z18- (also has caption(optional) z18-)
+# historic-memorial-plaque                          # icon z20-
 # historic-stone                                    # icon z18- (also has caption(optional) z18-)
 # === 210
 
 # amenity-post_box                                  # icon z19-
 # amenity-recycling-container                       # icon z20- and caption z19 (also has caption(optional) z20-)
 # amenity-toilets-private                           # icon z18- (also has caption(optional) z19-)
-# historic-memorial-stolperstein                    # icon z19- (also has caption(optional) z19-)
+# historic-memorial-stolperstein                    # icon z20-
 # === 200
 
 # amenity-parking-lane                              # icon z20- and caption z19 (also has caption(optional) z20-, area z17-)
@@ -1638,7 +1638,7 @@
 # amenity-theatre                                   # caption(optional) z14- (also has icon z14-)
 # historic-battlefield                              # caption(optional) z15- (also has icon z15-)
 # historic-city_gate                                # caption(optional) z15- (also has icon z13-)
-# historic-memorial-war_memorial                    # caption(optional) z15- (also has icon z15-)
+# historic-memorial-war_memorial                    # caption(optional) z20- (also has icon z20-)
 # leisure-water_park                                # caption(optional) z16- (also has icon z16-, area z13-)
 # shop-mall                                         # caption(optional) z14- (also has icon z14-)
 # tourism-aquarium                                  # caption(optional) z16- (also has icon z16-)
@@ -1681,7 +1681,7 @@
 # === -5550
 
 # amenity-ranger_station                            # caption(optional) z14- (also has icon z13-, area z13-)
-# historic-monument                                 # caption(optional) z13- (also has icon z13-)
+# historic-monument                                 # caption(optional) z18- (also has icon z18-)
 # tourism-information-office                        # caption(optional) z14- (also has icon z13-, area z15-)
 # tourism-information-visitor_centre                # caption(optional) z14- (also has icon z13-, area z13-)
 # === -5600
@@ -1718,7 +1718,7 @@
 # === -5800
 
 # amenity-place_of_worship                          # caption(optional) z14- (also has icon z14-, area z13-)
-# historic-memorial                                 # caption(optional) z15- (also has icon z15-)
+# historic-memorial                                 # caption(optional) z20- (also has icon z20-)
 # === -5850
 
 # amenity-cafe                                      # caption(optional) z18- (also has icon z18-)
@@ -1935,10 +1935,10 @@
 # amenity-taxi                                      # caption(optional) z19- (also has icon z19-)
 # === -7400
 
-# historic-memorial-sculpture                       # caption(optional) z15- (also has icon z15-)
-# historic-memorial-statue                          # caption(optional) z15- (also has icon z15-)
+# historic-memorial-sculpture                       # caption(optional) z20- (also has icon z20-)
+# historic-memorial-statue                          # caption(optional) z20- (also has icon z20-)
 # tourism-artwork-sculpture                         # caption(optional) z19- (also has icon z19-, caption z18)
-# tourism-artwork-statue                            # caption(optional) z19- (also has icon z19-, caption z18)
+# tourism-artwork-statue                            # caption(optional) z18- (also has icon z18-)
 # === -7410
 
 # tourism-motel                                     # caption(optional) z18- (also has icon z18-)
@@ -2064,7 +2064,7 @@
 # building-train_station                            # caption(optional) z17- (also has icon z17-, area z14-)
 # === -8300
 
-# leisure-sports_centre-sport-swimming              # caption(optional) z15- (also has icon z15-, area z13-)
+# leisure-sports_centre-sport-swimming              # caption(optional) z16- (also has icon z16-, area z13-)
 # === -8380
 
 # leisure-fitness_centre-sport-yoga                 # caption(optional) z17- (also has icon z16-, area z16-)
@@ -2181,8 +2181,8 @@
 # shop-perfumery                                    # caption(optional) z18- (also has icon z18-)
 # shop-pet                                          # caption(optional) z16- (also has icon z16-)
 # shop-photo                                        # caption(optional) z16- (also has icon z16-)
-# shop-rental                                       # caption(optional) z16- (also has icon z16-)
-# shop-rental-bike                                  # caption(optional) z16- (also has icon z16-)
+# shop-rental                                       # caption(optional) z18- (also has icon z18-)
+# shop-rental-bike                                  # caption(optional) z18- (also has icon z18-)
 # shop-sewing                                       # caption(optional) z16- (also has icon z16-)
 # shop-tattoo                                       # caption(optional) z16- (also has icon z16-)
 # shop-ticket                                       # caption(optional) z16- (also has icon z16-)
@@ -2200,7 +2200,6 @@
 # historic-archaeological_site                      # caption(optional) z17- (also has icon z17-)
 # historic-boundary_stone                           # caption(optional) z18- (also has icon z16-)
 # historic-gallows                                  # caption(optional) z17- (also has icon z16-)
-# historic-memorial-cross                           # caption(optional) z17- (also has icon z17-)
 # historic-pillory                                  # caption(optional) z17- (also has icon z16-)
 # historic-tomb                                     # caption(optional) z18- (also has icon z16-)
 # historic-wayside_cross                            # caption(optional) z18- (also has icon z16-)
@@ -2215,7 +2214,7 @@
 # amenity-shelter-public_transport                  # caption(optional) z14- (also has icon z14-)
 # emergency-lifeguard                               # caption(optional) z18- (also has icon z14-)
 # leisure-bandstand                                 # caption(optional) z17- (also has icon z17-)
-# leisure-fitness_station                           # caption(optional) z17- (also has icon z17-, area z15-)
+# leisure-fitness_station                           # caption(optional) z19- (also has icon z19-, caption z17-18, area z15-)
 # leisure-playground                                # caption(optional) z18- (also has icon z18-, caption z17, area z15-)
 # === -8500
 
@@ -2271,7 +2270,7 @@
 # leisure-sports_hall                               # caption(optional) z17- (also has icon z17-)
 # === -8750
 
-# amenity-compressed_air                            # caption(optional) z19- (also has icon z18-)
+# amenity-compressed_air                            # caption(optional) z19- (also has icon z19-)
 # amenity-parcel_locker                             # caption(optional) z17- (also has icon z17-)
 # amenity-payment_terminal                          # caption(optional) z17- (also has icon z17-)
 # amenity-vending_machine-fuel                      # caption(optional) z18- (also has icon z18-)
@@ -2427,13 +2426,11 @@
 
 # historic-anchor                                   # caption(optional) z18- (also has icon z18-)
 # historic-cannon                                   # caption(optional) z18- (also has icon z18-)
-# historic-memorial-plaque                          # caption(optional) z18- (also has icon z18-)
 # historic-stone                                    # caption(optional) z18- (also has icon z18-)
 # === -9790
 
 # amenity-recycling-container                       # caption(optional) z20- (also has icon z20-, caption z19)
 # amenity-toilets-private                           # caption(optional) z19- (also has icon z18-)
-# historic-memorial-stolperstein                    # caption(optional) z19- (also has icon z19-)
 # === -9800
 
 # amenity-parking-lane                              # caption(optional) z20- (also has icon z20-, caption z19, area z17-)

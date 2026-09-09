@@ -74,7 +74,7 @@ leisure-sports_centre-sport-shooting                # area z13- (also has icon z
 leisure-sports_centre-sport-skateboard              # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-skiing                  # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-soccer                  # area z13- (also has icon z16-, caption(optional) z16-)
-leisure-sports_centre-sport-swimming                # area z13- (also has icon z15-, caption(optional) z15-)
+leisure-sports_centre-sport-swimming                # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-table_tennis            # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-tennis                  # area z13- (also has icon z16-, caption(optional) z16-)
 leisure-sports_centre-sport-volleyball              # area z13- (also has icon z16-, caption(optional) z16-)
@@ -115,8 +115,8 @@ leisure-resort                                      # area z13- (also has icon z
 leisure-water_park                                  # area z13- (also has icon z16-, caption(optional) z16-)
 office-diplomatic                                   # area z15- (also has icon z17-, caption(optional) z17-)
 tourism-camp_site                                   # area z13- (also has icon z16-, caption(optional) z16-)
-tourism-information-office                          # area z15- (also has icon z17-, caption(optional) z17-)
-tourism-information-visitor_centre                  # area z13- (also has icon z17-, caption(optional) z17-)
+tourism-information-office                          # area z15- (also has icon z19-, caption z18, caption(optional) z19-)
+tourism-information-visitor_centre                  # area z13- (also has icon z19-, caption z18, caption(optional) z19-)
 === 170
 
 highway-footway-area                                # area z14- (also has line z15-, line::border z15-, pathtext z15-)
@@ -188,7 +188,7 @@ landuse-orchard                                     # area z12- (also has captio
 landuse-recreation_ground                           # area z12- (also has caption z15-)
 landuse-village_green                               # area z12-
 landuse-vineyard                                    # area z12- (also has caption z15-)
-leisure-fitness_station                             # area z15- (also has icon z17-, caption(optional) z17-)
+leisure-fitness_station                             # area z15- (also has icon z19-, caption z17-18, caption(optional) z19-)
 leisure-pitch                                       # area z15- (also has icon z17-, caption(optional) z17-)
 natural-bare_rock                                   # area z11- (also has caption z14-)
 natural-scree                                       # area z11-

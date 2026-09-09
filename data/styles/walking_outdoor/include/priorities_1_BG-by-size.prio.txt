@@ -79,7 +79,7 @@
 # leisure-sports_centre-sport-skateboard            # area z13- (also has icon z16-, caption(optional) z16-)
 # leisure-sports_centre-sport-skiing                # area z13- (also has icon z16-, caption(optional) z16-)
 # leisure-sports_centre-sport-soccer                # area z13- (also has icon z16-, caption(optional) z16-)
-# leisure-sports_centre-sport-swimming              # area z13- (also has icon z15-, caption(optional) z15-)
+# leisure-sports_centre-sport-swimming              # area z13- (also has icon z16-, caption(optional) z16-)
 # leisure-sports_centre-sport-table_tennis          # area z13- (also has icon z16-, caption(optional) z16-)
 # leisure-sports_centre-sport-tennis                # area z13- (also has icon z16-, caption(optional) z16-)
 # leisure-sports_centre-sport-volleyball            # area z13- (also has icon z16-, caption(optional) z16-)
@@ -193,7 +193,7 @@
 # landuse-recreation_ground                         # area z12- (also has caption z15-)
 # landuse-village_green                             # area z12-
 # landuse-vineyard                                  # area z12- (also has caption z15-)
-# leisure-fitness_station                           # area z15- (also has icon z17-, caption(optional) z17-)
+# leisure-fitness_station                           # area z15- (also has icon z19-, caption z17-18, caption(optional) z19-)
 # leisure-pitch                                     # area z15- (also has icon z17-, caption(optional) z17-)
 # natural-bare_rock                                 # area z11- (also has caption z13-)
 # natural-scree                                     # area z11-
