@@ -419,7 +419,9 @@ void Arrow3d::Render(ref_ptr<dp::GraphicsContext> context, ref_ptr<gpu::ProgramM
   }
 
   // Render outline.
-  if (m_shadowMesh && m_enableOutline && routingMode)
+  // The white outline used to be routing-only, so the pointer sat on the map
+  // with no separation while browsing. The design calls for it always.
+  if (m_shadowMesh && m_enableOutline)
   {
     dp::Color const outlineColor = df::GetColorConstant(df::kArrow3DOutlineColor);
     RenderArrow(context, mng, *m_shadowMesh, screen, gpu::Program::Arrow3dOutline, outlineColor, 0.0f /* dz */,
