@@ -1797,6 +1797,9 @@ void FrontendRenderer::RenderFrame()
   isActiveFrame |= needUpdateDynamicTextures;
   isActiveFrame |= m_userEventStream.IsWaitingForActionCompletion();
   isActiveFrame |= InterpolationHolder::Instance().IsActive();
+  // Keep drawing while any overlay is still fading, so a fade started by a
+  // zoom or pan finishes even after the map comes to rest.
+  isActiveFrame |= dp::OverlayHandle::ConsumeActiveFadesFlag();
 
   bool isActiveFrameForScene = isActiveFrame || m_frameData.m_forceFullRedrawNextFrame;
   if (AnimationSystem::Instance().HasAnimations())

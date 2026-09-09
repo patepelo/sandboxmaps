@@ -17,6 +17,8 @@
 
 #include "base/string_utils.hpp"
 
+#include <algorithm>
+#include <atomic>
 #include <set>
 #include <string>
 #include <tuple>
@@ -122,6 +124,44 @@ public:
 
   bool IsVisible() const { return m_isVisible; }
   void SetIsVisible(bool isVisible) { m_isVisible = isVisible; }
+
+  // Fade support (exp/overlay-fade).
+  // m_fadeAlpha chases IsVisible() so overlays fade instead of popping.
+  // Stepped per frame from GetAttributeMutation(), which is why it is mutable -
+  // same precedent as m_isLastVisible in TextHandle.
+  float GetFadeAlpha() const { return m_fadeAlpha; }
+
+  // True while the overlay still has something to draw, even though the
+  // overlay tree has taken its slot away. Callers must keep its geometry and
+  // indices alive until this goes false, or there is nothing left to fade.
+  bool IsFadingOut() const { return !m_isVisible && m_fadeAlpha > 0.0f; }
+
+  // Advances the fade one frame and returns the alpha to render with.
+  // Frame-based rather than time-based: good enough for the experiment and
+  // avoids plumbing a clock into every handle.
+  float StepFade() const
+  {
+    float const target = m_isVisible ? 1.0f : 0.0f;
+    // Tuned by eye. Deliberately slow: a gentle fade reads as the map
+    // settling, where a quick one still feels like a pop.
+    float const kFadeStep = 0.005f;  // ~3.3s at 60fps
+    if (m_fadeAlpha < target)
+      m_fadeAlpha = std::min(target, m_fadeAlpha + kFadeStep);
+    else if (m_fadeAlpha > target)
+      m_fadeAlpha = std::max(target, m_fadeAlpha - kFadeStep);
+
+    // The renderer skips frames when nothing moves, which would freeze a fade
+    // partway. Flag that another frame is needed so it can run to completion
+    // while the map sits still.
+    if (m_fadeAlpha != target)
+      s_hasActiveFades.store(true, std::memory_order_relaxed);
+
+    return m_fadeAlpha;
+  }
+
+  // Reads and clears the "a fade is still running" flag. Called once per frame
+  // by the renderer when deciding whether the next frame is needed.
+  static bool ConsumeActiveFadesFlag() { return s_hasActiveFades.exchange(false, std::memory_order_relaxed); }
 
   uint8_t GetMinVisibleScale() const { return m_minVisibleScale; }
   bool IsBillboard() const { return m_isBillboard; }
@@ -237,6 +277,13 @@ private:
   AccessibilityNodeInfo const m_accessibilityInfo;
 
   bool m_isVisible : 1;
+
+  // Current fade level, chases m_isVisible. Starts at 0 so overlays fade in
+  // when first placed rather than appearing at full opacity.
+  mutable float m_fadeAlpha = 0.0f;
+
+  // Set by StepFade() whenever any overlay is mid-fade; drives frame requests.
+  static std::atomic<bool> s_hasActiveFades;
 
   bool m_caching : 1;
   mutable bool m_extendedShapeDirty : 1;

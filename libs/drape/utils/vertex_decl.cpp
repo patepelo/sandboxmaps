@@ -127,12 +127,14 @@ dp::BindingInfo TextOutlinedStaticBindingInit()
 
 dp::BindingInfo TextDynamicBindingInit()
 {
-  static_assert(
-      sizeof(TextDynamicVertex) == (sizeof(TextStaticVertex::TPosition3d) + sizeof(TextDynamicVertex::TNormal)), "");
+  static_assert(sizeof(TextDynamicVertex) == (sizeof(TextStaticVertex::TPosition3d) +
+                                              sizeof(TextDynamicVertex::TNormal) + sizeof(float)),
+                "");
 
-  dp::BindingFiller<TextDynamicVertex> filler(2, TextDynamicVertex::GetDynamicStreamID());
+  dp::BindingFiller<TextDynamicVertex> filler(3, TextDynamicVertex::GetDynamicStreamID());
   filler.FillDecl<TextDynamicVertex::TPosition3d>("a_position");
   filler.FillDecl<TextDynamicVertex::TNormal>("a_normal");
+  filler.FillDecl<float>("a_fadeAlpha");
 
   return filler.m_info;
 }
@@ -311,6 +313,12 @@ dp::BindingInfo const & TextOutlinedStaticVertex::GetBindingInfo()
 TextDynamicVertex::TextDynamicVertex(TPosition3d const & position, TNormal const & normal)
   : m_position(position)
   , m_normal(normal)
+{}
+
+TextDynamicVertex::TextDynamicVertex(TPosition3d const & position, TNormal const & normal, float alpha)
+  : m_position(position)
+  , m_normal(normal)
+  , m_alpha(alpha)
 {}
 
 dp::BindingInfo const & TextDynamicVertex::GetBindingInfo()
