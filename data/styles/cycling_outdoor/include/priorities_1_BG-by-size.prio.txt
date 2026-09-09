@@ -93,11 +93,11 @@
 # === 180
 
 # amenity-car_wash                                  # area z15- (also has icon z17-, caption(optional) z17-)
-# amenity-charging_station                          # area z16- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-charging_station-bicycle                  # area z16- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-charging_station-carless                  # area z16- (also has icon z20-, caption z19, caption(optional) z20-)
+# amenity-charging_station                          # area z16- (also has icon z19-, caption(optional) z19-)
+# amenity-charging_station-bicycle                  # area z16- (also has icon z19-, caption(optional) z19-)
+# amenity-charging_station-carless                  # area z16- (also has icon z19-, caption(optional) z19-)
 # amenity-charging_station-motorcar                 # area z15- (also has icon z16-, caption(optional) z16-)
-# amenity-charging_station-motorcycle               # area z16- (also has icon z20-, caption z19, caption(optional) z20-)
+# amenity-charging_station-motorcycle               # area z16- (also has icon z19-, caption(optional) z19-)
 # amenity-charging_station-small                    # area z15- (also has icon z17-, caption(optional) z17-)
 # amenity-courthouse                                # area z15- (also has icon z17-, caption(optional) z17-)
 # amenity-fire_station                              # area z15- (also has icon z16-, caption(optional) z17-)
@@ -155,20 +155,20 @@
 # amenity-bicycle_parking-covered                   # area z15- (also has icon z19-, caption(optional) z19-)
 # amenity-car_pooling                               # area z15- (also has icon z16-, caption(optional) z18-)
 # amenity-motorcycle_parking                        # area z15- (also has icon z19-, caption(optional) z19-)
-# amenity-parking                                   # area z15- (also has icon z18-, caption(optional) z19-)
-# amenity-parking-fee                               # area z15- (also has icon z18-, caption(optional) z19-)
-# amenity-parking-lane                              # area z17- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-parking-lane-fee                          # area z17- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-parking-lane-private                      # area z17- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-parking-multi-storey                      # area z15- (also has icon z18-, caption(optional) z19-)
-# amenity-parking-multi-storey-fee                  # area z15- (also has icon z18-, caption(optional) z19-)
-# amenity-parking-no-access                         # area z15- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-parking-park_and_ride                     # area z15- (also has icon z18-, caption(optional) z19-)
-# amenity-parking-permissive                        # area z15- (also has icon z18-, caption(optional) z19-)
-# amenity-parking-private                           # area z17- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-parking-street_side                       # area z17- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-parking-street_side-fee                   # area z17- (also has icon z20-, caption z19, caption(optional) z20-)
-# amenity-parking-street_side-private               # area z17- (also has icon z20-, caption z19, caption(optional) z20-)
+# amenity-parking                                   # area z15- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-fee                               # area z15- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-lane                              # area z17- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-lane-fee                          # area z17- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-lane-private                      # area z17- (also has icon z19-, caption(optional) z19-)
+# amenity-parking-multi-storey                      # area z15- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-multi-storey-fee                  # area z15- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-no-access                         # area z15- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-park_and_ride                     # area z15- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-permissive                        # area z15- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-private                           # area z17- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-street_side                       # area z17- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-street_side-fee                   # area z17- (also has icon z18-, caption(optional) z18-)
+# amenity-parking-street_side-private               # area z17- (also has icon z18-, caption(optional) z18-)
 # === 100
 
 # natural-wetland                                   # area z11- (also has caption z16-)
@@ -201,7 +201,7 @@
 # === 80
 
 # landuse-plant_nursery                             # area z12- (also has icon z17-, caption(optional) z17-)
-# leisure-garden                                    # area z12- (also has icon z16-, caption(optional) z16-)
+# leisure-garden                                    # area z12- (also has icon z19-, caption z16-18, caption(optional) z19-)
 # leisure-garden-residential                        # area z12-
 # leisure-park                                      # area z10- (also has icon z14-, caption(optional) z14-)
 # leisure-park-no-access                            # area z10- (also has icon z14-, caption(optional) z14-)
@@ -237,11 +237,11 @@
 # power-substation                                  # area z13- (also has icon z17-, caption(optional) z18-)
 # === 50
 
-# amenity-childcare                                 # area z13- (also has icon z17-, caption(optional) z17-)
+# amenity-childcare                                 # area z13- (also has icon z18-, caption(optional) z18-)
 # amenity-clinic                                    # area z13- (also has icon z18-, caption(optional) z18-)
 # amenity-college                                   # area z13- (also has icon z16-, caption(optional) z16-)
 # amenity-hospital                                  # area z13- (also has icon z14-, caption(optional) z15-)
-# amenity-kindergarten                              # area z13- (also has icon z17-, caption(optional) z17-)
+# amenity-kindergarten                              # area z13- (also has icon z18-, caption(optional) z18-)
 # amenity-school                                    # area z13- (also has icon z16-, caption(optional) z16-)
 # amenity-university                                # area z13- (also has icon z14-, caption(optional) z14-)
 # === 40
