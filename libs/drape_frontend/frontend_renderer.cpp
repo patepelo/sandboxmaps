@@ -79,6 +79,23 @@ using namespace std::placeholders;
 namespace
 {
 float constexpr kIsometryAngle = static_cast<float>(math::pi) * 76.0f / 180.0f;
+
+// 3D buildings used to switch on the instant auto-perspective began, so they
+// popped into existence while the camera was still barely tilted. Hold them
+// back until the view is close enough that the extrusion reads as deliberate.
+// Deliberately not 17: the style already swaps building fill colour,
+// jumps opacity 0.8 -> 1.0 and changes the casing at z17, so extruding
+// there stacks a fourth change onto the busiest transition.
+int constexpr kMin3dBuildingsZoom = 18;
+
+bool Need3dBuildings(ScreenBase const & screen, bool isIsometry)
+{
+  if (isIsometry)
+    return true;
+  if (!screen.isPerspective())
+    return false;
+  return GetZoomLevel(screen.GetScale()) >= kMin3dBuildingsZoom;
+}
 double constexpr kVSyncInterval = 0.06;
 // Metal/Vulkan rendering is fast, so we can decrease sync inverval.
 double constexpr kVSyncIntervalMetalVulkan = 0.03;
@@ -1111,7 +1128,7 @@ void FrontendRenderer::UpdateContextDependentResources()
     // Request new tiles.
     ScreenBase const & screen = m_userEventStream.GetCurrentScreen();
     m_lastReadedModelView = screen;
-    m_requestedTiles->Set(screen, m_isIsometry || screen.isPerspective(), m_forceUpdateScene, m_forceUpdateUserMarks,
+    m_requestedTiles->Set(screen, Need3dBuildings(screen, m_isIsometry), m_forceUpdateScene, m_forceUpdateUserMarks,
                           ResolveTileKeys(screen));
     m_commutator->PostMessage(ThreadsCommutator::ResourceUploadThread, make_unique_dp<UpdateReadManagerMessage>(),
                               MessagePriority::UberHighSingleton);
@@ -1175,7 +1192,7 @@ void FrontendRenderer::InvalidateRect(m2::RectD const & gRect)
 
     // Request new tiles.
     m_lastReadedModelView = screen;
-    m_requestedTiles->Set(screen, m_isIsometry || screen.isPerspective(), m_forceUpdateScene, m_forceUpdateUserMarks,
+    m_requestedTiles->Set(screen, Need3dBuildings(screen, m_isIsometry), m_forceUpdateScene, m_forceUpdateUserMarks,
                           ResolveTileKeys(screen));
     m_commutator->PostMessage(ThreadsCommutator::ResourceUploadThread, make_unique_dp<UpdateReadManagerMessage>(),
                               MessagePriority::UberHighSingleton);
@@ -2697,7 +2714,7 @@ void FrontendRenderer::UpdateScene(ScreenBase const & modelView)
   {
     EmitModelViewChanged(modelView);
     m_lastReadedModelView = modelView;
-    m_requestedTiles->Set(modelView, m_isIsometry || modelView.isPerspective(), m_forceUpdateScene,
+    m_requestedTiles->Set(modelView, Need3dBuildings(modelView, m_isIsometry), m_forceUpdateScene,
                           m_forceUpdateUserMarks, ResolveTileKeys(modelView));
     m_commutator->PostMessage(ThreadsCommutator::ResourceUploadThread, make_unique_dp<UpdateReadManagerMessage>(),
                               MessagePriority::UberHighSingleton);
