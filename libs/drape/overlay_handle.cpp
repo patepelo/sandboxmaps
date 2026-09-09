@@ -15,6 +15,8 @@
 
 namespace dp
 {
+std::atomic<bool> OverlayHandle::s_hasActiveFades{false};
+
 struct OverlayHandle::OffsetNodeFinder
 {
 public:

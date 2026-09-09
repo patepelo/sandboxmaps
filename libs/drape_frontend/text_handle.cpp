@@ -35,7 +35,12 @@ TextHandle::TextHandle(dp::OverlayID const & id, uint8_t subID, dp::TGlyphs && g
 void TextHandle::GetAttributeMutation(ref_ptr<dp::AttributeBufferMutator> mutator) const
 {
   bool const isVisible = IsVisible();
-  if (!m_forceUpdateNormals && m_isLastVisible == isVisible)
+  float const alpha = StepFade();
+
+  // While a fade is in progress the alpha changes every frame, so the
+  // visibility-only early out would freeze it partway.
+  bool const fading = (alpha > 0.0f && alpha < 1.0f);
+  if (!m_forceUpdateNormals && !fading && m_isLastVisible == isVisible)
     return;
 
   TOffsetNode const & node = GetOffsetNode(gpu::TextDynamicVertex::GetDynamicStreamID());
@@ -44,10 +49,19 @@ void TextHandle::GetAttributeMutation(ref_ptr<dp::AttributeBufferMutator> mutato
 
   uint32_t const byteCount = static_cast<uint32_t>(m_buffer.size()) * sizeof(gpu::TextDynamicVertex);
   void * buffer = mutator->AllocateMutationBuffer(byteCount);
-  if (isVisible)
+  if (alpha > 0.0f)
+  {
+    // Keep the geometry and carry the current fade level per vertex.
     memcpy(buffer, m_buffer.data(), byteCount);
+    auto * vertices = static_cast<gpu::TextDynamicVertex *>(buffer);
+    for (size_t i = 0; i < m_buffer.size(); ++i)
+      vertices[i].m_alpha = alpha;
+  }
   else
+  {
+    // Fully faded out: collapse the quad as before.
     memset(buffer, 0, byteCount);
+  }
 
   dp::MutateNode mutateNode;
   mutateNode.m_region = node.second;

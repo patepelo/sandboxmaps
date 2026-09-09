@@ -121,9 +121,12 @@ struct TextDynamicVertex : BaseVertex
 {
   TextDynamicVertex() = default;
   TextDynamicVertex(TPosition3d const & position, TNormal const & normal);
+  TextDynamicVertex(TPosition3d const & position, TNormal const & normal, float alpha);
 
   TPosition3d m_position;
   TNormal m_normal;
+  // Per-overlay fade factor, mutated each frame. 1.0 is fully opaque.
+  float m_alpha = 1.0f;
 
   static dp::BindingInfo const & GetBindingInfo();
   static uint32_t GetDynamicStreamID();
