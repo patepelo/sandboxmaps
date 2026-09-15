@@ -250,10 +250,21 @@ area|z10-17[leisure=nature_reserve],
 area|z10-17[boundary=national_park],
 area|z10-17[boundary=protected_area][protect_class=1],
 {fill-opacity: 0.2; fill-color: @protected_nature;}
+area|z10-13[leisure=nature_reserve],
+area|z10-13[boundary=national_park],
+area|z10-13[boundary=protected_area][protect_class=1],
+{fill-opacity: 0.4;}
+area|z14-15[leisure=nature_reserve],
+area|z14-15[boundary=national_park],
+area|z14-15[boundary=protected_area][protect_class=1],
+{fill-opacity: 0.3;}
 
 line|z10-[boundary=national_park],
 line|z10-[boundary=protected_area][protect_class=1],
 {width: 0.5; opacity: 0.3; color: @protected_nature;}
+line|z10-13[boundary=national_park],
+line|z10-13[boundary=protected_area][protect_class=1],
+{width: 1; opacity: 0.6;}
 
 area|z10-16[boundary=aboriginal_lands],
 {fill-opacity: 0.07; fill-color: @indigenous_lands;}
@@ -481,7 +492,7 @@ area|z13-[power=generator],
 area|z13-[man_made=wastewater_plant]
 {fill-opacity: 1; fill-color: @industrial;}
 
-area|z13-[landuse=construction],
+area|z18-[landuse=construction],
 {fill-opacity: 1; fill-color: @construction_area;}
 
 /* 7.2 Hospital */
@@ -711,22 +722,17 @@ line|z19-[man_made=cutline],
 
 /* 8.2 Building */
 
-/* Buildings ramp up gradually and each visual change gets its own zoom, so no
-   two land together: casing appears at z16, the fill colour swaps at z17,
-   3D extrusion starts at z18 (see kMin3dBuildingsZoom) and opacity only
-   reaches 1.0 at z19. */
+/* Buildings appear flat from z17, extrude into 3D from z18 (see
+   kMin3dBuildingsZoom) and reach full opacity at z19. Dams and terminals keep
+   their earlier fills. */
 
-area|z14[building],
 area|z14[waterway=dam],
 {fill-color: @building0;fill-opacity: 0.55;}
 
-area|z15[building],
 area|z15[waterway=dam],
 {fill-color: @building0;fill-opacity: 0.65;}
 
 area|z14-15[aeroway=terminal],
-area|z16[building],
-area|z16[building:part],
 area|z16[waterway=dam],
 {fill-color: @building0;fill-opacity: 0.75;casing-width: 1;casing-color: @building_border0;}
 
@@ -847,12 +853,8 @@ line|z17[man_made=embankment],
 line|z18-[man_made=embankment],
 {width: 7; dashes: 8,4,4,3;}
 
-line|z17-[natural=tree_row],
-{color: @woods; width: 3.5;}
-line|z18-[natural=tree_row],
-{color: @woods; width: 6;}
 line|z19-[natural=tree_row],
-{width: 6.5;}
+{color: @woods; width: 6.5;}
 
 
 /* 9. ISOLINES */

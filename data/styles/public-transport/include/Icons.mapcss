@@ -5,5 +5,9 @@
 
 /* 3.4 Bus Station */
 
-node|z14[highway=bus_stop],
+/* The default style now holds bus stops back to z17. The transit layer keeps
+   its early stops, so it fills z14-16 itself. */
+node|z14-15[highway=bus_stop],
 {icon-image: bus-xvs.svg;icon-min-distance: 1;}
+node|z16[highway=bus_stop],
+{icon-image: bus-xs.svg;icon-min-distance: 1;}

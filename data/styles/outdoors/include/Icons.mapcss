@@ -30,7 +30,6 @@ node|z15-[amenity=hunting_stand],
 node|z15-[man_made=survey_point],
 node|z15-[natural=hot_spring],
 node|z12-[natural=geyser],
-node|z14-[natural=beach],
 area|z13-[natural=bare_rock][name],
 node|z16-[natural=tree],
 {text: name;text-color: @poi_label;text-position: center;text-offset: 1;font-size: 10;}

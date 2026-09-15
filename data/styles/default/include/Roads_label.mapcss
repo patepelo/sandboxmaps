@@ -381,3 +381,13 @@ node|z15[highway=motorway_junction]
 node|z16-[highway=motorway_junction],
 node|z17-[junction],
 {font-size: 10;}
+
+/* Pedestrian areas and squares: fill only, no outline. The area types also
+   match the [highway=pedestrian] road rules in Roads.mapcss, so drop their
+   line and casing, and centre the name instead of running it along the edge. */
+line[highway=pedestrian][area?],
+line[highway=pedestrian][place=square],
+{width: 0; text-position: center;}
+line[highway=pedestrian][area?]::border,
+line[highway=pedestrian][place=square]::border,
+{width: 0;}
