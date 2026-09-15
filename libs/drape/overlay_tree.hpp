@@ -15,6 +15,7 @@
 #include "base/buffer_vector.hpp"
 
 #include <array>
+#include <chrono>
 #include <memory>
 #include <vector>
 
@@ -140,5 +141,6 @@ private:
   HandlesCache m_displacers;
   uint32_t m_frameUpdatePeriod;
   uint8_t m_zoomLevel = 1;
+  std::chrono::steady_clock::time_point m_placementTime;
 };
 }  // namespace dp

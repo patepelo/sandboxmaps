@@ -19,6 +19,7 @@
 
 #include <algorithm>
 #include <atomic>
+#include <chrono>
 #include <set>
 #include <string>
 #include <tuple>
@@ -143,19 +144,26 @@ public:
   // indices alive until this goes false, or there is nothing left to fade.
   bool IsFadingOut() const { return !m_isVisible && m_fadeAlpha > 0.0f; }
 
-  // Advances the fade one frame and returns the alpha to render with.
-  // Frame-based rather than time-based: good enough for the experiment and
-  // avoids plumbing a clock into every handle.
+  // Advances the fade and returns the alpha to render with. Time-based, so the
+  // fade lasts the same on 60, 90 and 120 Hz screens.
   float StepFade() const
   {
     float const target = m_isVisible ? 1.0f : 0.0f;
-    // Tuned by eye. Deliberately slow: a gentle fade reads as the map
-    // settling, where a quick one still feels like a pop.
-    float const kFadeStep = 0.005f;  // ~3.3s at 60fps
+    // Tuned by eye: fading in reads as the map settling, fading out a little
+    // quicker keeps losers from lingering over their replacement.
+    float constexpr kFadeInSeconds = 0.4f;
+    float constexpr kFadeOutSeconds = 0.25f;
+
+    auto const now = std::chrono::steady_clock::now();
+    float dt = 1.0f / 60.0f;
+    if (m_lastFadeStep != std::chrono::steady_clock::time_point{})
+      dt = std::min(std::chrono::duration<float>(now - m_lastFadeStep).count(), 0.1f);
+    m_lastFadeStep = now;
+
     if (m_fadeAlpha < target)
-      m_fadeAlpha = std::min(target, m_fadeAlpha + kFadeStep);
+      m_fadeAlpha = std::min(target, m_fadeAlpha + dt / kFadeInSeconds);
     else if (m_fadeAlpha > target)
-      m_fadeAlpha = std::max(target, m_fadeAlpha - kFadeStep);
+      m_fadeAlpha = std::max(target, m_fadeAlpha - dt / kFadeOutSeconds);
 
     // The renderer skips frames when nothing moves, which would freeze a fade
     // partway. Flag that another frame is needed so it can run to completion
@@ -165,6 +173,26 @@ public:
 
     return m_fadeAlpha;
   }
+
+  // Placement inertia: remembers whether the overlay tree placed this overlay in
+  // its last pass and when that last changed, so a label that just appeared or
+  // just got hidden keeps that state for a moment instead of flip-flopping.
+  void UpdatePlacement(bool placed, std::chrono::steady_clock::time_point now)
+  {
+    if (placed != m_wasPlaced)
+    {
+      m_wasPlaced = placed;
+      m_placementChangedAt = now;
+    }
+  }
+  bool WasPlaced() const { return m_wasPlaced; }
+  bool IsPlacementHeld(std::chrono::steady_clock::time_point now, std::chrono::steady_clock::duration hold) const
+  {
+    return now - m_placementChangedAt < hold;
+  }
+
+  // Asks the renderer for more frames, e.g. so placement runs again once a hold expires.
+  static void RequestMoreFrames() { s_hasActiveFades.store(true, std::memory_order_relaxed); }
 
   // Reads and clears the "a fade is still running" flag. Called once per frame
   // by the renderer when deciding whether the next frame is needed.
@@ -288,6 +316,10 @@ private:
   // Current fade level, chases m_isVisible. Starts at 0 so overlays fade in
   // when first placed rather than appearing at full opacity.
   mutable float m_fadeAlpha = 0.0f;
+  mutable std::chrono::steady_clock::time_point m_lastFadeStep;
+
+  bool m_wasPlaced = false;
+  std::chrono::steady_clock::time_point m_placementChangedAt;
 
   // Set by StepFade() whenever any overlay is mid-fade; drives frame requests.
   static std::atomic<bool> s_hasActiveFades;

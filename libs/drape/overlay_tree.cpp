@@ -16,6 +16,8 @@
 namespace dp
 {
 int constexpr kMinFrameUpdatePeriod = 8;
+// How long a label keeps a newly gained or lost place before it can flip back.
+auto constexpr kPlacementHold = std::chrono::milliseconds(500);
 int constexpr kAvgFrameUpdatePeriod = 10;
 int constexpr kMaxFrameUpdatePeriod = 15;
 uint32_t constexpr kMinHandlesCount = 100;
@@ -257,6 +259,15 @@ void OverlayTree::InsertHandle(ref_ptr<OverlayHandle> handle, int currentRank,
   bool const selected =
       m_selectedFeatureID.IsValid() && handleToCompare->GetOverlayID().m_featureId == m_selectedFeatureID;
 
+  // Inertia: a label hidden moments ago stays hidden, instead of reappearing on the next pass
+  // and being hidden again right after.
+  if (!selected && !handle->WasPlaced() && handle->IsPlacementHeld(m_placementTime, kPlacementHold))
+  {
+    // Keep frames coming so it gets placed once the hold is over, even if the map stops moving.
+    OverlayHandle::RequestMoreFrames();
+    return;
+  }
+
   // Two colliding icons that both have a dot collapse together: neither icon (nor its caption) is
   // placed, so both show as dots instead of one icon hiding the other.
   if (handle->CollapsesToDot() && !boundToParent && !selected)
@@ -293,6 +304,13 @@ void OverlayTree::InsertHandle(ref_ptr<OverlayHandle> handle, int currentRank,
     for (auto const & rivalHandle : rivals)
     {
       bool reject = m_selectedFeatureID.IsValid() && rivalHandle->GetOverlayID().m_featureId == m_selectedFeatureID;
+      // Inertia: a label that appeared moments ago keeps its place, even against a
+      // higher-priority newcomer; the newcomer gets its turn once the hold is over.
+      if (!reject && rivalHandle->WasPlaced() && rivalHandle->IsPlacementHeld(m_placementTime, kPlacementHold))
+      {
+        reject = true;
+        OverlayHandle::RequestMoreFrames();
+      }
       if (!reject)
       {
         if (modelView.isPerspective())
@@ -360,6 +378,7 @@ void OverlayTree::EndOverlayPlacing()
   ASSERT(IsNeedUpdate(), ());
 
   m_displacers.clear();
+  m_placementTime = std::chrono::steady_clock::now();
 
 #ifdef DEBUG_OVERLAYS_OUTPUT
   LOG(LINFO, ("- BEGIN OVERLAYS PLACING"));
@@ -387,7 +406,10 @@ void OverlayTree::EndOverlayPlacing()
   for (int rank = 0; rank < dp::OverlayRanksCount; rank++)
   {
     for (auto const & handle : m_handles[rank])
+    {
+      handle->UpdatePlacement(IsInCache(handle), m_placementTime);
       handle->SetDisplayFlag(false);
+    }
     m_handles[rank].clear();
   }
 
