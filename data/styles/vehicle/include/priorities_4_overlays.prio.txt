@@ -257,7 +257,7 @@ amenity-parking-underground                         # icon z15- (also has captio
 amenity-parking-underground-fee                     # icon z15- (also has caption(optional) z16-)
 === 2550
 
-amenity-motorcycle_parking                          # icon z17- (also has area z17-)
+amenity-motorcycle_parking                          # icon z20- (also has area z17-)
 amenity-parking_entrance                            # icon z16-
 amenity-parking_entrance-permissive                 # icon z16-
 landuse-garages                                     # caption z16- (also has area z13-)
@@ -710,7 +710,7 @@ amenity-parking-private                             # icon z17- (also has captio
 amenity-parking-street_side-private                 # icon z17- (also has caption(optional) z17-, area z15-)
 amenity-parking-underground-private                 # icon z17- (also has caption(optional) z17-)
 amenity-parking_entrance-private                    # icon z19-
-emergency-emergency_ward_entrance                   # icon z18- (also has caption(optional) z18-)
+emergency-emergency_ward_entrance                   # icon z20- (also has caption(optional) z20-)
 === 500
 
 natural-wetland                                     # caption z16- (also has area z11-)
@@ -768,15 +768,15 @@ building-garage                                     # caption z18- (also has are
 building-guardhouse                                 # icon z18- (also has area z15-)
 === 40
 
-entrance-main                                       # icon z18- (also has caption(optional) z18-)
+entrance-main                                       # icon z20- (also has caption(optional) z20-)
 === 30
 
-entrance                                            # icon z19- (also has caption(optional) z19-)
-entrance-entry                                      # icon z19- (also has caption(optional) z19-)
-entrance-exit                                       # icon z19- (also has caption(optional) z19-)
+entrance                                            # icon z20- (also has caption(optional) z20-)
+entrance-entry                                      # icon z20- (also has caption(optional) z20-)
+entrance-exit                                       # icon z20- (also has caption(optional) z20-)
 === 20
 
-entrance-emergency                                  # icon z19- (also has caption(optional) z19-)
+entrance-emergency                                  # icon z20- (also has caption(optional) z20-)
 === 10
 
 #
@@ -1232,7 +1232,7 @@ entrance-emergency                                  # icon z19- (also has captio
 # amenity-parking-private                           # caption(optional) z17- (also has icon z17-, area z15-)
 # amenity-parking-street_side-private               # caption(optional) z17- (also has icon z17-, area z15-)
 # amenity-parking-underground-private               # caption(optional) z17- (also has icon z17-)
-# emergency-emergency_ward_entrance                 # caption(optional) z18- (also has icon z18-)
+# emergency-emergency_ward_entrance                 # caption(optional) z20- (also has icon z20-)
 # === -9500
 
 # railway-tram_stop                                 # caption(optional) z17- (also has icon z17-)
@@ -1263,27 +1263,27 @@ entrance-emergency                                  # icon z19- (also has captio
 # leisure-park-private                              # caption(optional) z14- (also has icon z14-, area z10-)
 # === -9900
 
-entrance-garage                                     # icon z19- (also has caption(optional) z19-)
+entrance-garage                                     # icon z20- (also has caption(optional) z20-)
 === -9910
 
-entrance-house                                      # icon z19- (also has caption(optional) z19-)
+entrance-house                                      # icon z20- (also has caption(optional) z20-)
 === -9920
 
-# entrance-main                                     # caption(optional) z18- (also has icon z18-)
+# entrance-main                                     # caption(optional) z20- (also has icon z20-)
 # === -9970
 
-# entrance                                          # caption(optional) z19- (also has icon z19-)
-# entrance-entry                                    # caption(optional) z19- (also has icon z19-)
-# entrance-exit                                     # caption(optional) z19- (also has icon z19-)
+# entrance                                          # caption(optional) z20- (also has icon z20-)
+# entrance-entry                                    # caption(optional) z20- (also has icon z20-)
+# entrance-exit                                     # caption(optional) z20- (also has icon z20-)
 # === -9980
 
-# entrance-emergency                                # caption(optional) z19- (also has icon z19-)
+# entrance-emergency                                # caption(optional) z20- (also has icon z20-)
 # === -9990
 
 amenity-loading_dock                                # icon z19- (also has caption(optional) z19-)
 # amenity-loading_dock                              # caption(optional) z19- (also has icon z19-)
-# entrance-garage                                   # caption(optional) z19- (also has icon z19-)
-# entrance-house                                    # caption(optional) z19- (also has icon z19-)
-entrance-service                                    # icon z19- (also has caption(optional) z19-)
-# entrance-service                                  # caption(optional) z19- (also has icon z19-)
+# entrance-garage                                   # caption(optional) z20- (also has icon z20-)
+# entrance-house                                    # caption(optional) z20- (also has icon z20-)
+entrance-service                                    # icon z20- (also has caption(optional) z20-)
+# entrance-service                                  # caption(optional) z20- (also has icon z20-)
 === -10000

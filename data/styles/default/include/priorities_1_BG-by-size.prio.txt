@@ -41,7 +41,7 @@ landuse-landfill                                    # area z13- (also has icon z
 leisure-playground                                  # area z15- (also has icon z18-, caption(optional) z18-)
 === 200
 
-amenity-fountain                                    # area z16- (also has icon z17-, caption(optional) z18-)
+amenity-fountain                                    # area z16- (also has icon z19-, caption(optional) z19-)
 leisure-fitness_centre-sport-yoga                   # area z16- (also has icon z18-, caption(optional) z18-)
 leisure-sports_centre                               # area z13- (also has icon z18-, caption(optional) z18-)
 leisure-sports_centre-sport-american_football       # area z13- (also has icon z18-, caption(optional) z18-)
@@ -113,13 +113,13 @@ landuse-garages                                     # area z13- (also has captio
 leisure-dog_park                                    # area z15- (also has icon z19-, caption(optional) z19-)
 leisure-resort                                      # area z13- (also has icon z18-, caption(optional) z18-)
 leisure-water_park                                  # area z13- (also has icon z17-, caption(optional) z17-)
-office-diplomatic                                   # area z15- (also has icon z17-, caption(optional) z17-)
+office-diplomatic                                   # area z15- (also has icon z19-, caption(optional) z19-)
 tourism-camp_site                                   # area z13- (also has icon z16-, caption(optional) z16-)
 tourism-information-office                          # area z15- (also has icon z19-, caption(optional) z19-)
 tourism-information-visitor_centre                  # area z13- (also has icon z19-, caption(optional) z19-)
 === 170
 
-highway-footway-area                                # area z14- (also has line z15-, line::border z15-, pathtext z15-)
+highway-footway-area                                # area z14- (also has line z17-, line::border z17-, caption z15-16, pathtext z17-)
 leisure-track-area                                  # area z15- (also has caption z16-)
 === 160
 
@@ -149,7 +149,7 @@ railway-platform                                    # area z16- (also has captio
 amenity-bicycle_parking                             # area z15- (also has icon z19-, caption(optional) z19-)
 amenity-bicycle_parking-covered                     # area z15- (also has icon z19-, caption(optional) z19-)
 amenity-car_pooling                                 # area z15- (also has icon z19-, caption(optional) z19-)
-amenity-motorcycle_parking                          # area z15- (also has icon z19-, caption(optional) z19-)
+amenity-motorcycle_parking                          # area z15- (also has icon z20-, caption(optional) z20-)
 amenity-parking                                     # area z15- (also has icon z18-, caption(optional) z18-)
 amenity-parking-fee                                 # area z15- (also has icon z18-, caption(optional) z18-)
 amenity-parking-lane                                # area z17- (also has icon z18-, caption(optional) z18-)
@@ -190,7 +190,7 @@ landuse-village_green                               # area z12-
 landuse-vineyard                                    # area z12- (also has caption z15-)
 leisure-fitness_station                             # area z15- (also has icon z19-, caption(optional) z19-)
 leisure-pitch                                       # area z15- (also has icon z18-, caption(optional) z18-)
-natural-bare_rock                                   # area z11- (also has caption z14-)
+natural-bare_rock                                   # area z11- (also has caption z19-)
 natural-scree                                       # area z11-
 natural-shingle                                     # area z12-
 === 80

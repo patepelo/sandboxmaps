@@ -157,8 +157,11 @@ void Stylist::ProcessKey(FeatureType & f, drule::Key const & key)
       m_areaRule = dRule->GetArea();
     }
     break;
-  // TODO(pastk) : check if circle/waymarker support exists still (not used in styles ATM).
   case drule::circle:
+    ASSERT(dRule->GetCircle() && !m_circleRule && (geomType == GeomType::Point || geomType == GeomType::Area),
+           (m_circleRule == nullptr, geomType, f.DebugString()));
+    m_circleRule = dRule->GetCircle();
+    break;
   case drule::waymarker:
   default: ASSERT(false, (key.m_type, f.DebugString())); return;
   }
@@ -201,7 +204,7 @@ Stylist::Stylist(FeatureType & f, uint8_t zoomLevel, int8_t deviceLang)
     for (auto & k : typeKeys)
     {
       // Take overlay drules from the main type only.
-      if (t == mainOverlayType || (k.m_type != drule::caption && k.m_type != drule::symbol &&
+      if (t == mainOverlayType || (k.m_type != drule::caption && k.m_type != drule::symbol && k.m_type != drule::circle &&
                                    k.m_type != drule::shield && k.m_type != drule::pathtext))
       {
         if (hasHatching && k.m_type == drule::area)

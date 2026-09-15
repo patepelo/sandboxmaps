@@ -106,6 +106,7 @@ private:
   ScreenBase const & GetModelView() const { return m_traits.GetModelView(); }
   void InsertHandle(ref_ptr<OverlayHandle> handle, int currentRank, ref_ptr<OverlayHandle> const & parentOverlay);
   bool CheckHandle(ref_ptr<OverlayHandle> handle, int currentRank, ref_ptr<OverlayHandle> & parentOverlay) const;
+  void PlacePoiDots();
   bool DeleteHandleImpl(ref_ptr<OverlayHandle> handle);
   void DeleteHandle(ref_ptr<OverlayHandle> handle);
 

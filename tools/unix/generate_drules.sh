@@ -6,6 +6,21 @@ DATA_PATH="${DATA_PATH:-$OMIM_PATH/data}"
 
 source "$(dirname "$0")/activate_venv.sh"
 
+# Local fixes to the kothic submodule (tools/kothic points at upstream CoMaps, which
+# this fork cannot push to). Apply each patch once; skip it if already applied.
+KOTHIC_PATH="$OMIM_PATH/tools/kothic"
+for patch in "$OMIM_PATH"/tools/kothic-patches/*.patch; do
+  [ -e "$patch" ] || continue
+  patch="$(cd "$(dirname "$patch")" && pwd)/$(basename "$patch")"  # git -C needs an absolute path
+  if git -C "$KOTHIC_PATH" apply --check "$patch" 2>/dev/null; then
+    echo "Applying kothic patch $(basename "$patch")"
+    git -C "$KOTHIC_PATH" apply "$patch"
+  elif ! git -C "$KOTHIC_PATH" apply --reverse --check "$patch" 2>/dev/null; then
+    echo "Kothic patch $(basename "$patch") does not apply" >&2
+    exit 1
+  fi
+done
+
 function BuildDrawingRules() {
   styleType=$1
   styleName=$2

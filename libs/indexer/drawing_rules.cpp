@@ -41,6 +41,11 @@ SymbolRuleProto const * BaseRule::GetSymbol() const
   return 0;
 }
 
+CircleRuleProto const * BaseRule::GetCircle() const
+{
+  return nullptr;
+}
+
 CaptionRuleProto const * BaseRule::GetCaption() const
 {
   return 0;
@@ -170,6 +175,16 @@ public:
   explicit Symbol(SymbolRuleProto const & r) : m_symbol(r) {}
 
   virtual SymbolRuleProto const * GetSymbol() const { return &m_symbol; }
+};
+
+class Circle : public BaseRule
+{
+  CircleRuleProto m_circle;
+
+public:
+  explicit Circle(CircleRuleProto const & r) : m_circle(r) {}
+
+  virtual CircleRuleProto const * GetCircle() const { return &m_circle; }
 };
 
 class Caption : public BaseRule
@@ -316,6 +331,9 @@ public:
 
         if (de.has_symbol())
           AddRule<Symbol>(p, de.scale(), symbol, de.symbol(), apply_if);
+
+        if (de.has_circle())
+          AddRule<Circle>(p, de.scale(), circle, de.circle(), apply_if);
 
         if (de.has_caption())
           AddRule<Caption>(p, de.scale(), caption, de.caption(), apply_if);

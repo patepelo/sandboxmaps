@@ -26,11 +26,11 @@ waterway-weir                                       # line z15-
 === 270
 
 barrier-city_wall                                   # line z15-
-barrier-fence                                       # line z17-
-barrier-guard_rail                                  # line z17-
-barrier-hedge                                       # line z18-
-barrier-wall                                        # line z17-
-barrier-yes                                         # line z17-
+barrier-fence                                       # line z20-
+barrier-guard_rail                                  # line z20-
+barrier-hedge                                       # line z20-
+barrier-wall                                        # line z20-
+barrier-yes                                         # line z20-
 railway-monorail                                    # line z14-
 railway-monorail-bridge                             # line z14-
 railway-monorail-tunnel                             # line z14-
@@ -358,7 +358,7 @@ railway-subway-bridge::bridgeblack                  # line::bridgeblack z16- (al
 building:part                                       # area z16-
 === 90
 
-barrier-retaining_wall                              # line z17-
+barrier-retaining_wall                              # line z20-
 man_made-embankment                                 # line z17-
 natural-cliff                                       # line z16-
 natural-earth_bank                                  # line z16-
@@ -372,7 +372,7 @@ boundary-administrative-4                           # line z5-
 man_made-cutline                                    # line z15-
 === 60
 
-barrier-ditch                                       # line z17-
+barrier-ditch                                       # line z20-
 building                                            # area z15- (also has caption z18-)
 building-garage                                     # area z15- (also has caption z18-)
 building-guardhouse                                 # area z15- (also has icon z18-)

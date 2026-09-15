@@ -60,6 +60,7 @@ class Stylist
 {
 public:
   SymbolRuleProto const * m_symbolRule = nullptr;
+  CircleRuleProto const * m_circleRule = nullptr;
   CaptionRuleProto const * m_captionRule = nullptr;
   CaptionRuleProto const * m_houseNumberRule = nullptr;
   PathTextRuleProto const * m_pathtextRule = nullptr;

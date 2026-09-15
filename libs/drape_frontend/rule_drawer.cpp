@@ -301,7 +301,7 @@ void RuleDrawer::ProcessAreaAndPointStyle(FeatureType & f, Stylist const & s, TI
     areaMinHeight = static_cast<float>((rectMercator.SizeX() + rectMercator.SizeY()) * 0.5);
   }
 
-  bool applyPointStyle = s.m_symbolRule || s.m_captionRule || s.m_houseNumberRule;
+  bool applyPointStyle = s.m_symbolRule || s.m_circleRule || s.m_captionRule || s.m_houseNumberRule;
   if (applyPointStyle)
   {
     if (!is3dBuilding)
@@ -329,7 +329,7 @@ void RuleDrawer::ProcessAreaAndPointStyle(FeatureType & f, Stylist const & s, TI
   /// @todo Can we put this check in the beginning of this function?
   if (applyPointStyle && !IsDiscardCustomFeature(f.GetID()) && !IsHiddenChristmasFeature(f))
   {
-    apply.ProcessPointRules(s.m_symbolRule, s.m_captionRule, s.m_houseNumberRule, featureCenter,
+    apply.ProcessPointRules(s.m_symbolRule, s.m_circleRule, s.m_captionRule, s.m_houseNumberRule, featureCenter,
                             m_context->GetTextureManager());
   }
 }
@@ -411,7 +411,7 @@ void RuleDrawer::ProcessPointStyle(FeatureType & f, Stylist const & s, TInsertSh
     return;
 
   ApplyPointFeature apply(m_context->GetTileKey(), insertShape, f, s.GetCaptionDescription());
-  apply.ProcessPointRules(s.m_symbolRule, s.m_captionRule, s.m_houseNumberRule, f.GetCenter(),
+  apply.ProcessPointRules(s.m_symbolRule, s.m_circleRule, s.m_captionRule, s.m_houseNumberRule, f.GetCenter(),
                           m_context->GetTextureManager());
 }
 
@@ -432,15 +432,15 @@ void RuleDrawer::operator()(FeatureType & f)
   Stylist const s(f, m_zoomLevel, m_deviceLang);
 
   // No drawing rules.
-  if (!s.m_symbolRule && !s.m_captionRule && !s.m_houseNumberRule && s.m_lineRules.empty() && !s.m_areaRule &&
-      !s.m_hatchingRule)
+  if (!s.m_symbolRule && !s.m_circleRule && !s.m_captionRule && !s.m_houseNumberRule && s.m_lineRules.empty() &&
+      !s.m_areaRule && !s.m_hatchingRule)
     return;
 
 #ifdef DEBUG
   // Validate mixing of feature styles.
   bool const hasLine = !s.m_lineRules.empty();
   bool const hasLineAdd = s.m_shieldRule || s.m_pathtextRule;
-  bool const hasPoint = s.m_symbolRule || s.m_captionRule || s.m_houseNumberRule;
+  bool const hasPoint = s.m_symbolRule || s.m_circleRule || s.m_captionRule || s.m_houseNumberRule;
   bool const hasArea = s.m_areaRule || s.m_hatchingRule;
 
   ASSERT(!((hasLine || hasLineAdd) && (hasPoint || hasArea)),
@@ -477,7 +477,7 @@ void RuleDrawer::operator()(FeatureType & f)
   }
   else
   {
-    ASSERT(s.m_symbolRule || s.m_captionRule || s.m_houseNumberRule, ());
+    ASSERT(s.m_symbolRule || s.m_circleRule || s.m_captionRule || s.m_houseNumberRule, ());
     ASSERT(geomType == feature::GeomType::Point, ());
     ProcessPointStyle(f, s, insertShape);
   }

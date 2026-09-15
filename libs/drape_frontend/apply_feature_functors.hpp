@@ -64,7 +64,8 @@ public:
   ApplyPointFeature(TileKey const & tileKey, TInsertShapeFn const & insertShape, FeatureType & f,
                     CaptionDescription const & captions);
 
-  void ProcessPointRules(SymbolRuleProto const * symbolRule, CaptionRuleProto const * captionRule,
+  void ProcessPointRules(SymbolRuleProto const * symbolRule, CircleRuleProto const * circleRule,
+                         CaptionRuleProto const * captionRule,
                          CaptionRuleProto const * houseNumberRule, m2::PointD const & centerPoint,
                          ref_ptr<dp::TextureManager> texMng);
 

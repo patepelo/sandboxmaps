@@ -58,6 +58,7 @@ struct PoiSymbolViewParams : CommonOverlayViewParams
   float m_posZ = 0.0f;
   bool m_hasArea = false;
   bool m_prioritized = false;
+  bool m_hasDot = false;
   std::string m_maskColor;
   dp::Anchor m_anchor = dp::Center;
   m2::PointF m_offset = m2::PointF(0.0f, 0.0f);
@@ -137,5 +138,6 @@ struct ColoredSymbolViewParams : CommonOverlayViewParams
   m2::PointF m_sizeInPixels = m2::PointF(0.0f, 0.0f);
   float m_outlineWidth = 0.0f;
   m2::PointF m_offset = m2::PointF(0.0f, 0.0f);
+  bool m_isPoiDot = false;
 };
 }  // namespace df

@@ -45,6 +45,8 @@ OverlayHandle::OverlayHandle(OverlayID const & id, uint8_t subID, dp::Anchor anc
   , m_isReady(false)
   , m_isSpecialLayerOverlay(false)
   , m_displayFlag(false)
+  , m_collapsesToDot(false)
+  , m_isPoiDot(false)
 {}
 
 void OverlayHandle::EnableCaching(bool enable)

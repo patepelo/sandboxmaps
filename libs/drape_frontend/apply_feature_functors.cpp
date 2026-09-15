@@ -558,7 +558,8 @@ ApplyPointFeature::ApplyPointFeature(TileKey const & tileKey, TInsertShapeFn con
   : TBase(tileKey, insertShape, f, captions)
 {}
 
-void ApplyPointFeature::ProcessPointRules(SymbolRuleProto const * symbolRule, CaptionRuleProto const * captionRule,
+void ApplyPointFeature::ProcessPointRules(SymbolRuleProto const * symbolRule, CircleRuleProto const * circleRule,
+                                          CaptionRuleProto const * captionRule,
                                           CaptionRuleProto const * houseNumberRule, m2::PointD const & centerPoint,
                                           ref_ptr<dp::TextureManager> texMng)
 {
@@ -569,6 +570,38 @@ void ApplyPointFeature::ProcessPointRules(SymbolRuleProto const * symbolRule, Ca
   bool const obsoleteInEditor = featureStatus == FeatureStatus::Obsolete;
 
   m2::PointF symbolSize(0.0f, 0.0f);
+
+  if (circleRule)
+  {
+    // A small dot shown in place of the POI's icon when the icon is not placed, e.g. when it
+    // collides with a neighbour that also has a dot (see OverlayTree::PlacePoiDots).
+    ColoredSymbolViewParams params;
+    FillCommonParams(params);
+    params.m_depthLayer = ftypes::IsUnderBuildingChecker::Instance()(m_f) ? DepthLayer::OverlayUnderBuildingLayer
+                                                                         : DepthLayer::OverlayLayer;
+    params.m_depthTestEnabled = false;
+    params.m_depth = PriorityToDepth(circleRule->priority(), drule::symbol, 0);
+    params.m_shape = ColoredSymbolViewParams::Shape::Circle;
+    params.m_isPoiDot = true;
+
+    float const visualScale = static_cast<float>(df::VisualParams::Instance().GetVisualScale());
+    float const radius = static_cast<float>(circleRule->radius()) * visualScale;
+    float const borderWidth =
+        circleRule->has_border() ? static_cast<float>(circleRule->border().width()) * visualScale : 0.0f;
+
+    // Two plain circles instead of one outlined circle, so the fill is always drawn over its halo.
+    if (borderWidth > 0.0f)
+    {
+      params.m_color = ToDrapeColor(circleRule->border().color());
+      params.m_radiusInPixels = radius + borderWidth;
+      m_insertShape(make_unique_dp<ColoredSymbolShape>(centerPoint, params, m_tileKey, 0 /* textIndex */,
+                                                       4 /* subID */, true /* needOverlay */));
+    }
+    params.m_color = ToDrapeColor(circleRule->color());
+    params.m_radiusInPixels = radius;
+    m_insertShape(make_unique_dp<ColoredSymbolShape>(centerPoint, params, m_tileKey, 0 /* textIndex */,
+                                                     5 /* subID */, true /* needOverlay */));
+  }
 
   if (symbolRule)
   {
@@ -588,6 +621,7 @@ void ApplyPointFeature::ProcessPointRules(SymbolRuleProto const * symbolRule, Ca
     params.m_posZ = m_posZ;
     params.m_hasArea = HasArea();
     params.m_prioritized = createdByEditor;
+    params.m_hasDot = circleRule != nullptr;
     if (obsoleteInEditor)
       params.m_maskColor = kPoiDeletedMaskColor;
 
