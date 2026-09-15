@@ -404,11 +404,11 @@ area|z17-[leisure],
 
 area|z14-[leisure=park][name],
 area|z14-[landuse=forest][name],
-area|z16-[leisure=garden][garden:type!=residential][name]
+area|z19-[leisure=garden][garden:type!=residential][name]
 {text: name;text-color: @park_label;text-halo-color: @halo_park_label;text-halo-radius: 0.5;text-halo-opacity: 0.8;icon-min-distance: 8;text-offset: 1;font-size: 10;}
 area|z16-[leisure=park][name]::int_name,
 area|z16-[landuse=forest][name]::int_name,
-area|z16-[leisure=garden][garden:type!=residential][name]::int_name
+area|z19-[leisure=garden][garden:type!=residential][name]::int_name
 {text: int_name;text-color: @park_label;text-halo-color: @halo_park_label;text-halo-radius: 0.5;text-halo-opacity: 0.8;text-offset: 1;font-size: 10;}
 
 /*
@@ -449,6 +449,20 @@ area|z18-[leisure=garden][garden:type!=residential][name]::int_name,
 area|z18-[landuse=forest][name]::int_name,
 {font-size: 11;}
 
+/* Beaches are labelled exactly like parks, in their own sand colour. */
+area|z15-[natural=beach][name]
+{text: name;text-color: @sand_label;text-halo-color: @halo_park_label;text-halo-radius: 0.5;text-halo-opacity: 0.8;icon-min-distance: 8;text-offset: 1;font-size: 11;}
+area|z16-[natural=beach][name]::int_name
+{text: int_name;text-color: @sand_label;text-halo-color: @halo_park_label;text-halo-radius: 0.5;text-halo-opacity: 0.8;text-offset: 1;font-size: 10;}
+area|z15-[natural=beach][!name]
+{text: none}
+area|z17[natural=beach][name]
+{font-size: 12;}
+area|z18-[natural=beach][name]
+{font-size: 13;}
+area|z18-[natural=beach][name]::int_name
+{font-size: 11;}
+
 area|z18-[landuse=forest][!name]
 {text: none; icon-image: nparkf-m.svg;}
 area|z18-[leisure=park][!name]
@@ -468,9 +482,8 @@ area|z17-[landuse=plant_nursery],
 /* 5.2 Beach, Glacier, Desert, etc. */
 
 area|z14-[natural=desert],
-area|z15-[natural=sand],
-node|z15-[natural=beach],
-{text: name;font-size: 10;text-color: @poi_label;}
+area|z19-[natural=sand],
+{text: name;font-size: 10;text-color: @sand_label;text-halo-color: @halo_park_label;text-halo-radius: 0.5;text-halo-opacity: 0.8;}
 
 area|z16-[leisure=beach_resort],
 {text: name; font-size: 10; text-color: @poi_label; text-offset: 1;}
@@ -593,12 +606,12 @@ line[waterway][tunnel]
 /* 	7.1 Industrial */
 
 area|z15-[landuse=industrial],
-area|z15-[landuse=construction],
+area|z18-[landuse=construction],
 area|z15-[landuse=railway],
 area|z15-[landuse=quarry],
 area|z15-[man_made=wastewater_plant],
 node|z15-[landuse=industrial],
-node|z15-[landuse=construction],
+node|z18-[landuse=construction],
 node|z15-[landuse=landfill],
 node|z15-[landuse=railway],
 node|z15-[landuse=quarry],

@@ -49,7 +49,7 @@
 # power-line::dash                                  # line::dash z19- (also has line z19-)
 # === 340
 
-# highway-ladder                                    # line z15- (also has line::border z15-, icon z17-, pathtext z17-)
+# highway-ladder                                    # line z15- (also has line::border z15-, icon z20-, pathtext z20-)
 # highway-steps                                     # line z15- (also has line::border z15-, pathtext z16-)
 # highway-steps-bridge                              # line z15- (also has line::border z15-, line::bridgeblack z17-, line::bridgewhite z15-, pathtext z16-)
 # highway-steps-tunnel                              # line z15- (also has line::border z15-, line::tunnelBackground z17-, line::tunnelCasing z17-, pathtext z16-)
@@ -62,7 +62,7 @@
 # barrier-guard_rail                                # line z17-
 # barrier-hedge                                     # line z16-
 # barrier-wall                                      # line z16-
-# barrier-yes                                       # line z16- (also has icon z18-, caption(optional) z18-)
+# barrier-yes                                       # line z16- (also has icon z19-, caption(optional) z19-)
 # railway-funicular                                 # line z12-
 # railway-funicular-bridge                          # line z12-
 # railway-funicular-tunnel                          # line z12-
@@ -268,11 +268,11 @@
 # railway-rail-utility-tunnel                       # line(casing) z14- (also has line z13-, line::dash z17-)
 # === 209
 
-# highway-ford                                      # line z13- (also has line::border z14-, icon z16-, pathtext z16-)
+# highway-ford                                      # line z13- (also has line::border z14-, icon z18-, pathtext z16-)
 # highway-pedestrian                                # line z13- (also has line::border z14-, pathtext z14-)
-# highway-pedestrian-area                           # line z13- and area z14- (also has line::border z14-, pathtext z14-)
+# highway-pedestrian-area                           # area z14- (also has caption z14-)
 # highway-pedestrian-bridge                         # line z13- (also has line::border z14-, line::bridgeblack z14-, line::bridgewhite z13-, pathtext z14-)
-# highway-pedestrian-square                         # line z13- and area z14- (also has line::border z14-, pathtext z14-)
+# highway-pedestrian-square                         # area z14- (also has caption z14-)
 # highway-pedestrian-tunnel                         # line z13- (also has line::border z14-, line(casing) z16-, pathtext z14-)
 # === 200
 
@@ -433,11 +433,11 @@
 # highway-footway-bicycle::border                   # line::border z15- (also has line z15-, line::cycleline z14-, pathtext z15-)
 # highway-footway-crossing::border                  # line::border z20- (also has line z20-)
 # highway-footway-sidewalk::border                  # line::border z20- (also has line z20-)
-# highway-ford::border                              # line::border z14- (also has line z13-, icon z16-, pathtext z16-)
-# highway-ladder::border                            # line::border z15- (also has line z15-, icon z17-, pathtext z17-)
+# highway-ford::border                              # line::border z14- (also has line z13-, icon z18-, pathtext z16-)
+# highway-ladder::border                            # line::border z15- (also has line z15-, icon z20-, pathtext z20-)
 # highway-pedestrian::border                        # line::border z14- (also has line z13-, pathtext z14-)
-# highway-pedestrian-area::border                   # line::border z14- (also has line z13-, area z14-, pathtext z14-)
-# highway-pedestrian-square::border                 # line::border z14- (also has line z13-, area z14-, pathtext z14-)
+# highway-pedestrian-area::border                   # WARNING: no drule defined for the priority (also has area z14-, caption z14-)
+# highway-pedestrian-square::border                 # WARNING: no drule defined for the priority (also has area z14-, caption z14-)
 # highway-steps::border                             # line::border z15- (also has line z15-, pathtext z16-)
 # === 144
 
@@ -544,11 +544,11 @@
 # railway-subway-bridge::bridgeblack                # line::bridgeblack z16- (also has line z13-, line::bridgewhite z13-, line::dash z16-)
 # === 130
 
-# building                                          # area z14- (also has caption z17-)
-# building-garage                                   # area z14- (also has caption z17-)
-# building-guardhouse                               # area z14- (also has icon z18-, caption(optional) z18-)
-# building-has_parts                                # area z14- (also has caption z17-)
-# building-train_station                            # area z14- (also has icon z17-, caption(optional) z17-)
+# building                                          # area z17- (also has caption z17-)
+# building-garage                                   # area z17- (also has caption z17-)
+# building-guardhouse                               # area z17- (also has icon z18-, caption(optional) z18-)
+# building-has_parts                                # area z17- (also has caption z17-)
+# building-train_station                            # area z17- (also has icon z17-, caption(optional) z17-)
 # === 120
 
 # piste:type-connection                             # line z15-
@@ -565,7 +565,7 @@
 # piste:type-sled                                   # line z14- (also has pathtext z15-)
 # === 110
 
-# building:part                                     # area z16-
+# building:part                                     # area z17-
 # === 100
 
 # barrier-retaining_wall                            # line z16-
@@ -618,5 +618,5 @@
 # man_made-bridge                                   # area z14-
 # === 10
 
-# natural-tree_row                                  # line z17-
+# natural-tree_row                                  # line z19-
 # === 5

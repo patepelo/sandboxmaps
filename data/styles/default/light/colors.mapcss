@@ -224,6 +224,7 @@
 
 @park_label: #3A7921;
 @halo_park_label: #FFFFFF;
+@sand_label: #7A5A1E;
 
 /* 6.3 Place labels */
 

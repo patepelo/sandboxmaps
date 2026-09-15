@@ -158,6 +158,7 @@
 @water_light_label: #004A59;
 @park_label: #2B4918;
 @halo_park_label: #111;
+@sand_label: #6B5A38;
 
 /* 6.3 Place labels */
 
