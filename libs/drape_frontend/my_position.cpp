@@ -8,6 +8,7 @@
 #include "drape_frontend/shape_view_params.hpp"
 #include "drape_frontend/tile_key.hpp"
 #include "drape_frontend/tile_utils.hpp"
+#include "drape_frontend/visual_params.hpp"
 
 #include "shaders/program_params.hpp"
 #include "shaders/programs.hpp"
@@ -31,11 +32,22 @@
 #include "base/math.hpp"
 #include "base/matrix.hpp"
 
+#include <cmath>
+
 namespace df
 {
 namespace mp
 {
 df::ColorConstant const kMyPositionAccuracyColor = "MyPositionAccuracy";
+df::ColorConstant const kMyPositionHeadingColor = "MyPositionHeading";
+
+// Heading cone shown around the position dot while browsing. The fade is
+// built from concentric bands, each sampling its own colour-texture entry with
+// a lower alpha, so it needs no new shader program.
+double constexpr kHeadingConeRadiusDp = 60.0;
+double constexpr kHeadingConeHalfAngleDeg = 28.0;
+int constexpr kHeadingConeBands = 10;
+int constexpr kHeadingConeSegments = 16;
 
 struct MarkerVertex
 {
@@ -78,6 +90,7 @@ MyPosition::MyPosition(ref_ptr<dp::GraphicsContext> context, ref_ptr<dp::Texture
   m_parts.resize(4);
   CacheAccuracySector(context, mng);
   CachePointPosition(context, mng);
+  CacheHeadingCone(context, mng);
 }
 
 bool MyPosition::InitArrow(ref_ptr<dp::GraphicsContext> context, ref_ptr<dp::TextureManager> mng,
@@ -116,6 +129,7 @@ void MyPosition::SetPositionObsolete(bool obsolete)
 {
   CHECK(m_arrow3d != nullptr, ());
   m_arrow3d->SetPositionObsolete(obsolete);
+  m_isPositionObsolete = obsolete;
 }
 
 void MyPosition::RenderAccuracy(ref_ptr<dp::GraphicsContext> context, ref_ptr<gpu::ProgramManager> mng,
@@ -146,27 +160,33 @@ void MyPosition::RenderAccuracy(ref_ptr<dp::GraphicsContext> context, ref_ptr<gp
 void MyPosition::RenderMyPosition(ref_ptr<dp::GraphicsContext> context, ref_ptr<gpu::ProgramManager> mng,
                                   ScreenBase const & screen, int zoomLevel, FrameValues const & frameValues)
 {
-  if (m_showAzimuth)
+  // The directional arrow is reserved for navigation. While browsing, show the
+  // position dot and, when a heading is known, a cone pointing the same way.
+  if (m_isRoutingMode && m_showAzimuth)
   {
     CHECK(m_arrow3d != nullptr, ());
     m_arrow3d->SetPosition(m2::PointD(m_position));
     m_arrow3d->SetAzimuth(m_azimuth);
     m_arrow3d->Render(context, mng, screen, m_isRoutingMode);
+    return;
   }
-  else
-  {
-    gpu::ShapesProgramParams params;
-    frameValues.SetTo(params);
-    TileKey const key = GetTileKeyByPoint(m2::PointD(m_position), ClipTileZoomByMaxDataZoom(zoomLevel));
-    math::Matrix<float, 4, 4> mv = key.GetTileBasedModelView(screen);
-    params.m_modelView = glsl::make_mat4(mv.m_data);
 
-    auto const pos = static_cast<m2::PointF>(
-        MapShape::ConvertToLocal(m2::PointD(m_position), key.GetGlobalRect().Center(), kShapeCoordScalar));
-    params.m_position = glsl::vec3(pos.x, pos.y, dp::depth::kMyPositionMarkDepth);
-    params.m_azimut = -(m_azimuth + static_cast<float>(screen.GetAngle()));
-    RenderPart(context, mng, params, MyPositionPoint);
-  }
+  gpu::ShapesProgramParams params;
+  frameValues.SetTo(params);
+  TileKey const key = GetTileKeyByPoint(m2::PointD(m_position), ClipTileZoomByMaxDataZoom(zoomLevel));
+  math::Matrix<float, 4, 4> mv = key.GetTileBasedModelView(screen);
+  params.m_modelView = glsl::make_mat4(mv.m_data);
+
+  auto const pos = static_cast<m2::PointF>(
+      MapShape::ConvertToLocal(m2::PointD(m_position), key.GetGlobalRect().Center(), kShapeCoordScalar));
+  params.m_position = glsl::vec3(pos.x, pos.y, dp::depth::kMyPositionMarkDepth);
+  params.m_azimut = -(m_azimuth + static_cast<float>(screen.GetAngle()));
+
+  // A stale fix has no trustworthy heading, so drop the cone and keep the dot.
+  if (m_showAzimuth && !m_isPositionObsolete)
+    RenderPart(context, mng, params, MyPositionHeading);
+
+  RenderPart(context, mng, params, MyPositionPoint);
 }
 
 void MyPosition::CacheAccuracySector(ref_ptr<dp::GraphicsContext> context, ref_ptr<dp::TextureManager> mng)
@@ -264,6 +284,86 @@ void MyPosition::CachePointPosition(ref_ptr<dp::GraphicsContext> context, ref_pt
       CacheSymbol(context, *symbols[i], state, batcher, partIndices[i]);
     }
   }
+}
+
+void MyPosition::CacheHeadingCone(ref_ptr<dp::GraphicsContext> context, ref_ptr<dp::TextureManager> mng)
+{
+  using mp::kHeadingConeBands;
+  using mp::kHeadingConeSegments;
+
+  dp::Color const base = df::GetColorConstant(mp::kMyPositionHeadingColor);
+  auto const radius = static_cast<float>(mp::kHeadingConeRadiusDp * VisualParams::Instance().GetVisualScale());
+  auto const halfAngle = static_cast<float>(math::DegToRad(mp::kHeadingConeHalfAngleDeg));
+
+  // Marker normals live in pixel space, where y grows downwards, so "ahead"
+  // is -y. With the azimuth sign used by the MyPosition shader this points the
+  // cone clockwise from north, matching the navigation arrow.
+  auto const direction = [](float angle) { return glsl::vec2(std::sin(angle), -std::cos(angle)); };
+
+  size_t const vertexCount = static_cast<size_t>(kHeadingConeSegments) * (6 * kHeadingConeBands - 3);
+  buffer_vector<mp::MarkerVertex, 1024> buffer;
+  ref_ptr<dp::Texture> texture;
+  bool hasTexture = false;
+
+  for (int band = 0; band < kHeadingConeBands; ++band)
+  {
+    float const r0 = radius * static_cast<float>(band) / kHeadingConeBands;
+    float const r1 = radius * static_cast<float>(band + 1) / kHeadingConeBands;
+
+    // Ease the fade so the cone is dense near the dot and dissolves at the rim.
+    float const t = (static_cast<float>(band) + 0.5f) / kHeadingConeBands;
+    float const falloff = (1.0f - t) * (1.0f - t);
+    dp::Color const bandColor(base.GetRed(), base.GetGreen(), base.GetBlue(),
+                              static_cast<uint8_t>(base.GetAlpha() * falloff));
+
+    dp::TextureManager::ColorRegion region;
+    mng->GetColorRegion(bandColor, region);
+    // Every band must land in the same colour texture, since the cone is one draw.
+    ASSERT(!hasTexture || texture == region.GetTexture(), ());
+    texture = region.GetTexture();
+    hasTexture = true;
+    glsl::vec2 const uv = glsl::ToVec2(region.GetTexRect().Center());
+
+    for (int s = 0; s < kHeadingConeSegments; ++s)
+    {
+      float const a0 = -halfAngle + 2.0f * halfAngle * static_cast<float>(s) / kHeadingConeSegments;
+      float const a1 = -halfAngle + 2.0f * halfAngle * static_cast<float>(s + 1) / kHeadingConeSegments;
+      glsl::vec2 const d0 = direction(a0);
+      glsl::vec2 const d1 = direction(a1);
+
+      buffer.emplace_back(d0 * r0, uv);
+      buffer.emplace_back(d0 * r1, uv);
+      buffer.emplace_back(d1 * r1, uv);
+      if (band > 0)
+      {
+        buffer.emplace_back(d0 * r0, uv);
+        buffer.emplace_back(d1 * r1, uv);
+        buffer.emplace_back(d1 * r0, uv);
+      }
+    }
+  }
+  ASSERT_EQUAL(buffer.size(), vertexCount, ());
+
+  auto state = CreateRenderState(gpu::Program::MyPosition, DepthLayer::OverlayLayer);
+  state.SetDepthTestEnabled(false);
+  state.SetColorTexture(texture);
+
+  dp::Batcher batcher(static_cast<uint32_t>(vertexCount), static_cast<uint32_t>(vertexCount));
+  batcher.SetBatcherHash(static_cast<uint64_t>(BatcherBucket::Default));
+  dp::SessionGuard guard(context, batcher, [this](dp::RenderState const & state, drape_ptr<dp::RenderBucket> && b)
+  {
+    drape_ptr<dp::RenderBucket> bucket = std::move(b);
+    ASSERT(bucket->GetOverlayHandlesCount() == 0, ());
+
+    m_nodes.emplace_back(state, bucket->MoveBuffer());
+    m_parts[MyPositionHeading].second = m_nodes.size() - 1;
+  });
+
+  dp::AttributeProvider provider(1 /* stream count */, static_cast<uint32_t>(vertexCount));
+  provider.InitStream(0 /* stream index */, mp::GetMarkerBindingInfo(), make_ref(buffer.data()));
+
+  m_parts[MyPositionHeading].first = batcher.InsertTriangleList(context, state, make_ref(&provider), nullptr);
+  ASSERT(m_parts[MyPositionHeading].first.IsValid(), ());
 }
 
 void MyPosition::RenderPart(ref_ptr<dp::GraphicsContext> context, ref_ptr<gpu::ProgramManager> mng,

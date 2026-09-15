@@ -2,8 +2,10 @@ colors
 {
   GuiText-color: #4D4D4D;
   GuiText-opacity: 0.86;
-  MyPositionAccuracy-color: #000000;
-  MyPositionAccuracy-opacity: 0.08;
+  MyPositionAccuracy-color: #1F7FD6;
+  MyPositionAccuracy-opacity: 0.12;
+  MyPositionHeading-color: #1F7FD6;
+  MyPositionHeading-opacity: 0.55;
   Selection-color: #1E96F0;
   Selection-opacity: 0.64;
   Route-color: #0087FF;
