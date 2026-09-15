@@ -86,13 +86,13 @@ float constexpr kIsometryAngle = static_cast<float>(math::pi) * 76.0f / 180.0f;
 // Deliberately not 17: the style already swaps building fill colour,
 // jumps opacity 0.8 -> 1.0 and changes the casing at z17, so extruding
 // there stacks a fourth change onto the busiest transition.
+// Applies to both tilted perspective and the flat isometric view that 3D
+// buildings use while browsing (which is otherwise on from z16).
 int constexpr kMin3dBuildingsZoom = 18;
 
 bool Need3dBuildings(ScreenBase const & screen, bool isIsometry)
 {
-  if (isIsometry)
-    return true;
-  if (!screen.isPerspective())
+  if (!isIsometry && !screen.isPerspective())
     return false;
   return GetZoomLevel(screen.GetScale()) >= kMin3dBuildingsZoom;
 }
