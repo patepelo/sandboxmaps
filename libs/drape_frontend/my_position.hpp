@@ -51,12 +51,14 @@ public:
 private:
   void CacheAccuracySector(ref_ptr<dp::GraphicsContext> context, ref_ptr<dp::TextureManager> mng);
   void CachePointPosition(ref_ptr<dp::GraphicsContext> context, ref_ptr<dp::TextureManager> mng);
+  void CacheHeadingCone(ref_ptr<dp::GraphicsContext> context, ref_ptr<dp::TextureManager> mng);
 
   enum EMyPositionPart
   {
     // Don't change the order and the values.
     MyPositionAccuracy = 0,
     MyPositionPoint = 1,
+    MyPositionHeading = 2,
   };
 
   void RenderPart(ref_ptr<dp::GraphicsContext> context, ref_ptr<gpu::ProgramManager> mng,
@@ -71,6 +73,7 @@ private:
   float m_interpolatedAccuracy;
   bool m_showAzimuth;
   bool m_isRoutingMode;
+  bool m_isPositionObsolete = false;
 
   using TPart = std::pair<dp::IndicesRange, size_t>;
 
