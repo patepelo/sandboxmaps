@@ -189,3 +189,18 @@ logic. Guessing at tuning while the mechanism was unverified wasted a cycle.
   before iOS renders this correctly.
 - **Battery.** Fades keep the render loop awake, so a longer fade means more
   awake frames. Worth measuring on device before shipping the current ~3.3s.
+
+## Parked (2026-09-15)
+
+Tried on a real Android device and it does **not** behave like the Qt
+desktop build: labels pile up on top of each other instead of yielding to
+higher-priority ones. The displacement rule is effectively lost on device.
+
+Not yet diagnosed. Leading suspect: `RenderBucket` keeps a fading-out
+overlay's indices alive while `IsFadingOut()`, so labels that *lost* their
+slot keep drawing for the whole ~3.3s fade. If the per-vertex alpha is not
+applied on Android's rendering backend (desktop is GL; Android may be
+running Vulkan, whose shaders were not touched), those losers draw at full
+opacity and overlap. Qt hid this because the alpha works there.
+
+Parked here until picked up again; not merged into anything in daily use.
