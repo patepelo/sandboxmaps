@@ -204,3 +204,26 @@ running Vulkan, whose shaders were not touched), those losers draw at full
 opacity and overlap. Qt hid this because the alpha works there.
 
 Parked here until picked up again; not merged into anything in daily use.
+
+## Picked up again (2026-09-15)
+
+Rebased onto current main as `exp/overlay-fade-2` (POI dots, 3D building
+gate). The only conflict was in `overlay_handle.hpp`, next to the POI-dot
+flags; both sides kept.
+
+**Android cause, confirmed by reading the build setup:** Android renders
+with Vulkan, whose shaders are not built from source during the app build.
+They come from `data/vulkan_shaders/shaders_pack.spv`, a prebuilt pack
+generated from `libs/shaders/GL` with `tools/unix/generate_vulkan_shaders.sh`
+and committed. The fade changed the GL text shaders but never regenerated
+the pack, so on Android the text shaders ignored `a_fadeAlpha`. Losing
+labels, kept alive by `IsFadingOut()`, drew at full opacity for the whole
+fade and piled up.
+
+Regenerated the pack with glslc from Homebrew's shaderc (the script expects
+the NDK's copy). Regenerating main's shaders the same way reproduces the
+committed reflection exactly, with only the SPIR-V generator header
+differing, so the compiler swap is not a source of change. On this branch
+only the four text programs change size.
+
+Still GL and Vulkan only; Metal (iOS) is untouched.
