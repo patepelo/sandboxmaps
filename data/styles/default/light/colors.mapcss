@@ -273,3 +273,14 @@
 @label_isoline100: #496149;
 @label_isoline50: #567556;
 @label_isoline10: #567556;
+
+/* POI dots */
+@poi_dot_halo: #FFFFFF;
+@poi_dot_car: #AA96BC;
+@poi_dot_car: #A389BC;
+@poi_dot_entertainment: #EB785D;
+@poi_dot_food: #EC955E;
+@poi_dot_health: #D85961;
+@poi_dot_service: #747E86;
+@poi_dot_shop: #BE75A3;
+@poi_dot_transport: #2F6499;

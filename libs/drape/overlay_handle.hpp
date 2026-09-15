@@ -123,6 +123,13 @@ public:
   bool IsVisible() const { return m_isVisible; }
   void SetIsVisible(bool isVisible) { m_isVisible = isVisible; }
 
+  // POI dots: an icon that has a dot collapses to it when it collides with another such icon,
+  // and the dot itself is shown only when its icon is not placed (see OverlayTree).
+  void SetCollapsesToDot(bool collapses) { m_collapsesToDot = collapses; }
+  bool CollapsesToDot() const { return m_collapsesToDot; }
+  void SetIsPoiDot(bool isPoiDot) { m_isPoiDot = isPoiDot; }
+  bool IsPoiDot() const { return m_isPoiDot; }
+
   uint8_t GetMinVisibleScale() const { return m_minVisibleScale; }
   bool IsBillboard() const { return m_isBillboard; }
 
@@ -245,6 +252,8 @@ private:
   bool m_isReady : 1;
   bool m_isSpecialLayerOverlay : 1;
   bool m_displayFlag : 1;
+  bool m_collapsesToDot : 1;
+  bool m_isPoiDot : 1;
 };
 
 class SquareHandle : public OverlayHandle

@@ -1,0 +1,23 @@
+diff --git a/src/libkomwm.py b/src/libkomwm.py
+index 360b4f1..241f7cd 100644
+--- a/src/libkomwm.py
++++ b/src/libkomwm.py
+@@ -900,12 +900,15 @@ def komap_mapswithme(options):
+                             if 'icon-min-distance' in st:
+                                 dr_element.symbol.min_distance = int(st.get('icon-min-distance', 0))
+                             has_icons = False
+-                        if st.get('symbol-shape'):
+-                            # TODO: not used in current styles; do "circles" work in drape at all?
++                        if st.get('symbol-shape') not in (None, 'none'):
++                            # Small POI dots, shown by drape where the icon is not placed (see OverlayTree::PlacePoiDots).
+                             dr_element.circle.radius = float(st.get('symbol-size'))
+                             dr_element.circle.color = mwm_encode_color(colors, st, 'symbol-fill')
++                            if st.get('symbol-stroke-width'):
++                                dr_element.circle.border.width = st.get('symbol-stroke-width')
++                                dr_element.circle.border.color = mwm_encode_color(colors, st, 'symbol-stroke')
++                            # Dots share the icon's priority and are not listed in priorities files.
+                             dr_element.circle.priority = get_drape_priority(cl, 'circle', st.get('object-id'))
+-                            store_visibility(cl, 'circle', st.get('object-id'), zoom)
+                             has_icons = False
+ 
+                     if has_text and st.get('text') and st.get('text') != 'none':

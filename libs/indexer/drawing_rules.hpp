@@ -21,6 +21,7 @@ class LineRuleProto;
 class AreaRuleProto;
 class SymbolRuleProto;
 class CaptionRuleProto;
+class CircleRuleProto;
 class PathTextRuleProto;
 class ShieldRuleProto;
 class ContainerProto;
@@ -37,6 +38,7 @@ public:
   virtual LineRuleProto const * GetLine() const;
   virtual AreaRuleProto const * GetArea() const;
   virtual SymbolRuleProto const * GetSymbol() const;
+  virtual CircleRuleProto const * GetCircle() const;
   virtual CaptionRuleProto const * GetCaption() const;
   virtual PathTextRuleProto const * GetPathtext() const;
   virtual ShieldRuleProto const * GetShield() const;

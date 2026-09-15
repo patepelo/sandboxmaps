@@ -45,7 +45,7 @@
 # leisure-playground                                # area z15- (also has icon z18-, caption(optional) z18-)
 # === 200
 
-# amenity-fountain                                  # area z16- (also has icon z17-, caption(optional) z18-)
+# amenity-fountain                                  # area z16- (also has icon z19-, caption(optional) z19-)
 # leisure-fitness_centre-sport-yoga                 # area z16- (also has icon z18-, caption(optional) z18-)
 # leisure-sports_centre                             # area z13- (also has icon z18-, caption(optional) z18-)
 # leisure-sports_centre-sport-american_football     # area z13- (also has icon z18-, caption(optional) z18-)
@@ -117,13 +117,13 @@
 # leisure-dog_park                                  # area z15- (also has icon z19-, caption(optional) z19-)
 # leisure-resort                                    # area z13- (also has icon z18-, caption(optional) z18-)
 # leisure-water_park                                # area z13- (also has icon z17-, caption(optional) z17-)
-# office-diplomatic                                 # area z15- (also has icon z17-, caption(optional) z17-)
+# office-diplomatic                                 # area z15- (also has icon z19-, caption(optional) z19-)
 # tourism-camp_site                                 # area z13- (also has icon z13-, caption(optional) z13-)
 # tourism-information-office                        # area z15- (also has icon z13-, caption(optional) z14-)
 # tourism-information-visitor_centre                # area z13- (also has icon z13-, caption(optional) z14-)
 # === 170
 
-# highway-footway-area                              # area z14- (also has line z11-, line::border z16-, pathtext z13-)
+# highway-footway-area                              # area z14- (also has line z11-, line::border z16-, caption z15-16, pathtext z13-14,17-)
 # leisure-track-area                                # area z15- (also has caption z16-)
 # === 160
 
@@ -153,7 +153,7 @@
 # amenity-bicycle_parking                           # area z15- (also has icon z19-, caption(optional) z19-)
 # amenity-bicycle_parking-covered                   # area z15- (also has icon z19-, caption(optional) z19-)
 # amenity-car_pooling                               # area z15- (also has icon z19-, caption(optional) z19-)
-# amenity-motorcycle_parking                        # area z15- (also has icon z19-, caption(optional) z19-)
+# amenity-motorcycle_parking                        # area z15- (also has icon z20-, caption(optional) z20-)
 # amenity-parking                                   # area z15- (also has icon z18-, caption(optional) z18-)
 # amenity-parking-fee                               # area z15- (also has icon z18-, caption(optional) z18-)
 # amenity-parking-lane                              # area z17- (also has icon z18-, caption(optional) z18-)

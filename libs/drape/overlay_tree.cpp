@@ -244,6 +244,33 @@ void OverlayTree::InsertHandle(ref_ptr<OverlayHandle> handle, int currentRank,
   bool const selected =
       m_selectedFeatureID.IsValid() && handleToCompare->GetOverlayID().m_featureId == m_selectedFeatureID;
 
+  // Two colliding icons that both have a dot collapse together: neither icon (nor its caption) is
+  // placed, so both show as dots instead of one icon hiding the other.
+  if (handle->CollapsesToDot() && !boundToParent && !selected)
+  {
+    bool collapsed = false;
+    for (auto const & rivalHandle : rivals)
+    {
+      if (!rivalHandle->CollapsesToDot() ||
+          (m_selectedFeatureID.IsValid() && rivalHandle->GetOverlayID().m_featureId == m_selectedFeatureID))
+      {
+        continue;
+      }
+
+      auto it = m_overlayIdCache.find(rivalHandle->GetOverlayID());
+      if (it != m_overlayIdCache.end())
+      {
+        for (auto const & h : it->second)
+          DeleteHandleImpl(h);
+        m_overlayIdCache.erase(it);
+      }
+      StoreDisplacementInfo(4 /* case index */, handle, rivalHandle);
+      collapsed = true;
+    }
+    if (collapsed)
+      return;
+  }
+
   if (!selected)
   {
     // In this loop we decide which element must be visible.
@@ -333,10 +360,15 @@ void OverlayTree::EndOverlayPlacing()
 
     for (auto const & handle : m_handles[rank])
     {
+      if (handle->IsPoiDot())
+        continue;
       ref_ptr<OverlayHandle> parentOverlay;
       if (CheckHandle(handle, rank, parentOverlay))
         InsertHandle(handle, rank, parentOverlay);
     }
+
+    if (rank == dp::OverlayRank0)
+      PlacePoiDots();
   }
 
   for (int rank = 0; rank < dp::OverlayRanksCount; rank++)
@@ -358,6 +390,30 @@ void OverlayTree::EndOverlayPlacing()
 #ifdef DEBUG_OVERLAYS_OUTPUT
   LOG(LINFO, ("- END OVERLAYS PLACING"));
 #endif
+}
+
+void OverlayTree::PlacePoiDots()
+{
+  ScreenBase const & modelView = GetModelView();
+  for (auto const & dot : m_handles[dp::OverlayRank0])
+  {
+    if (!dot->IsPoiDot())
+      continue;
+
+    // Shown only where the POI's own icon was not placed.
+    auto const it = m_overlayIdCache.find(dot->GetOverlayID());
+    bool const iconPlaced =
+        it != m_overlayIdCache.end() && std::any_of(it->second.begin(), it->second.end(), [](auto const & h)
+    { return h->GetOverlayRank() == dp::OverlayRank0 && !h->IsPoiDot(); });
+    if (iconPlaced)
+      continue;
+
+    // Dots never displace icons (those are already placed), but they take space before captions
+    // are placed, so a neighbour's name gives way instead of covering the dot. They are kept out
+    // of m_overlayIdCache so the hidden icon's caption cannot use a dot as its parent.
+    m_handlesCache.insert(dot);
+    TBase::Add(dot, dot->GetExtendedPixelRect(modelView));
+  }
 }
 
 bool OverlayTree::CheckHandle(ref_ptr<OverlayHandle> handle, int currentRank,

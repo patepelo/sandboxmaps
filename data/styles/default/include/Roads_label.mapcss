@@ -247,24 +247,22 @@ line|z18-[highway=busway],
 line|z15-[highway=cycleway],
 line|z15-[highway=construction],
 line|z15-[highway=track],
-line|z15-[highway=path],
+line|z17-[highway=path],
 line|z15-[highway=bridleway],
-line|z15-[highway=footway],
+line|z17-[highway=footway],
 line|z16-[leisure=track],
-line|z16-[highway=steps],
+line|z17-[highway=steps],
 line|z16-[highway=ford],
-line|z16-[highway=raceway],
+line|z16-[highway=raceway]
 {text: name;text-color: @label_medium;text-halo-opacity: 0.8;text-halo-radius: 1;text-halo-color: @label_halo_light;}
 
 /* Don't display names of sidewalks and pedestrian crossings. */
-line|z15-[highway=footway][footway=sidewalk],
-line|z15-[highway=footway][footway=crossing],
+line|z17-[highway=footway][footway=sidewalk],
+line|z17-[highway=footway][footway=crossing]
 {text: none;}
 
 line|z15[highway=construction],
 line|z15[highway=bridleway],
-line|z15[highway=path],
-line|z15[highway=footway],
 line|z15[highway=cycleway],
 line|z15[highway=track]
 {font-size: 8;}
@@ -274,9 +272,9 @@ line|z16-17[highway=construction],
 line|z16-17[highway=track],
 line|z16-17[highway=raceway],
 line|z16-17[leisure=track],
-line|z16-17[highway=path],
+line|z17-17[highway=path],
 line|z16-17[highway=bridleway],
-line|z16-17[highway=footway],
+line|z17-17[highway=footway]
 {font-size: 9;}
 line|z18-[highway=ford],
 line|z18-[highway=cycleway],
@@ -286,7 +284,7 @@ line|z18-[highway=raceway],
 line|z18-[leisure=track],
 line|z18-[highway=path],
 line|z18-[highway=bridleway],
-line|z18-[highway=footway],
+line|z18-[highway=footway]
 {font-size: 10;}
 
 /* 10.PISTE 15-22 ZOOM */
@@ -361,12 +359,7 @@ line|z17-[route=ferry],
 
 /* line|z15-[highway=primary][hwtag=oneway]::arrows <-- не работает по типам магистралей */
 
-line|z15[hwtag=oneway]::arrows
-{pattern-offset: 30;pattern-image: arrow-xs.svg;pattern-spacing: 60;}
-line|z16[hwtag=oneway]::arrows
-{pattern-offset: 50;pattern-image: arrow-s.svg;pattern-spacing: 70;}
-line|z17[hwtag=oneway]::arrows
-{pattern-offset: 70;pattern-image: arrow-s.svg;pattern-spacing: 80;}
+/* One-way arrows only from z18 */
 line|z18-[hwtag=oneway]::arrows
 {pattern-offset: 90;pattern-image: arrow-m.svg;pattern-spacing: 90;}
 
@@ -391,3 +384,8 @@ line[highway=pedestrian][place=square],
 line[highway=pedestrian][area?]::border,
 line[highway=pedestrian][place=square]::border,
 {width: 0;}
+
+/* Footway lines start at z17, so before that a footway area's name is centred
+   instead of following an outline that is not drawn yet. */
+line|z15-16[highway=footway][area?],
+{text-position: center;}
