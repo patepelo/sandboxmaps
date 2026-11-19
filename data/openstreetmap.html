@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>How OpenStreetMap works</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #3c3c3c; --heading: #111; --muted: #6b6b6b; --link: #37653F;
+      --bg: #ffffff; --card: #f3f5f1; --line: #d9ddd5;
+      --osm: #7ebc6f; --osm-dark: #4f8a43; --road: #ffffff; --road-edge: #c9cdc4;
+      --park: #c8e6b8; --water: #aad3df; --building: #e3ddd3; --pin: #e8553f; --person: #4a6fa5;
+    }
+    @media screen and (prefers-color-scheme: dark) {
+      :root {
+        --text: #c9c9c9; --heading: #eeeeee; --muted: #9a9a9a; --link: #8fc28a;
+        --bg: #121212; --card: #1e211d; --line: #333832;
+        --osm: #6aa65c; --osm-dark: #8fc28a; --road: #3a3d38; --road-edge: #4a4e47;
+        --park: #2f4a2a; --water: #24414d; --building: #3b3832; --pin: #e8664f; --person: #7d9fd1;
+      }
+    }
+    html { background: var(--bg); color: var(--text); -webkit-text-size-adjust: none; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+           line-height: 1.5; margin: 0; padding: 1em 1.1em 2em; max-width: 40em; }
+    h1 { color: var(--heading); font-size: 1.5em; line-height: 1.25; margin: 0.4em 0 0.3em; }
+    h2 { color: var(--heading); font-size: 1.15em; margin: 1.8em 0 0.4em; }
+    p { margin: 0.5em 0; }
+    a, a:visited { color: var(--link); }
+    .lead { font-size: 1.05em; }
+    .card { background: var(--card); border-radius: 14px; padding: 0.9em 1em; margin: 1em 0; }
+    svg { display: block; width: 100%; height: auto; margin: 0.6em auto; }
+    .caption { color: var(--muted); font-size: 0.85em; text-align: center; margin-top: -0.2em; }
+    ol.steps { padding-left: 0; list-style: none; counter-reset: step; margin: 0.6em 0; }
+    ol.steps li { counter-increment: step; position: relative; padding-left: 2.4em; margin: 0.8em 0; }
+    ol.steps li::before { content: counter(step); position: absolute; left: 0; top: -0.05em; width: 1.7em; height: 1.7em;
+      border-radius: 50%; background: var(--osm); color: #fff; font-weight: bold; text-align: center; line-height: 1.7em; }
+    .links li { margin: 0.4em 0; }
+    .editor { background: var(--card); border-radius: 14px; padding: 0.8em 1em; margin: 0.7em 0; }
+    .editor p { margin: 0.3em 0 0.4em; }
+    .editor-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em; color: var(--heading); }
+    .editor-head b { font-size: 1.05em; margin-right: 0.2em; }
+    .tag { font-size: 0.75em; padding: 0.1em 0.6em; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+    .tag.easy { background: var(--osm); border-color: var(--osm); color: #fff; }
+    .tag.mid { background: #e0a43a; border-color: #e0a43a; color: #fff; }
+    .tag.hard { background: var(--person); border-color: var(--person); color: #fff; }
+    /* SVG paint, so drawings follow light/dark mode */
+    .s-park { fill: var(--park); } .s-water { fill: var(--water); } .s-building { fill: var(--building); }
+    .s-road { fill: none; stroke: var(--road); stroke-linecap: round; }
+    .s-road-edge { fill: none; stroke: var(--road-edge); stroke-linecap: round; }
+    .s-pin { fill: var(--pin); } .s-person { fill: var(--person); } .s-osm { fill: var(--osm); }
+    .s-card { fill: var(--card); } .s-bg { fill: var(--bg); } .s-line { stroke: var(--line); fill: none; }
+    .s-arrow { stroke: var(--muted); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .s-text { fill: var(--text); font: 600 13px -apple-system, Roboto, sans-serif; }
+    .s-text-small { fill: var(--muted); font: 11px -apple-system, Roboto, sans-serif; }
+    .s-white { fill: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero: a small map being drawn by people -->
+  <svg viewBox="0 0 320 170" role="img" aria-label="A small map with a park, a river, roads and people adding places">
+    <rect class="s-card" x="0" y="0" width="320" height="170" rx="16"/>
+    <path class="s-water" d="M0,128 C60,112 110,150 170,132 C230,114 270,140 320,124 L320,170 L0,170 Z"/>
+    <rect class="s-park" x="196" y="22" width="96" height="70" rx="12"/>
+    <rect class="s-building" x="40" y="26" width="34" height="26" rx="4"/>
+    <rect class="s-building" x="82" y="26" width="26" height="26" rx="4"/>
+    <rect class="s-building" x="40" y="62" width="68" height="22" rx="4"/>
+    <path class="s-road-edge" stroke-width="13" d="M20,100 C90,100 120,60 180,58 S300,60 312,60"/>
+    <path class="s-road" stroke-width="9" d="M20,100 C90,100 120,60 180,58 S300,60 312,60"/>
+    <path class="s-road-edge" stroke-width="9" d="M150,12 L150,150"/>
+    <path class="s-road" stroke-width="5" d="M150,12 L150,150"/>
+    <!-- pins being added -->
+    <g transform="translate(226,46)"><path class="s-pin" d="M0,-16 a10,10 0 0 1 10,10 c0,8 -10,18 -10,18 c0,0 -10,-10 -10,-18 a10,10 0 0 1 10,-10z"/><circle class="s-white" cx="0" cy="-6" r="3.5"/></g>
+    <g transform="translate(92,20)"><path class="s-pin" d="M0,-16 a10,10 0 0 1 10,10 c0,8 -10,18 -10,18 c0,0 -10,-10 -10,-18 a10,10 0 0 1 10,-10z"/><circle class="s-white" cx="0" cy="-6" r="3.5"/></g>
+    <!-- people -->
+    <g class="s-person"><circle cx="268" cy="106" r="7"/><path d="M256,128 a12,12 0 0 1 24,0z"/></g>
+    <g class="s-person"><circle cx="122" cy="112" r="7"/><path d="M110,134 a12,12 0 0 1 24,0z"/></g>
+    <g class="s-osm"><circle cx="40" cy="132" r="7"/><path d="M28,154 a12,12 0 0 1 24,0z"/></g>
+  </svg>
+
+  <h1>A map of the world, made by people like you</h1>
+  <p class="lead">The maps in Sandbox Maps are mostly based on <b>OpenStreetMap</b> (OSM). Here is what that means,
+    and how you can help make the map better.</p>
+
+  <h2>What is OpenStreetMap?</h2>
+  <p>OpenStreetMap is a free map of the whole world. It works a bit like Wikipedia, but for maps: instead of
+    articles, people add roads, paths, shops, parks, bus stops, opening hours and much more.</p>
+  <p>Nobody owns it, and anyone can use it. Many apps and websites are built on the same OpenStreetMap data,
+    including CoMaps and Sandbox Maps.</p>
+
+  <h2>Who makes it?</h2>
+  <svg viewBox="0 0 320 110" role="img" aria-label="Volunteers around the world adding to one shared map">
+    <rect class="s-card" x="0" y="0" width="320" height="110" rx="16"/>
+    <circle class="s-osm" cx="160" cy="55" r="34"/>
+    <path class="s-white" d="M146,40 h28 v30 h-28z" opacity="0.9"/>
+    <path d="M150,46 h20 M150,53 h20 M150,60 h14" style="fill:none;stroke:var(--osm);stroke-width:3"/>
+    <g class="s-person"><circle cx="52" cy="38" r="9"/><path d="M37,66 a15,15 0 0 1 30,0z"/></g>
+    <g class="s-person"><circle cx="268" cy="38" r="9"/><path d="M253,66 a15,15 0 0 1 30,0z"/></g>
+    <g class="s-osm"><circle cx="96" cy="74" r="7"/><path d="M84,96 a12,12 0 0 1 24,0z"/></g>
+    <g class="s-pin"><circle cx="226" cy="74" r="7"/><path d="M214,96 a12,12 0 0 1 24,0z"/></g>
+    <path class="s-arrow" d="M70,46 L118,52 M250,46 L202,52 M108,80 L128,70 M214,80 L192,70"/>
+  </svg>
+  <p>Millions of volunteers, from locals who know their street to people mapping from aerial photos.
+    They all add to <b>one shared map</b>, so a fix made by one person helps everyone.</p>
+
+  <h2>How the map gets onto your phone</h2>
+  <svg viewBox="0 0 320 120" role="img" aria-label="People edit OpenStreetMap, map files are made from it, and your phone downloads them to use offline">
+    <rect class="s-card" x="0" y="0" width="320" height="120" rx="16"/>
+    <!-- people -->
+    <g class="s-person"><circle cx="40" cy="40" r="9"/><path d="M25,68 a15,15 0 0 1 30,0z"/></g>
+    <text class="s-text" x="40" y="90" text-anchor="middle">People</text>
+    <text class="s-text-small" x="40" y="104" text-anchor="middle">edit OSM</text>
+    <path class="s-arrow" d="M66,50 L92,50 M86,44 L92,50 L86,56"/>
+    <!-- OSM -->
+    <circle class="s-osm" cx="122" cy="48" r="22"/>
+    <text class="s-white" x="122" y="53" text-anchor="middle" style="font: bold 13px -apple-system, Roboto, sans-serif">OSM</text>
+    <text class="s-text" x="122" y="90" text-anchor="middle">Shared map</text>
+    <text class="s-text-small" x="122" y="104" text-anchor="middle">updated live</text>
+    <path class="s-arrow" d="M150,50 L176,50 M170,44 L176,50 L170,56"/>
+    <!-- map files -->
+    <rect class="s-bg" x="186" y="30" width="34" height="38" rx="5"/>
+    <rect class="s-bg s-line" x="192" y="26" width="34" height="38" rx="5" stroke-width="2"/>
+    <path class="s-park" d="M197,34 h24 v10 h-24z"/><path class="s-water" d="M197,47 h24 v10 h-24z"/>
+    <text class="s-text" x="206" y="90" text-anchor="middle">Map files</text>
+    <text class="s-text-small" x="206" y="104" text-anchor="middle">made regularly</text>
+    <path class="s-arrow" d="M236,50 L258,50 M252,44 L258,50 L252,56"/>
+    <!-- phone -->
+    <rect class="s-bg s-line" x="268" y="22" width="32" height="54" rx="7" stroke-width="2.5"/>
+    <path class="s-park" d="M273,30 h22 v18 h-22z"/><path class="s-water" d="M273,50 h22 v12 h-22z"/>
+    <text class="s-text" x="284" y="90" text-anchor="middle">Your phone</text>
+    <text class="s-text-small" x="284" y="104" text-anchor="middle">works offline</text>
+  </svg>
+  <p>OpenStreetMap changes every minute. From time to time, map files are made from it and published, and
+    Sandbox Maps downloads them to your phone. That is why the app works <b>without internet</b>.</p>
+  <div class="card">
+    <p><b>The map data date</b> in About tells you when your maps were made. Anything added to OpenStreetMap after
+      that date appears in the app once you update your maps.</p>
+  </div>
+
+  <h2>Fix something yourself</h2>
+  <p>Is a shop missing, or are the opening hours wrong? You can fix it right from the app:</p>
+  <ol class="steps">
+    <li>Tap the place on the map to open it.</li>
+    <li>Tap <b>Edit Place</b> and change what is wrong.</li>
+    <li>Sign in with a free OpenStreetMap account and save.</li>
+  </ol>
+  <svg viewBox="0 0 320 130" role="img" aria-label="A phone showing a place with an Edit Place button">
+    <rect class="s-card" x="0" y="0" width="320" height="130" rx="16"/>
+    <rect class="s-bg s-line" x="110" y="10" width="100" height="112" rx="12" stroke-width="2.5"/>
+    <rect class="s-park" x="118" y="20" width="84" height="38" rx="6"/>
+    <g transform="translate(160,44)"><path class="s-pin" d="M0,-16 a10,10 0 0 1 10,10 c0,8 -10,18 -10,18 c0,0 -10,-10 -10,-18 a10,10 0 0 1 10,-10z"/><circle class="s-white" cx="0" cy="-6" r="3.5"/></g>
+    <rect class="s-card" x="118" y="64" width="84" height="8" rx="4"/>
+    <rect class="s-card" x="118" y="76" width="60" height="6" rx="3"/>
+    <rect class="s-osm" x="126" y="92" width="68" height="20" rx="10"/>
+    <text class="s-white" x="160" y="106" text-anchor="middle" style="font: bold 10px -apple-system, Roboto, sans-serif">Edit Place</text>
+  </svg>
+  <p>Your change shows on your phone straight away. It is also sent to OpenStreetMap, so it reaches
+    <b>everyone using Sandbox Maps, CoMaps and other OpenStreetMap apps</b> after their next map update.</p>
+  <p>For bigger changes, like drawing new roads or buildings, try one of the editors below.</p>
+
+  <h2>Recommended editors</h2>
+  <p>All of these are free and edit the same OpenStreetMap, so your changes reach Sandbox Maps too. Use the same
+    OpenStreetMap account everywhere.</p>
+
+  <div class="editor">
+    <div class="editor-head"><b>StreetComplete</b><span class="tag easy">Easy</span><span class="tag">Android</span></div>
+    <p>Answers simple questions about places around you while you walk, like "Is this bench made of wood?".
+      A fun way to start, with no map skills needed.</p>
+    <a href="https://streetcomplete.app">streetcomplete.app</a>
+  </div>
+
+  <div class="editor">
+    <div class="editor-head"><b>Every Door</b><span class="tag easy">Easy</span><span class="tag">Android</span></div>
+    <p>Made for adding and updating shops, cafés, entrances and other points of interest on the spot.</p>
+    <a href="https://every-door.app">every-door.app</a>
+  </div>
+
+  <div class="editor">
+    <div class="editor-head"><b>iD</b><span class="tag mid">Medium</span><span class="tag">Web browser</span></div>
+    <p>The editor built into the OpenStreetMap website. Good for drawing roads, paths and buildings on a bigger
+      screen, with a built-in walkthrough for beginners.</p>
+    <a href="https://www.openstreetmap.org/edit">openstreetmap.org/edit</a>
+  </div>
+
+  <div class="editor">
+    <div class="editor-head"><b>Vespucci</b><span class="tag hard">Advanced</span><span class="tag">Android</span></div>
+    <p>A full editor on your phone or tablet, for detailed mapping out in the field.</p>
+    <a href="https://vespucci.io">vespucci.io</a>
+  </div>
+
+  <div class="editor">
+    <div class="editor-head"><b>JOSM</b><span class="tag hard">Advanced</span><span class="tag">Computer</span></div>
+    <p>The most powerful editor, used by experienced mappers for large or complex changes.</p>
+    <a href="https://josm.openstreetmap.de">josm.openstreetmap.de</a>
+  </div>
+
+  <h2>Free and open</h2>
+  <p>OpenStreetMap data is open: anyone may use it, as long as they credit OpenStreetMap and share improvements
+    under the same terms (the <a href="https://www.openstreetmap.org/copyright">Open Database License</a>).
+    That is why you see "&copy; OpenStreetMap contributors" in apps like this one.</p>
+
+  <h2>Learn more</h2>
+  <ul class="links">
+    <li><a href="https://www.openstreetmap.org">openstreetmap.org</a>: browse and edit the map</li>
+    <li><a href="https://wiki.openstreetmap.org/wiki/Beginners%27_guide">Beginners' guide</a> on the OpenStreetMap wiki</li>
+    <li><a href="https://www.openstreetmap.org/about">About OpenStreetMap</a></li>
+  </ul>
+
+</body>
+</html>
