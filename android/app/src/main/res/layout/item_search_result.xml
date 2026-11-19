@@ -10,12 +10,25 @@
   android:padding="@dimen/margin_half_double_plus"
   tools:background="#20FF0000">
 
+  <!-- Map icon of the place type, from the map's symbol atlas (see MapIconCache). INVISIBLE, not GONE, when
+       there is none, so titles stay in one column. -->
+  <ImageView
+      android:id="@+id/icon"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_alignParentStart="true"
+      android:layout_alignParentTop="true"
+      android:layout_marginEnd="@dimen/margin_half_double_plus"
+      android:importantForAccessibility="no"
+      android:scaleType="centerInside"
+      tools:src="@drawable/ic_question_mark" />
+
   <com.google.android.material.textview.MaterialTextView
       android:id="@+id/title"
       android:textAlignment="viewStart"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_alignParentStart="true"
+      android:layout_toEndOf="@id/icon"
       android:textAppearance="@style/MwmTextAppearance.Body1"
       android:ellipsize="end"
       android:maxLines="2"
@@ -26,7 +39,7 @@
       android:textAlignment="viewStart"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentStart="true"
+      android:layout_toEndOf="@id/icon"
       android:layout_below="@id/title"
       android:layout_toStartOf="@id/open"
       android:layout_marginEnd="@dimen/margin_half"
@@ -50,7 +63,7 @@
       android:textAlignment="viewStart"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentStart="true"
+      android:layout_toEndOf="@id/icon"
       android:layout_below="@id/description"
       android:layout_toStartOf="@id/distance"
       android:layout_marginTop="@dimen/margin_quarter"

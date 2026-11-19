@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  "Random" search category: each tap fills in the next example and shows its tip.
+  Only types of places (POI types) that the predefined category buttons don't cover, to show how many more
+  exist. No brands, landmarks, addresses, coordinates or "type + city" combinations.
+  Both arrays must have the same length; item N of the tips explains item N of the queries.
+  Every term and every "also try" word is checked against data/categories.txt.
+-->
+<resources>
+  <string name="search_random">Random</string>
+
+  <string-array name="search_random_queries" translatable="false">
+    <!-- Around town -->
+    <item>public bookcase</item>
+    <item>give box</item>
+    <item>tool library</item>
+    <item>bicycle repair station</item>
+    <item>luggage locker</item>
+    <item>internet cafe</item>
+    <item>hackerspace</item>
+    <!-- Sport and things to do -->
+    <item>outdoor gym</item>
+    <item>sauna</item>
+    <item>escape room</item>
+    <item>mini golf</item>
+    <item>chess</item>
+    <item>archery</item>
+    <item>skateboarding</item>
+    <item>scuba diving</item>
+    <item>observatory</item>
+    <!-- Nature -->
+    <item>beach</item>
+    <item>cave</item>
+    <item>volcano</item>
+    <item>geyser</item>
+    <item>firepit</item>
+    <!-- History -->
+    <item>lighthouse</item>
+    <item>windmill</item>
+    <item>shipwreck</item>
+    <item>battlefield</item>
+    <!-- Food -->
+    <item>ramen</item>
+    <item>tapas</item>
+    <item>gelato</item>
+    <item>vegan</item>
+    <!-- Emoji -->
+    <item>✈</item>
+  </string-array>
+
+  <string-array name="search_random_hints" translatable="false">
+    <item>Search finds far more than the category buttons. Free book exchanges: also try book swap, street library.</item>
+    <item>Boxes where people leave things for others to take.</item>
+    <item>Borrow tools instead of buying them. Also try: tools.</item>
+    <item>Free tools and pumps to fix your bike.</item>
+    <item>Somewhere to leave your bags. Also try: coin lockers.</item>
+    <item>Also try: cybercafé.</item>
+    <item>Community workshops. Also try: makerspace, hacklab.</item>
+    <item>Free outdoor exercise spots. Also try: street workout, fitness station.</item>
+    <item>Also try: steam room.</item>
+    <item>Indoor fun for groups. Also try: escape game.</item>
+    <item>Also try: minigolf, putt putt.</item>
+    <item>Places to play chess, indoors or out.</item>
+    <item>Sports by name: archery, padel, curling…</item>
+    <item>Skate parks and spots. Also try: skate.</item>
+    <item>Dive centres and spots.</item>
+    <item>Stargazing spots.</item>
+    <item>Beaches near you.</item>
+    <item>Nature has types too: caves, volcanoes, geysers.</item>
+    <item>Volcanoes, active or not.</item>
+    <item>Hot water that shoots up from the ground.</item>
+    <item>Places to make a fire.</item>
+    <item>Lighthouses along the coast.</item>
+    <item>Old windmills.</item>
+    <item>Wrecks on the coast and under water.</item>
+    <item>Historic battlefields.</item>
+    <item>Search by cuisine. Also try: noodles, kebab.</item>
+    <item>Any cuisine works, not just the eating button.</item>
+    <item>Synonyms work: gelato finds ice cream too.</item>
+    <item>Diet types work too. Also try: vegetarian.</item>
+    <item>Emoji work as search terms: this one finds airports.</item>
+  </string-array>
+</resources>

@@ -8,6 +8,11 @@
 #include "map/place_page_info.hpp"
 #include "map/viewport_search_params.hpp"
 
+#include "indexer/classificator.hpp"
+#include "indexer/drawing_rules.hpp"
+#include "indexer/drules_include.hpp"
+#include "indexer/scales.hpp"
+
 #include "search/mode.hpp"
 #include "search/result.hpp"
 
@@ -63,6 +68,34 @@ jmethodID g_endBookmarksResultsId;
 bool PopularityHasHigherPriority(bool hasPosition, double distanceInMeters)
 {
   return !hasPosition || distanceInMeters > search::Result::kPopularityHighPriorityMinDistance;
+}
+
+// Name of the map icon (as in symbols.sdf, e.g. "cafe-m") drawn for this type at the most detailed zoom, or empty.
+// Tries point rules, then area rules (e.g. parks), and falls back to parent types (amenity-cafe -> amenity).
+std::string GetMapIconName(uint32_t type)
+{
+  auto const & c = classif();
+  int const scale = scales::GetUpperStyleScale();
+  for (uint8_t level = ftype::GetLevel(type); level > 0; --level)
+  {
+    uint32_t t = type;
+    ftype::TruncValue(t, level);
+    ClassifObject const * obj = c.GetObject(t);
+    if (!obj)
+      continue;
+    for (auto const geomType : {feature::GeomType::Point, feature::GeomType::Area})
+    {
+      drule::KeysT keys;
+      obj->GetSuitable(scale, geomType, keys);
+      for (auto const & key : keys)
+      {
+        drule::BaseRule const * rule = drule::rules().Find(key);
+        if (rule && rule->GetSymbol() && !rule->GetSymbol()->name().empty())
+          return rule->GetSymbol()->name();
+      }
+    }
+  }
+  return {};
 }
 
 jobject ToJavaResult(Result const & result, search::ProductInfo const & productInfo, bool hasPosition, double lat,
@@ -123,13 +156,15 @@ jobject ToJavaResult(Result const & result, search::ProductInfo const & productI
   auto const titleAndBranch = result.GetTitleAndBranch();
   jni::TScopedLocalRef titleWithoutBranch(env, jni::ToJavaString(env, titleAndBranch.m_title));
   jni::TScopedLocalRef branch(env, jni::ToJavaString(env, titleAndBranch.m_branch));
+  jni::TScopedLocalRef iconName(env, jni::ToJavaString(env, isFeature ? GetMapIconName(result.GetFeatureType()) : ""));
 
   jni::TScopedLocalRef desc(
       env,
       env->NewObject(g_descriptionClass, g_descriptionConstructor, featureId.get(), featureType.get(), address.get(),
                      dist.get(), description.get(), titleWithoutBranch.get(), branch.get(),
                      static_cast<jint>(result.IsOpenNow()), result.GetMinutesUntilOpen(),
-                     result.GetMinutesUntilClosed(), static_cast<jboolean>(popularityHasHigherPriority)));
+                     result.GetMinutesUntilClosed(), static_cast<jboolean>(popularityHasHigherPriority),
+                     iconName.get()));
 
   jni::TScopedLocalRef name(env, jni::ToJavaString(env, result.GetString()));
   jni::TScopedLocalRef popularity(env, env->NewObject(g_popularityClass, g_popularityConstructor,
@@ -251,13 +286,13 @@ JNIEXPORT void JNICALL Java_app_organicmaps_sdk_search_SearchEngine_nativeInit(J
       Description(FeatureId featureId, String featureType, String region, Distance distance,
                   String description, String titleWithoutBranch, String branch, int openNow,
                   int minutesUntilOpen, int minutesUntilClosed,
-                  boolean hasPopularityHigherPriority)
+                  boolean hasPopularityHigherPriority, String iconName)
   */
   g_descriptionConstructor =
       jni::GetConstructorID(env, g_descriptionClass,
                             "(Lapp/organicmaps/sdk/bookmarks/data/FeatureId;"
                             "Ljava/lang/String;Ljava/lang/String;Lapp/organicmaps/sdk/util/Distance;"
-                            "Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIIZ)V");
+                            "Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIIZLjava/lang/String;)V");
 
   g_popularityClass = jni::GetGlobalClassRef(env, "app/organicmaps/sdk/search/Popularity");
   g_popularityConstructor = jni::GetConstructorID(env, g_popularityClass, "(I)V");

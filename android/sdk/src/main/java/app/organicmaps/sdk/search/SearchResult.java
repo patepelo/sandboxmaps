@@ -50,10 +50,13 @@ public class SearchResult
     public final int minutesUntilOpen;
     public final int minutesUntilClosed;
     public final boolean hasPopularityHigherPriority;
+    // Map icon for the feature type, as named in the symbols atlas (e.g. "cafe-m"); empty if the type has none.
+    @NonNull
+    public final String iconName;
 
     public Description(FeatureId featureId, String featureType, String region, Distance distance, String description,
                        String titleWithoutBranch, String branch, int openNow, int minutesUntilOpen,
-                       int minutesUntilClosed, boolean hasPopularityHigherPriority)
+                       int minutesUntilClosed, boolean hasPopularityHigherPriority, @NonNull String iconName)
     {
       this.featureId = featureId;
       this.localizedFeatureType = featureType;
@@ -66,6 +69,7 @@ public class SearchResult
       this.minutesUntilOpen = minutesUntilOpen;
       this.minutesUntilClosed = minutesUntilClosed;
       this.hasPopularityHigherPriority = hasPopularityHigherPriority;
+      this.iconName = iconName;
     }
   }
 

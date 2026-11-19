@@ -50,6 +50,9 @@
     <string name="about_developed_by_enthusiasts">Built on CoMaps, Organic Maps and MAPS.ME, under the Apache 2.0 license. Not endorsed by the CoMaps project.</string>
     <!-- About screen: where the map data comes from, written for people new to OpenStreetMap -->
     <string name="about_title">About</string>
+    <!-- Search categories: toggle for the extra categories -->
+    <string name="search_categories_more">More</string>
+    <string name="search_categories_less">Less</string>
     <string name="about_section_map_data">Map data</string>
     <string name="about_section_links">Source code</string>
     <string name="about_section_legal">Legal</string>

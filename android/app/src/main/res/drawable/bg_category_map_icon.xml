@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Soft circle behind map icons on the extra search categories, so tiles match the built-in ones in size. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <solid android:color="?attr/colorSurfaceContainerHighest" />
+</shape>
