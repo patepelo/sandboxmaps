@@ -26,6 +26,13 @@
 
 namespace qt
 {
+
+constexpr int kColType = 0;
+constexpr int kColName = 1;
+constexpr int kColAddress = 2;
+constexpr int kColDistance = 3;
+constexpr int kColCount = 4;
+
 SearchPanel::SearchPanel(DrawWidget * drawWidget, QWidget * parent)
   : QWidget(parent)
   , m_pDrawWidget(drawWidget)
@@ -37,7 +44,7 @@ SearchPanel::SearchPanel(DrawWidget * drawWidget, QWidget * parent)
   m_pEditor = new QLineEdit(this);
   connect(m_pEditor, &QLineEdit::textChanged, this, &SearchPanel::OnSearchTextChanged);
 
-  m_pTable = new QTableWidget(0, 4 /*columns*/, this);
+  m_pTable = new QTableWidget(0, kColCount, this);
   m_pTable->setFocusPolicy(Qt::NoFocus);
   m_pTable->setAlternatingRowColors(true);
   m_pTable->setShowGrid(false);
@@ -135,7 +142,8 @@ void SearchPanel::OnSearchResults(uint64_t timestamp, search::Results results)
 
   for (auto const & res : m_results)
   {
-    QString const name = QString::fromStdString(res.GetString());
+    auto const [title, branch] = res.GetTitleAndBranch();
+    QString const name = QString::fromStdString(branch.empty() ? title : title + " " + branch);
     QString strHigh;
     int pos = 0;
     for (size_t r = 0; r < res.GetHighlightRangesCount(); ++r)
@@ -152,8 +160,8 @@ void SearchPanel::OnSearchResults(uint64_t timestamp, search::Results results)
 
     int const rowCount = m_pTable->rowCount();
     m_pTable->insertRow(rowCount);
-    m_pTable->setCellWidget(rowCount, 1, new QLabel(strHigh));
-    m_pTable->setItem(rowCount, 2, CreateItem(res.GetAddress()));
+    m_pTable->setCellWidget(rowCount, kColName, new QLabel(strHigh));
+    m_pTable->setItem(rowCount, kColAddress, CreateItem(res.GetAddress()));
 
     bool showDistance = true;
     switch (res.GetResultType())
@@ -162,13 +170,13 @@ void SearchPanel::OnSearchResults(uint64_t timestamp, search::Results results)
     case search::Result::Type::PureSuggest: showDistance = false; break;
     case search::Result::Type::Feature:
     case search::Result::Type::Postcode:
-      m_pTable->setItem(rowCount, 0, CreateItem(res.GetLocalizedFeatureType()));
+      m_pTable->setItem(rowCount, kColType, CreateItem(res.GetLocalizedFeatureType()));
       break;
     case search::Result::Type::LatLon: m_pTable->setItem(rowCount, 0, CreateItem("LatLon")); break;
     }
 
     if (showDistance)
-      m_pTable->setItem(rowCount, 3, CreateItem(m_pDrawWidget->GetDistance(res)));
+      m_pTable->setItem(rowCount, kColDistance, CreateItem(m_pDrawWidget->GetDistance(res)));
   }
 
   GetFramework().FillSearchResultsMarks(true /* clear */, m_results);

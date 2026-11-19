@@ -23,6 +23,7 @@ class SurfaceRendererLegacy extends Renderer
     super(carContext, displayManager, locationHelper, lifecycleOwner);
     setSurfaceCallback(new SurfaceCallbackLegacy(mCarContext, mMap, mLocationHelper));
     mMap.setMapRenderingListener(getMapRenderingListener());
+    mMap.setCarNavigationView(true);
   }
 
   @Override
@@ -72,6 +73,7 @@ class SurfaceRendererLegacy extends Renderer
   {
     super.enable();
 
+    mMap.setCarNavigationView(true);
     mMap.onStart();
     mMap.setMapRenderingListener(getMapRenderingListener());
     mMap.updateMyPositionRoutingOffset(0);
@@ -82,6 +84,7 @@ class SurfaceRendererLegacy extends Renderer
   {
     super.disable();
 
+    mMap.setCarNavigationView(false);
     mMap.onPause();
     mMap.onSurfaceDestroyed(false);
     mMap.onStop();
@@ -90,6 +93,17 @@ class SurfaceRendererLegacy extends Renderer
 
   @Override
   public void setSpeedLimit(int speedLimit, boolean speedLimitExceeded)
+  {
+    // Not supported.
+  }
+  @Override
+  public void setCurrentSpeed(double speedMps)
+  {
+    // Not supported.
+  }
+
+  @Override
+  public void hideCurrentSpeed()
   {
     // Not supported.
   }

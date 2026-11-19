@@ -6,6 +6,8 @@
 #include "indexer/feature_visibility.hpp"
 #include "indexer/ftypes_matcher.hpp"
 #include "indexer/ftypes_subtypes.hpp"
+#include "indexer/reviews_display.hpp"
+#include "indexer/reviews_model.hpp"
 #include "indexer/scales.hpp"
 
 #include "platform/distance.hpp"
@@ -16,6 +18,7 @@
 #include "base/logging.hpp"
 #include "base/string_utils.hpp"
 
+#include <string>
 #include <utility>
 
 namespace feature
@@ -297,10 +300,21 @@ string FormatDrinkingWater(TypesHolder const & types)
 
 string FormatStars(uint8_t starsCount)
 {
+  if (starsCount == 0)
+    return "";
+  auto const starsCountStr = std::to_string(static_cast<int>(starsCount));
+  if (starsCount <= 5)
+    return localisation::TranslatedInterfaceText("stars_" + starsCountStr);
   std::string stars;
-  for (int i = 0; i < starsCount && i < kMaxStarsCount; ++i)
-    stars.append(kStarSymbol);
+  stars.append(starsCountStr).append(kStarSymbol);
   return stars;
+}
+
+string FormatRating(reviews::Rating rating)
+{
+  std::string result;
+  result.append(strings::to_string_dac(reviews::ToStarRating(rating), 1)).append(kStarSymbol);
+  return result;
 }
 
 string FormatElevation(string_view elevation)
@@ -366,6 +380,19 @@ YesNoUnknown YesNoUnknownFromString(std::string_view str)
     return No;
   else
     return YesNoUnknown::Unknown;
+}
+
+TitleAndBranch SplitTitleAndBranch(string const & title, string_view branch)
+{
+  if (title.empty() || branch.empty())
+    return {title, {}};
+  if (!title.ends_with(branch))
+    return {title, string(branch)};
+
+  size_t const pos = title.size() - branch.size();
+  if (pos > 1 && title[pos - 1] == ' ')
+    return {title.substr(0, pos - 1), string(branch)};
+  return {title, {}};
 }
 
 }  // namespace feature

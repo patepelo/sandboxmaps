@@ -20,6 +20,7 @@
  5.5 Others
 6.SHOP
  6.1 Craft
+ 6.2 Club
 7.CAR
  7.1 Parking
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,6 +35,7 @@ node|z18-[tourism],
 node|z20-[office],
 node|z19-[craft],
 node|z19-[amenity],
+node|z19-[club],
 {text: name; text-color: @poi_label; text-offset: 1;}
 
 node|z19-[amenity],
@@ -44,6 +46,9 @@ node|z20-[office],
 
 node|z19-[craft],
 {icon-image: craft-m.svg;}
+
+node|z19-[club],
+{icon-image: club-m.svg;}
 
 node|z19-[shop],
 {icon-min-distance: 10;}
@@ -411,7 +416,7 @@ node|z17-[seamark:type=buoy_cardinal][seamark:buoy_cardinal:category=east][seama
 {icon-image: buoy-spherical-cardinal-east-m.svg;}
 node|z17-[seamark:type=buoy_cardinal][seamark:buoy_cardinal:category=west][seamark:buoy_cardinal:shape=spherical],
 {icon-image: buoy-spherical-cardinal-west-m.svg;}
-node|z17-[seamark:type=buoy_cardinal][seamark:buoy_cardinal:category=south[seamark:buoy_cardinal:shape=spherical],
+node|z17-[seamark:type=buoy_cardinal][seamark:buoy_cardinal:category=south][seamark:buoy_cardinal:shape=spherical],
 {icon-image: buoy-spherical-cardinal-south-m.svg;}
 node|z17-[seamark:type=buoy_cardinal][seamark:buoy_cardinal:category=north][seamark:buoy_cardinal:shape=spherical],
 {icon-image: buoy-spherical-cardinal-north-m.svg;}
@@ -421,95 +426,131 @@ node|z17-[seamark:type=buoy_safe_water][seamark:buoy_safe_water:shape=spherical]
 {icon-image: buoy-spherical-safe_water-m.svg;}
 
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=lattice],
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=pile],
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=buoyant],
+*/
 {icon-image: beacon-lateral-port-s.svg;}
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=lattice],
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=pile],
 node|z16[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=buoyant],
+*/
 {icon-image: beacon-lateral-starboard-s.svg;}
 node|z16[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=lattice],
 node|z16[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=pile],
 node|z16[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=buoyant],
+*/
 {icon-image: beacon-isolated_danger-s.svg;}
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=lattice],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=pile],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-east-s.svg;}
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=lattice],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=pile],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-west-s.svg;}
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=lattice],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=pile],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-south-s.svg;}
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=lattice],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=pile],
 node|z16[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-north-s.svg;}
 node|z16[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=lattice],
 node|z16[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=pile],
 node|z16[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=buoyant],
+*/
 {icon-image: beacon-special_purpose-s.svg;}
 node|z16[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z16[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=lattice],
 node|z16[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=pile],
 node|z16[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=buoyant],
+*/
 {icon-image: beacon-safe_water-s.svg;}
 
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=lattice],
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=pile],
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=port][seamark:beacon_lateral:shape=buoyant],
+*/
 {icon-image: beacon-lateral-port-m.svg;}
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=lattice],
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=pile],
 node|z17-[seamark:type=beacon_lateral][seamark:beacon_lateral:category=starboard][seamark:beacon_lateral:shape=buoyant],
+*/
 {icon-image: beacon-lateral-starboard-m.svg;}
 node|z17-[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=lattice],
 node|z17-[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=pile],
 node|z17-[seamark:type=beacon_isolated_danger][seamark:beacon_isolated_danger:shape=buoyant],
+*/
 {icon-image: beacon-isolated_danger-m.svg;}
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=lattice],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=pile],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=east][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-east-m.svg;}
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=lattice],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=pile],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=west][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-west-m.svg;}
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=lattice],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=pile],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=south][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-south-m.svg;}
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=lattice],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=pile],
 node|z17-[seamark:type=beacon_cardinal][seamark:beacon_cardinal:category=north][seamark:beacon_cardinal:shape=buoyant],
+*/
 {icon-image: beacon-cardinal-north-m.svg;}
 node|z17-[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=lattice],
 node|z17-[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=pile],
 node|z17-[seamark:type=beacon_special_purpose][seamark:beacon_special_purpose:shape=buoyant],
+*/
 {icon-image: beacon-special_purpose-m.svg;}
 node|z17-[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=tower],
+/* TODO AFTER Kothic migration : no match with .csv
 node|z17-[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=lattice],
 node|z17-[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=pile],
 node|z17-[seamark:type=beacon_safe_water][seamark:beacon_safe_water:shape=buoyant],
+*/
 {icon-image: beacon-safe_water-m.svg;}
 
 
@@ -587,7 +628,9 @@ node|z17-[historic=wreck],
 node|z18-[historic=locomotive],
 node|z18-[historic=boundary_stone],
 node|z18-[historic=wayside_cross],
+/* TODO AFTER Kothic migration: no match with .csv
 node|z16-[historic=cross],
+*/
 node|z18-[man_made=cross],
 node|z18-[historic=tomb],
 node|z16-[tourism=aquarium],
@@ -636,6 +679,7 @@ node|z17-[historic=castle][castle_type=shiro],
 node|z17-[historic=fort]
 {icon-image: castle-m.svg;}
 
+/* TODO AFTER Kothic migratin: rework
 node|z17-17[historic=ruins][castle_type=castrum],
 node|z17-17[historic=ruins][castle_type=defensive],
 node|z17-17[historic=ruins][castle_type=fortified_church],
@@ -651,6 +695,10 @@ node|z17-[historic=ruins][castle_type=fortress],
 node|z17-[historic=ruins][castle_type=hillfort],
 node|z17-[historic=ruins][castle_type=kremlin],
 node|z17-[historic=ruins][castle_type=shiro],
+node|z17-[historic=ruins][name],
+{icon-image: remains-m.svg;}
+*/
+
 node|z17-[historic=ruins][name],
 {icon-image: remains-m.svg;}
 
@@ -996,13 +1044,17 @@ node|z16-[barrier=toll_booth],
 node|z20-[barrier=turnstile],
 node|z20-[barrier=wicket_gate],
 node|z18-[barrier=cycle_barrier],
+node|z20-[barrier=bus_trap],
+node|z20-[barrier=sump_buster],
 node|z18-[amenity=nightclub],
+node|z18-[amenity=music_venue],
 node|z15-[amenity=townhall],
 node|z18-[amenity=bank],
 node|z19-[amenity=taxi],
 node|z19-[leisure=dog_park],
 node|z18-[man_made=windmill],
 node|z18-[amenity=college],
+node|z18-[amenity=research_institute],
 node|z16-[amenity=conference_centre],
 node|z18-[amenity=events_venue],
 node|z16-[amenity=exhibition_centre],
@@ -1054,7 +1106,9 @@ node|z20-[amenity=vending_machine][vending=parking_tickets],
 node|z20-[amenity=vending_machine][vending=public_transport_tickets],
 node|z20-[amenity=payment_terminal],
 node|z19-[amenity=shower],
+/* TODO AFTER Kothic migration: rework
 node|z19-[amenity=slipway],
+*/
 node|z19-[amenity=motorcycle_rental],
 node|z19-[amenity=bicycle_rental],
 node|z19-[amenity=bicycle_repair_station],
@@ -1067,6 +1121,7 @@ node|z19-[amenity=parcel_locker],
 node|z18-[amenity=public_bath],
 node|z19-[aeroway=gate],
 node|z18-[sport],
+node|z18-[amenity=tool_library],
 node|z18-[leisure=sports_centre],
 node|z18-[leisure=sports_centre][sport=american_football],
 node|z18-[leisure=sports_centre][sport=basketball],
@@ -1161,6 +1216,7 @@ node|z19-[man_made=cairn],
 node|z18-[tourism],
 node|z18-[office],
 node|z18-[craft],
+node|z19-[club],
 {font-size: 11;}
 
 /* 5.1 Hospital */
@@ -1272,6 +1328,10 @@ node|z15-[amenity=university][!name]
 node|z17-[amenity=college],
 {icon-image: college-m.svg;}
 node|z18-[amenity=college],
+{font-size: 11;}
+node|z18-[amenity=research_institute],
+{icon-image: research_institute-m.svg;}
+node|z18-[amenity=research_institute],
 {font-size: 11;}
 node|z18-[amenity=kindergarten],
 {icon-image: kindergarten-m.svg;}
@@ -1527,6 +1587,9 @@ node|z16-[amenity=place_of_worship][religion=christian][denomination=jehovahs_wi
 node|z18-[amenity=nightclub],
 {icon-image: nightclub-m.svg;font-size: 11;}
 
+node|z16-[amenity=music_venue],
+{icon-image: music_venue-m.svg;font-size: 11;}
+
 node|z18-[amenity=love_hotel],
 node|z18-[amenity=brothel],
 node|z18-[amenity=stripclub],
@@ -1574,6 +1637,8 @@ node|z15-[barrier=border_control],
 
 node|z20-[barrier=block],
 node|z20-[barrier=bollard],
+node|z20-[barrier=bus_trap],
+node|z20-[barrier=sump_buster],
 node|z19-[barrier=yes],
 node|z19-[barrier=chain],
 node|z19-[barrier=stile],
@@ -1788,11 +1853,13 @@ node|z19-[amenity=recycling][recycling_type=centre],
 {icon-image: recycling-centre-m.svg;}
 
 node|z18-[power=plant],
-/* Skip individual solar generators, because there are a lot of mapped panels */
-node|z18-[power=generator][generator:source!=solar],
+node|z18-[power=generator],
 node|z18-[power=substation],
 {icon-image: power-m.svg;font-size: 11;}
 
+/* No icons for individual point-mapped solar generators (too many of them) */
+node|z17-[power=generator][generator:source=solar],
+{icon-image: none;}
 
 node|z18-[power=generator][generator:source=wind],
 {icon-image: dot-m.svg;}
@@ -1867,6 +1934,9 @@ node|z18[amenity=toilets][access=private],
 {icon-image: none; text: none;}
 node|z19-[amenity=toilets][access=private],
 {icon-image: toilets_private-m.svg;}
+
+node|z18-[amenity=tool_library],
+{icon-image: doityourself-m.svg; font-size: 11;}
 
 node|z20-[amenity=bench],
 {icon-image: bench.svg;}
@@ -1966,6 +2036,7 @@ node|z19-[shop=chemist],
 node|z19-[shop=clothes],
 node|z19-[shop=computer],
 node|z19-[shop=video_games],
+node|z19-[shop=games],
 node|z19-[shop=tattoo],
 node|z19-[shop=erotic],
 node|z19-[shop=confectionery],
@@ -2012,6 +2083,7 @@ node|z19-[shop=seafood],
 node|z19-[shop=shoes],
 node|z19-[shop=sports],
 node|z19-[shop=ticket],
+node|z19-[shop=tool_hire],
 node|z19-[shop=toys],
 node|z19-[shop=stationery],
 node|z19-[shop=agrarian],
@@ -2024,6 +2096,7 @@ node|z19-[shop=auction],
 node|z19-[shop=bookmaker],
 node|z19-[shop=fabric],
 node|z19-[shop=funeral_directors],
+node|z19-[shop=swimming_pool],
 node|z19-[shop=collector],
 node|z19-[shop=wholesale],
 node|z19-[shop=tobacco],
@@ -2105,8 +2178,10 @@ node|z19[shop=computer],
 {icon-image: computer-m.svg;}
 node|z19[shop=video_games],
 {icon-image: video-games-m.svg;}
+node|z19[shop=games],
+{icon-image: games-m.svg;}
 node|z19[shop=tattoo],
-{icon-image: craft-m.svg;}
+{icon-image: tattoo-m.svg;}
 node|z19[shop=erotic],
 {icon-image: erotic-m.svg;}
 node|z19[shop=confectionery],
@@ -2188,6 +2263,8 @@ node|z19[shop=sports],
 {icon-image: sports-m.svg;}
 node|z19[shop=ticket],
 {icon-image: ticket-shop-m.svg;}
+node|z19[shop=tool_hire],
+{icon-image: doityourself-m.svg;}
 node|z19[shop=toys],
 {icon-image: toys-m.svg;}
 node|z19[shop=stationery],
@@ -2196,6 +2273,8 @@ node|z19[shop=rental],
 {icon-image: rental-m.svg;}
 node|z19[shop=rental][rental=bike],
 {icon-image: shop-rental-bicycle-m.svg;}
+node|z18-[shop=storage_rental],
+{icon-image: rental-m.svg;}
 
 node|z19-[shop=agrarian],
 node|z19-[shop=trade],
@@ -2256,8 +2335,10 @@ node|z19-[shop=computer],
 {icon-image: computer-m.svg;icon-min-distance: 24;}
 node|z19-[shop=video_games],
 {icon-image: video-games-m.svg;icon-min-distance: 24;}
+node|z19-[shop=games],
+{icon-image: games-m.svg;icon-min-distance: 24;}
 node|z19-[shop=tattoo],
-{icon-image: craft-m.svg;icon-min-distance: 24;}
+{icon-image: tattoo-m.svg;icon-min-distance: 24;}
 node|z19-[shop=erotic],
 {icon-image: erotic-m.svg;icon-min-distance: 24;}
 node|z19-[shop=confectionery],
@@ -2337,6 +2418,8 @@ node|z19-[shop=sports],
 {icon-image: sports-m.svg;icon-min-distance: 24;}
 node|z19-[shop=ticket],
 {icon-image: ticket-shop-m.svg;icon-min-distance: 24;}
+node|z19-[shop=tool_hire],
+{icon-image: doityourself-m.svg;icon-min-distance: 24;}
 node|z19-[shop=toys],
 {icon-image: toys-m.svg;icon-min-distance: 24;}
 node|z19-[shop=stationery],
@@ -2365,6 +2448,8 @@ node|z19-[shop=fabric],
 {icon-image: shop-m.svg;}
 node|z19-[shop=funeral_directors],
 {icon-image: funeral_directors-m.svg;}
+node|z19-[shop=swimming_pool],
+{icon-image: shop-m.svg;}
 node|z19-[shop=bookmaker],
 {icon-image: lottery-m.svg;}
 node|z19-[shop=wholesale],
@@ -2419,6 +2504,15 @@ node|z19-[craft=metal_construction],
 node|z19-[craft=winery],
 {icon-image:winery-m.svg;}
 
+/* 6.2 CLUB */
+
+node|z18-[club=social],
+node|z18-[club=freemasonry],
+node|z18-[club=allotments],
+node|z18-[club=hunting],
+node|z18-[club=surf_life_saving],
+{icon-image: club-m.svg;font-size: 11;}
+
 /* 7. CAR */
 
 area|z14-[highway=services],
@@ -2426,9 +2520,11 @@ area|z15-[highway=rest_area],
 {text-position: center;}
 
 node|z18-[amenity=fuel],
+/* TODO AFTER Kothic migration : rework those lines that were silenty ignored by Kothic2025
 node|z19-[amenity=charging_station][motorcar?][!capacity],
 node|z19-[amenity=charging_station][motorcar?][capacity=1],
 node|z19-[amenity=charging_station][motorcar?][capacity=2],
+*/
 node|z19-[amenity=charging_station][motorcar?][capacity?],
 area|z18-[highway=services],
 area|z18-[highway=rest_area],
@@ -2470,6 +2566,7 @@ node|z19[amenity=charging_station][motorcar?][capacity?],
 node|z19-[amenity=charging_station][motorcar?][capacity?],
 {icon-image: charging_station-m.svg;}
 
+/* TODO AFTER Kothic migration. Those rules did not work for Kothic2025
 node|z19[amenity=charging_station][motorcar?][!capacity],
 node|z19[amenity=charging_station][motorcar?][capacity=1],
 node|z19[amenity=charging_station][motorcar?][capacity=2],
@@ -2478,6 +2575,7 @@ node|z19-[amenity=charging_station][motorcar?][!capacity],
 node|z19-[amenity=charging_station][motorcar?][capacity=1],
 node|z19-[amenity=charging_station][motorcar?][capacity=2],
 {icon-image: charging_station-small-m.svg;}
+*/
 
 node|z19[amenity=charging_station][motorcar?],
 {text-offset: 1;font-size: 10;icon-min-distance: 20;}

@@ -541,6 +541,7 @@ railway-subway-bridge::bridgeblack                  # line::bridgeblack z16- (al
 === 130
 
 building                                            # area z17- (also has caption z17-)
+building-abandoned                                  # area z17- (also has caption z17-)
 building-garage                                     # area z17- (also has caption z17-)
 building-guardhouse                                 # area z17- (also has icon z18-, caption(optional) z18-)
 building-has_parts                                  # area z17- (also has caption z17-)
@@ -597,6 +598,7 @@ man_made-pier                                       # line z14- and area z12- (a
 waterway-dam                                        # line z14- and area z14- (also has pathtext z15-)
 === 30
 
+boundary-hazard                                     # area z12- (also has icon z16-, caption(optional) z16-)
 landuse-military                                    # area z12- (also has icon z16-, caption(optional) z17-)
 landuse-military-danger_area                        # area z10- (also has icon z16-, caption(optional) z17-)
 === 25

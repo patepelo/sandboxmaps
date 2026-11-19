@@ -1,9 +1,9 @@
-• Visualizza i nomi dei preferiti sulla mappa (disattivabile)
-• Visualizza le recensioni degli utenti Mangrove nella pagina info dei POI
-• Dimensione del carattere della mappa personalizzata
-• Consenti agli utenti TalkBack di leggere la mappa
-• Possibilità di avviare la registrazione della traccia dopo l'inizio della navigazione
-• Mostra "Apre domani alle..." nelle info dei POI
-• Corretta la possibilità di cercare nella lingua impostata dall'utente
+• Migliorato il contrasto in modalità scura: testo e strade più leggibili
+• Aggiunte zone pericolose
+• Distinzione tra opzioni vegetariane e solo vegetariane
+• Rimossa l’indicazione «prosegui dritto» quando si attraversano strade principali
+• Aggiunta modalità anteprima del percorso (cliccando una tratta durante la pianificazione)
+• Interfaccia di Android Auto migliorata
+• Aggiunti i nomi delle filiali nei POI, info di seconda mano, locali di musica...
 
 Maggiori dettagli su comaps.app/latest

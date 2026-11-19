@@ -1,10 +1,9 @@
-• Anzeige von Favoriten-Namen auf der Karte (Ausschalten in Einstellungen)
-• Anzeige von Mangrove Nutzerbewertungen bei POIs
-• Einstellung zum Anpassen der Kartenschriftgröße
-• Karte vorlesen für TalkBack Nutzer
-• Option Tracks aufzunehmen während der Navigation
-• Anzeige "Öffnet morgen um ..." bei POIs
-• Fehler zur Suche in benutzerdefinierter Kartensprache behoben
-• Straßenschilder für Kirgisistan, Usbekistan, Tadschikistan, Kasachstan und Georgien
+• Verbesserter Darkmode:  Text und Straßen sind besser erkennbar
+• Gefahrenzonen wurden hinzugefügt
+• Unterscheidung zwischen Option für Vegetarier und nur vegitarisch
+• Es wird nicht mehr "gerade ausgehen" beim Überqueren großer Kreuzungen gesagt
+• Vorschau für Routen hinzugefügt
+• Verbesserte Android Auto Oberflächlich und Wechsel zwischen Auto/Smartphone
+• Markennamen von POIs and Secondhand Informationen, Konzertlocation, Kantine und mehr hinzugefügt
 
 Weitere Details unter comaps.app/latest

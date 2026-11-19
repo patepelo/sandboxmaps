@@ -6,6 +6,7 @@
   3.1 Countries
   3.2 Region
   3.3 Military
+  3.4 Hazard
 4.VEGETATION
 5.BEACH, GLACIER, DESERT, etc.
 6.WATER
@@ -280,6 +281,9 @@ area|z10-[landuse=military][military=danger_area],
 area|z12-[landuse=military]
 {fill-opacity: 0.5; fill-color: @military;}
 
+area|z12-[boundary=hazard]
+{fill-opacity: 1.0; fill-color: @hazard;}
+
 area|z12-[amenity=prison]
 {fill-opacity: 0.5; fill-color: @prison;}
 /* End of hardcoded */
@@ -339,7 +343,7 @@ line|z13-[natural=strait],
 
 /* 6.1 Area water(lake,pond etc.) */
 
-area|z0-[natural=water][!tunnel],
+area|z0-[natural=water],
 area|z0-[landuse=salt_pond],
 area|z0-[waterway=dock],
 area|z12-[landuse=basin],
@@ -349,6 +353,7 @@ area|z15-[natural=water][tunnel],
 area|z16-[amenity=fountain],
 {fill-color: @water;}
 
+area|z0-14[natural=water][tunnel],
 area|z0-[natural=water][water=ditch],
 area|z0-[natural=water][water=drain],
 area|z0-[natural=water][water=wastewater],
@@ -517,7 +522,6 @@ area|z15-[amenity=university],
 
 area|z14-[leisure=miniature_golf],
 area|z15-[leisure=pitch],
-area|z15-[leisure=track][area?],
 area|z15-[leisure=fitness_station],
 {fill-color: @sport2; fill-opacity: 1;}
 

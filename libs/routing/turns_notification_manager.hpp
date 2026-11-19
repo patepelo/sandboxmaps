@@ -15,6 +15,11 @@ namespace turns
 {
 namespace sound
 {
+// If the distance between two sequential turns is less than kSecondTurnThresholdDistM
+// the information about the second turn will be shown or pronounced
+// when the user is approaching to the first one with "Then,".
+double constexpr kSecondTurnThresholdDistM = 400.0;
+
 /// \brief The PronouncedNotification enum represents which sound notifications
 /// for turns were heard.
 enum class PronouncedNotification
@@ -103,6 +108,9 @@ public:
   /// So it works when the class enable and disable.
   CarDirection GetSecondTurnNotification() const { return m_secondTurnNotification; }
 
+  uint32_t GetFirstNotificationDistM() const;
+  uint32_t GetSecondNotificationDistM() const;
+
 private:
   std::string GenerateTurnText(uint32_t distanceUnits, uint8_t exitNum, bool useThenInsteadOfDistance,
                                TurnItem const & turn, RouteSegment::RoadNameInfo const & nextStreetInfo,
@@ -111,6 +119,17 @@ private:
   /// Generates turn sound notification for the nearest to the current position turn.
   std::string GenerateFirstTurnSound(TurnItem const & turn, double distanceToTurnMeters,
                                      RouteSegment::RoadNameInfo const & nextStreetInfo);
+
+  /// Generates the notification about turns[followingIdx] as it is chained after the notification
+  /// about turns[followingIdx - 1] ("Then. Turn right."). A roundabout entrance+exit pair is
+  /// announced as "Then. At the roundabout. Take the Xth exit."
+  /// \param useThenPrefix false emits the instruction on its own, without "Then". It is
+  /// used when there is no notification about the preceding turn to chain it to.
+  /// @return an empty string when the turn is too far after the preceding one to be chained
+  
+  std::string GenerateFollowingTurnSound(std::vector<TurnItemDist> const & turns, size_t followingIdx,
+                                         RouteSegment::RoadNameInfo const & nextStreetInfo,
+                                         bool useThenPrefix) const;
 
   /// Generates a combined "In X meters, at the roundabout, take the Nth exit [onto Street]"
   /// notification when the upcoming turn pair is a classic roundabout entrance+exit.

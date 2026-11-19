@@ -138,6 +138,15 @@ public abstract class Renderer implements DefaultLifecycleObserver
 
   public void hideSpeedLimit()
   {
-    setSpeedLimit(0, false);
+    setSpeedLimit(-1, false);
   }
+
+  /**
+   * Updates the current speed view.
+   *
+   * @param speedMps The current speed in m/s.
+   */
+  public abstract void setCurrentSpeed(double speedMps);
+
+  public abstract void hideCurrentSpeed();
 }

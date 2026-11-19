@@ -15,6 +15,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.TypefaceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ import app.organicmaps.util.bottomsheet.MenuBottomSheetFragment;
 import app.organicmaps.util.bottomsheet.MenuBottomSheetItem;
 import app.organicmaps.widget.ArrowView;
 import app.organicmaps.widget.StarRatingView;
+import app.organicmaps.widget.placepage.sections.PlacePageAddReviewFragment;
 import app.organicmaps.widget.placepage.sections.PlacePageBookmarkFragment;
 import app.organicmaps.widget.placepage.sections.PlacePageChargeSocketsFragment;
 import app.organicmaps.widget.placepage.sections.PlacePageLinksFragment;
@@ -104,6 +106,7 @@ public class PlacePageView extends Fragment
 
 {
   private static final String PREF_COORDINATES_FORMAT = "coordinates_format";
+  private static final String ADD_REVIEW_FRAGMENT_TAG = "ADD_REVIEW_FRAGMENT_TAG";
   private static final String BOOKMARK_FRAGMENT_TAG = "BOOKMARK_FRAGMENT_TAG";
   private static final String TRACK_FRAGMENT_TAG = "TRACK_FRAGMENT_TAG";
   private static final String WIKIPEDIA_FRAGMENT_TAG = "WIKIPEDIA_FRAGMENT_TAG";
@@ -167,6 +170,8 @@ public class PlacePageView extends Fragment
   private MaterialTextView mTvCuisine;
   private View mOrganic;
   private MaterialTextView mTvOrganic;
+  private View mSecondHand;
+  private MaterialTextView mTvSecondHand;
   private View mOutdoorSeating;
   private MaterialTextView mTvOutdoorSeating;
   private View mEntrance;
@@ -361,6 +366,8 @@ public class PlacePageView extends Fragment
     mTvCuisine = mFrame.findViewById(R.id.tv__place_cuisine);
     mOrganic = mFrame.findViewById(R.id.ll__place_organic);
     mTvOrganic = mFrame.findViewById(R.id.tv__place_organic);
+    mSecondHand = mFrame.findViewById(R.id.ll__place_second_hand);
+    mTvSecondHand = mFrame.findViewById(R.id.tv__place_second_hand);
     mEntrance = mFrame.findViewById(R.id.ll__place_entrance);
     mTvEntrance = mEntrance.findViewById(R.id.tv__place_entrance);
     mTvLastChecked = mFrame.findViewById(R.id.place_page_last_checked);
@@ -396,7 +403,7 @@ public class PlacePageView extends Fragment
     ArrayList<Review> reviews = mMapObject.getReviews();
     if (!reviews.isEmpty())
     {
-      ReviewListActivity.start(requireContext(), mMapObject.getTitle(), reviews);
+      ReviewListActivity.start(requireContext(), mMapObject.getTitle(), reviews, mMapObject.getReviewEditorAppName(), mMapObject.getFeatureId());
     }
   }
 
@@ -501,6 +508,12 @@ public class PlacePageView extends Fragment
                        mMapObject.isTrack());
   }
 
+  private void updateAddReviewView()
+  {
+    updateViewFragment(PlacePageAddReviewFragment.class, ADD_REVIEW_FRAGMENT_TAG, R.id.place_page_add_review_fragment,
+        true /* the fragment manages visibility on its own */);
+  }
+
   private boolean hasWikipediaEntry()
   {
     final String wikipediaLink = mMapObject.getMetadata(Metadata.MetadataType.FMD_WIKIPEDIA);
@@ -514,27 +527,20 @@ public class PlacePageView extends Fragment
                        hasWikipediaEntry());
   }
 
-  private void setTextAndColorizeSubtitle()
-  {
-    String text = mMapObject.getSubtitle();
-    UiUtils.setTextAndHideIfEmpty(mTvSubtitle, text);
-    if (!TextUtils.isEmpty(text))
-    {
-      SpannableStringBuilder sb = new SpannableStringBuilder(text);
-      int start = text.indexOf("★");
-      int end = text.lastIndexOf("★") + 1;
-      if (start > -1)
-      {
-        sb.setSpan(new ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.base_yellow)), start, end,
-                   Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-      }
-      mTvSubtitle.setText(sb);
-    }
-  }
-
   private void refreshPreview()
   {
-    UiUtils.setTextAndHideIfEmpty(mTvTitle, mMapObject.getTitle());
+    final String branch = mMapObject.getBranch();
+    if (!branch.isEmpty())
+    {
+      final SpannableStringBuilder title = new SpannableStringBuilder(mMapObject.getTitleWithoutBranch()).append(' ');
+      final int branchStart = title.length();
+      title.append(branch);
+      title.setSpan(new TypefaceSpan(getString(R.string.robotoRegular)), branchStart, title.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+      UiUtils.setTextAndHideIfEmpty(mTvTitle, title);
+    }
+    else
+      UiUtils.setTextAndHideIfEmpty(mTvTitle, mMapObject.getTitle());
 
     if (mMapObject.getStarRating() != null)
     {
@@ -551,7 +557,7 @@ public class PlacePageView extends Fragment
 
     if (mToolbar != null)
       mToolbar.setTitle(mMapObject.getTitle());
-    setTextAndColorizeSubtitle();
+    UiUtils.setTextAndHideIfEmpty(mTvSubtitle, mMapObject.getSubtitle());
     UiUtils.setTextAndHideIfEmpty(mTvAddress, mMapObject.getAddress());
 
     refreshCategoryPreview();
@@ -733,6 +739,8 @@ public class PlacePageView extends Fragment
     refreshMetadataOrHide(Framework.nativeGetActiveObjectFormattedCuisine(), mCuisine, mTvCuisine);
     final String organic = getLocalizedFeatureType(getContext(), mMapObject.getOrganic());
     refreshMetadataOrHide(organic, mOrganic, mTvOrganic);
+    final String secondHand = getLocalizedFeatureType(getContext(), mMapObject.getSecondHand());
+    refreshMetadataOrHide(secondHand, mSecondHand, mTvSecondHand);
     refreshWiFi();
     refreshMetadataOrHide(mMapObject.getMetadata(Metadata.MetadataType.FMD_FLATS), mEntrance, mTvEntrance);
     final String level = Utils.getLocalizedLevel(getContext(), mMapObject.getMetadata(Metadata.MetadataType.FMD_LEVEL));
@@ -904,6 +912,7 @@ public class PlacePageView extends Fragment
     updateChargeSocketsView();
     updatePhoneView();
     updateTrackView();
+    updateAddReviewView();
   }
 
   private void refreshWiFi()

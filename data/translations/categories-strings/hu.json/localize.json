@@ -3,7 +3,7 @@
         "defaultMessage": "Hol lehet enni valamit|Étkezés|Étterem|Étel|Kaja"
     },
     "@category_food": {
-        "defaultMessage": "Élelmiszer|Ennivaló|Üzlet"
+        "defaultMessage": "Élelmiszerek|Élelmiszer|Ennivaló|Üzlet"
     },
     "@category_transport": {
         "defaultMessage": "Közlekedés|Tömegközlekedés"
@@ -1478,7 +1478,7 @@
     "@cuisine_all_vegetarian": {
         "defaultMessage": "Vegetáriánus konyha"
     },
-    "cuisine-vegan|@cuisine_all_vegetarian": {
+    "cuisine-vegan|cuisine-vegan_only|@cuisine_all_vegetarian": {
         "defaultMessage": "Vegán konyha"
     }
 }

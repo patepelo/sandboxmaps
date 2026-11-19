@@ -272,6 +272,7 @@ UNIT_TEST(XMLFeature_FromOSM)
   TEST_EQUAL(node.GetAttribute("id"), "4", ());
   TEST_EQUAL(node.GetTagValue("test"), "value", ());
   TEST_EQUAL(features[2].GetTagValue("hi"), "test", ());
+  TEST_EQUAL(features[2].GetOSMIdString(), "3", ());
 }
 
 UNIT_TEST(XMLFeature_FromXmlNode)
@@ -287,10 +288,10 @@ UNIT_TEST(XMLFeature_FromXmlNode)
   pugi::xml_document doc;
   doc.load_string(kTestNode);
   XMLFeature const feature(doc.child("osm").child("node"));
-  TEST_EQUAL(feature.GetAttribute("id"), "4", ());
+  TEST_EQUAL(feature.GetOSMIdString(), "4", ());
   TEST_EQUAL(feature.GetTagValue("amenity"), "fountain", ());
   XMLFeature const copy(feature);
-  TEST_EQUAL(copy.GetAttribute("id"), "4", ());
+  TEST_EQUAL(copy.GetOSMIdString(), "4", ());
   TEST_EQUAL(copy.GetTagValue("amenity"), "fountain", ());
 }
 
@@ -465,6 +466,22 @@ UNIT_TEST(XMLFeature_Diet)
 
   ft.SetCuisine("vegan");
   TEST_EQUAL(ft.GetCuisine(), "vegan", ());
+
+  ft.SetCuisine("vegan_only;pasta;vegetarian");
+  TEST_EQUAL(ft.GetTagValue("diet:vegan"), "only", ());
+  TEST_EQUAL(ft.GetTagValue("diet:vegetarian"), "yes", ());
+  TEST_EQUAL(ft.GetTagValue("cuisine"), "pasta", ());
+  TEST_EQUAL(ft.GetCuisine(), "pasta;vegan_only;vegetarian", ());
+
+  ft.SetCuisine("vegetarian_only");
+  TEST_EQUAL(ft.GetTagValue("diet:vegetarian"), "only", ());
+  TEST(!ft.HasTag("diet:vegan"), ());
+  TEST(!ft.HasTag("cuisine"), ());
+  TEST_EQUAL(ft.GetCuisine(), "vegetarian_only", ());
+
+  ft.SetCuisine("vegetarian;vegetarian_only");
+  TEST_EQUAL(ft.GetTagValue("diet:vegetarian"), "only", ());
+  TEST_EQUAL(ft.GetCuisine(), "vegetarian_only", ());
 
   ft.SetCuisine("");
   TEST_EQUAL(ft.GetCuisine(), "", ());

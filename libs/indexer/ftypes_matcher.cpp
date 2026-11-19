@@ -66,7 +66,47 @@ public:
     m_map[c.GetTypeByPath({"highway", "steps"})] = HighwayClass::Pedestrian;
     m_map[c.GetTypeByPath({"highway", "cycleway"})] = HighwayClass::Pedestrian;
     m_map[c.GetTypeByPath({"highway", "path"})] = HighwayClass::Pedestrian;
+
+    /*
+     * Inherited from OM.
+     * Prior to #4200, there were no construction subtypes, `highway-construction` was used for everything
+     * under construction. OM originally treated construction segments as footways, so they could still
+     * be used in pedestrian routing. This changed various times, see
+     * https://github.com/organicmaps/organicmaps/issues/3929 and CoMaps PR #4200.
+     * As of #4200, this mapping would now only be used for construction types that do not belong to
+     * any of the subtypes – that is, feature with `highway=construction` but no `construction=*` tag,
+     * or an unsupported value in that tag. Most of these are expected to be new constructions (as
+     * opposed to existing roads undergoing reconstruction) with no indication of the type of road
+     * being constructed, roads that were never intended for general motorized traffic, or the lowest
+     * tiers of the road network (driveways or parking aisles).
+     * Note that `HighwayClass` is used only for route weight and rendering; whether a particular feature
+     * can be used for routing at all is determined by its types (`highway-*` and `hwtag-*`, which are
+     * derived from the `highway=*` and access tags in OSM).
+     */
     m_map[c.GetTypeByPath({"highway", "construction"})] = HighwayClass::Pedestrian;
+
+    // Construction types, so traffic decoder can treat them like the corresponding highway types
+    m_map[c.GetTypeByPath({"highway", "construction", "motorway"})] = HighwayClass::Motorway;
+    m_map[c.GetTypeByPath({"highway", "construction", "motorway_link"})] = HighwayClass::Motorway;
+    m_map[c.GetTypeByPath({"highway", "construction", "trunk"})] = HighwayClass::Trunk;
+    m_map[c.GetTypeByPath({"highway", "construction", "trunk_link"})] = HighwayClass::Trunk;
+
+    m_map[c.GetTypeByPath({"highway", "construction", "primary"})] = HighwayClass::Primary;
+    m_map[c.GetTypeByPath({"highway", "construction", "primary_link"})] = HighwayClass::Primary;
+
+    m_map[c.GetTypeByPath({"highway", "construction", "secondary"})] = HighwayClass::Secondary;
+    m_map[c.GetTypeByPath({"highway", "construction", "secondary_link"})] = HighwayClass::Secondary;
+
+    m_map[c.GetTypeByPath({"highway", "construction", "tertiary"})] = HighwayClass::Tertiary;
+    m_map[c.GetTypeByPath({"highway", "construction", "tertiary_link"})] = HighwayClass::Tertiary;
+
+    m_map[c.GetTypeByPath({"highway", "construction", "unclassified"})] = HighwayClass::LivingStreet;
+    m_map[c.GetTypeByPath({"highway", "construction", "residential"})] = HighwayClass::LivingStreet;
+    m_map[c.GetTypeByPath({"highway", "construction", "living_street"})] = HighwayClass::LivingStreet;
+    m_map[c.GetTypeByPath({"highway", "construction", "road"})] = HighwayClass::LivingStreet;
+
+    m_map[c.GetTypeByPath({"highway", "construction", "service"})] = HighwayClass::Service;
+    m_map[c.GetTypeByPath({"highway", "construction", "track"})] = HighwayClass::Service;
   }
 
   HighwayClass Get(uint32_t t) const
@@ -189,6 +229,7 @@ IsNeverMainTypeChecker::IsNeverMainTypeChecker()
   m_types.push_back(c.GetTypeByPath({"organic"}));
   m_types.push_back(c.GetTypeByPath({"wheelchair"}));
   m_types.push_back(c.GetTypeByPath({"building", "has_parts"}));
+  m_types.push_back(c.GetTypeByPath({"second_hand"}));
   for (auto const subtype : ftypes::Subtypes::Instance().AllSubtypes())
     m_types.push_back(subtype);
 }
@@ -523,6 +564,7 @@ IsPartOfTourismAttractionsChecker::IsPartOfTourismAttractionsChecker() : BaseChe
       {"amenity", "grave_yard"},
       {"amenity", "fountain"},
       {"amenity", "place_of_worship"},
+      {"amenity", "planetarium"},
       {"amenity", "theatre"},
       {"amenity", "townhall"},
       {"amenity", "university"},
@@ -761,6 +803,12 @@ IsOrganicChecker::IsOrganicChecker() : BaseChecker(1 /* level */)
 {
   Classificator const & c = classif();
   m_types.push_back(c.GetTypeByPath({"organic"}));
+}
+
+IsSecondHandChecker::IsSecondHandChecker() : BaseChecker(1 /* level */)
+{
+  Classificator const & c = classif();
+  m_types.push_back(c.GetTypeByPath({"second_hand"}));
 }
 
 IsChristmasChecker::IsChristmasChecker()

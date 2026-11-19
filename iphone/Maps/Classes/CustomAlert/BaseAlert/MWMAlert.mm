@@ -101,9 +101,6 @@
 + (MWMAlert *)notEnoughSpaceAlert {
   return [MWMDefaultAlert notEnoughSpaceAlert];
 }
-+ (MWMAlert *)invalidUserNameOrPasswordAlert {
-  return [MWMDefaultAlert invalidUserNameOrPasswordAlert];
-}
 
 + (MWMAlert *)downloaderNoConnectionAlertWithOkBlock:(MWMVoidBlock)okBlock cancelBlock:(MWMVoidBlock)cancelBlock {
   return [MWMDefaultAlert downloaderNoConnectionAlertWithOkBlock:okBlock cancelBlock:cancelBlock];
@@ -147,16 +144,8 @@
   return [MWMBCCreateCategoryAlert alertWithMaxCharachersNum:max minCharactersNum:min callback:callback];
 }
 
-+ (MWMAlert *)spinnerAlertWithTitle:(NSString *)title cancel:(MWMVoidBlock)cancel {
-  return [MWMSpinnerAlert alertWithTitle:title cancel:cancel];
-}
-
 + (MWMAlert *)bookmarkConversionErrorAlert {
   return [MWMDefaultAlert bookmarkConversionErrorAlert];
-}
-
-+ (MWMAlert *)tagsLoadingErrorAlertWithOkBlock:okBlock cancelBlock:cancelBlock {
-  return [MWMDefaultAlert tagsLoadingErrorAlertWithOkBlock:okBlock cancelBlock:cancelBlock];
 }
 
 + (MWMAlert *)bugReportAlertWithTitle:(NSString *)title {
@@ -201,13 +190,6 @@
 - (void)rotate:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
   if ([self respondsToSelector:@selector(willRotateToInterfaceOrientation:)])
     [self willRotateToInterfaceOrientation:toInterfaceOrientation];
-}
-
-- (void)addControllerViewToWindow {
-  UIWindow *window = UIApplication.sharedApplication.delegate.window;
-  UIView *view = self.alertController.view;
-  [window addSubview:view];
-  view.frame = window.bounds;
 }
 
 - (void)layoutSubviews {

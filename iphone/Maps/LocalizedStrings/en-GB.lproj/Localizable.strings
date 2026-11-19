@@ -106,8 +106,6 @@
 "category_recycling" = "Recycling";
 /* Search category for water; any changes should be duplicated in categories.txt @category_water! also used to sort bookmarks by type */
 "category_water" = "Water";
-/* Search category for RV facilities; any changes should be duplicated in categories.txt @category_rv! */
-"category_rv" = "RV Facilities";
 "share_bookmarks_email_body" = "Hello!\n\nAttached are my saved places; please open them in Sandbox Maps. If you don't have it installed you can download it here: https://www.comaps.app/download/\n\nEnjoy travelling with Sandbox Maps!";
 /* message title of loading file */
 "load_kmz_title" = "Loading Favourites";
@@ -452,7 +450,7 @@
 "downloader_update_maps" = "Update Maps";
 "downloader_search_field_hint" = "Find map";
 "migration_download_error_dialog" = "Download error";
-"common_check_internet_connection_dialog" = "Please make sure your device is connected to the Internet.";
+"common_check_internet_connection_dialog" = "Please make sure your device is connected to the internet.";
 "downloader_no_space_title" = "Not enough space";
 "downloader_no_space_message" = "Please delete any unnecessary data";
 "editor_profile_changes" = "Verified Changes";
@@ -474,7 +472,7 @@
 "editor_sharing_title" = "I improved the Sandbox Maps maps";
 /* Downloaded 10 **of** 20 <- it is that "of" */
 "downloader_of" = "%1$d of %2$d";
-"download_over_mobile_header" = "Download over a cellular network connection?";
+"download_over_mobile_header" = "Download over a mobile network connection?";
 "download_over_mobile_message" = "This could be considerably expensive with some plans or if roaming.";
 "error_enter_correct_house_number" = "Enter a valid building number";
 "editor_storey_number" = "Number of floors (maximum of %d)";
@@ -561,13 +559,13 @@
 "accept" = "Accept";
 /* For the first routing */
 "decline" = "Decline";
-"mobile_data_dialog" = "Use mobile internet to show detailed information?";
+"mobile_data_dialog" = "Use mobile data to show detailed information?";
 "mobile_data_option_always" = "Use Always";
 "mobile_data_option_today" = "Only Today";
 "mobile_data_option_not_today" = "Do Not Use Today";
-"mobile_data" = "Mobile Internet";
+"mobile_data" = "Mobile Data";
 /* NOTE to translators: please synchronize your translation with the English one. */
-"mobile_data_description" = "Mobile internet is required for map update notifications and uploading edits.";
+"mobile_data_description" = "Mobile data is required for map update notifications and uploading edits.";
 "mobile_data_option_never" = "Never Use";
 "mobile_data_option_ask" = "Always Ask";
 "traffic_update_maps_text" = "To display traffic data, maps must be updated.";
@@ -923,3 +921,15 @@
 "bookmarks_text_placement_title" = "Show names of favourites on map";
 "pref_font_size" = "Font size for map labels";
 "font_size" = "Font size";
+"category_rv" = "RV Facilities";
+"mode_options_accessibility_hint" = "Shows options for this mode";
+"stars_5" = "5-star";
+"custom_map_server_error_scheme" = "The URL must start with http:// or https://";
+"stars_4" = "4-star";
+"stars_2" = "2-star";
+"custom_map_server_map_series" = "This version of Sandbox Maps is using map series %@.";
+"not_set" = "Not set";
+"custom_map_server" = "Custom Map Server";
+"stars_3" = "3-star";
+"stars_1" = "1-star";
+"custom_map_server_message" = "Override the default map download server used for map downloads. Leave empty to use the default Sandbox Maps map server.";

@@ -21,6 +21,7 @@
 #include "map/everywhere_search_params.hpp"
 #include "map/user_mark.hpp"
 
+#include "storage/country_info_getter.hpp"
 #include "storage/storage_defines.hpp"
 #include "storage/storage_helpers.hpp"
 
@@ -38,7 +39,9 @@
 #include "geometry/mercator.hpp"
 #include "geometry/point_with_altitude.hpp"
 
+#include "indexer/feature_decl.hpp"
 #include "indexer/feature_altitude.hpp"
+#include "indexer/map_object.hpp"
 #include "indexer/validate_and_format_contacts.hpp"
 
 #include "routing/following_info.hpp"
@@ -807,6 +810,11 @@ void Framework::UpdateMyPositionRoutingOffset(int offsetY)
   NativeFramework()->UpdateMyPositionRoutingOffset(false, offsetY);
 }
 
+void Framework::SetCarNavigationView (bool enabled)
+{
+  NativeFramework()->SetCarNavigationView(enabled);
+}
+
 void Framework::ApplyWidgets()
 {
   gui::TWidgetsLayoutInfo layout;
@@ -829,6 +837,11 @@ void Framework::SetupMeasurementSystem()
 place_page::Info & Framework::GetPlacePageInfo()
 {
   return m_work.GetCurrentPlacePageInfo();
+}
+
+osm::MapObject Framework::GetMapObjectByID(FeatureID const & featureId) const
+{
+  return m_work.GetMapObjectByID(featureId);
 }
 
 bool Framework::IsAutoRetryDownloadFailed()
@@ -892,6 +905,13 @@ void CallRoutingListener(shared_ptr<jobject> listener, int errorCode, storage::C
 
   env->CallVoidMethod(*listener, method, errorCode,
                       jni::TScopedLocalObjectArrayRef(env, jni::ToJavaStringArray(env, absentMaps)).get());
+}
+
+void CallTurnPreviewChangedListener(shared_ptr<jobject> listener, bool isPreviewing, uint32_t segmentIndex)
+{
+  JNIEnv * env = jni::GetEnv();
+  jmethodID const methodId = jni::GetMethodID(env, *listener, "onTurnPreviewChanged", "(ZI)V");
+  env->CallVoidMethod(*listener, methodId, static_cast<jboolean>(isPreviewing), static_cast<jint>(segmentIndex));
 }
 
 void CallRouteProgressListener(shared_ptr<jobject> listener, float progress)
@@ -1209,6 +1229,11 @@ JNIEXPORT jdoubleArray JNICALL Java_app_organicmaps_sdk_Framework_nativeGetScree
   return jLatLon;
 }
 
+JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeRestoreDownloadQueue(JNIEnv * env, jclass)
+{
+  frm()->GetStorage().RestoreDownloadQueue();
+}
+
 JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeShowTrackRect(JNIEnv * env, jclass, jlong track)
 {
   frm()->ShowTrack(static_cast<kml::TrackId>(track));
@@ -1353,6 +1378,17 @@ JNIEXPORT jobject JNICALL Java_app_organicmaps_sdk_Framework_nativeGetRouteFollo
   return CreateRoutingInfo(env, info, rm);
 }
 
+JNIEXPORT jdouble JNICALL Java_app_organicmaps_sdk_Framework_nativeGetRoadSpeedLimit(JNIEnv *, jclass, jdouble lat,
+                                                                                    jdouble lon, jdouble bearingDeg)
+{
+  return frm()->GetRoutingManager().GetRoadSpeedLimitMps(lat, lon, bearingDeg);
+}
+
+JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeResetRoadSpeedLimit(JNIEnv *, jclass)
+{
+  frm()->GetRoutingManager().ResetRoadSpeedLimitCache();
+}
+
 JNIEXPORT jobjectArray JNICALL Java_app_organicmaps_sdk_Framework_nativeGetRouteJunctionPoints(JNIEnv * env, jclass,
                                                                                                jdouble maxDistM)
 {
@@ -1485,9 +1521,12 @@ JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeSetRoutingListen
                                                                                    jobject listener)
 {
   CHECK(g_framework, ("Framework isn't created yet!"));
-  frm()->GetRoutingManager().SetRouteBuildingListener(
-      [rf = jni::make_global_ref(listener)](routing::RouterResultCode e, storage::CountriesSet const & countries)
+  auto const rf = jni::make_global_ref(listener);
+  auto & rm = frm()->GetRoutingManager();
+  rm.SetRouteBuildingListener([rf](routing::RouterResultCode e, storage::CountriesSet const & countries)
   { CallRoutingListener(rf, static_cast<int>(e), countries); });
+  rm.SetPreviewedTurnChangedCallback([rf](bool isPreviewing, uint32_t segmentIndex)
+  { CallTurnPreviewChangedListener(rf, isPreviewing, segmentIndex); });
 }
 
 JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeSetRouteProgressListener(JNIEnv * env, jclass,
@@ -1589,6 +1628,24 @@ JNIEXPORT jobjectArray JNICALL Java_app_organicmaps_sdk_Framework_nativeGetRoute
 
   auto const steps = rm.GetRouteTurnsForDisplay(nativeLanguage);
   return CreateRouteStepInfoArray(env, steps);
+}
+
+JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativePreviewTurn(JNIEnv *, jclass, jint segmentIndex)
+{
+  if (segmentIndex < 0)
+    return;
+
+  frm()->PreviewTurn(static_cast<uint32_t>(segmentIndex));
+}
+
+JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeClearPreviewedTurn(JNIEnv *, jclass)
+{
+  frm()->GetRoutingManager().ClearPreviewedTurn();
+}
+
+JNIEXPORT jboolean JNICALL Java_app_organicmaps_sdk_Framework_nativeIsPreviewingTurn(JNIEnv *, jclass)
+{
+  return static_cast<jboolean>(frm()->GetRoutingManager().IsPreviewingTurn());
 }
 
 JNIEXPORT jobject JNICALL Java_app_organicmaps_sdk_Framework_nativeGetTransitRouteInfo(JNIEnv * env, jclass)

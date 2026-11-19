@@ -1,3 +1,4 @@
+import CarPlay
 import XCTest
 import UIKit
 @testable import CoMaps__Debug_
@@ -16,14 +17,172 @@ final class CarPlayServiceTests: XCTestCase {
     super.tearDown()
   }
 
+  func testPanningInterfaceStateIsInitiallyHidden() {
+    let state = CarPlayPanningInterfaceState()
+
+    XCTAssertFalse(state.isPresented)
+  }
+
+  func testPanningInterfaceStateTracksShowAndDismiss() {
+    var state = CarPlayPanningInterfaceState()
+    let template = CPMapTemplate()
+
+    state.didShow(template)
+    XCTAssertTrue(state.isPresented)
+    XCTAssertTrue(state.didDismiss(template))
+    XCTAssertFalse(state.isPresented)
+  }
+
+  func testPanningInterfaceStateResetClearsPresentedTemplate() {
+    var state = CarPlayPanningInterfaceState()
+    state.didShow(CPMapTemplate())
+
+    state.reset()
+
+    XCTAssertFalse(state.isPresented)
+  }
+
+  func testPanningInterfaceStateIgnoresLateDismissFromReplacedTemplate() {
+    var state = CarPlayPanningInterfaceState()
+    let replacedTemplate = CPMapTemplate()
+    let currentTemplate = CPMapTemplate()
+    state.didShow(replacedTemplate)
+    state.reset()
+    state.didShow(currentTemplate)
+
+    XCTAssertFalse(state.didDismiss(replacedTemplate))
+    XCTAssertTrue(state.isPresented)
+    XCTAssertTrue(state.didDismiss(currentTemplate))
+    XCTAssertFalse(state.isPresented)
+  }
+
+  func testSearchContextStateStartsOwnedByPhone() {
+    let state = CarPlaySearchContextState()
+
+    XCTAssertEqual(state.owner, .phone)
+  }
+
+  func testSearchContextStateResetsOnlyWhenOwnerChanges() {
+    var state = CarPlaySearchContextState()
+
+    XCTAssertTrue(state.transition(to: .car))
+    XCTAssertEqual(state.owner, .car)
+    XCTAssertFalse(state.transition(to: .car))
+    XCTAssertTrue(state.transition(to: .phone))
+    XCTAssertEqual(state.owner, .phone)
+    XCTAssertFalse(state.transition(to: .phone))
+  }
+
+  func testSearchContextStateIgnoresTransientHostlessRebind() {
+    var state = CarPlaySearchContextState()
+    XCTAssertTrue(state.transition(to: .car))
+
+    XCTAssertFalse(state.transition(to: nil))
+    XCTAssertEqual(state.owner, .car)
+    XCTAssertFalse(state.transition(to: .car))
+  }
+
+  func testSearchResultOrderingMovesSelectedResultFirst() {
+    let results = [10, 20, 30, 40]
+
+    XCTAssertEqual(CarPlaySearchResultOrdering.selectedFirst(results, selectedIndex: 0),
+                   [10, 20, 30, 40])
+    XCTAssertEqual(CarPlaySearchResultOrdering.selectedFirst(results, selectedIndex: 2),
+                   [30, 10, 20, 40])
+    XCTAssertEqual(CarPlaySearchResultOrdering.selectedFirst(results, selectedIndex: 3),
+                   [40, 10, 20, 30])
+  }
+
+  func testSearchResultOrderingRejectsInvalidIndex() {
+    XCTAssertNil(CarPlaySearchResultOrdering.selectedFirst([10, 20], selectedIndex: -1))
+    XCTAssertNil(CarPlaySearchResultOrdering.selectedFirst([10, 20], selectedIndex: 2))
+    XCTAssertNil(CarPlaySearchResultOrdering.selectedFirst([Int](), selectedIndex: 0))
+  }
+
+  func testListLimiterReservesLastRowForOverflowWarning() {
+    let items = Array(1 ... 21)
+
+    XCTAssertEqual(CarPlayListLimiter.limit(items,
+                                            to: 12,
+                                            withOverflowItem: -1),
+                   Array(1 ... 11) + [-1])
+  }
+
+  func testListLimiterHandlesRestrictionsWithUnchangedReportedMaximum() {
+    let items = Array(1 ... 21)
+    let reportedMaximum = 24
+
+    for isListLimited in [false, true, false] {
+      let effectiveMaximum = CarPlayListLimiter.effectiveMaximumItemCount(reportedMaximum,
+                                                                          isListLimited: isListLimited)
+      let result = CarPlayListLimiter.limit(items,
+                                            to: effectiveMaximum,
+                                            withOverflowItem: -1)
+
+      XCTAssertEqual(result, isListLimited ? Array(1 ... 11) + [-1] : items)
+    }
+  }
+
+  func testListLimiterRespectsReportedMaximumBelowRestrictionLimit() {
+    let effectiveMaximum = CarPlayListLimiter.effectiveMaximumItemCount(8, isListLimited: true)
+
+    XCTAssertEqual(effectiveMaximum, 8)
+    XCTAssertEqual(CarPlayListLimiter.limit(Array(1 ... 21),
+                                            to: effectiveMaximum,
+                                            withOverflowItem: -1),
+                   Array(1 ... 7) + [-1])
+  }
+
+  func testListLimiterReturnsNoItemsAtZeroCapacity() {
+    for isListLimited in [false, true] {
+      let effectiveMaximum = CarPlayListLimiter.effectiveMaximumItemCount(0,
+                                                                          isListLimited: isListLimited)
+
+      XCTAssertEqual(CarPlayListLimiter.limit([1],
+                                              to: effectiveMaximum,
+                                              withOverflowItem: -1),
+                     [])
+    }
+  }
+
+  func testListLimiterDoesNotTruncateItemsAtOrBelowLimit() {
+    let effectiveMaximum = CarPlayListLimiter.effectiveMaximumItemCount(24, isListLimited: true)
+
+    XCTAssertEqual(CarPlayListLimiter.limit(Array(1 ... 12),
+                                            to: effectiveMaximum,
+                                            withOverflowItem: -1),
+                   Array(1 ... 12))
+    XCTAssertEqual(CarPlayListLimiter.limit(Array(1 ... 11),
+                                            to: effectiveMaximum,
+                                            withOverflowItem: -1),
+                   Array(1 ... 11))
+  }
+
+  func testListItemHandlerCompletesUnknownSelectionExactlyOnce() {
+    let item = CPListItem(text: "Unknown", detailText: nil)
+    var completionCount = 0
+    ListTemplateBuilder.configureSelectionHandler(for: item)
+
+    item.handler?(item, {
+      completionCount += 1
+    })
+
+    XCTAssertEqual(completionCount, 1)
+  }
+
   func testCreateEstimates() {
-    let routeInfo = RouteInfo(timeToTarget: 100,
+    let routeInfo = RouteInfo(routeID: 1,
+                              turnIndex: 1,
+                              currentStep: nil,
+                              nextStep: nil,
+                              timeToTarget: 100,
                               targetDistance: 25.2,
                               targetUnitsIndex: 1, // km
                               distanceToTurn: 0.5,
                               turnUnitsIndex: 0, // m
                               turnImageName: nil,
-                              nextTurnImageName: nil,
+                              firstNotificationDistanceMeters: 0,
+                              secondNotificationDistanceMeters: 0,
                               speedMps: 40.5,
                               speedLimitMps: 60,
                               roundExitNumber: 0,
@@ -49,6 +208,201 @@ final class CarPlayServiceTests: XCTestCase {
     XCTAssertEqual(estimates.timeRemaining, 100)
   }
 
+  func testManeuverRefreshStateUsesPrimaryIdentity() {
+    let plan = makePlan([(1, .turnLeft, 0), (2, .turnLeft, 1000)])
+    let content = CarPlayManeuverContent(routeInfo: makeRouteInfo(currentStep: 1), plan: plan)
+    let nextIdenticalTurn = CarPlayManeuverContent(routeInfo: makeRouteInfo(currentStep: 2), plan: plan)
+    var state = CarPlayManeuverRefreshState()
+
+    XCTAssertEqual(state.reason(for: content), .initial)
+    state.didDisplay(content)
+    XCTAssertNil(state.reason(for: content))
+    XCTAssertEqual(state.reason(for: nextIdenticalTurn), .primaryAdvanced,
+                   "Consecutive visually identical turns must still replace the primary")
+  }
+
+  func testManeuverRefreshStateIgnoresDistanceOnlyChanges() {
+    let plan = makePlan([(1, .turnLeft, 0)])
+    let far = CarPlayManeuverContent(routeInfo: makeRouteInfo(distanceToTurn: 500), plan: plan)
+    let near = CarPlayManeuverContent(routeInfo: makeRouteInfo(distanceToTurn: 20), plan: plan)
+    var state = CarPlayManeuverRefreshState()
+    state.didDisplay(far)
+
+    XCTAssertNil(state.reason(for: near),
+                 "Distance updates must update estimates without republishing maneuvers")
+  }
+
+  func testManeuverRefreshStateReplacesPrimaryForNewRouteWithSameStep() {
+    let firstRoute = CarPlayManeuverContent(routeInfo: makeRouteInfo(routeID: 1),
+                                            plan: makePlan(routeID: 1, [(1, .turnLeft, 0)]))
+    let reroute = CarPlayManeuverContent(routeInfo: makeRouteInfo(routeID: 2),
+                                         plan: makePlan(routeID: 2, [(1, .turnLeft, 0)]))
+    var state = CarPlayManeuverRefreshState()
+    state.didDisplay(firstRoute)
+
+    XCTAssertEqual(state.reason(for: reroute), .routeChanged)
+  }
+
+  func testManeuverRefreshStateRepublishesForLaneGuidanceChanges() {
+    let plan = makePlan([(1, .turnLeft, 0)])
+    let withoutLanes = CarPlayManeuverContent(routeInfo: makeRouteInfo(), plan: plan)
+    let withLeftLane = CarPlayManeuverContent(
+      routeInfo: makeRouteInfo(lanes: [makeLane(ways: [.left], recommended: .left)]), plan: plan)
+    let withRightLane = CarPlayManeuverContent(
+      routeInfo: makeRouteInfo(lanes: [makeLane(ways: [.right], recommended: .right)]), plan: plan)
+    var state = CarPlayManeuverRefreshState()
+
+    state.didDisplay(withoutLanes)
+    XCTAssertEqual(state.reason(for: withLeftLane), .supplementaryChanged)
+    state.didDisplay(withLeftLane)
+    XCTAssertEqual(state.reason(for: withRightLane), .supplementaryChanged)
+    XCTAssertEqual(state.reason(for: withoutLanes), .supplementaryChanged,
+                   "Removing lane guidance must refresh the maneuvers")
+  }
+
+  func testManeuverRefreshStateResetForcesInitialPublish() {
+    let content = CarPlayManeuverContent(routeInfo: makeRouteInfo(), plan: makePlan([(1, .turnLeft, 0)]))
+    var state = CarPlayManeuverRefreshState()
+    state.didDisplay(content)
+    state.reset()
+
+    XCTAssertEqual(state.reason(for: content), .initial)
+  }
+
+  func testManeuverRefreshStateCanForceReroute() {
+    let content = CarPlayManeuverContent(routeInfo: makeRouteInfo(), plan: makePlan([(1, .turnLeft, 0)]))
+    var state = CarPlayManeuverRefreshState()
+    state.didDisplay(content)
+
+    XCTAssertEqual(state.reason(for: content, forcing: .reroute), .reroute)
+  }
+
+  func testRoundaboutEntranceAndExitMapToTheSamePlannedManeuver() {
+    let plan = makePlan([(1, .turnLeft, 0), (2, .leaveRoundAbout, 1000), (3, .reachedYourDestination, 3000)])
+    let entrance = CarPlayManeuverContent(
+      routeInfo: makeRouteInfo(turnIndex: 3, carDirection: .enterRoundAbout, currentStep: 2), plan: plan)
+    let exit = CarPlayManeuverContent(
+      routeInfo: makeRouteInfo(turnIndex: 5, carDirection: .leaveRoundAbout, currentStep: 2), plan: plan)
+    var state = CarPlayManeuverRefreshState()
+    state.didDisplay(entrance)
+
+    XCTAssertTrue(entrance.isPlannedPrimary)
+    XCTAssertEqual(entrance.primaryIdentity.step, 2)
+    XCTAssertEqual(exit.primaryIdentity.step, 2)
+    XCTAssertNil(state.reason(for: exit),
+                 "Entering the roundabout must not replace the combined roundabout maneuver")
+  }
+
+  func testManeuverPhaseFollowsVoicePromptDistances() {
+    func phase(_ distance: Double) -> CarPlayManeuverPhase {
+      return CarPlayManeuverPhase.phase(distanceMeters: distance,
+                                        firstNotificationDistanceMeters: 1000,
+                                        secondNotificationDistanceMeters: 120,
+                                        holdingExecute: false)
+    }
+
+    XCTAssertEqual(phase(1500), .continue)
+    XCTAssertEqual(phase(999), .initial)
+    XCTAssertEqual(phase(119), .prepare)
+    XCTAssertEqual(phase(29), .execute)
+  }
+
+  func testManeuverPhaseFallsBackWithoutVoicePromptDistances() {
+    func phase(_ distance: Double) -> CarPlayManeuverPhase {
+      return CarPlayManeuverPhase.phase(distanceMeters: distance,
+                                        firstNotificationDistanceMeters: 0,
+                                        secondNotificationDistanceMeters: 0,
+                                        holdingExecute: false)
+    }
+
+    XCTAssertEqual(phase(400), .continue)
+    XCTAssertEqual(phase(399), .initial)
+    XCTAssertEqual(phase(149), .prepare)
+    XCTAssertEqual(phase(29), .execute)
+  }
+
+  func testManeuverPhaseKeepsExecuteWithinShortPrepareDistance() {
+    XCTAssertEqual(CarPlayManeuverPhase.phase(distanceMeters: 25,
+                                              firstNotificationDistanceMeters: 235,
+                                              secondNotificationDistanceMeters: 20,
+                                              holdingExecute: false), .initial)
+    XCTAssertEqual(CarPlayManeuverPhase.phase(distanceMeters: 19,
+                                              firstNotificationDistanceMeters: 235,
+                                              secondNotificationDistanceMeters: 20,
+                                              holdingExecute: false), .execute)
+  }
+
+  func testEstimatesSnapshotIgnoresInvisibleChanges() {
+    let maneuver = CPManeuver()
+    func snapshot(_ target: AnyObject, meters: Double, seconds: TimeInterval) -> CarPlayEstimatesSnapshot {
+      let estimates = CPTravelEstimates(distanceRemaining: Measurement(value: meters, unit: UnitLength.meters),
+                                        timeRemaining: seconds)
+      return CarPlayEstimatesSnapshot(targets: [target], estimates: estimates)
+    }
+
+    XCTAssertEqual(snapshot(maneuver, meters: 380, seconds: 61), snapshot(maneuver, meters: 380, seconds: 89))
+    XCTAssertNotEqual(snapshot(maneuver, meters: 380, seconds: 89), snapshot(maneuver, meters: 380, seconds: 90))
+    XCTAssertNotEqual(snapshot(maneuver, meters: 380, seconds: 61), snapshot(maneuver, meters: 370, seconds: 61))
+    XCTAssertNotEqual(snapshot(maneuver, meters: 380, seconds: 61), snapshot(CPManeuver(), meters: 380, seconds: 61))
+    XCTAssertNotEqual(snapshot(maneuver, meters: -1, seconds: -1), snapshot(maneuver, meters: -1, seconds: 0))
+  }
+
+  func testEstimatesSnapshotNeverMatchesAReleasedTarget() {
+    var maneuver: CPManeuver? = CPManeuver()
+    let estimates = CPTravelEstimates(distanceRemaining: Measurement(value: 380, unit: UnitLength.meters),
+                                      timeRemaining: 0)
+    let previous = CarPlayEstimatesSnapshot(targets: [maneuver!], estimates: estimates)
+    maneuver = nil
+    let replacement = CPManeuver()
+
+    XCTAssertNotEqual(previous, CarPlayEstimatesSnapshot(targets: [replacement], estimates: estimates))
+  }
+
+  func testManeuverPhaseHoldsExecuteInsideRoundabout() {
+    XCTAssertEqual(CarPlayManeuverPhase.phase(distanceMeters: 300,
+                                              firstNotificationDistanceMeters: 1000,
+                                              secondNotificationDistanceMeters: 120,
+                                              holdingExecute: true), .execute)
+  }
+
+  func testStepMissingFromPlanIsUnplanned() {
+    let plan = makePlan([(1, .turnLeft, 0), (3, .reachedYourDestination, 1100)])
+    let content = CarPlayManeuverContent(routeInfo: makeRouteInfo(currentStep: 2, nextStep: 3), plan: plan)
+
+    XCTAssertFalse(content.isPlannedPrimary)
+    XCTAssertEqual(content.primaryIdentity, CarPlayPrimaryManeuverIdentity(routeID: 1, step: 2))
+    XCTAssertNil(content.secondaryStep)
+  }
+
+  func testSecondaryManeuverIsTheNextStepFromCore() {
+    let plan = makePlan([(1, .turnLeft, 0), (2, .turnRight, 1000), (3, .reachedYourDestination, 1400)])
+
+    let withoutNext = CarPlayManeuverContent(routeInfo: makeRouteInfo(currentStep: 1), plan: plan)
+    let withNext = CarPlayManeuverContent(routeInfo: makeRouteInfo(currentStep: 2, nextStep: 3), plan: plan)
+
+    XCTAssertNil(withoutNext.secondaryStep)
+    XCTAssertEqual(withNext.secondaryStep, 3)
+  }
+
+  func testManeuverContentFallsBackToRouteInfoWithoutMatchingPlan() {
+    let otherRoutePlan = makePlan(routeID: 7, [(1, .turnLeft, 0), (2, .turnRight, 100)])
+    let content = CarPlayManeuverContent(routeInfo: makeRouteInfo(routeID: 1, nextStep: 2), plan: otherRoutePlan)
+
+    XCTAssertFalse(content.isPlannedPrimary)
+    XCTAssertEqual(content.primaryIdentity, CarPlayPrimaryManeuverIdentity(routeID: 1, step: 1))
+    XCTAssertNil(content.secondaryStep)
+  }
+
+  func testRoundaboutManeuverTypeCarriesExitNumber() throws {
+    guard #available(iOS 17.4, *) else { throw XCTSkip("Maneuver metadata requires iOS 17.4") }
+    XCTAssertEqual(CarDirection.leaveRoundAbout.cpManeuverType(exitNumber: 3), .roundaboutExit3)
+    XCTAssertEqual(CarDirection.enterRoundAbout.cpManeuverType(exitNumber: 1), .roundaboutExit1)
+    XCTAssertEqual(CarDirection.leaveRoundAbout.cpManeuverType(exitNumber: 19), .roundaboutExit19)
+    XCTAssertEqual(CarDirection.leaveRoundAbout.cpManeuverType(exitNumber: 0), .exitRoundabout)
+    XCTAssertEqual(CarDirection.leaveRoundAbout.cpManeuverType(exitNumber: 20), .exitRoundabout)
+    XCTAssertEqual(CarDirection.turnLeft.cpManeuverType(exitNumber: 3), .leftTurn)
+  }
+
   func testLaneWayTurnImageNames() {
     XCTAssertEqual(LaneWay.through.turnImageName, "straight")
     XCTAssertEqual(LaneWay.none.turnImageName, "straight")
@@ -67,7 +421,7 @@ final class CarPlayServiceTests: XCTestCase {
   func testCarPlayManeuverSymbolUsesBlackAndWhiteVariants() throws {
     let displayScale: CGFloat = 2
     let symbol = try XCTUnwrap(
-      CarPlayManeuverSymbol.image(named: "ic_cp_simple_left", displayScale: displayScale))
+      CarPlayManeuverSymbol.images(named: "ic_cp_simple_left", displayScale: displayScale)).adaptive
     XCTAssertNotNil(symbol.imageAsset)
     XCTAssertEqual(symbol.scale, displayScale)
 
@@ -80,9 +434,9 @@ final class CarPlayServiceTests: XCTestCase {
   func testNumberedRoundaboutPreservesBlackAndWhiteVariants() throws {
     let displayScale: CGFloat = 2
     let plain = try XCTUnwrap(
-      CarPlayManeuverSymbol.image(named: "ic_cp_round", displayScale: displayScale))
+      CarPlayManeuverSymbol.images(named: "ic_cp_round", displayScale: displayScale)).adaptive
     let numbered = try XCTUnwrap(
-      CarPlayManeuverSymbol.image(named: "ic_cp_round", exitNumber: 3, displayScale: displayScale))
+      CarPlayManeuverSymbol.images(named: "ic_cp_round", exitNumber: 3, displayScale: displayScale)).adaptive
     XCTAssertEqual(numbered.scale, displayScale)
 
     let light = CarPlayManeuverSymbol.resolvedVariant(of: numbered, style: .light)
@@ -94,6 +448,56 @@ final class CarPlayServiceTests: XCTestCase {
     XCTAssertGreaterThan(try visiblePixelCount(of: light),
                          try visiblePixelCount(of: plainLight),
                          "The exit number should add visible pixels to the roundabout symbol")
+  }
+
+  func testCarPlayManeuverCardSymbolIsAlwaysWhite() throws {
+    let displayScale: CGFloat = 2
+    let card = try XCTUnwrap(
+      CarPlayManeuverSymbol.images(named: "ic_cp_simple_left", displayScale: displayScale)).card
+
+    XCTAssertEqual(card.scale, displayScale)
+    XCTAssertEqual(card.renderingMode, .alwaysOriginal)
+    XCTAssertGreaterThan(try averageVisibleLuminance(of: card), 0.9)
+    let resolvedLight = CarPlayManeuverSymbol.resolvedVariant(of: card, style: .light)
+    XCTAssertGreaterThan(try averageVisibleLuminance(of: resolvedLight), 0.9)
+  }
+
+  func testCarPlayManeuverSymbolIsTrimmedToFillTheCanvas() throws {
+    let card = try XCTUnwrap(
+      CarPlayManeuverSymbol.images(named: "ic_cp_simple_left", displayScale: 2)).card
+    let bounds = try visibleBounds(of: card)
+    let cgImage = try XCTUnwrap(card.cgImage)
+
+    XCTAssertEqual(card.size, CarPlayManeuverSymbol.canvasSize)
+    XCTAssertGreaterThanOrEqual(bounds.height / CGFloat(cgImage.height), 0.85)
+  }
+
+  func testDestinationStepWithoutRoadNameUsesDestinationName() {
+    let destination = CarPlayManeuverDescription(
+      step: makePlan([(6, .reachedYourDestination, 1100)]).steps[0], isLeftHandTraffic: false)
+    let turn = CarPlayManeuverDescription(
+      step: makePlan([(4, .turnLeft, 1000)]).steps[0], isLeftHandTraffic: false)
+
+    XCTAssertEqual(destination.fallbackInstructionVariants(destinationName: " Tante "), ["Tante"])
+    XCTAssertEqual(destination.fallbackInstructionVariants(destinationName: nil), [L("pick_destination")])
+    XCTAssertEqual(destination.fallbackInstructionVariants(destinationName: ""), [L("pick_destination")])
+    XCTAssertEqual(turn.fallbackInstructionVariants(destinationName: "Tante"), [""])
+  }
+
+  func testMultipleRoadRefsAreSeparatedAndDeduplicated() {
+    XCTAssertEqual(NavigationInstructionFormatter.instructionVariants(roadName: "Storoveien",
+                                                                      roadRef: "150;Ring 3;Ring 3",
+                                                                      junctionRef: "",
+                                                                      destinationRef: "",
+                                                                      destination: ""),
+                   ["150 / Ring 3 Storoveien", "150 / Ring 3", "Storoveien"])
+    XCTAssertEqual(NavigationInstructionFormatter.instructionVariants(roadName: "",
+                                                                      roadRef: "",
+                                                                      junctionRef: "",
+                                                                      destinationRef: "E6; E18",
+                                                                      destination: "Smestad"),
+                   ["E6 / E18 → Smestad", "E6 / E18"])
+    XCTAssertEqual(NavigationInstructionFormatter.displayRefs(" 150 ;; Ring 3;150 "), "150 / Ring 3")
   }
 
   func testCarPlayLaneImageSetUsesWhiteLightContentAndBlackDarkContent() throws {
@@ -115,35 +519,164 @@ final class CarPlayServiceTests: XCTestCase {
     XCTAssertLessThan(try averageVisibleLuminance(of: imageSet.darkContentImage), 0.1)
   }
 
-  func testInstructionVariants() {
-    // Motorway exit: the richest (first) variant joins the exit label, the destination ref and the
-    // destinations, and the array is ordered longest-first.
-    let exit = NavigationInstructionFormatter.instructionVariants(roadName: "",
-                                                                  roadRef: "",
-                                                                  junctionRef: "6A",
-                                                                  destinationRef: "US 101 South",
-                                                                  destination: "San Jose; San Francisco",
-                                                                  isLink: true)
-    XCTAssertEqual(exit.first, "Exit 6A: US 101 South → San Jose / San Francisco")
-    XCTAssertEqual(exit, exit.sorted { $0.count > $1.count })
+  func testPreferredCarPlayLaneSeparatesHighlightedAngleFromRemainingAngles() throws {
+    guard #available(iOS 18.0, *) else { throw XCTSkip("Structured lanes require iOS 18") }
+    let metadata = CarPlayLaneMetadata.lane(
+      for: makeLane(ways: [.through, .right], recommended: .right))
+    let highlightedAngle = try XCTUnwrap(metadata.highlightedAngle)
 
-    // Plain road: ref and name are combined, no brackets.
-    let road = NavigationInstructionFormatter.instructionVariants(roadName: "Bayshore Freeway",
-                                                                  roadRef: "CA 85",
-                                                                  junctionRef: "",
-                                                                  destinationRef: "",
-                                                                  destination: "",
-                                                                  isLink: false)
-    XCTAssertEqual(road.first, "CA 85 Bayshore Freeway")
+    XCTAssertEqual(degrees(highlightedAngle), 90)
+    XCTAssertEqual(metadata.angles.map(degrees), [0])
+    XCTAssertFalse(metadata.angles.contains { degrees($0) == degrees(highlightedAngle) })
+  }
+
+  func testPreferredCarPlayLaneRemovesEquivalentHighlightedAngles() throws {
+    guard #available(iOS 18.0, *) else { throw XCTSkip("Structured lanes require iOS 18") }
+    let metadata = CarPlayLaneMetadata.lane(
+      for: makeLane(ways: [.slightLeft, .mergeToLeft, .through], recommended: .mergeToLeft))
+    let highlightedAngle = try XCTUnwrap(metadata.highlightedAngle)
+
+    XCTAssertEqual(degrees(highlightedAngle), -45)
+    XCTAssertEqual(metadata.angles.map(degrees), [0])
+  }
+
+  func testUnrecommendedCarPlayLaneDeduplicatesAnglesPreservingOrder() throws {
+    guard #available(iOS 18.0, *) else { throw XCTSkip("Structured lanes require iOS 18") }
+    let metadata = CarPlayLaneMetadata.lane(
+      for: makeLane(ways: [.slightLeft, .mergeToLeft, .through], recommended: .none))
+
+    XCTAssertNil(metadata.highlightedAngle)
+    XCTAssertEqual(metadata.angles.map(degrees), [-45, 0])
+  }
+
+  func testDirectionlessCarPlayLaneFallsBackToStraightAhead() throws {
+    guard #available(iOS 18.0, *) else { throw XCTSkip("Structured lanes require iOS 18") }
+    let metadata = CarPlayLaneMetadata.lane(for: makeLane(ways: [], recommended: .none))
+
+    XCTAssertNil(metadata.highlightedAngle)
+    XCTAssertEqual(metadata.angles.map(degrees), [0])
+  }
+
+  func testSingleDirectionPreferredCarPlayLaneNeedsNoRemainingAngles() throws {
+    guard #available(iOS 18.0, *) else { throw XCTSkip("Structured lanes require iOS 18") }
+    let metadata = CarPlayLaneMetadata.lane(
+      for: makeLane(ways: [.right], recommended: .right))
+    let highlightedAngle = try XCTUnwrap(metadata.highlightedAngle)
+
+    XCTAssertEqual(degrees(highlightedAngle), 90)
+    XCTAssertTrue(metadata.angles.isEmpty)
+  }
+
+  func testInstructionVariants() {
+    func variants(junctionRef: String = "",
+                  destinationRef: String = "",
+                  destination: String = "") -> [String] {
+      NavigationInstructionFormatter.instructionVariants(roadName: "Storoveien",
+                                                         roadRef: "150",
+                                                         junctionRef: junctionRef,
+                                                         destinationRef: destinationRef,
+                                                         destination: destination)
+    }
+
+    XCTAssertEqual(variants(), ["150 Storoveien", "Storoveien", "150"])
+    XCTAssertEqual(variants(junctionRef: "67"), ["Exit 67: 150 Storoveien", "Exit 67"])
+    XCTAssertEqual(variants(destinationRef: "E6"), ["E6"])
+    XCTAssertEqual(variants(destination: "Smestad"), ["Smestad"])
+    XCTAssertEqual(variants(junctionRef: "67", destinationRef: "E6"), ["Exit 67: E6", "Exit 67"])
+    XCTAssertEqual(variants(junctionRef: "67", destination: "Smestad"),
+                   ["Exit 67 → Smestad", "Exit 67"])
+    XCTAssertEqual(variants(destinationRef: "E6", destination: "Smestad"), ["E6 → Smestad", "E6"])
+    XCTAssertEqual(variants(junctionRef: "67", destinationRef: "E6", destination: "Smestad"),
+                   ["Exit 67: E6 → Smestad", "Exit 67: E6", "Exit 67"])
+
+    XCTAssertEqual(variants(junctionRef: "6A",
+                            destinationRef: "US 101 South",
+                            destination: "San Jose; San Francisco"),
+                   ["Exit 6A: US 101 South → San Jose / San Francisco",
+                    "Exit 6A: US 101 South → San Jose",
+                    "Exit 6A: US 101 South",
+                    "Exit 6A"])
 
     // No structured data at all yields no variants, so callers keep their fallback.
     let empty = NavigationInstructionFormatter.instructionVariants(roadName: "",
                                                                    roadRef: "",
                                                                    junctionRef: "",
                                                                    destinationRef: "",
-                                                                   destination: "",
-                                                                   isLink: false)
+                                                                   destination: "")
     XCTAssertTrue(empty.isEmpty)
+  }
+
+  func testCarPlayRoadFollowingVariantsUseDestinationRefAndCompactDestinations() {
+    let variants = NavigationInstructionFormatter.carPlayRoadFollowingManeuverVariants(
+      roadName: "Bayshore Freeway",
+      roadRef: "US 101",
+      destinationRef: "US 101 South",
+      destination: "San Jose; San Francisco")
+
+    XCTAssertEqual(variants, [
+      "US 101 South → San Jose / San Francisco",
+      "US 101 South → San Jose",
+      "US 101 South",
+    ])
+    XCTAssertFalse(variants.contains { $0.contains("Exit") })
+  }
+
+  func testCarPlayRoadFollowingVariantsUseDestinationsWithoutRef() {
+    let variants = NavigationInstructionFormatter.carPlayRoadFollowingManeuverVariants(
+      roadName: "Storoveien",
+      roadRef: "150;Ring 3",
+      destinationRef: "",
+      destination: "Grefsen;Sandaker")
+
+    XCTAssertEqual(variants, ["Grefsen / Sandaker", "Grefsen"])
+  }
+
+  func testCarPlayRoadFollowingVariantsFallBackToRoadNameAndRef() {
+    let variants = NavigationInstructionFormatter.carPlayRoadFollowingManeuverVariants(
+      roadName: "Bayshore Freeway",
+      roadRef: "CA 85",
+      destinationRef: "",
+      destination: "")
+
+    XCTAssertEqual(variants, ["CA 85 Bayshore Freeway", "Bayshore Freeway", "CA 85"])
+  }
+
+  func testCarPlayInstrumentClusterMetadataSetsDestinationsAndLocalizedExit() throws {
+    guard #available(iOS 17.4, *) else { throw XCTSkip("Navigation metadata requires iOS 17.4") }
+    let maneuver = CPManeuver()
+    let routeInfo = makeRouteInfo(roadName: "",
+                                  roadRef: "",
+                                  junctionRef: " 6A ",
+                                  destinationRef: "US 101 South",
+                                  destination: "San Jose; San Francisco",
+                                  isLink: true)
+
+    CarPlayInstrumentClusterMetadata.apply(to: maneuver, description: CarPlayManeuverDescription(routeInfo: routeInfo))
+
+    let roadFollowingVariants = try XCTUnwrap(maneuver.roadFollowingManeuverVariants)
+    XCTAssertEqual(roadFollowingVariants, [
+      "US 101 South → San Jose / San Francisco",
+      "US 101 South → San Jose",
+      "US 101 South",
+    ])
+    XCTAssertEqual(maneuver.highwayExitLabel, "Exit 6A")
+    XCTAssertFalse(roadFollowingVariants.contains { $0.contains("Exit 6A") })
+  }
+
+  func testCarPlayInstrumentClusterMetadataLeavesEmptyRoadTextUnset() throws {
+    guard #available(iOS 17.4, *) else { throw XCTSkip("Navigation metadata requires iOS 17.4") }
+    let maneuver = CPManeuver()
+    let routeInfo = makeRouteInfo(roadName: "",
+                                  roadRef: "",
+                                  junctionRef: "",
+                                  destinationRef: "",
+                                  destination: "",
+                                  isLink: false)
+
+    CarPlayInstrumentClusterMetadata.apply(to: maneuver, description: CarPlayManeuverDescription(routeInfo: routeInfo))
+
+    XCTAssertNil(maneuver.roadFollowingManeuverVariants)
+    XCTAssertTrue(maneuver.highwayExitLabel.isEmpty)
   }
 
   func testCarPlayRoadShieldInstructionVariants() {
@@ -160,11 +693,10 @@ final class CarPlayServiceTests: XCTestCase {
       junctionRef: "",
       destinationRef: "",
       destination: "",
-      isLink: false,
       isLeftHandTraffic: false,
       shields: shields)
 
-    XCTAssertEqual(variants.text.first, "SP246;E 70 East Passo Xon")
+    XCTAssertEqual(variants.text.first, "SP246 / E 70 East Passo Xon")
     XCTAssertFalse(variants.attributed.isEmpty)
     let attachmentCounts = variants.attributed.map { attachments(in: $0).count }
     XCTAssertTrue(attachmentCounts.contains(2), "The richest variant should retain every shield")
@@ -184,6 +716,147 @@ final class CarPlayServiceTests: XCTestCase {
     }
   }
 
+  func testRoadWithoutDestinationUsesShieldedRoadFallback() {
+    let shields = RoadShieldInfo(
+      targetRoadShields: [
+        RoadShield(type: .genericGreen, text: "150", additionalText: nil),
+        RoadShield(type: .genericWhite, text: "Ring 3", additionalText: nil),
+      ],
+      junctionRoadShields: [])
+
+    let variants = NavigationInstructionFormatter.carPlayInstructionVariants(
+      roadName: "Storoveien",
+      roadRef: "150;Ring 3",
+      junctionRef: "",
+      destinationRef: "",
+      destination: "",
+      isLeftHandTraffic: false,
+      shields: shields)
+
+    XCTAssertEqual(variants.text.first, "150 / Ring 3 Storoveien")
+    XCTAssertEqual(attachments(in: variants.attributed.first!).count, 2)
+    XCTAssertTrue(variants.attributed.first!.string.contains("Storoveien"))
+
+    let phoneInstruction = NavigationInstructionFormatter.attributedInstruction(
+      nextStreet: "Storoveien",
+      roadName: "Storoveien",
+      roadRef: "150;Ring 3",
+      junctionRef: "",
+      destinationRef: "",
+      destination: "",
+      isLeftHandTraffic: false,
+      shields: shields,
+      textSize: 16,
+      textColor: nil)
+    XCTAssertEqual(attachments(in: phoneInstruction).count, 2)
+    XCTAssertTrue(phoneInstruction.string.contains("Storoveien"))
+  }
+
+  func testDestinationWithoutDestinationRefExcludesRoadFallback() {
+    let unexpectedRoadShields = RoadShieldInfo(
+      targetRoadShields: [
+        RoadShield(type: .genericGreen, text: "150", additionalText: nil),
+        RoadShield(type: .genericWhite, text: "Ring 3", additionalText: nil),
+      ],
+      junctionRoadShields: [])
+
+    let variants = NavigationInstructionFormatter.carPlayInstructionVariants(
+      roadName: "Storoveien",
+      roadRef: "150;Ring 3",
+      junctionRef: "",
+      destinationRef: "",
+      destination: "Grefsen;Sandaker",
+      isLeftHandTraffic: false,
+      shields: unexpectedRoadShields)
+
+    XCTAssertEqual(variants.text, ["Grefsen / Sandaker", "Grefsen"])
+    XCTAssertTrue(variants.attributed.isEmpty)
+    XCTAssertFalse(variants.text.contains { $0.contains("Ring 3") || $0.contains("Storoveien") })
+
+    let phoneInstruction = NavigationInstructionFormatter.attributedInstruction(
+      nextStreet: "Grefsen / Sandaker",
+      roadName: "Storoveien",
+      roadRef: "150;Ring 3",
+      junctionRef: "",
+      destinationRef: "",
+      destination: "Grefsen;Sandaker",
+      isLeftHandTraffic: false,
+      shields: unexpectedRoadShields,
+      textSize: 16,
+      textColor: nil)
+    XCTAssertEqual(phoneInstruction.string, "Grefsen / Sandaker")
+    XCTAssertTrue(attachments(in: phoneInstruction).isEmpty)
+  }
+
+  func testDestinationRefOnlyUsesShieldAndExcludesRoadFallback() {
+    let shields = RoadShieldInfo(
+      targetRoadShields: [RoadShield(type: .genericGreen, text: "E6", additionalText: nil)],
+      junctionRoadShields: [])
+
+    let variants = NavigationInstructionFormatter.carPlayInstructionVariants(
+      roadName: "Storoveien",
+      roadRef: "150",
+      junctionRef: "",
+      destinationRef: "E6",
+      destination: "",
+      isLeftHandTraffic: false,
+      shields: shields)
+
+    XCTAssertEqual(variants.text, ["E6"])
+    XCTAssertEqual(variants.attributed.count, 1)
+    XCTAssertEqual(attachments(in: variants.attributed[0]).count, 1)
+    XCTAssertFalse(variants.attributed[0].string.contains("Storoveien"))
+
+    let phoneInstruction = NavigationInstructionFormatter.attributedInstruction(
+      nextStreet: "E6",
+      roadName: "Storoveien",
+      roadRef: "150",
+      junctionRef: "",
+      destinationRef: "E6",
+      destination: "",
+      isLeftHandTraffic: false,
+      shields: shields,
+      textSize: 16,
+      textColor: nil)
+    XCTAssertEqual(attachments(in: phoneInstruction).count, 1)
+    XCTAssertFalse(phoneInstruction.string.contains("Storoveien"))
+  }
+
+  func testDestinationWithoutDestinationRefRetainsJunctionShield() {
+    let shields = RoadShieldInfo(
+      targetRoadShields: [RoadShield(type: .genericGreen, text: "150", additionalText: nil)],
+      junctionRoadShields: [RoadShield(type: .genericGreen, text: "67", additionalText: nil)])
+
+    let variants = NavigationInstructionFormatter.carPlayInstructionVariants(
+      roadName: "Storoveien",
+      roadRef: "150",
+      junctionRef: "67",
+      destinationRef: "",
+      destination: "Smestad",
+      isLeftHandTraffic: false,
+      shields: shields)
+
+    XCTAssertEqual(variants.text, ["Exit 67 → Smestad", "Exit 67"])
+    XCTAssertEqual(variants.attributed.map { attachments(in: $0).count }, [1, 1])
+    XCTAssertTrue(variants.attributed[0].string.contains("Smestad"))
+    XCTAssertFalse(variants.attributed.contains { $0.string.contains("Storoveien") })
+
+    let phoneInstruction = NavigationInstructionFormatter.attributedInstruction(
+      nextStreet: "Smestad",
+      roadName: "Storoveien",
+      roadRef: "150",
+      junctionRef: "67",
+      destinationRef: "",
+      destination: "Smestad",
+      isLeftHandTraffic: false,
+      shields: shields,
+      textSize: 16,
+      textColor: nil)
+    XCTAssertEqual(attachments(in: phoneInstruction).count, 1)
+    XCTAssertTrue(phoneInstruction.string.contains("Smestad"))
+    XCTAssertFalse(phoneInstruction.string.contains("Storoveien"))
+  }
+
   func testCarPlayExitShieldInstructionVariants() {
     let shields = RoadShieldInfo(
       targetRoadShields: [RoadShield(type: .usHighway, text: "101", additionalText: "South")],
@@ -195,7 +868,6 @@ final class CarPlayServiceTests: XCTestCase {
       junctionRef: "6A",
       destinationRef: "US 101 South",
       destination: "San Jose; San Francisco",
-      isLink: true,
       isLeftHandTraffic: false,
       shields: shields)
 
@@ -203,6 +875,27 @@ final class CarPlayServiceTests: XCTestCase {
     XCTAssertEqual(attachments(in: variants.attributed.first!).count, 2)
     XCTAssertTrue(variants.attributed.first!.string.contains("South"))
     XCTAssertTrue(variants.attributed.first!.string.contains("San Jose / San Francisco"))
+    XCTAssertTrue(variants.text.allSatisfy { $0.contains("Exit 6A") })
+    XCTAssertTrue(variants.attributed.allSatisfy { !attachments(in: $0).isEmpty },
+                  "Every attributed variant for a numbered exit must retain its junction shield")
+    XCTAssertEqual(attachments(in: variants.attributed.last!).count, 1)
+    XCTAssertFalse(variants.attributed.last!.string.contains("San Jose"),
+                   "The shortest attributed fallback should be the junction shield alone")
+
+    let phoneInstruction = NavigationInstructionFormatter.attributedInstruction(
+      nextStreet: "US 101 South > San Jose / San Francisco",
+      roadName: "",
+      roadRef: "",
+      junctionRef: "6A",
+      destinationRef: "US 101 South",
+      destination: "San Jose; San Francisco",
+      isLeftHandTraffic: false,
+      shields: shields,
+      textSize: 16,
+      textColor: nil)
+    XCTAssertEqual(attachments(in: phoneInstruction).count, 2)
+    XCTAssertTrue(phoneInstruction.string.contains("South"))
+    XCTAssertTrue(phoneInstruction.string.contains("San Jose / San Francisco"))
   }
 
   func testCarPlayAttributedVariantsRequireShields() {
@@ -212,7 +905,6 @@ final class CarPlayServiceTests: XCTestCase {
       junctionRef: "",
       destinationRef: "",
       destination: "",
-      isLink: false,
       isLeftHandTraffic: false,
       shields: nil)
 
@@ -230,7 +922,6 @@ final class CarPlayServiceTests: XCTestCase {
       junctionRef: "",
       destinationRef: "",
       destination: "",
-      isLink: false,
       isLeftHandTraffic: false,
       shields: shields)
 
@@ -249,6 +940,79 @@ final class CarPlayServiceTests: XCTestCase {
       }
     }
     return result
+  }
+
+  private func makeRouteInfo(routeID: UInt64 = 1,
+                             turnIndex: UInt32 = 1,
+                             carDirection: CarDirection = .turnLeft,
+                             distanceToTurn: Double = 100,
+                             firstNotificationDistanceMeters: Double = 0,
+                             secondNotificationDistanceMeters: Double = 0,
+                             lanes: [LaneInfo] = [],
+                             roadName: String = "Main Street",
+                             roadRef: String = "",
+                             junctionRef: String = "",
+                             destinationRef: String = "",
+                             destination: String = "",
+                             isLink: Bool = false,
+                             currentStep: UInt32? = 1,
+                             nextStep: UInt32? = nil) -> RouteInfo {
+    return RouteInfo(routeID: routeID,
+                     turnIndex: turnIndex,
+                     currentStep: currentStep.map { NSNumber(value: $0) },
+                     nextStep: nextStep.map { NSNumber(value: $0) },
+                     timeToTarget: 100,
+                     targetDistance: 1,
+                     targetUnitsIndex: 1,
+                     distanceToTurn: distanceToTurn,
+                     turnUnitsIndex: 0,
+                     turnImageName: "ic_cp_simple_left",
+                     firstNotificationDistanceMeters: firstNotificationDistanceMeters,
+                     secondNotificationDistanceMeters: secondNotificationDistanceMeters,
+                     speedMps: 10,
+                     speedLimitMps: 50,
+                     roundExitNumber: 0,
+                     lanes: lanes,
+                     roadName: roadName,
+                     roadRef: roadRef,
+                     junctionRef: junctionRef,
+                     destinationRef: destinationRef,
+                     destination: destination,
+                     isLink: isLink,
+                     roadShields: nil,
+                     currentRoadName: "Current Street",
+                     carDirectionIndex: carDirection.rawValue,
+                     isLeftHandTraffic: false)
+  }
+
+  private func makePlan(routeID: UInt64 = 1,
+                        _ steps: [(sequence: UInt32, direction: CarDirection, distanceFromStart: Double)])
+    -> CarPlayRoutePlan {
+    var previousDistance = 0.0
+    return CarPlayRoutePlan(routeID: routeID, steps: steps.map { step in
+      defer { previousDistance = step.distanceFromStart }
+      return CarPlayRouteStep(sequence: step.sequence,
+                              carDirection: step.direction,
+                              exitNumber: step.direction.isRoundabout ? 2 : 0,
+                              distanceFromStartMeters: step.distanceFromStart,
+                              distanceFromPreviousMeters: step.distanceFromStart - previousDistance,
+                              roadName: "Main Street",
+                              roadRef: "",
+                              junctionRef: "",
+                              destinationRef: "",
+                              destination: "",
+                              isLink: false,
+                              lanes: [])
+    })
+  }
+
+  private func makeLane(ways: [LaneWay], recommended: LaneWay) -> LaneInfo {
+    return LaneInfo(laneWays: ways.map { NSNumber(value: $0.rawValue) },
+                    recommendedWay: recommended.rawValue)
+  }
+
+  private func degrees(_ angle: Measurement<UnitAngle>) -> Double {
+    return angle.converted(to: .degrees).value
   }
 
   private func averageVisibleLuminance(of image: UIImage) throws -> CGFloat {
@@ -270,6 +1034,22 @@ final class CarPlayServiceTests: XCTestCase {
   private func visiblePixelCount(of image: UIImage) throws -> Int {
     let pixels = try rgbaPixels(of: image)
     return stride(from: 3, to: pixels.count, by: 4).filter { pixels[$0] > 32 }.count
+  }
+
+  private func visibleBounds(of image: UIImage) throws -> CGRect {
+    let pixels = try rgbaPixels(of: image)
+    let width = try XCTUnwrap(image.cgImage).width
+    var minX = Int.max, minY = Int.max, maxX = -1, maxY = -1
+    for index in stride(from: 3, to: pixels.count, by: 4) where pixels[index] > 32 {
+      let pixel = index / 4
+      minX = min(minX, pixel % width)
+      maxX = max(maxX, pixel % width)
+      minY = min(minY, pixel / width)
+      maxY = max(maxY, pixel / width)
+    }
+    XCTAssertGreaterThanOrEqual(maxX, 0, "The image should contain visible pixels")
+    guard maxX >= 0 else { return .zero }
+    return CGRect(x: minX, y: minY, width: maxX - minX + 1, height: maxY - minY + 1)
   }
 
   private func rgbaPixels(of image: UIImage) throws -> [UInt8] {

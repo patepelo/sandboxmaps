@@ -52,6 +52,11 @@ void LocalCountryFile::DeleteFromDisk(MapFileType type) const
 {
   ASSERT_LESS(base::Underlying(type), m_files.size(), ());
 
+  // World files in the bundle can't be deleted
+  if (IsInBundle())
+    return;
+
+  LOG(LDEBUG, ("Deleting map file", *this));
   if (OnDisk(type) && !base::DeleteFileX(GetPath(type)))
     LOG(LERROR, (type, "from", *this, "wasn't deleted from disk."));
 }

@@ -805,7 +805,7 @@
     <string name="tts_info_link">https://www.comaps.app/support/tts-configuration-guide-for-android/</string>
     <string name="app_site_url">https://comaps.app/tr/</string>
     <string name="instagram_url">https://www.instagram.com/comaps.app/</string>
-    <string name="telegram_url">https://t.me/CoMaps_TR</string>
+    <string name="telegram_url">https://t.me/Sandbox Maps_TR</string>
     <string name="pref_left_button_title">Sol alt tuş ataması</string>
     <string name="pref_left_button_disable">Devre dışı</string>
     <string name="error_enter_correct_fediverse_page">Gireceğiniz Mastodon kullanıcı adı ve adresi halihazırda mevcut olmalı</string>

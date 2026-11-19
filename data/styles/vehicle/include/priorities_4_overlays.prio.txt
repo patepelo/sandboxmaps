@@ -248,6 +248,7 @@ shop-caravan                                        # icon z17-
 
 amenity-car_pooling                                 # icon z15- (also has caption(optional) z16-, area z15-)
 amenity-parking                                     # icon z15- (also has caption(optional) z16-, area z15-)
+amenity-parking-customers                           # icon z15- (also has caption(optional) z16-, area z15-)
 amenity-parking-fee                                 # icon z15- (also has caption(optional) z16-, area z15-)
 amenity-parking-multi-storey                        # icon z15- (also has caption(optional) z16-, area z15-)
 amenity-parking-multi-storey-fee                    # icon z15- (also has caption(optional) z16-, area z15-)
@@ -736,6 +737,7 @@ historic-archaeological_site                        # icon z17- (also has captio
 === 300
 
 amenity-fast_food                                   # icon z17- (also has caption(optional) z17-)
+amenity-fast_food-cafeteria                         # icon z17- (also has caption(optional) z17-)
 shop-convenience                                    # icon z17- (also has caption(optional) z18-)
 === 250
 
@@ -761,6 +763,7 @@ leisure-park-private                                # icon z14- (also has captio
 === 100
 
 building                                            # caption z18- (also has area z15-)
+building-abandoned                                  # caption z18- (also has area z15-)
 building-has_parts                                  # caption z18- (also has area z15-)
 === 50
 
@@ -852,6 +855,7 @@ entrance-emergency                                  # icon z20- (also has captio
 
 # amenity-car_pooling                               # caption(optional) z16- (also has icon z15-, area z15-)
 # amenity-parking                                   # caption(optional) z16- (also has icon z15-, area z15-)
+# amenity-parking-customers                         # caption(optional) z16- (also has icon z15-, area z15-)
 # amenity-parking-fee                               # caption(optional) z16- (also has icon z15-, area z15-)
 # amenity-parking-multi-storey                      # caption(optional) z16- (also has icon z15-, area z15-)
 # amenity-parking-multi-storey-fee                  # caption(optional) z16- (also has icon z15-, area z15-)
@@ -1246,6 +1250,7 @@ entrance-emergency                                  # icon z20- (also has captio
 # === -9700
 
 # amenity-fast_food                                 # caption(optional) z17- (also has icon z17-)
+# amenity-fast_food-cafeteria                       # caption(optional) z17- (also has icon z17-)
 # shop-convenience                                  # caption(optional) z18- (also has icon z17-)
 # === -9750
 
@@ -1284,6 +1289,6 @@ amenity-loading_dock                                # icon z19- (also has captio
 # amenity-loading_dock                              # caption(optional) z19- (also has icon z19-)
 # entrance-garage                                   # caption(optional) z20- (also has icon z20-)
 # entrance-house                                    # caption(optional) z20- (also has icon z20-)
-entrance-service                                    # icon z20- (also has caption(optional) z20-)
-# entrance-service                                  # caption(optional) z20- (also has icon z20-)
+entrance-service                                    # icon z19- (also has caption(optional) z20-)
+# entrance-service                                  # caption(optional) z20- (also has icon z19-)
 === -10000
