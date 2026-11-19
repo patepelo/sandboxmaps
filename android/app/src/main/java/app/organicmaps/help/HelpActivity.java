@@ -9,7 +9,7 @@ public class HelpActivity extends BaseToolbarActivity
   @Override
   protected int getToolbarTitle()
   {
-    return R.string.about_menu_title;
+    return R.string.about_title;
   }
 
   @Override

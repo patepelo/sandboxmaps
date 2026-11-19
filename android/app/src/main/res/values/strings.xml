@@ -41,13 +41,23 @@
     <!-- Text in About screen -->
     <string name="about_headline">An experimental fork of CoMaps</string>
     <!-- Text in About screen -->
-    <string name="about_proposition_1">Just for fun</string>
+    <string name="about_proposition_1">• Just for fun</string>
     <!-- Text in About screen -->
-    <string name="about_proposition_2">Testing things around</string>
+    <string name="about_proposition_2">• Testing things around</string>
     <!-- Text in About screen -->
-    <string name="about_proposition_3">• Unofficial — use at your own risk</string>
+    <string name="about_proposition_3">• Unofficial. Use at your own risk.</string>
     <!-- Text in About screen -->
     <string name="about_developed_by_enthusiasts">Built on CoMaps, Organic Maps and MAPS.ME, under the Apache 2.0 license. Not endorsed by the CoMaps project.</string>
+    <!-- About screen: where the map data comes from, written for people new to OpenStreetMap -->
+    <string name="about_title">About</string>
+    <string name="about_section_map_data">Map data</string>
+    <string name="about_section_links">Source code</string>
+    <string name="about_section_legal">Legal</string>
+    <string name="about_osm_title">Where the map comes from</string>
+    <string name="about_osm_text">The app\'s maps are mostly based on OpenStreetMap (OSM): a free map of the whole world, made by volunteers. It works a bit like Wikipedia, but for maps: anyone can add or fix roads, paths, shops and other places.\n\nSpotted something wrong or missing? Open the place and tap Edit Place, or edit on the OpenStreetMap website. Your edits are shared with everyone using Sandbox Maps, CoMaps and other apps that use OpenStreetMap.</string>
+    <string name="about_osm_learn_more">How OpenStreetMap works</string>
+    <string name="about_osm_data_date">Map data date</string>
+    <string name="about_osm_link">www.openstreetmap.org</string>
     <!-- The button that opens system location settings -->
     <string name="location_settings">Location Settings</string>
     <string name="close">Close</string>

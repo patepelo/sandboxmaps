@@ -98,12 +98,17 @@
 
   <string name="bluesky" translatable="false">Bluesky</string>
   <string name="codeberg" translatable="false">Codeberg</string>
+  <string name="github" translatable="false">GitHub</string>
+  <string name="app_repo_url" translatable="false">https://github.com/patepelo/sandboxmaps</string>
   <string name="editor_line_social_network" translatable="false">LINE</string>
   <string name="facebook" translatable="false">Facebook</string>
   <string name="instagram" translatable="false">Instagram</string>
   <string name="mastodon" translatable="false">Mastodon</string>
   <string name="matrix" translatable="false">Matrix</string>
   <string name="openstreetmap" translatable="false">OpenStreetMap</string>
+  <string name="privacy_policy_url" translatable="false">file:///android_asset/privacy.html</string>
+  <string name="terms_of_use_url" translatable="false">file:///android_asset/terms.html</string>
+  <string name="osm_explainer_url" translatable="false">file:///android_asset/openstreetmap.html</string>
   <string name="telegram" translatable="false">Telegram</string>
   <string name="twitter" translatable="false">X (Twitter)</string>
   <string name="vk" translatable="false">VK</string>

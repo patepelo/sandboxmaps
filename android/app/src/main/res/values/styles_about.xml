@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Styles for the About screen (layout/about.xml), so all its sections look the same. -->
+<resources>
+  <!-- Small coloured label above each card, e.g. "MAP DATA". -->
+  <style name="About.SectionHeader" parent="">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">@dimen/margin_base_plus</item>
+    <item name="android:layout_marginBottom">@dimen/margin_half</item>
+    <item name="android:paddingStart">@dimen/margin_base</item>
+    <item name="android:paddingEnd">@dimen/margin_base</item>
+    <item name="android:textAppearance">@style/MwmTextAppearance.Body3</item>
+    <item name="android:textColor">?colorPrimary</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:letterSpacing">0.08</item>
+  </style>
+
+  <!-- Rounded, flat card holding one section. -->
+  <style name="About.Card" parent="">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="cardBackgroundColor">?colorSurfaceContainerLow</item>
+    <item name="cardCornerRadius">16dp</item>
+    <item name="cardElevation">0dp</item>
+    <item name="strokeWidth">0dp</item>
+  </style>
+
+  <!-- Body text inside a card. -->
+  <style name="About.Text" parent="">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textAppearance">@style/MwmTextAppearance.Body2.Primary</item>
+    <item name="android:lineSpacingMultiplier">1.15</item>
+  </style>
+
+  <!-- Tappable row inside a card. -->
+  <style name="About.Row" parent="MwmWidget.TextView.Item">
+    <item name="android:paddingStart">@dimen/margin_base</item>
+    <item name="android:paddingEnd">@dimen/margin_base</item>
+    <item name="android:drawablePadding">@dimen/margin_base</item>
+    <item name="android:textAlignment">viewStart</item>
+  </style>
+
+  <!-- Thin line between parts of a card. -->
+  <style name="About.Divider" parent="">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/divider_height</item>
+  </style>
+</resources>

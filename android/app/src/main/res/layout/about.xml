@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- About screen. Styles are in values/styles_about.xml; used in both orientations. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,233 +13,225 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:clipChildren="false"
-      android:clipToPadding="false"
       android:orientation="vertical"
-      android:padding="@dimen/margin_base">
+      android:paddingHorizontal="@dimen/margin_base"
+      android:paddingTop="@dimen/margin_base_plus"
+      android:paddingBottom="@dimen/margin_double">
 
+    <!-- Header -->
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="@dimen/about_logo"
-        android:layout_height="@dimen/about_logo"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/margin_base"
         android:contentDescription="@string/app_name"
         app:srcCompat="@drawable/ic_logo_monochrome"
-        app:tint="?attr/colorLogo"/>
+        app:tint="?attr/colorLogo" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/project_name"
+        android:textAlignment="center"
+        android:textAppearance="@style/MwmTextAppearance.Headline5"
+        android:textColor="?android:textColorPrimary"
+        android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/margin_half"
+        android:layout_marginTop="@dimen/margin_quarter"
+        android:textAlignment="center"
         android:textAppearance="@style/MwmTextAppearance.Body3"
         android:textIsSelectable="true"
-        tools:text="2025.04.16-FDroid" />
+        tools:text="2026.11.19-1-FDroid-debug" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_base"
-        android:text="@string/about_headline"
-        android:textAlignment="center"
-        android:textAppearance="@style/MwmTextAppearance.Headline6"
-        android:textColor="?android:textColorPrimary" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/margin_half"
-        android:text="@string/about_proposition_1"
-        android:textAppearance="@style/MwmTextAppearance.Body1"
-        android:textColor="?android:textColorPrimary" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_half"
-        android:text="@string/about_proposition_2"
-        android:textAppearance="@style/MwmTextAppearance.Body1"
-        android:textColor="?android:textColorPrimary" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_half"
-        android:text="@string/about_proposition_3"
-        android:textAppearance="@style/MwmTextAppearance.Body1"
-        android:textColor="?android:textColorPrimary" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_half"
-        android:text="@string/about_developed_by_enthusiasts"
-        android:textAppearance="@style/MwmTextAppearance.Body2"
-        android:textColor="?android:textColorPrimary"
-        android:textStyle="bold" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-      <com.google.android.material.imageview.ShapeableImageView
-          android:id="@+id/osm_logo"
-          android:layout_width="@dimen/osm_logo"
-          android:layout_height="@dimen/osm_logo"
-          android:layout_gravity="center"
-          android:contentDescription="@string/openstreetmap"
-          app:srcCompat="@drawable/ic_openstreetmap_color"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
-
-      <com.google.android.material.textview.MaterialTextView
-          android:id="@+id/osm_presentation"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/margin_half"
-          android:includeFontPadding="false"
-          android:text="@string/osm_presentation"
-          android:textAppearance="@style/MwmTextAppearance.Body2"
-          android:textColor="?android:textColorPrimary"
-          android:autoLink="web"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@+id/osm_logo"
-          app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/donate"
-        style="@style/MwmWidget.M3.Button.Primary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_base"
-        android:padding="@dimen/margin_quarter"
-        android:text="@string/donate" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/report"
-        style="@style/MwmWidget.M3.Button.Secondary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_half"
-        android:text="@string/report_a_bug" />
+        android:text="@string/about_headline"
+        android:textAlignment="center"
+        android:textAppearance="@style/MwmTextAppearance.Body1.Secondary" />
 
+    <!-- What this app is -->
+    <com.google.android.material.card.MaterialCardView
+        style="@style/About.Card"
+        android:layout_marginTop="@dimen/margin_base_plus">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="@dimen/margin_base">
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/About.Text"
+            android:text="@string/about_proposition_1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/About.Text"
+            android:layout_marginTop="@dimen/margin_quarter"
+            android:text="@string/about_proposition_2" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/About.Text"
+            android:layout_marginTop="@dimen/margin_quarter"
+            android:text="@string/about_proposition_3" />
+
+        <com.google.android.material.divider.MaterialDivider
+            style="@style/About.Divider"
+            android:layout_marginVertical="@dimen/margin_base" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.15"
+            android:text="@string/about_developed_by_enthusiasts"
+            android:textAppearance="@style/MwmTextAppearance.Body3" />
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Map data -->
     <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/faq"
-      style="@style/MwmWidget.TextView.Item"
-      android:text="@string/faq"
-      android:textAlignment="viewStart"
-      app:drawableStartCompat="@drawable/ic_question_mark" />
+        style="@style/About.SectionHeader"
+        android:text="@string/about_section_map_data" />
 
+    <com.google.android.material.card.MaterialCardView style="@style/About.Card">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_base">
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="@dimen/margin_base"
+                android:contentDescription="@string/openstreetmap"
+                app:srcCompat="@drawable/ic_openstreetmap_color" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/about_osm_title"
+                android:textAppearance="@style/MwmTextAppearance.Body1"
+                android:textStyle="bold" />
+          </LinearLayout>
+
+          <com.google.android.material.textview.MaterialTextView
+              style="@style/About.Text"
+              android:layout_marginTop="@dimen/margin_base"
+              android:text="@string/about_osm_text" />
+
+          <com.google.android.material.divider.MaterialDivider
+              style="@style/About.Divider"
+              android:layout_marginVertical="@dimen/margin_base" />
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/about_osm_data_date"
+                android:textAppearance="@style/MwmTextAppearance.Body2" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/osm_data_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/MwmTextAppearance.Body2.Primary"
+                android:textIsSelectable="true"
+                android:textStyle="bold"
+                tools:text="15 Nov 2026" />
+          </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider style="@style/About.Divider" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/osm_learn_more"
+            style="@style/About.Row"
+            android:text="@string/about_osm_learn_more"
+            app:drawableEndCompat="@drawable/ic_arrow_forward"
+            app:drawableStartCompat="@drawable/ic_question_mark" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/osm_website"
+            style="@style/About.Row"
+            android:text="@string/about_osm_link"
+            app:drawableStartCompat="@drawable/ic_website" />
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Links -->
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/support_us"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/how_to_support_us"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_volunteer" />
+        style="@style/About.SectionHeader"
+        android:text="@string/about_section_links" />
 
+    <com.google.android.material.card.MaterialCardView style="@style/About.Card">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/github"
+            style="@style/About.Row"
+            android:text="@string/github"
+            app:drawableStartCompat="@drawable/ic_github" />
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Legal -->
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/news"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/news"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_news" />
+        style="@style/About.SectionHeader"
+        android:text="@string/about_section_legal" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/rate"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/rate_the_app"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_rate" />
+    <com.google.android.material.card.MaterialCardView style="@style/About.Card">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/web"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/website"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_website" />
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/code_repo"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/codeberg"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_codeberg" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/privacy_policy"
+            style="@style/About.Row"
+            android:text="@string/privacy_policy"
+            app:drawableEndCompat="@drawable/ic_arrow_forward" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mastodon"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/mastodon"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_mastodon" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/term_of_use_link"
+            style="@style/About.Row"
+            android:text="@string/terms_of_use"
+            app:drawableEndCompat="@drawable/ic_arrow_forward" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/matrix"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/matrix"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_matrix" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lemmy"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/lemmy"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_lemmy" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/bluesky"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/bluesky"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_bluesky" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/pixelfed"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/pixelfed"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_pixelfed" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/openstreetmap"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/openstreetmap"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_openstreetmap" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/email"
-        style="@style/MwmWidget.TextView.Item"
-        android:text="@string/email"
-        android:textAlignment="viewStart"
-        app:drawableStartCompat="@drawable/ic_email" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
-        android:layout_marginBottom="@dimen/margin_quarter"
-        android:layout_marginTop="@dimen/margin_quarter" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/privacy_policy"
-        style="@style/MwmWidget.TextView.Item"
-        android:textAlignment="viewStart"
-        android:text="@string/privacy_policy" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/term_of_use_link"
-        style="@style/MwmWidget.TextView.Item"
-        android:textAlignment="viewStart"
-        android:text="@string/terms_of_use" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/copyright"
-        style="@style/MwmWidget.TextView.Item"
-        android:textAlignment="viewStart"
-        android:text="@string/copyright" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/copyright"
+            style="@style/About.Row"
+            android:text="@string/copyright"
+            app:drawableEndCompat="@drawable/ic_arrow_forward" />
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
   </LinearLayout>
 </ScrollView>

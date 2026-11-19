@@ -38,11 +38,7 @@ public class CopyrightFragment extends BaseMwmFragment
   @Override
   public boolean onBackPressed()
   {
-    if (!mDelegate.onBackPressed())
-    {
-      ((HelpActivity) requireActivity()).stackFragment(HelpFragment.class, getString(R.string.about_help), null);
-    }
-
-    return true;
+    // Go back inside the page first; otherwise let the activity return to About (it also restores the title).
+    return mDelegate.onBackPressed();
   }
 }
