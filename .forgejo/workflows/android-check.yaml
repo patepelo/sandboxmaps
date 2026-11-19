@@ -13,6 +13,7 @@ on:
       - CMakeLists.txt
       - defines.hpp
       - .forgejo/workflows/android-check.yaml  # Run check on self change
+      - .forgejo/actions/setup-gradle/**
       - libs/**
       - '!**/*_tests/**'
       - '!libs/**/*apple*'
@@ -55,6 +56,9 @@ jobs:
           path: data/world_mwm
           key: world-mwm
 
+      - name: Setup Gradle
+        uses: ./.forgejo/actions/setup-gradle
+
       - name: Lint
         shell: bash
         working-directory: android
@@ -73,7 +77,8 @@ jobs:
             arch: arm64
           - flavor: FdroidDebug
             type: Debug
-            arch: arm32
+            # Both ARM ABIs, so this actually installs on 64-bit-only phones.
+            arch: "arm32 -Parm64"
     # Cancels previous jobs if the same branch or PR was updated again.
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.flavor }}-${{ github.event.pull_request.number || github.ref }}
@@ -93,6 +98,9 @@ jobs:
         with:
           path: data/world_mwm
           key: world-mwm
+
+      - name: Setup Gradle
+        uses: ./.forgejo/actions/setup-gradle
 
       - name: Compile
         shell: bash

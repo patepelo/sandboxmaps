@@ -1,9 +1,11 @@
 #pragma once
 
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include "indexer/ftraits.hpp"
+#include "indexer/reviews_model.hpp"
 #include "indexer/yes_no_unknown.hpp"
 
 struct FeatureID;
@@ -86,10 +88,21 @@ bool HasToilets(TypesHolder const & types);
 /// @returns formatted drinking water type.
 std::string FormatDrinkingWater(TypesHolder const & types);
 
-/// @returns starsCount of ★ symbol.
+/// @returns formatted star rating of a hotel/restaurant.
 std::string FormatStars(uint8_t starsCount);
+
+/// @returns formatted rating from reviews.
+std::string FormatRating(reviews::Rating rating);
 
 /// @returns formatted elevation with ▲ symbol and units.
 std::string FormatElevation(std::string_view elevation);
+
+struct TitleAndBranch
+{
+  std::string m_title;
+  std::string m_branch;
+};
+
+TitleAndBranch SplitTitleAndBranch(std::string const & title, std::string_view branch);
 
 }  // namespace feature

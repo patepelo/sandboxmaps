@@ -107,50 +107,54 @@
     <string name="measurement_units_summary">Choose between miles and kilometers</string>
 
     <!-- SECTION: Search categories -->
-    <!-- Search category for cafes, bars, restaurants; any changes should be duplicated in categories.txt @category_eat! -->
+    <!-- Search category for cafes, bars, restaurants; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_eat! -->
     <string name="category_eat">Where to eat</string>
-    <!-- Search category for grocery stores; any changes should be duplicated in categories.txt @category_food! -->
+    <!-- Search category for grocery stores; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_food! -->
     <string name="category_food">Groceries</string>
-    <!-- Search category for public transport; any changes should be duplicated in categories.txt @category_transport! -->
+    <!-- Search category for public transport; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_transport! -->
     <string name="category_transport">Transport</string>
-    <!-- Search category for fuel stations; any changes should be duplicated in categories.txt @category_fuel! -->
+    <!-- Search category for fuel stations; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_fuel! -->
     <string name="category_fuel">Gas</string>
-    <!-- Search category for parking lots; any changes should be duplicated in categories.txt @category_parking! -->
+    <!-- Search category for parking lots; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_parking! -->
     <string name="category_parking">Parking</string>
-    <!-- Search category for malls/clothes/shoes/gifts/jewellery/sport shops; any changes should be duplicated in categories.txt @category_shopping! -->
+    <!-- Search category for malls/clothes/shoes/gifts/jewellery/sport shops; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_shopping! -->
     <string name="category_shopping">Shopping</string>
-    <!-- Search category for second_hand/charity/antique/auction shops; any changes should be duplicated in categories.txt @category_secondhand! -->
+    <!-- Search category for second_hand/charity/antique/auction shops; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_secondhand! -->
     <string name="category_secondhand">Second Hand</string>
-    <!-- Search category for places to stay; any changes should be duplicated in categories.txt @category_hotel! -->
-    <string name="category_hotel">Hotel</string>
-    <!-- Search category sight seeings and touristic attractions; any changes should be duplicated in categories.txt @category_tourism! -->
+    <!-- Search category for places to stay; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_hotel! -->
+    <string name="category_hotel">Accommodation</string>
+    <!-- Search category sight seeings and touristic attractions; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_tourism! -->
     <string name="category_tourism">Sights</string>
-    <!-- Search category for entertainment; any changes should be duplicated in categories.txt @category_entertainment! -->
+    <!-- Search category for entertainment; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_entertainment! -->
     <string name="category_entertainment">Entertainment</string>
-    <!-- Search category for ATMs; any changes should be duplicated in categories.txt @category_atm! -->
+    <!-- Search category for ATMs; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_atm! -->
     <string name="category_atm">ATM</string>
-    <!-- Search category for nightclubs/bars; any changes should be duplicated in categories.txt @category_nightlife! -->
+    <!-- Search category for nightclubs/bars; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_nightlife! -->
     <string name="category_nightlife">Nightlife</string>
-    <!-- Search category for water park/disneyland/playground/toys store; any changes should be duplicated in categories.txt @category_children! -->
+    <!-- Search category for water park/disneyland/playground/toys store; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_children! -->
     <string name="category_children">Family holiday</string>
-    <!-- Search category for banks; any changes should be duplicated in categories.txt @category_bank! -->
+    <!-- Search category for banks; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_bank! -->
     <string name="category_bank">Bank</string>
-    <!-- Search category for pharmacies; any changes should be duplicated in categories.txt @category_pharmacy! -->
+    <!-- Search category for pharmacies; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_pharmacy! -->
     <string name="category_pharmacy">Pharmacy</string>
-    <!-- Search category for hospitals; any changes should be duplicated in categories.txt @category_hospital! -->
-    <string name="category_hospital">Hospital</string>
-    <!-- Search category for toilets; any changes should be duplicated in categories.txt @category_toilet! -->
+    <!-- Search category for hospitals; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_hospital! -->
+    <string name="category_hospital">Healthcare</string>
+    <!-- Search category for toilets; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_toilet! -->
     <string name="category_toilet">Toilet</string>
-    <!-- Search category for post offices; any changes should be duplicated in categories.txt @category_post! -->
+    <!-- Search category for post offices; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_post! -->
     <string name="category_post">Post</string>
-    <!-- Search category for police; any changes should be duplicated in categories.txt @category_police! -->
+    <!-- Search category for police; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_police! -->
     <string name="category_police">Police</string>
-    <!-- Search category for recycling; any changes should be duplicated in categories.txt @category_recycling! -->
+    <!-- Search category for recycling; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_recycling! -->
     <string name="category_recycling">Recycling</string>
-    <!-- Search category for water; any changes should be duplicated in categories.txt @category_water! also used to sort Favorites by type -->
+    <!-- Search category for water; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_water! also used to sort Favorites by type -->
     <string name="category_water">Water</string>
-    <!-- Search category for RV facilities; any changes should be duplicated in categories.txt @category_rv! -->
+    <!-- Search category for RV facilities; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_rv! -->
     <string name="category_rv">RV Facilities</string>
+    <!-- Search category for picnic; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_picnic! -->
+    <string name="category_picnic">Picnic Table</string>
+    <!-- Search category for shelter; any changes should be duplicated in  data/translations/categories-strings/en.json/localize.json @category_shelter -->
+    <string name="category_shelter">Shelter</string>
 
     <!-- SECTION: Other translations -->
     <!-- Notes field in Favorites view -->
@@ -434,6 +438,10 @@
     <string name="p2p_reroute_from_current">Do you want to plan a route from your current location?</string>
     <!-- Edit open hours/set time and minutes dialog -->
     <string name="next_button">Next</string>
+    <string name="route_preview_previous_turn">Previous turn</string>
+    <string name="route_preview_next_turn">Next turn</string>
+    <string name="route_preview_turn_position">%1$d of %2$d</string>
+    <string name="route_preview_cancel">Close route preview</string>
     <!-- Tab title in the Edit Opening Hours time picker -->
     <string name="editor_time_from">From</string>
     <!-- Tab title in the Edit Opening Hours time picker -->
@@ -620,13 +628,13 @@
     <string name="accept">Accept</string>
     <!-- For the first routing -->
     <string name="decline">Decline</string>
-    <string name="mobile_data_dialog">Use mobile internet to show detailed information?</string>
+    <string name="mobile_data_dialog">Use mobile internet?</string>
     <string name="mobile_data_option_always">Use Always</string>
     <string name="mobile_data_option_today">Only Today</string>
     <string name="mobile_data_option_not_today">Do Not Use Today</string>
     <string name="mobile_data">Mobile Internet</string>
     <!-- NOTE to translators: please synchronize your translation with the English one. -->
-    <string name="mobile_data_description">Mobile internet is required for map update notifications and uploading edits</string>
+    <string name="mobile_data_description">Mobile internet is required for map update notifications, uploading edits and linking to review websites</string>
     <string name="mobile_data_option_never">Never Use</string>
     <string name="mobile_data_option_ask">Always Ask</string>
     <string name="traffic_update_maps_text">To display traffic data, maps must be updated</string>
@@ -965,7 +973,8 @@
     <string name="backup_interval_manual_only">Off (manual only)</string>
     <string name="dialog_report_error_missing_folder">The selected backup location is not available or writable. Select a different location, please.</string>
     <string name="dialog_report_error_with_logs">Please send us an error report:\n
-    - \"Enable logging\" in the settings\n
+    - Go to Settings, then choose "Advanced"\n
+    - \"Enable logging\"\n
     - reproduce the problem\n
     - in the \"About &amp; Help\" screen press the \"Report a bug\" button and send via email or chat\n
     - disable logging
@@ -1059,5 +1068,15 @@
     <string name="place_reviews_title">Place Reviews</string>
     <string name="place_reviews">%1$s Reviews</string>
     <string name="rating_stars_description">stars: %.1f</string>
-    <string name="reviews_by_mangrove">Reviews from Mangrove.\nAdd reviews in <a href="https://mapcomplete.org">MapComplete</a>.</string>
+    <string name="reviews_by_mangrove">Reviews from Mangrove</string>
+    <string name="add_review">Add a Review via %1$s</string>
+    <string name="add_review_url_resolution_failed">Place not found in the latest OpenStreetMap.</string>
+    <string name="add_review_url_resolution_failed_dev">Place not found in the DEV OpenStreetMap.</string>
+    <string name="internet_unavailable">No Internet connection</string>
+    <!-- Stars -->
+    <string name="stars_1">1-star</string>
+    <string name="stars_2">2-star</string>
+    <string name="stars_3">3-star</string>
+    <string name="stars_4">4-star</string>
+    <string name="stars_5">5-star</string>
 </resources>

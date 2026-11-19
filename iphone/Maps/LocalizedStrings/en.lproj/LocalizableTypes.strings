@@ -60,6 +60,7 @@
 "type.leisure.bowling_alley" = "Bowling Alley";
 "type.amenity.clinic" = "Clinic";
 "type.amenity.college" = "College";
+"type.amenity.research_institute" = "Research Institute";
 "type.amenity.community_centre" = "Community Centre";
 "type.amenity.community_centre.youth_centre" = "Youth Centre";
 "type.amenity.compressed_air" = "Compressed Air";
@@ -73,6 +74,7 @@
 "type.amenity.exhibition_centre" = "Exhibition Center";
 "type.amenity.money_transfer" = "Money Transfer";
 "type.amenity.music_school" = "Music School";
+"type.amenity.music_venue" = "Music Venue";
 "type.amenity.sailing_school" = "Sailing School";
 "type.amenity.flight_school" = "Flight School";
 "type.amenity.prep_school" = "Tutorial School";
@@ -82,6 +84,8 @@
 "type.building.guardhouse" = "Security Booth";
 "type.power.portal" = "Power Portal";
 "type.amenity.fast_food" = "Fast Food";
+/* Cafeteria or canteen where you can quickly have a full meal without table service. */
+"type.amenity.fast_food.cafeteria" = "Cafeteria";
 "type.amenity.ferry_terminal" = "Ferry";
 "type.amenity.fire_station" = "Fire Station";
 "type.amenity.food_court" = "Food Court";
@@ -106,6 +110,7 @@
 "type.amenity.nightclub" = "Nightclub";
 "type.amenity.nursing_home" = "Nursing Home";
 "type.amenity.parking" = "Parking";
+"type.amenity.parking.customers" = "Customer Parking";
 "type.amenity.parking.fee" = "Parking";
 "type.amenity.parking.multi.storey" = "Multi Storey Parking";
 "type.amenity.parking.multi.storey.fee" = "Multi Storey Parking";
@@ -188,6 +193,7 @@
 "type.amenity.toilets.customers" = "Customer Access";
 "type.amenity.toilets.private" = "Private Access";
 "type.toilets.yes" = "Toilet";
+"type.amenity.tool_library" = "Tool Library";
 "type.amenity.townhall" = "Town Hall";
 "type.amenity.university" = "University";
 "type.amenity.vending_machine" = "Vending Machine";
@@ -220,6 +226,8 @@
 "type.barrier.chain" = "Chain";
 "type.barrier.city_wall" = "City Wall";
 "type.barrier.cycle_barrier" = "Cycle Barrier";
+"type.barrier.bus_trap" = "Bus Trap";
+"type.barrier.sump_buster" = "Sump Buster";
 "type.waterway.ditch" = "Drainage Ditch";
 "type.natural.water.moat" = "Moat";
 "type.natural.water.wastewater" = "Wastewater";
@@ -245,6 +253,7 @@
 "type.boundary.administrative.3" = "Regional Boundary";
 /* Country's primary subdivision borders, e.g. between regions, provinces, states.. */
 "type.boundary.administrative.4" = "Regional Boundary";
+"type.boundary.hazard" = "Hazardous Area";
 "type.boundary.national_park" = "National Park";
 "type.boundary.aboriginal_lands" = "Indigenous Lands";
 "type.boundary.protected_area" = "Protected Area";
@@ -255,6 +264,7 @@
 "type.boundary.protected_area.5" = "Protected Area";
 "type.boundary.protected_area.6" = "Protected Area";
 "type.building" = "Building";
+"type.building.abandoned" = "Abandoned Building";
 /* Duplicates [address] in strings.txt */
 "type.building.address" = "Address";
 "type.building.has_parts" = "Building";
@@ -263,6 +273,34 @@
 "type.building.train_station" = "Station Building";
 "type.building.warehouse" = "Warehouse";
 "type.cemetery.grave" = "Grave";
+"type.club" = "Club";
+"type.club.allotments" = "Allotment Association";
+"type.club.amateur_radio" = "Amateur Radio Club";
+"type.club.art" = "Art Club";
+"type.club.automobile" = "Automobile Club";
+"type.club.board_games" = "Board Games Club";
+"type.club.cadet" = "Cadet Club";
+"type.club.computer" = "Computer Club";
+"type.club.culture" = "Cultural Association";
+"type.club.dog" = "Dog Club";
+"type.club.fraternity" = "Fraternity";
+"type.club.freemasonry" = "Masonic Lodge";
+"type.club.game" = "Gaming Club";
+"type.club.gardening" = "Gardening Club";
+"type.club.history" = "History Club";
+"type.club.hunting" = "Hunting Club";
+"type.club.model_railway" = "Model Railway Club";
+"type.club.motorcycle" = "Motorcycle Club";
+"type.club.music" = "Music Club";
+"type.club.religion" = "Religious Club";
+"type.club.scout" = "Scout Club";
+"type.club.social" = "Social Club";
+"type.club.student" = "Student Club";
+"type.club.surf_life_saving" = "Surf Life Saving";
+"type.club.theatre" = "Theatre Club";
+"type.club.veterans" = "Veterans Club";
+"type.club.youth" = "Youth Club";
+"type.club.youth_movement" = "Youth Movement";
 "type.craft" = "Craft";
 "type.craft.beekeeper" = "Beekeeper";
 "type.craft.blacksmith" = "Blacksmith";
@@ -370,8 +408,10 @@
 "type.cuisine.tea" = "Tea";
 "type.cuisine.thai" = "Thai";
 "type.cuisine.turkish" = "Turkish";
-"type.cuisine.vegan" = "Vegan";
-"type.cuisine.vegetarian" = "Vegetarian";
+"type.cuisine.vegan" = "Vegan Options";
+"type.cuisine.vegan_only" = "Vegan Only";
+"type.cuisine.vegetarian" = "Vegetarian Options";
+"type.cuisine.vegetarian_only" = "Vegetarian Only";
 "type.cuisine.vietnamese" = "Vietnamese";
 "type.emergency" = "Emergency";
 "type.emergency.access_point" = "Emergency Rescue Point";
@@ -701,6 +741,7 @@
 "type.landuse.landfill" = "Landfill";
 "type.landuse.meadow" = "Meadow";
 "type.landuse.military" = "Military Area";
+"type.landuse.military.danger_area" = "Military Danger Area";
 "type.landuse.orchard" = "Orchard";
 "type.landuse.quarry" = "Quarry";
 "type.landuse.railway" = "Railway Premises";
@@ -890,6 +931,9 @@
 "type.organic.only" = "Organic only";
 "type.organic.yes" = "Organic options";
 "type.organic.no" = "No organic options";
+"type.second_hand.only" = "Second-hand only";
+"type.second_hand.yes" = "Second-hand options";
+"type.second_hand.no" = "No second-hand options";
 "type.place.city" = "City";
 "type.place.city.capital" = "Capital";
 "type.place.city.capital.10" = "City";
@@ -1026,6 +1070,7 @@
 "type.railway.station.subway.bengalore" = "Subway Station";
 "type.railway.station.subway.berlin" = "Subway Station";
 "type.railway.station.subway.bilbao" = "Subway Station";
+"type.railway.station.subway.boston" = "Subway Station";
 "type.railway.station.subway.brasilia" = "Subway Station";
 "type.railway.station.subway.brescia" = "Subway Station";
 "type.railway.station.subway.brussels" = "Subway Station";
@@ -1144,6 +1189,7 @@
 "type.railway.subway_entrance.bengalore" = "Subway Entrance";
 "type.railway.subway_entrance.berlin" = "Subway Entrance";
 "type.railway.subway_entrance.bilbao" = "Subway Entrance";
+"type.railway.subway_entrance.boston" = "Subway Entrance";
 "type.railway.subway_entrance.brasilia" = "Subway Entrance";
 "type.railway.subway_entrance.brescia" = "Subway Entrance";
 "type.railway.subway_entrance.brussels" = "Subway Entrance";
@@ -1211,6 +1257,7 @@
 "type.railway.subway_entrance.paris" = "Subway Entrance";
 "type.railway.subway_entrance.philadelphia" = "Subway Entrance";
 "type.railway.subway_entrance.pyongyang" = "Subway Entrance";
+"type.railway.subway_entrance.qingdao" = "Subway Entrance";
 "type.railway.subway_entrance.rennes" = "Subway Entrance";
 "type.railway.subway_entrance.rio" = "Subway Entrance";
 "type.railway.subway_entrance.roma" = "Subway Entrance";
@@ -1290,6 +1337,7 @@
 "type.shop.florist" = "Florist";
 "type.shop.funeral_directors" = "Funeral Directors";
 "type.shop.furniture" = "Furniture Store";
+"type.shop.games" = "Game Shop";
 "type.shop.garden_centre" = "Garden Center";
 "type.shop.gas" = "Gas Store";
 "type.shop.gift" = "Gift Shop";
@@ -1337,6 +1385,7 @@
 "type.shop.tea" = "Tea Shop";
 "type.shop.telecommunication" = "Telecommunication Shop";
 "type.shop.ticket" = "Ticket Shop";
+"type.shop.tool_hire" = "Tool Hire";
 "type.shop.toys" = "Toy Store";
 "type.shop.travel_agency" = "Travel Agency";
 "type.shop.tyres" = "Tyre Shop";
@@ -1368,6 +1417,7 @@
 "type.shop.perfumery" = "Perfume Shop";
 "type.shop.sewing" = "Sewing Supplies Shop";
 "type.shop.storage_rental" = "Storage Rental";
+"type.shop.swimming_pool" = "Swimming Pool Shop";
 "type.shop.tobacco" = "Smoke Shop";
 "type.shop.trade" = "Trade Supplies";
 "type.shop.watches" = "Watch Store";

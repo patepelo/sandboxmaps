@@ -25,6 +25,17 @@ public abstract class BaseSignView extends View
     mBorderInsetRatio = ratio;
   }
 
+  private boolean mFlat = false;
+  public void setFlat(boolean flat)
+  {
+    if (mFlat == flat)
+      return;
+    mFlat = flat;
+    mSizedFor = null;
+    configureTextSize();
+    invalidate();
+  }
+
   // colors
   protected int mBackgroundColor;
   protected int mBorderColor;
@@ -81,7 +92,20 @@ public abstract class BaseSignView extends View
     // subtract half the stroke PLUS the extra inset
     final float gap = mRadius * mBorderInsetRatio;
     mBorderRadius = mRadius - (mBorderWidth / 2f) - gap;
+    mSizedFor = null;
     configureTextSize();
+  }
+
+  @Nullable
+  private String mSizedFor;
+
+  private static String sizingReference(String text)
+  {
+    final int n = Math.max(2, text.length());
+    final StringBuilder sb = new StringBuilder(n);
+    for (int i = 0; i < n; i++)
+      sb.append('8');
+    return sb.toString();
   }
 
   @Override
@@ -92,23 +116,31 @@ public abstract class BaseSignView extends View
     if (str == null)
       return;
 
+    canvas.save();
+    canvas.translate(getPaddingLeft(), getPaddingTop());
+
     final float cx = mWidth / 2f;
     final float cy = mHeight / 2f;
 
-    // background & border
-    boolean alert = isAlert();
-    mBackgroundPaint.setColor(alert ? mAlertColor : mBackgroundColor);
-    canvas.drawCircle(cx, cy, mRadius, mBackgroundPaint);
-    if (!alert)
+    if (!mFlat)
     {
-      mBorderPaint.setStrokeWidth(mBorderWidth);
-      mBorderPaint.setColor(mBorderColor);
-      canvas.drawCircle(cx, cy, mBorderRadius, mBorderPaint);
+      // background & border
+      boolean alert = isAlert();
+      mBackgroundPaint.setColor(alert ? mAlertColor : mBackgroundColor);
+      canvas.drawCircle(cx, cy, mRadius, mBackgroundPaint);
+      if (!alert)
+      {
+        mBorderPaint.setStrokeWidth(mBorderWidth);
+        mBorderPaint.setColor(mBorderColor);
+        canvas.drawCircle(cx, cy, mBorderRadius, mBorderPaint);
+      }
     }
 
     // text
-    mTextPaint.setColor(alert ? mTextAlertColor : mTextColor);
+    mTextPaint.setColor(isAlert() ? mTextAlertColor : mTextColor);
     drawValueString(canvas, cx, cy, str);
+
+    canvas.restore();
   }
 
   @Override
@@ -133,34 +165,44 @@ public abstract class BaseSignView extends View
 
   private void drawValueString(Canvas c, float cx, float cy, String str)
   {
-    Rect b = new Rect();
-    mTextPaint.getTextBounds(str, 0, str.length(), b);
+    final String ref = sizingReference(str);
+    final Rect b = new Rect();
+    mTextPaint.getTextBounds(ref, 0, ref.length(), b);
     final float y = cy - b.exactCenterY();
     c.drawText(str, cx, y, mTextPaint);
   }
 
   void configureTextSize()
   {
-    String text = getValueString();
+    final String text = getValueString();
     if (text == null)
       return;
-    final float textRadius = mBorderRadius - mBorderWidth;
+
+    final String ref = sizingReference(text);
+    if (ref.equals(mSizedFor))
+      return;
+
+    final float textRadius = mFlat ? Math.min(mWidth, mHeight) / 2f : mBorderRadius - mBorderWidth;
     final float maxTextSize = 2f * textRadius;
     final float maxTextSize2 = maxTextSize * maxTextSize;
-    float lo = 0f, hi = maxTextSize, sz = maxTextSize;
-    Rect b = new Rect();
+    float lo = 0f, hi = maxTextSize, best = 1f;
+    final Rect b = new Rect();
     while (lo <= hi)
     {
-      sz = (lo + hi) / 2f;
+      final float sz = (lo + hi) / 2f;
       mTextPaint.setTextSize(sz);
-      mTextPaint.getTextBounds(text, 0, text.length(), b);
-      float area = b.width() * b.width() + b.height() * b.height();
+      mTextPaint.getTextBounds(ref, 0, ref.length(), b);
+      final float area = b.width() * b.width() + b.height() * b.height();
       if (area <= maxTextSize2)
+      {
+        best = sz;  // remember the last size that actually fit
         lo = sz + 1f;
+      }
       else
         hi = sz - 1f;
     }
-    mTextPaint.setTextSize(Math.max(1f, sz));
+    mTextPaint.setTextSize(Math.max(1f, best));
+    mSizedFor = ref;
   }
 
   /** child must return the string to draw, or null if nothing */

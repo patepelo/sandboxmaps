@@ -1,13 +1,13 @@
-• Verkehrsmittel UI und verkehrsmittelspezifische Kartenstile
-• Anzeige von Favoriten-Namen auf der Karte (Ausschalten in Einstellungen)
-• Einstellung zum Anpassen der Kartenschriftgröße
-• Straßenschilder für Kirgisistan, Usbekistan, Tadschikistan, Kasachstan und Georgien hinzugefügt
-• Dunkle und helle Bildvarianten zum Abbiegen für CarPlay hinzugefügt
-• OSM-Editor: Mehr Kategorien hinzugefügt (Gefängnis, Dojo, Bowlingbahn, Sonnenliege, Geschäft für Künstlerbedarf, Golfplatz, Minigolf und Fahrgeschäfte (Achterbahn, Karussell...) und Sammelpunkte)
-• Fehler zur Suche in benutzerdefinierter Kartensprache behoben (nicht nur EN und lokale Sprache)
-• Unbeschränkte Spuren für Spurführung bei Geradeaus fahren Anweisungen nutzen
-• Nicht fee=donation als kostenpflichtig werten
-• Sprachanweisungen für mazedonische Sprache hinzugefügt
-• Nach Standort fragen bevor geschützte Daten vorhanden sind behoben
-• Verschwinden vom Vorschau Knopf für eine Route behoben
-• OpenStreetMap-Daten vom 30. August und wöchentliche Updates
+• Überarbeitung der CarPlay-Abbiegehinweise: Behebt diverse Fehler, z. B. verzögerte Anweisungen, falsche Abbiegerichtung und die Funktion der nächsten Abbiegung nur bei aktivierter Sprachausgabe (TTS).
+• Behebt einen seit Langem bestehenden Absturz in den CarPlay-Suchergebnissen.
+• Unterstützung für Fahrzeuge, die die Listenanzeige in CarPlay während der Fahrt einschränken.
+• Behebt Problem unsichtbarer Einstellungssymbolen in CarPlay unter iOS 27.
+• Korrigiert die Pfeilposition beim Starten der Navigation vom Dashboard und Wechseln zur Hauptansicht.
+• Verbesserter Kontrast im dunklen Anzeigemodus: Besser lesbarer Text und Straßen.
+• Gefahrenbereiche hinzugefügt.
+• Unterscheidung zwischen vegetarischen Gerichten („Optionen“) und „ausschließlich“ vegetarischen Gerichten.
+• Keine Ansage „Geradeaus fahren“ mehr beim Überqueren großer Straßen.
+• Aufteilung von Tansania, Vietnam, Malaysia und Guangdong (China) in kleinere Karten.
+• Suchbegriff „?reviews“ um Orte mit Bewertungen zu finden
+• Anzeige von 'second hand'-Optionen auf Ortsseiten, Musikclubs, Cafés und andere POI hinzugefügt.
+• OpenStreetMap-Daten vom 5. November und wöchentliche Aktualisierungen.

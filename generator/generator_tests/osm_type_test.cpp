@@ -384,6 +384,30 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_Synonyms)
   }
 }
 
+UNIT_CLASS_TEST(TestWithClassificator, OsmType_DietVegetarianVegan)
+{
+  {
+    auto const params = GetFeatureBuilderParams({{"amenity", "restaurant"}, {"diet:vegetarian", "yes"}});
+    TEST(params.IsTypeExist(GetType({"cuisine", "vegetarian"})), (params));
+    TEST(!params.IsTypeExist(GetType({"cuisine", "vegetarian_only"})), (params));
+  }
+  {
+    auto const params = GetFeatureBuilderParams({{"amenity", "restaurant"}, {"diet:vegetarian", "only"}});
+    TEST(params.IsTypeExist(GetType({"cuisine", "vegetarian_only"})), (params));
+    TEST(!params.IsTypeExist(GetType({"cuisine", "vegetarian"})), (params));
+  }
+  {
+    auto const params = GetFeatureBuilderParams({{"amenity", "cafe"}, {"diet:vegan", "yes"}});
+    TEST(params.IsTypeExist(GetType({"cuisine", "vegan"})), (params));
+    TEST(!params.IsTypeExist(GetType({"cuisine", "vegan_only"})), (params));
+  }
+  {
+    auto const params = GetFeatureBuilderParams({{"amenity", "cafe"}, {"diet:vegan", "only"}});
+    TEST(params.IsTypeExist(GetType({"cuisine", "vegan_only"})), (params));
+    TEST(!params.IsTypeExist(GetType({"cuisine", "vegan"})), (params));
+  }
+}
+
 UNIT_CLASS_TEST(TestWithClassificator, OsmType_Capital)
 {
   {
@@ -2243,6 +2267,7 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_SimpleTypesSmoke)
       {"amenity", "telephone"},
       {"amenity", "theatre"},
       {"amenity", "toilets"},
+      {"amenity", "tool_library"},
       {"amenity", "townhall"},
       {"amenity", "university"},
       {"amenity", "veterinary"},
@@ -2268,6 +2293,8 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_SimpleTypesSmoke)
       {"barrier", "turnstile"},
       {"barrier", "wicket_gate"},
       {"barrier", "cycle_barrier"},
+      {"barrier", "bus_trap"},
+      {"barrier", "sump_buster"},
       {"barrier", "swing_gate"},
       {"barrier", "toll_booth"},
       {"barrier", "wall"},
@@ -2376,8 +2403,6 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_SimpleTypesSmoke)
       {"cuisine", "tea"},
       {"cuisine", "thai"},
       {"cuisine", "turkish"},
-      {"cuisine", "vegan"},
-      {"cuisine", "vegetarian"},
       {"cuisine", "vietnamese"},
       {"emergency", "defibrillator"},
       {"emergency", "fire_hydrant"},
@@ -2628,6 +2653,7 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_SimpleTypesSmoke)
       {"shop", "florist"},
       {"shop", "funeral_directors"},
       {"shop", "furniture"},
+      {"shop", "games"},
       {"shop", "garden_centre"},
       {"shop", "gift"},
       {"shop", "greengrocer"},
@@ -2661,9 +2687,11 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_SimpleTypesSmoke)
       {"shop", "sports"},
       {"shop", "stationery"},
       {"shop", "supermarket"},
+      {"shop", "swimming_pool"},
       {"shop", "tattoo"},
       {"shop", "tea"},
       {"shop", "ticket"},
+      {"shop", "tool_hire"},
       {"shop", "toys"},
       {"shop", "travel_agency"},
       {"shop", "tyres"},
@@ -3182,15 +3210,15 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_MultipleComplexTypesSmoke)
   using Type = std::vector<std::string>;
   std::vector<std::pair<std::vector<Type>, Tags>> const complexTypes = {
       {{{"amenity", "parking"}, {"fee", "no"}}, {{"amenity", "parking"}, {"fee", "no"}}},
-      {{{"amenity", "parking", "fee"}, {"fee", "yes"}}, {{"amenity", "parking"}, {"fee", "any_value"}}},
+      {{{"amenity", "parking", "fee"}, {"fee", "yes"}}, {{"amenity", "parking"}, {"fee", "yes"}}},
       {{{"amenity", "parking", "lane", "fee"}, {"fee", "yes"}},
-       {{"amenity", "parking"}, {"parking", "lane"}, {"fee", "any_value"}}},
+       {{"amenity", "parking"}, {"parking", "lane"}, {"fee", "yes"}}},
       {{{"amenity", "parking", "multi-storey", "fee"}, {"fee", "yes"}},
-       {{"amenity", "parking"}, {"parking", "multi-storey"}, {"fee", "any_value"}}},
+       {{"amenity", "parking"}, {"parking", "multi-storey"}, {"fee", "yes"}}},
       {{{"amenity", "parking", "street_side", "fee"}, {"fee", "yes"}},
-       {{"amenity", "parking"}, {"parking", "street_side"}, {"fee", "any_value"}}},
+       {{"amenity", "parking"}, {"parking", "street_side"}, {"fee", "yes"}}},
       {{{"amenity", "parking", "underground", "fee"}, {"fee", "yes"}},
-       {{"amenity", "parking"}, {"parking", "underground"}, {"fee", "any_value"}}},
+       {{"amenity", "parking"}, {"parking", "underground"}, {"fee", "yes"}}},
   };
 
   for (auto const & type : complexTypes)
@@ -3201,6 +3229,18 @@ UNIT_CLASS_TEST(TestWithClassificator, OsmType_MultipleComplexTypesSmoke)
     for (auto const & result : results)
       TEST(params.IsTypeExist(GetType(result)), (type, params));
   }
+}
+
+UNIT_CLASS_TEST(TestWithClassificator, OsmType_BoundaryHazard)
+{
+  Tags const tags = {
+      {"boundary", "hazard"},
+  };
+
+  auto const params = GetFeatureBuilderParams(tags);
+
+  TEST_EQUAL(params.m_types.size(), 1, (params));
+  TEST(params.IsTypeExist(GetType({"boundary", "hazard"})), (params));
 }
 
 }  // namespace osm_type_test

@@ -5,15 +5,13 @@
 
 #include "platform/http_request.hpp"
 #include "platform/safe_callback.hpp"
+#include "platform/servers_list.hpp"
 
-#include <cstdint>
 #include <functional>
 #include <memory>
 #include <string>
 #include <utility>
 #include <vector>
-
-#include "platform/servers_list.hpp"
 
 class DownloadingPolicy;
 
@@ -77,6 +75,7 @@ public:
 
   void SetDownloadingPolicy(DownloadingPolicy * policy);
   void SetDataVersion(int64_t version) { m_dataVersion = version; }
+  int64_t GetDataVersion() { return m_dataVersion; }
 
   /// Reset after changes, e.g. map download URL.
   void ResetMetaConfig();

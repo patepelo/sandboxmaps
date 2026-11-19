@@ -133,6 +133,7 @@ public:
     explicit MwmId(std::shared_ptr<MwmInfo> const & info) : m_info(info) {}
 
     void Reset() { m_info.reset(); }
+    bool IsNull() const { return m_info == nullptr; }
     bool IsAlive() const { return (m_info && m_info->GetStatus() != MwmInfo::STATUS_DEREGISTERED); }
     bool IsDeregistered(platform::LocalCountryFile const & deregisteredCountryFile) const;
 
@@ -152,8 +153,10 @@ public:
   explicit MwmSet(size_t cacheSize = 64) : m_cacheSize(cacheSize) {}
   virtual ~MwmSet() = default;
 
-  // Mwm handle, which is used to refer to mwm and prevent it from
-  // deletion when its FileContainer is used.
+  /**
+   * @brief Mwm handle, which is used to refer to mwm and prevent it from deletion when its
+   * FileContainer is used.
+   */
   class MwmHandle
   {
   public:
@@ -238,19 +241,26 @@ public:
     BadFile
   };
 
-  // An Observer interface to MwmSet. Note that these functions can
-  // be called from *ANY* thread because most signals are sent when
-  // some thread releases its MwmHandle, so overrides must be as fast
-  // as possible and non-blocking when it's possible.
+  /**
+   * @brief An Observer interface to `MwmSet`.
+   *
+   * Note that these functions can be called from *ANY* thread because most signals are sent when
+   * some thread releases its MwmHandle, so overrides must be as fast as possible and non-blocking
+   * when it's possible.
+   */
   class Observer
   {
   public:
     virtual ~Observer() = default;
 
-    // Called when a map is registered for the first time and can be used.
+    /**
+     * @brief Called when a map is registered for the first time and can be used.
+     */
     virtual void OnMapRegistered(platform::LocalCountryFile const & /* localFile */) {}
 
-    // Called when a map is deregistered and can no longer be used.
+    /**
+     * @brief Called when a map is deregistered and can no longer be used.
+     */
     virtual void OnMapDeregistered(platform::LocalCountryFile const & /* localFile */) {}
   };
 
@@ -294,12 +304,24 @@ public:
   /// Returns true when country is registered and can be used.
   bool IsLoaded(platform::CountryFile const & countryFile) const;
 
+  std::vector<std::string> GetLoadedCountryNames(m2::RectD const & rect) const;
+
+  /// @return 0 if country is not loaded.
+  int64_t GetMwmVersion(platform::CountryFile const & countryFile) const;
+
   /// Get ids of all mwms. Some of them may be with not active status.
   /// In that case, LockValue returns NULL.
   /// @todo In fact, std::shared_ptr<MwmInfo> is a MwmId. Seems like better to make vector<MwmId> interface.
   void GetMwmsInfo(std::vector<std::shared_ptr<MwmInfo>> & info) const;
 
-  // Clears caches and mwm's registry. All known mwms won't be marked as DEREGISTERED.
+  /**
+   * @brief Clears caches and mwm's registry.
+   *
+   * All known mwms won't be marked as DEREGISTERED.
+   *
+   * @todo what does “all won’t be marked” mean? Not all will be marked/some might not be marked?
+   * Or all will be unmarked?
+   */
   void Clear();
 
   void ClearCache();
@@ -340,10 +362,18 @@ private:
     ProcessEventList(events);
   }
 
-  // Sets |status| in |info|, adds corresponding event to |event|.
+  /**
+   * @brief Sets `status` in `info`, adds corresponding event to `event`.
+   * @param info
+   * @param status
+   * @param events
+   */
   void SetStatus(MwmInfo & info, MwmInfo::Status status, EventList & events);
 
-  // Triggers observers on each event in |events|.
+  /**
+   * @brief Triggers observers on each event in `events`.
+   * @param events
+   */
   void ProcessEventList(EventList & events);
 
   /// @precondition This function is always called under mutex m_lock.
@@ -369,6 +399,7 @@ protected:
   /// @precondition This function is always called under mutex m_lock.
   MwmId GetMwmIdByCountryFileImpl(platform::CountryFile const & countryFile) const;
 
+  /// @todo Why vector of MwmInfo's ?!
   std::map<std::string, std::vector<std::shared_ptr<MwmInfo>>> m_info;
 
   mutable std::mutex m_lock;

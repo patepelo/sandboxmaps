@@ -41,6 +41,8 @@
 
     <include layout="@layout/place_page_organic" />
 
+    <include layout="@layout/place_page_second_hand" />
+
     <include layout="@layout/place_page_entrance"/>
 
     <include layout="@layout/place_page_operator"/>
@@ -80,6 +82,12 @@
     <!-- ToDo: Address is missing compared with iOS. It's shown in title but anyway .. -->
 
     <include layout="@layout/place_page_latlon"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/place_page_add_review_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/place_page_add_review" />
 
     <include layout="@layout/place_page_open_in"/>
   </LinearLayout>

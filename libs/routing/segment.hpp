@@ -9,14 +9,16 @@
 
 namespace routing
 {
-// This is directed road segment used as vertex in index graph.
-//
-// You can imagine the segment as a material arrow.
-// Head of each arrow is connected to fletchings of next arrows with invisible links:
-// these are the edges of the graph.
-//
-// Position of the segment is a position of the arrowhead: GetPointId(true).
-// This position is used in heuristic and edges weight calculations.
+/**
+ * @brief A directed road segment used as a vertex in the index graph.
+ *
+ * You can imagine the segment as a material arrow.
+ * Head of each arrow is connected to fletchings of next arrows with invisible links:
+ * these are the edges of the graph.
+ *
+ * Position of the segment is a position of the arrowhead: GetPointId(true).
+ * This position is used in heuristic and edges weight calculations.
+ */
 class Segment final
 {
 public:
@@ -51,6 +53,12 @@ public:
 
   /// @todo Logically, these functions should be equal, but keep existing logic,
   /// and investigate possible enhancements in future.
+  /// TODO (mvglasow) As far as I can tell, they test for two different things:
+  /// IsFakeCreated tests if the feature ID equals a single known fake ID; the MWM ID is ignored.
+  /// IsRealSegment tests if the MWM ID equals a single known fake ID or the feature ID matches one
+  /// of several possible fake feature IDs.
+  /// These are not guaranteed to correspond, and segments have been spotted for which both
+  /// functions return false.
   /// @{
   bool IsFakeCreated() const;
   bool IsRealSegment() const;
@@ -78,7 +86,7 @@ public:
   bool operator<(SegmentEdge const & edge) const;
 
 private:
-  // Target is vertex going to for outgoing edges, vertex going from for ingoing edges.
+  /** @brief Vertex going to for outgoing edges, vertex going from for ingoing edges. */
   Segment m_target;
   RouteWeight m_weight;
 };

@@ -3,7 +3,7 @@
         "defaultMessage": "Onde comer|comer|comida"
     },
     "@category_food": {
-        "defaultMessage": "Mercearias|Comida|Alimentos"
+        "defaultMessage": "Lojas alimentares|Mercearias|Comida|Alimentos"
     },
     "@category_transport": {
         "defaultMessage": "5Transporte"
@@ -1478,7 +1478,7 @@
     "@cuisine_all_vegetarian": {
         "defaultMessage": "Vegetariana"
     },
-    "cuisine-vegan|@cuisine_all_vegetarian": {
+    "cuisine-vegan|cuisine-vegan_only|@cuisine_all_vegetarian": {
         "defaultMessage": "Vegana"
     }
 }

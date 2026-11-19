@@ -29,8 +29,25 @@ using namespace std;
 using namespace turns;
 using namespace ftypes;
 
+namespace
+{
+bool IsContinuousFeature(LoadedPathSegment const & ingoing, LoadedPathSegment const & outgoing)
+{
+  if (ingoing.m_segments.empty() || outgoing.m_segments.empty())
+    return false;
+
+  auto const & ingoingSegment = ingoing.m_segments.back();
+  auto const & outgoingSegment = outgoing.m_segments.front();
+  return ingoingSegment.GetMwmId() == outgoingSegment.GetMwmId() &&
+         ingoingSegment.GetFeatureId() == outgoingSegment.GetFeatureId() &&
+         ingoingSegment.IsForward() == outgoingSegment.IsForward() &&
+         ingoingSegment.GetPointId(true /* front */) == outgoingSegment.GetPointId(false /* front */);
+}
+}  // namespace
+
 CarDirectionsEngine::CarDirectionsEngine(MwmDataSource & dataSource, shared_ptr<NumMwmIds> numMwmIds)
   : DirectionsEngine(dataSource, std::move(numMwmIds))
+  , previousDirection(turns::CarDirection::None)
 {}
 
 void CarDirectionsEngine::FixupTurns(vector<RouteSegment> & routeSegments)
@@ -104,7 +121,8 @@ void FixupCarTurns(vector<RouteSegment> & routeSegments)
 }
 
 void GetTurnDirectionBasic(IRoutingResult const & result, size_t const outgoingSegmentIndex,
-                           NumMwmIds const & numMwmIds, RoutingSettings const & vehicleSettings, TurnItem & turn);
+                           NumMwmIds const & numMwmIds, RoutingSettings const & vehicleSettings, TurnItem & turn,
+                           CarDirection & previousDirection);
 
 size_t CarDirectionsEngine::GetTurnDirection(IRoutingResult const & result, size_t const outgoingSegmentIndex,
                                              NumMwmIds const & numMwmIds, RoutingSettings const & vehicleSettings,
@@ -134,7 +152,7 @@ size_t CarDirectionsEngine::GetTurnDirection(IRoutingResult const & result, size
   }
 
   if (turnItem.m_turn == CarDirection::None)
-    GetTurnDirectionBasic(result, outgoingSegmentIndex, numMwmIds, vehicleSettings, turnItem);
+    GetTurnDirectionBasic(result, outgoingSegmentIndex, numMwmIds, vehicleSettings, turnItem, this->previousDirection);
 
   // Lane information.
   if (turnItem.m_turn != CarDirection::None)
@@ -438,8 +456,43 @@ void CorrectRightmostAndLeftmost(vector<TurnCandidate> const & turnCandidates, S
   }
 }
 
+// Returns true if:
+// 1. `previousDirection` was a turn
+// 2. `currentDirection` is a GoStraight
+// 3. both the incoming and outgoing segments are on roads with the same name
+// 4. the incoming segment is short
+//
+// This is intended to be used to detect cases such as https://www.openstreetmap.org/#map=19/56.114091/10.152609
+// where turning left could otherwise generate a "Go straight" verbal indication.
+bool IsTurnAcrossDualCarriageway(IRoutingResult const & result, size_t const outgoingSegmentIndex,
+                                 CarDirection const & currentDirection, RoutingSettings const & vehicleSettings,
+                                 CarDirection & previousDirection)
+{
+  if (outgoingSegmentIndex == 0)
+    return false;
+
+  auto wasTurn = previousDirection == CarDirection::TurnLeft || previousDirection == CarDirection::TurnRight;
+  if (wasTurn && currentDirection == CarDirection::GoStraight)
+  {
+    TurnInfo turn;
+    GetTurnInfo(result, outgoingSegmentIndex, vehicleSettings, turn);
+
+    if (turn.m_ingoing->m_roadNameInfo != turn.m_outgoing->m_roadNameInfo)
+      return false;
+
+    // If the segment between last curve and now is shorter than 30 metres
+    if (CalcRouteDistanceM(turn.m_ingoing->m_path, 0, turn.m_ingoing->m_path.size()) < 30)
+      return true;
+  }
+
+  previousDirection = currentDirection;
+
+  return false;
+}
+
 void GetTurnDirectionBasic(IRoutingResult const & result, size_t const outgoingSegmentIndex,
-                           NumMwmIds const & numMwmIds, RoutingSettings const & vehicleSettings, TurnItem & turn)
+                           NumMwmIds const & numMwmIds, RoutingSettings const & vehicleSettings, TurnItem & turn,
+                           CarDirection & previousDirection)
 {
   TurnInfo turnInfo;
   if (!GetTurnInfo(result, outgoingSegmentIndex, vehicleSettings, turnInfo))
@@ -530,11 +583,16 @@ void GetTurnDirectionBasic(IRoutingResult const & result, size_t const outgoingS
                                            numMwmIds))
     return;
 
-  // If the route stays on the same named road (same name, ref, class, not link, not roundabout)
+  if (IsTurnAcrossDualCarriageway(result, outgoingSegmentIndex, intermediateDirection, vehicleSettings,
+                                  previousDirection))
+    return;
+
+  // If the route stays on the same road (same name/ref, class, not link, not roundabout)
   // and no candidate goes roughly straight, the apparent turn is just the road bending — drop it.
   // If a straight-ahead candidate exists, keep the turn so we can tell the user which way the
-  // named road actually goes.
-  if (!turnInfo.m_ingoing->m_roadNameInfo.m_name.empty() &&
+  // road actually goes.
+  if ((!turnInfo.m_ingoing->m_roadNameInfo.m_name.empty() ||
+       !turnInfo.m_ingoing->m_roadNameInfo.m_ref.empty()) &&
       turnInfo.m_ingoing->m_roadNameInfo.m_name == turnInfo.m_outgoing->m_roadNameInfo.m_name &&
       turnInfo.m_ingoing->m_roadNameInfo.m_ref == turnInfo.m_outgoing->m_roadNameInfo.m_ref &&
       turnInfo.m_ingoing->m_highwayClass == turnInfo.m_outgoing->m_highwayClass &&
@@ -542,11 +600,23 @@ void GetTurnDirectionBasic(IRoutingResult const & result, size_t const outgoingS
       !turnInfo.m_ingoing->m_onRoundabout && !turnInfo.m_outgoing->m_onRoundabout)
   {
     double constexpr kSameRoadStraightAngle = 20.0;
+    bool const isContinuousFeature = IsContinuousFeature(*turnInfo.m_ingoing, *turnInfo.m_outgoing);
     bool hasStraightAheadOption = false;
     for (auto const & candidate : nodes.candidates)
     {
       if (abs(candidate.m_angle) <= kSameRoadStraightAngle)
       {
+        if (isContinuousFeature)
+        {
+          auto const classDiff = CalcDiffRoadClasses(turnInfo.m_outgoing->m_highwayClass, candidate.m_highwayClass);
+          if (classDiff <= kMinHighwayClassDiff ||
+              (classDiff <= kMinHighwayClassDiffForService &&
+               (candidate.m_highwayClass == HighwayClass::Service ||
+                candidate.m_highwayClass == HighwayClass::ServiceMinor)))
+          {
+            continue;
+          }
+        }
         hasStraightAheadOption = true;
         break;
       }
@@ -649,6 +719,10 @@ size_t CheckUTurnOnRoute(IRoutingResult const & result, size_t const outgoingSeg
           turn.m_turn = CarDirection::UTurnLeft;
           return 1;
         }
+
+        // Check if the road travels along a continous OSM feature, indicating it's not a real U-turn
+        if (IsContinuousFeature(masterSegment, checkedSegment))
+          return 0;
 
         // Same-road wide U-turn (e.g. round a traffic island): the route stays on
         // the same named/classed road but the overall heading reverses. Compare

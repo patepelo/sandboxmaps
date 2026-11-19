@@ -44,8 +44,21 @@ namespace routing
 using SubrouteUid = uint64_t;
 SubrouteUid constexpr kInvalidSubrouteId = std::numeric_limits<uint64_t>::max();
 
-/// \brief The route is composed of one or several subroutes. Every subroute is composed of segments.
-/// For every Segment is kept some attributes in the structure SegmentInfo.
+/**
+ * @brief A segment of the route.
+ *
+ * The route is composed of one or several subroutes. Every subroute is composed of segments.
+ *
+ * For every Segment, some attributes are kept in the `SegmentInfo` structure.
+ *
+ * @todo the statement regarding `SegmentInfo` seems to be outdated, is `SegmentInfo` a prececessor
+ * of `RouteSegment`?
+ *
+ * Segment data which is actually related to a point, such as junction, distance and time, refer to
+ * the end which is closer to the end of the route. For the first segment, distance and time are the
+ * length and travel time of the segment itself. For the last segment, distance and time are the
+ * length and travel time of the entore route, and the junction is the finish point.
+ */
 class RouteSegment final
 {
 public:
@@ -74,17 +87,38 @@ public:
     uint8_t m_maxSpeedKmPH = 0;
   };
 
+  /**
+   * @brief Holds structured information about a road.
+   *
+   * `m_ref` and `m_name` refer to the road itself.
+   *
+   * This structure is only populated for the first segment of a feature (segment index is either 0,
+   * or one less than the segment count of the feature, or the segment is the first segment of the
+   * subroute which is not a fake segment). For subsequent segments of the same feature, it is empty.
+   */
   struct RoadNameInfo
   {
     FeatureID m_mwmId;
-    // This is for street/road. |m_ref| |m_name|.
-    std::string m_name;             // E.g "Johnson Ave.".
-    std::string m_destination_ref;  // Number of next road, e.g. "CA 85", Sometimes "CA 85 South". Usually match |m_ref|
-                                    // of next main road.
-    // This is for 1st segment of link after junction. Exit |junction_ref| to |m_destination_ref| for |m_destination|.
-    std::string m_junction_ref;  // Number of junction e.g. "398B".
-    std::string m_destination;   // E.g. "Cupertino".
-    std::string m_ref;           // Number of street/road e.g. "CA 85".
+    /** @brief The name of the road, e.g. “Johnson Ave”. */
+    std::string m_name;
+    /**
+     * @brief The number of the next road.
+     *
+     * This usually matches `m_ref` of the naxt main road, e.g. “CA 85”, sometimes “CA 85 South”.
+     */
+    std::string m_destination_ref;
+    /**
+     * @brief The junction number, e.g. “398B”.
+     *
+     * This is used for the first link segment after a junction (exit `junction_ref` to
+     * `m_destination_ref` for `m_destination`).
+     */
+    std::string m_junction_ref;
+    /** @brief The destination of the road, e.g. “Cupertino”. */
+    std::string m_destination;
+    /** @brief The number of the road, e.g. “CA85”. */
+    std::string m_ref;
+    /** @brief Whether the road is of a link type.*/
     bool m_isLink = false;
     ftypes::HighwayClass m_highwayClass = ftypes::HighwayClass::Undefined;
 
@@ -130,12 +164,22 @@ public:
     friend std::string DebugPrint(RoadNameInfo const & rni);
   };
 
+  /**
+   * @brief Constructs a new `RouteSegment`.
+   *
+   * @param segment The segment on the map
+   * @param turn Turn information for route description and driver instructions
+   * @param junction Coordinates of the turn maneuver described by `turn`
+   * @param roadNameInfo Cached map information about the segment, used for rendering road information
+   * @param onRoundabout Whether the segment is part of a roundabout (false for fake segments)
+   */
   RouteSegment(Segment const & segment, turns::TurnItem const & turn, geometry::PointWithAltitude const & junction,
-               RoadNameInfo const & roadNameInfo)
+               RoadNameInfo const & roadNameInfo, bool const onRoundabout)
     : m_segment(segment)
     , m_turn(turn)
     , m_junction(junction)
     , m_roadNameInfo(roadNameInfo)
+    , m_onRoundabout(onRoundabout)
     , m_transitInfo(nullptr)
   {}
 
@@ -160,13 +204,50 @@ public:
 
   Segment const & GetSegment() const { return m_segment; }
   Segment & GetSegment() { return m_segment; }
+
+  /**
+   * @brief Returns the point at the end of this segment.
+   *
+   * The end of the segment is the point that is furthest from the beginning of the route, i.e. the
+   * point shared between this segment and the following one (or the destination for the last segment.)
+   *
+   * This does not necessarily represent the last point of this segment (or the first point of the
+   * following segment) as stored in the map. If the route uses only part of the segment, this point
+   * can be located anywhere on the current segment, or anywhere on the next segment.
+   */
   geometry::PointWithAltitude const & GetJunction() const { return m_junction; }
+
   RoadNameInfo const & GetRoadNameInfo() const { return m_roadNameInfo; }
   turns::TurnItem const & GetTurn() const { return m_turn; }
   void ClearTurnLanes() { m_turn.m_lanes.clear(); }
 
+  /**
+   * @brief Returns distance from the beginning of the route in meters.
+   *
+   * Distance is measured up to the end of the current segment, i.e. including the segment. For the
+   * first segment, this is identical to the length of the segment; for the last segment, it is
+   * identical to the length of the entire route.
+   *
+   * Note that real segments may not be counted in full if they are preceded or followed by a fake
+   * segment: the transition between the real and the fake segment may occur anywhere on the real segment
+   * (not just at its endpoints), so that only part of the segment is used for the route. Only that
+   * part will be counted, not necessarily the whole segment.
+   */
   double GetDistFromBeginningMeters() const { return m_distFromBeginningMeters; }
   double GetDistFromBeginningMerc() const { return m_distFromBeginningMerc; }
+
+  /**
+   * @brief Returns travel time from the beginning of the route.
+   *
+   * Travel time is the ETA from the beginning of the route to the end of the current segment, i.e.
+   * including the segment. For the first segment, this is identical to the travel time along the
+   * segment; for the last segment, it is identical to the travel time along the entire route.
+   *
+   * Note that real segments may not be counted in full if they are preceded or followed by a fake
+   * segment: the transition between the real and the fake segment may occur anywhere on the real segment
+   * (not just at its endpoints), so that only part of the segment is used for the route. Only that
+   * part will be counted, not necessarily the whole segment.
+   */
   double GetTimeFromBeginningSec() const { return m_timeFromBeginningS; }
 
   bool HasTransitInfo() const { return m_transitInfo.HasTransitInfo(); }
@@ -184,6 +265,8 @@ public:
   SpeedInUnits const & GetSpeedLimit() const { return m_speedLimit; }
   void SetSpeedLimit(SpeedInUnits const & speed) { m_speedLimit = speed; }
 
+  bool IsOnRoundabout() const { return m_onRoundabout; }
+
 private:
   Segment m_segment;
 
@@ -197,6 +280,9 @@ private:
 
   /// RoadNameInfo of |m_segment| if any. Otherwise |m_roadNameInfo| is empty.
   RoadNameInfo m_roadNameInfo;
+
+  /** @brief Whether the road is part of a roundabout. */
+  bool m_onRoundabout = false;
 
   /// Speed limit of |m_segment| if any.
   SpeedInUnits m_speedLimit;
@@ -414,12 +500,6 @@ public:
   /// fields accordingly.
   bool MatchLocationToRoute(location::GpsInfo & location, location::RouteMatchingInfo & routeMatchingInfo) const;
 
-  /// Add country name if we have no country filename to make route.
-  void AddAbsentCountry(std::string const & name);
-
-  /// Get absent file list of a routing files for shortest path finding.
-  std::set<std::string> const & GetAbsentCountries() const { return m_absentCountries; }
-
   inline void SetRoutingSettings(RoutingSettings const & routingSettings) { m_routingSettings = routingSettings; }
 
   // Subroute interface.
@@ -458,6 +538,7 @@ public:
 
   void GetTurnsForTesting(std::vector<turns::TurnItem> & turns) const;
   bool IsRouteId(uint64_t routeId) const { return routeId == m_routeId; }
+  uint64_t GetRouteId() const { return m_routeId; }
 
   /// \returns Length of the route segment with |segIdx| in meters.
   double GetSegLenMeters(size_t segIdx) const;
@@ -474,13 +555,24 @@ public:
 
   std::string DebugPrintTurns() const;
 
+  /// \returns list of turns intended for display to the user
   std::vector<RouteStepInfo> GetTurnsForDisplay(std::string const & locale) const;
+  std::optional<uint32_t> GetStepSequenceForTurn(uint32_t turnIndex) const;
+  std::optional<uint32_t> GetNextStepSequence(uint32_t sequence, double maxDistM) const;
+  std::optional<uint32_t> GetTurnIndexForStepSequence(uint32_t sequence) const;
+  /// \returns the point for at a specific turn index along the route
+  m2::PointD GetJunctionPointForTurn(uint32_t segmentIndex) const;
+  /// \returns the approach direction for the turn
+  double GetDirectionForTurn(uint32_t segmentIndex) const;
 
 private:
   friend std::string DebugPrint(Route const & r);
 
   double GetPolySegAngle(size_t ind) const;
   void GetClosestTurnAfterIdx(size_t segIdx, turns::TurnItem & turn) const;
+  bool IsDisplayableTurn(size_t segIdx) const;
+  turns::lanes::LanesInfo const & GetStepLanes(size_t segIdx) const;
+  std::optional<size_t> GetStepSegIdx(uint32_t sequence) const;
 
   /// \returns Estimated time from the beginning.
   double GetCurrentTimeFromBeginSec() const;
@@ -491,8 +583,8 @@ private:
 
   FollowedPolyline m_poly;
 
-  std::set<std::string> m_absentCountries;
   std::vector<RouteSegment> m_routeSegments;
+  std::vector<size_t> m_stepSegIdxs;
   // |m_haveAltitudes| is true if and only if all route points have altitude information.
   bool m_haveAltitudes = false;
 
@@ -510,4 +602,7 @@ private:
 /// \returns true if |turn| is not equal to turns::CarDirection::None or
 /// |turns::PedestrianDirection::None|.
 bool IsNormalTurn(turns::TurnItem const & turn);
+
+void GetFullRoadName(RouteSegment::RoadNameInfo const & road, RoadShieldInfo & roadShields, std::string & name);
+RoadInfo GetRoadInfo(RouteSegment::RoadNameInfo const & road);
 }  // namespace routing

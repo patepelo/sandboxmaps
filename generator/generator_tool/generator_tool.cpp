@@ -27,7 +27,6 @@
 #include "generator/routing_world_roads_generator.hpp"
 #include "generator/search_index_builder.hpp"
 #include "generator/statistics.hpp"
-#include "generator/traffic_generator.hpp"
 #include "generator/transit_generator.hpp"
 #include "generator/transit_generator_experimental.hpp"
 #include "generator/unpack_mwm.hpp"
@@ -93,6 +92,7 @@ DEFINE_bool(generate_geometry, false, "3rd pass - split and simplify geometry an
 DEFINE_bool(generate_index, false, "4rd pass - generate index.");
 DEFINE_bool(generate_search_index, false, "5th pass - generate search index.");
 DEFINE_bool(generate_cities_boundaries, false, "Generate the cities boundaries section");
+DEFINE_bool(generate_reviews, false, "Generate the reviews section");
 DEFINE_string(cities_boundaries_data, "", "File with cities boundaries");
 
 DEFINE_bool(generate_cities_ids, false, "Generate the cities ids section");
@@ -174,7 +174,6 @@ DEFINE_string(unpack_borders, "", "Convert packed_polygons to a directory of pol
 DEFINE_bool(unpack_mwm, false, "Unpack each section of mwm into a separate file with name filePath.sectionName.");
 DEFINE_bool(check_mwm, false, "Check map file to be correct.");
 DEFINE_string(delete_section, "", "Delete specified section (defines.hpp) from container.");
-DEFINE_bool(generate_traffic_keys, false, "Generate keys for the traffic map (road segment -> speed group).");
 
 DEFINE_bool(dump_mwm_tmp, false, "Prints feature builder objects from .mwm.tmp");
 
@@ -246,6 +245,7 @@ MAIN_WITH_ERROR_HANDLING([](int argc, char ** argv)
   genInfo.m_complexHierarchyFilename = FLAGS_complex_hierarchy_data;
   genInfo.m_isolinesDir = FLAGS_isolines_path;
   genInfo.m_addressesDir = FLAGS_addresses_path;
+  genInfo.m_reviewsFile = FLAGS_reviews_path;
 
   // Use merged style.
   GetStyleReader().SetCurrentStyle(MapStyleMerged);
@@ -525,7 +525,7 @@ MAIN_WITH_ERROR_HANDLING([](int argc, char ** argv)
       }
     }
 
-    if (!FLAGS_reviews_path.empty())
+    if (FLAGS_generate_reviews && !FLAGS_reviews_path.empty())
     {
       BuildReviewsSection(FLAGS_reviews_path, dataFile);
     }
@@ -553,12 +553,6 @@ MAIN_WITH_ERROR_HANDLING([](int argc, char ** argv)
         // Used for countries.
         BuildPopularPlacesFromDescriptions(dataFile);
       }
-    }
-
-    if (FLAGS_generate_traffic_keys)
-    {
-      if (!traffic::GenerateTrafficKeysFromDataFile(dataFile))
-        LOG(LCRITICAL, ("Error generating traffic keys."));
     }
   }
 

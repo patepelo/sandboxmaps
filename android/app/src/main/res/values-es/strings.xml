@@ -143,7 +143,7 @@
     <!-- message title of loading file -->
     <string name="load_kmz_title">Cargando favoritos</string>
     <!-- Kmz file successful loading -->
-    <string name="load_kmz_successful">¡Los favoritos se han cargado con éxito! Puedes encontrarlos en el mapa o en la pantalla de Gestor de Favoritos.</string>
+    <string name="load_kmz_successful">¡Los favoritos se han cargado con éxito! Puedes encontrarlos en el mapa o en el gestor de favoritos.</string>
     <!-- Kml file loading failed -->
     <string name="load_kmz_failed">No se pudieron cargar los Favoritos. El archivo podría tener daños o defectos.</string>
     <!-- Failed to recognize the format of a bookmarks or tracks file. -->
@@ -245,7 +245,7 @@
     <!-- Toast text when compass calibration may improve the correctness of the current position arrow -->
     <string name="compass_calibration_required">Mueve el teléfono en forma de ocho para calibrar la brújula y fijar la dirección de la flecha en el mapa.</string>
     <!-- Toast text when user hides UI with a long tap anywhere on the map -->
-    <string name="enable_long_tap_fullscreen_description">Vuelva a pulsar prolongadamente sobre el mapa para ver la interfaz</string>
+    <string name="enable_long_tap_fullscreen_description">Mantén pulsado el mapa para ver la interfaz de nuevo</string>
     <!-- Update all button text -->
     <string name="downloader_update_all_button">Actualizar todos</string>
     <!-- Cancel all button text -->
@@ -516,13 +516,13 @@
     <string name="accept">Aceptar</string>
     <!-- For the first routing -->
     <string name="decline">Rechazar</string>
-    <string name="mobile_data_dialog">¿Usar Internet móvil para mostrar información detallada?</string>
+    <string name="mobile_data_dialog">¿Usar datos móviles?</string>
     <string name="mobile_data_option_always">Usar siempre</string>
     <string name="mobile_data_option_today">Sólo hoy</string>
     <string name="mobile_data_option_not_today">No usar hoy</string>
     <string name="mobile_data">Internet móvil</string>
     <!-- NOTE to translators: please synchronize your translation with the English one. -->
-    <string name="mobile_data_description">Se requiere conexión a Internet para recibir notificaciones de actualización de mapas y cargar ediciones</string>
+    <string name="mobile_data_description">Se requiere conexión de datos móviles para las notificaciones de actualización del mapa, subir las ediciones y enlazar con sitios web de reseñas</string>
     <string name="mobile_data_option_never">No usar nunca</string>
     <string name="mobile_data_option_ask">Preguntar siempre</string>
     <string name="traffic_update_maps_text">Para mostrar los datos de tráfico, deben actualizarse los mapas</string>
@@ -982,5 +982,20 @@
     <string name="place_reviews_title">Reseñas de lugares</string>
     <string name="place_reviews">%1$s Reseñas</string>
     <string name="rating_stars_description">estrellas: %.1f</string>
-    <string name="reviews_by_mangrove">Reseñas de Mangrove. \nAñadir reseñas en <a href="https://mapcomplete.org">MapComplete</a>.</string>
+    <string name="reviews_by_mangrove">Reseñas de Mangrove.</string>
+    <string name="pref_font_size">Tamaño de fuente de las etiquetas del mapa</string>
+    <string name="decrease_font_size">Reducir el tamaño de las etiquetas del mapa</string>
+    <string name="internet_unavailable">Sin conexión a internet</string>
+    <string name="add_review_url_resolution_failed_dev">Lugar no encontrado en el servidor DEV de OpenStreetMap.</string>
+    <string name="add_review_url_resolution_failed">Lugar no encontrado en la última versión de OpenStreetMap.</string>
+    <string name="add_review">Añadir una reseña a través de %1$s</string>
+    <string name="stars_1">1-estrella</string>
+    <string name="stars_2">2-estrellas</string>
+    <string name="stars_3">3-estrellas</string>
+    <string name="stars_4">4-estrellas</string>
+    <string name="stars_5">5-estrellas</string>
+    <string name="route_preview_previous_turn">Giro anterior</string>
+    <string name="route_preview_next_turn">Siguiente giro</string>
+    <string name="route_preview_cancel">Cerrar vista previa</string>
+    <string name="route_preview_turn_position">%1$d de %2$d</string>
 </resources>

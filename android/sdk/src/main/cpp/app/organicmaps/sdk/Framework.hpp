@@ -15,6 +15,8 @@
 #include "drape/pointers.hpp"
 
 #include "indexer/feature_decl.hpp"
+#include "indexer/map_object.hpp"
+#include "indexer/map_style.hpp"
 
 #include "platform/country_defines.hpp"
 #include "platform/location.hpp"
@@ -209,11 +211,13 @@ public:
   ChoosePositionMode GetChoosePositionMode();
 
   void UpdateMyPositionRoutingOffset(int offsetY);
+  void SetCarNavigationView (bool enabled);
   void SetupWidget(gui::EWidget widget, float x, float y, dp::Anchor anchor);
   void ApplyWidgets();
   void CleanWidgets();
 
   place_page::Info & GetPlacePageInfo();
+  osm::MapObject GetMapObjectByID(FeatureID const & featureId) const;
 
   bool IsAutoRetryDownloadFailed();
   bool IsDownloadOn3gEnabled();

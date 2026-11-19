@@ -98,6 +98,28 @@ enum CarDirection: UInt8 {
     }
   }
 
+  var diagnosticName: String {
+    switch self {
+    case .none: return "none"
+    case .goStraight: return "go_straight"
+    case .turnRight: return "turn_right"
+    case .turnSharpRight: return "turn_sharp_right"
+    case .turnSlightRight: return "turn_slight_right"
+    case .turnLeft: return "turn_left"
+    case .turnSharpLeft: return "turn_sharp_left"
+    case .turnSlightLeft: return "turn_slight_left"
+    case .uTurnLeft: return "u_turn_left"
+    case .uTurnRight: return "u_turn_right"
+    case .enterRoundAbout: return "enter_roundabout"
+    case .leaveRoundAbout: return "leave_roundabout"
+    case .stayOnRoundAbout: return "stay_on_roundabout"
+    case .startAtEndOfStreet: return "start_at_end_of_street"
+    case .reachedYourDestination: return "reached_destination"
+    case .exitHighwayToLeft: return "exit_highway_left"
+    case .exitHighwayToRight: return "exit_highway_right"
+    }
+  }
+
   /// CarPlay maneuver type for the instrument cluster / HUD.
   @available(iOS 17.4, *)
   var cpManeuverType: CPManeuverType {
@@ -117,6 +139,15 @@ enum CarDirection: UInt8 {
     case .exitHighwayToLeft: return .highwayOffRampLeft
     case .exitHighwayToRight: return .highwayOffRampRight
     }
+  }
+
+  @available(iOS 17.4, *)
+  func cpManeuverType(exitNumber: Int) -> CPManeuverType {
+    guard isRoundabout, (1...19).contains(exitNumber),
+          let type = CPManeuverType(rawValue: CPManeuverType.roundaboutExit1.rawValue + UInt(exitNumber - 1)) else {
+      return cpManeuverType
+    }
+    return type
   }
 
   /// CarPlay junction type for the instrument cluster / HUD.
@@ -180,15 +211,32 @@ final class NavigationInstructionFormatter: NSObject {
                                         roadRef: String,
                                         junctionRef: String,
                                         destinationRef: String,
-                                        destination: String,
-                                        isLink: Bool) -> [String] {
+                                        destination: String) -> [String] {
     instructionCandidates(roadName: roadName,
                           roadRef: roadRef,
                           junctionRef: junctionRef,
                           destinationRef: destinationRef,
                           destination: destination,
-                          isLink: isLink,
                           shields: nil).map(\.plainText)
+  }
+
+  /// Instrument cluster instruction variants
+  static func carPlayRoadFollowingManeuverVariants(roadName: String,
+                                                   roadRef: String,
+                                                   destinationRef: String,
+                                                   destination: String) -> [String] {
+    return instructionCandidates(roadName: roadName,
+                                 roadRef: roadRef,
+                                 junctionRef: "",
+                                 destinationRef: destinationRef,
+                                 destination: destination,
+                                 shields: nil).map(\.plainText)
+  }
+
+  static func carPlayHighwayExitLabel(junctionRef: String) -> String? {
+    let ref = junctionRef.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !ref.isEmpty else { return nil }
+    return String(format: L("carplay_highway_exit"), ref)
   }
 
   static func carPlayInstructionVariants(roadName: String,
@@ -196,7 +244,6 @@ final class NavigationInstructionFormatter: NSObject {
                                          junctionRef: String,
                                          destinationRef: String,
                                          destination: String,
-                                         isLink: Bool,
                                          isLeftHandTraffic: Bool,
                                          shields: RoadShieldInfo?) -> CarPlayVariants {
     let candidates = instructionCandidates(roadName: roadName,
@@ -204,7 +251,6 @@ final class NavigationInstructionFormatter: NSObject {
                                            junctionRef: junctionRef,
                                            destinationRef: destinationRef,
                                            destination: destination,
-                                           isLink: isLink,
                                            shields: shields)
     let text = candidates.map(\.plainText)
     var attributed = [NSAttributedString]()
@@ -245,7 +291,6 @@ final class NavigationInstructionFormatter: NSObject {
                                             junctionRef: String,
                                             destinationRef: String,
                                             destination: String,
-                                            isLink: Bool,
                                             shields: RoadShieldInfo?) -> [InstructionCandidate] {
     func clean(_ s: String) -> String { s.trimmingCharacters(in: .whitespacesAndNewlines) }
     func joined(_ groups: [[InstructionPart]], separator: String) -> [InstructionPart] {
@@ -253,9 +298,9 @@ final class NavigationInstructionFormatter: NSObject {
     }
 
     let name = clean(roadName)
-    let ref = clean(roadRef)
+    let ref = displayRefs(roadRef)
     let junctionRef = clean(junctionRef)
-    let destinationRef = clean(destinationRef)
+    let destinationRef = displayRefs(destinationRef)
     let destination = clean(destination)
 
     let targetShields = shields?.targetRoadShields ?? []
@@ -265,12 +310,12 @@ final class NavigationInstructionFormatter: NSObject {
                                                                   shields: targetShields,
                                                                   isJunction: false)]
     var candidates = [[InstructionPart]]()
-    let hasExitInfo = !junctionRef.isEmpty || !destinationRef.isEmpty || !destination.isEmpty
-    if isLink || hasExitInfo {
-      let exitLabel = junctionRef.isEmpty ? "" : String(format: L("carplay_highway_exit"), junctionRef)
-      let exitParts: [InstructionPart] = exitLabel.isEmpty ? [] : [.roadRef(text: exitLabel,
-                                                                           shields: junctionShields,
-                                                                           isJunction: true)]
+    let exitLabel = carPlayHighwayExitLabel(junctionRef: junctionRef) ?? ""
+    let exitParts: [InstructionPart] = exitLabel.isEmpty ? [] : [.roadRef(text: exitLabel,
+                                                                         shields: junctionShields,
+                                                                         isJunction: true)]
+    let hasDestinationInfo = !destinationRef.isEmpty || !destination.isEmpty
+    if hasDestinationInfo {
       let destinationRefParts: [InstructionPart] = destinationRef.isEmpty ? [] : [
         .roadRef(text: destinationRef, shields: targetShields, isJunction: false),
       ]
@@ -286,10 +331,12 @@ final class NavigationInstructionFormatter: NSObject {
         firstDestination == destination ? [] : joined([lead, firstDestinationParts], separator: " → "),
         lead,
         exitParts,
-        // A link with no exit data at all (no junction/destination/ref) would produce nothing,
-        // fall back to its plain road name/ref.
-        joined([refParts, nameParts], separator: " "),
-        nameParts,
+      ]
+    } else if !exitParts.isEmpty {
+      let roadParts = joined([refParts, nameParts], separator: " ")
+      candidates = [
+        joined([exitParts, roadParts], separator: ": "),
+        exitParts,
       ]
     } else {
       candidates = [
@@ -305,6 +352,14 @@ final class NavigationInstructionFormatter: NSObject {
       .map(InstructionCandidate.init(parts:))
       .filter { !$0.plainText.isEmpty && seen.insert($0.plainText).inserted }
       .sorted { $0.plainText.count > $1.plainText.count }
+  }
+
+  static func displayRefs(_ refs: String) -> String {
+    var seen = Set<String>()
+    return refs.split(separator: ";")
+      .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+      .filter { !$0.isEmpty && seen.insert($0).inserted }
+      .joined(separator: " / ")
   }
 
   private static func render(_ candidate: InstructionCandidate,
@@ -383,7 +438,6 @@ final class NavigationInstructionFormatter: NSObject {
                                           junctionRef: String,
                                           destinationRef: String,
                                           destination: String,
-                                          isLink: Bool,
                                           isLeftHandTraffic: Bool,
                                           shields: RoadShieldInfo?,
                                           textSize: CGFloat,
@@ -423,18 +477,17 @@ final class NavigationInstructionFormatter: NSObject {
       }
     }
 
-    let hasExitInfo = !junctionRef.isEmpty || !destinationRef.isEmpty || !destination.isEmpty
+    let hasDestinationInfo = !destinationRef.isEmpty || !destination.isEmpty
 
-    // These follow roughly the same rules as GetFullRoadName in routing_session.cpp.
-    if isLink || hasExitInfo {
-      if !junctionRef.isEmpty {
-        if let shields, shields.hasJunctionRoadShields {
-          appendShields(shields.junctionRoadShields, isJunction: true)
-        } else {
-          appendText(junctionRef)
-        }
+    if !junctionRef.isEmpty {
+      if let shields, shields.hasJunctionRoadShields {
+        appendShields(shields.junctionRoadShields, isJunction: true)
+      } else {
+        appendText(junctionRef)
       }
+    }
 
+    if hasDestinationInfo {
       if !destinationRef.isEmpty {
         if result.length > 0 {
           appendText(": ")
@@ -452,15 +505,17 @@ final class NavigationInstructionFormatter: NSObject {
         }
         let parts = destination.split(separator: ";").map { $0.trimmingCharacters(in: .whitespaces) }
         appendText(parts.joined(separator: " / "))
-      } else if !roadName.isEmpty {
-        if result.length > 0 {
-          appendText(" ")
-        }
-        appendText(roadName)
       }
     } else {
-      if !roadRef.isEmpty, let shields, shields.hasTargetRoadShields {
-        appendShields(shields.targetRoadShields, isJunction: false)
+      if !roadRef.isEmpty {
+        if result.length > 0 {
+          appendText(": ")
+        }
+        if let shields, shields.hasTargetRoadShields {
+          appendShields(shields.targetRoadShields, isJunction: false)
+        } else {
+          appendText(roadRef)
+        }
       }
       if !roadName.isEmpty {
         if result.length > 0 {
@@ -480,13 +535,18 @@ final class NavigationInstructionFormatter: NSObject {
 
 @objc(MWMRouteInfo)
 class RouteInfo: NSObject {
+  let routeID: UInt64
+  let turnIndex: UInt32
+  let currentStep: UInt32?
+  let nextStep: UInt32?
   let timeToTarget: TimeInterval
   let targetDistance: Double
   let targetUnits: UnitLength
   let distanceToTurn: Double
   let turnUnits: UnitLength
   let turnImageName: String?
-  let nextTurnImageName: String?
+  let firstNotificationDistanceMeters: Double
+  let secondNotificationDistanceMeters: Double
   let speedMps: Double
   let speedLimitMps: Double?
   let roundExitNumber: Int
@@ -506,13 +566,18 @@ class RouteInfo: NSObject {
   let carDirection: CarDirection
   let isLeftHandTraffic: Bool
 
-  @objc init(timeToTarget: TimeInterval,
+  @objc init(routeID: UInt64,
+             turnIndex: UInt32,
+             currentStep: NSNumber?,
+             nextStep: NSNumber?,
+             timeToTarget: TimeInterval,
              targetDistance: Double,
              targetUnitsIndex: UInt8,
              distanceToTurn: Double,
              turnUnitsIndex: UInt8,
              turnImageName: String?,
-             nextTurnImageName: String?,
+             firstNotificationDistanceMeters: Double,
+             secondNotificationDistanceMeters: Double,
              speedMps: Double,
              speedLimitMps: Double,
              roundExitNumber: Int,
@@ -527,13 +592,18 @@ class RouteInfo: NSObject {
              currentRoadName: String,
              carDirectionIndex: UInt8,
              isLeftHandTraffic: Bool) {
+    self.routeID = routeID
+    self.turnIndex = turnIndex
+    self.currentStep = currentStep?.uint32Value
+    self.nextStep = nextStep?.uint32Value
     self.timeToTarget = timeToTarget
     self.targetDistance = targetDistance
     self.targetUnits = RouteInfo.unitLength(for: targetUnitsIndex)
     self.distanceToTurn = distanceToTurn
     self.turnUnits = RouteInfo.unitLength(for: turnUnitsIndex)
     self.turnImageName = turnImageName
-    self.nextTurnImageName = nextTurnImageName
+    self.firstNotificationDistanceMeters = firstNotificationDistanceMeters
+    self.secondNotificationDistanceMeters = secondNotificationDistanceMeters
     self.speedMps = speedMps
     // speedLimitMps >= 0 means known limited speed.
     self.speedLimitMps = speedLimitMps < 0 ? nil : speedLimitMps

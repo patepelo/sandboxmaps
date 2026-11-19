@@ -199,7 +199,7 @@
     <!-- Settings «Route» category: «Tts announce street names» title -->
     <string name="pref_tts_street_names_title">Annoncer gadenavne</string>
     <!-- Settings «Route» category: «Tts announce street names» description -->
-    <string name="pref_tts_street_names_description">Når det er aktiveret, bliver navnet på den gade eller frakørsel, man skal dreje ind på, sagt højt.</string>
+    <string name="pref_tts_street_names_description">Hvis aktiveret bliver navnet på den gade eller frakørsel, du skal dreje ind på, sagt højt.</string>
     <!-- Settings «Route» category: «Tts language» title -->
     <string name="pref_tts_language_title">Stemmesprog</string>
     <!-- Settings «Route» category: «Test Voice Directions» title -->
@@ -338,7 +338,7 @@
     <string name="dialog_routing_try_again">Prøv venligst igen</string>
     <string name="not_now">Ikke nu</string>
     <string name="dialog_routing_download_and_build_cross_route">Ønsker du at downloade kortet og planlægge en mere optimal rute, der strækker sig over mere end ét kort?</string>
-    <string name="dialog_routing_download_cross_route">Download yderligere kort for at planlægge en mere optimal rute, der strækker sig ud over dette korts grænser.</string>
+    <string name="dialog_routing_download_cross_route">Download yderligere kort for at planlægge en bedre rute, der krydser dette korts grænser.</string>
     <!-- SECTION: Strings for downloading map from search -->
     <string name="search_without_internet_advertisement">For at komme i gang med at søge og oprette ruter skal du downloade kortet. Derefter har du ikke længere brug for en internetforbindelse.</string>
     <string name="search_select_map">Vælg kort</string>
@@ -467,7 +467,7 @@
     <!-- abbreviation for kilometers per hour -->
     <string name="kilometers_per_hour">km/t</string>
     <string name="miles_per_hour">mph</string>
-    <string name="hour">time</string>
+    <string name="hour">t</string>
     <string name="minute">min</string>
     <string name="day">d</string>
     <string name="placepage_more_button">Mere</string>
@@ -494,15 +494,15 @@
     <string name="accept">Accepter</string>
     <!-- For the first routing -->
     <string name="decline">Afvis</string>
-    <string name="mobile_data_dialog">Brug mobilt internet til at vise detaljeret information?</string>
+    <string name="mobile_data_dialog">Anvend mobildata?</string>
     <string name="mobile_data_option_always">Brug altid</string>
     <string name="mobile_data_option_today">Kun i dag</string>
     <string name="mobile_data_option_not_today">Brug ikke i dag</string>
-    <string name="mobile_data">Mobilt internet</string>
+    <string name="mobile_data">Mobildata</string>
     <!-- NOTE to translators: please synchronize your translation with the English one. -->
-    <string name="mobile_data_description">Mobilt internet er nødvendigt for at få besked om kortopdateringer og uploade ændringer</string>
+    <string name="mobile_data_description">Mobilt internet er nødvendigt for at få besked om kortopdateringer, uploade redigeringer og oprette links til anmeldelsessider</string>
     <string name="mobile_data_option_never">Brug aldrig</string>
-    <string name="mobile_data_option_ask">Spørg altid</string>
+    <string name="mobile_data_option_ask">Spørg hver gang</string>
     <string name="traffic_update_maps_text">Kort skal opdateres for at vise trafikdata</string>
     <string name="increase_font_size">Forøg størrelsen på kortetiketter</string>
     <string name="traffic_update_app">Opdater Sandbox Maps</string>
@@ -567,7 +567,7 @@
     <string name="subway">Undergrundsbane</string>
     <string name="layers_title">Kortstile og -lag</string>
     <string name="bookmarks_empty_list_title">Listen er tom</string>
-    <string name="bookmarks_empty_list_message">For at gemme et sted, så tryk et sted på kortet og dernæst på stjerneikonet</string>
+    <string name="bookmarks_empty_list_message">For at gemme et sted skal du trykke på stedet på kortet og derefter trykke på stjerneikonet</string>
     <string name="category_desc_more">…mere</string>
     <string name="export_file">Eksporter KMZ</string>
     <string name="export_file_gpx">Eksporter GPX</string>
@@ -577,7 +577,7 @@
     <!-- this text will be shown in application notification preferences opposite checkbox which enable/disable downloader notifications. Devices on Android 8+ are affected. -->
     <string name="notification_channel_downloader">Kort-downloader</string>
     <!-- "Speed cameras" settings menu option (should be short! no more than 47-50 chars) to warn a driver if there is a risk of exceeding the speed limit -->
-    <string name="pref_tts_speedcams_auto">Advar om for høj hastighed</string>
+    <string name="pref_tts_speedcams_auto">Advar ved for høj hastighed</string>
     <!-- Speed camera settings menu option - Always warn (about speedcams) -->
     <string name="pref_tts_speedcams_always">Advar altid</string>
     <!-- Speed camera settings menu option - Never warn (about speedcams) -->
@@ -672,7 +672,7 @@
     <string name="downloader_loading_ios">Downloader</string>
     <string name="enable_keep_screen_on">Hold skærmen tændt</string>
     <!-- Description in preferences -->
-    <string name="enable_keep_screen_on_description">Når den er aktiveret, vil skærmen altid være tændt, når kortet vises.</string>
+    <string name="enable_keep_screen_on_description">Hvis aktiveret vil skærmen altid være tændt når kortet vises.</string>
     <!-- OpenStreetMap text on splash screen -->
     <string name="splash_subtitle">Kortdata fra OpenStreetMap</string>
     <!-- Link to OSM wiki for Editor, Profile and About pages -->
@@ -783,7 +783,7 @@
     <string name="tts_info_link">https://www.comaps.app/support/tts-configuration-guide-for-android/</string>
     <string name="level_value_generic">Etage: %s</string>
     <string name="closes_in">Lukker om %s</string>
-    <string name="enable_show_on_lock_screen_description">Når den er aktiveret, fungerer appen på låseskærmen, selv når enheden er låst.</string>
+    <string name="enable_show_on_lock_screen_description">Hvis aktiveret fungerer appen på låseskærmen, selv når enheden er låst.</string>
     <string name="comma_separated_pair">%1$s, %2$s</string>
     <string name="move_maps_error">Fejl ved flytning af kortfiler</string>
     <string name="disk_error">Kan ikke oprette mapper og flytte filer på enhedens interne hukommelse eller sd-kort</string>
@@ -812,7 +812,7 @@
     <string name="backup_interval_every_week">Ugentligt</string>
     <string name="backup_interval_manual_only">Fra (kun manuelt)</string>
     <string name="dialog_report_error_missing_folder">Den valgte sikkerhedskopi-placering er ikke tilgængelig eller skrivbar. Vælg en anden placering.</string>
-    <string name="dialog_report_error_with_logs">Send os en fejlrapport:\n - \"Aktivér logning\" i indstillingerne\n - genskab problemet\n - Tryk på knappen \"Rapporter en fejl\" i skærmbilledet \"Om og hjælp\" og send via e-mail eller chat.\n - deaktiver logning</string>
+    <string name="dialog_report_error_with_logs">Send os en fejlrapport:\n - Gå til indstillingerne, så vælg Avanceret\n - \"Aktivér logning\"\n - genskab problemet\n - Tryk på knappen \"Rapporter en fejl\" i skærmbilledet \"Om og hjælp\" og send via e-mail eller chat.\n - deaktiver logning</string>
     <string name="editor_building_levels">Etager (inkl. stueetage, ekskl. tag)</string>
     <string name="error_enter_correct_level">Indtast et gyldigt etagenummer</string>
     <string name="pref_left_button_title">Indstilling af venstre knap</string>
@@ -877,7 +877,7 @@
     <string name="editor_mark_business_vacant_title">Markér forretning som tom</string>
     <string name="editor_mark_business_vacant_description">Brug dette, hvis forretningen er flyttet ud, og lokalet står tomt og er klar til en ny lejer.</string>
     <string name="editor_submit">Indsend</string>
-    <string name="power_management">Strømstyring</string>
+    <string name="power_management">Strømbesparelse</string>
     <string name="charge_socket_schuko">Europæisk</string>
     <string name="prefs_speed_cameras_information">Advarsler om hastighedskameraer er deaktiveret i lande, hvor advarsler er forbudt i henhold til lokal lovgivning.</string>
     <string name="navigation_start_tts_message">"Starter navigation, sprog for stemmeinstruktioner: "</string>
@@ -924,7 +924,7 @@
     <string name="tts_toggle_enable">Aktivér stemmevejledninger</string>
     <string name="tts_toggle_disable">Deaktivér stemmevejledninger</string>
     <string name="pref_aa_support_title">Android Auto</string>
-    <string name="pref_aa_support_summary_yes">Appen er installeret fra Google Play, du kan bruge den i din bil.</string>
+    <string name="pref_aa_support_summary_yes">Appen er installeret fra Google Play. Du kan bruge den i din bil.</string>
     <string name="pref_aa_support_summary_no">Appen er ikke installeret fra Google Play, du kan ikke bruge den i din bil. Tryk på indstillingen for flere oplysninger i vores FAQ.</string>
     <string name="oh_unknown">Åbningstider ukendt</string>
     <string name="editor_add_select_category_all_subtitle">Alle kategorier</string>
@@ -956,13 +956,27 @@
     <string name="prefs_group_data_management_summary">Kortlagring, sikkerhedskopiering af favoritter</string>
     <string name="prefs_group_advanced_summary">Aktivér logning</string>
     <string name="pref_enable_auto_reroute_title">Automatisk omdirigering</string>
-    <string name="pref_enable_auto_reroute_description">Når aktiveret, oprettes der automatisk en ny rute, når du forlader den planlagte rute.</string>
+    <string name="pref_enable_auto_reroute_description">Hvis aktiveret oprettes der automatisk en ny rute, når du forlader den planlagte rute.</string>
     <string name="recalculate_route">Genberegn</string>
     <string name="off_route">Du er kommet væk fra ruten</string>
     <string name="bookmarks_text_placement_title">Vis navnene af favoritterne på kortet</string>
     <string name="place_reviews_title">Anmeldelser</string>
     <string name="place_reviews">%1$s anmeldelser</string>
     <string name="rating_stars_description">stjerner: %.1f</string>
-    <string name="reviews_by_mangrove">Anmeldelser fra Mangrove.\nTilføj anmeldelser i <a href="https://mapcomplete.org">MapComplete</a>.</string>
-    <string name="pref_font_size">Tekststørrelse på kortetiketter</string>
+    <string name="reviews_by_mangrove">Anmeldelser fra Mangrove</string>
+    <string name="pref_font_size">Tekststørrelse på kortet</string>
+    <string name="decrease_font_size">Formindsk størrelsen på kortetiketter</string>
+    <string name="add_review">Tilføj en anmeldelse via %1$s</string>
+    <string name="add_review_url_resolution_failed">Stedet er ikke fundet i den seneste OpenStreetMap.</string>
+    <string name="add_review_url_resolution_failed_dev">Stedet er ikke fundet i udvikler-versionen af OpenStreetMap.</string>
+    <string name="internet_unavailable">Ingen internetforbindelse</string>
+    <string name="stars_1">1-stjernet</string>
+    <string name="stars_2">2-stjernet</string>
+    <string name="stars_3">3-stjernet</string>
+    <string name="stars_4">4-stjernet</string>
+    <string name="stars_5">5-stjernet</string>
+    <string name="route_preview_turn_position">%1$d af %2$d</string>
+    <string name="route_preview_cancel">Luk ruteforhåndsvisning</string>
+    <string name="route_preview_previous_turn">Forrige sving</string>
+    <string name="route_preview_next_turn">Næste sving</string>
 </resources>

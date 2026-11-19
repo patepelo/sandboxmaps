@@ -9,7 +9,7 @@
         "defaultMessage": "5Транспорт"
     },
     "@category_fuel": {
-        "defaultMessage": "3бензин|3дызель|4паліва|газ|АЗС"
+        "defaultMessage": "Заправка|3бензин|3дызель|4паліва|газ|АЗС"
     },
     "@category_parking": {
         "defaultMessage": "4Парковка"
@@ -1502,7 +1502,7 @@
     "@cuisine_all_vegetarian": {
         "defaultMessage": "Вегетаріанська кухня"
     },
-    "cuisine-vegan|@cuisine_all_vegetarian": {
+    "cuisine-vegan|cuisine-vegan_only|@cuisine_all_vegetarian": {
         "defaultMessage": "Веганська кухня"
     }
 }

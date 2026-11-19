@@ -1,13 +1,13 @@
-• Brugergrænseflade med transportmodusafhængige kortstile
-• Vis favoritnavne på kortet (slå fra i indstillingerne)
-• Indstilling for tekststørrelse på kortet
-• Tilføjet vejskilte for Kirgisistan, Usbekistan, Tadsjikistan, Kasakhstan og Georgien
-• Mørke og lyse varianter af svingbilleder i CarPlay
-• OSM-editor: tilføjet flere kategorier (prison, dojo, bowling_alley, lounger, shop=craft, golf_course, miniature_golf og attraktioner (roller_coaster, carousel...) og samlingspunkter)
-• Rettet mulighed for at søge på alle brugerindstillede kortsprog (ikke kun engelsk og lokalt sprog)
-• Brug vognbaner uden restriktioner for vognbanevejledning i fortsæt ligeud-instruktioner
-• Fortolk ikke fee=donation som betalt
-• Stemmevejledning på makedonsk aktiveret
-• Rettet forespørgsel om placering før beskyttede data er tilgængelige
-• Rettet problem med, at knappen til rutevisning forsvandt
-• OpenStreetMap-data pr. 30. august og yderligere ugentlige opdateringer
+• Omskrevet CarPlay-rutevejledning: Løst forskellige problemer, som: forsinkelse af instruktionerne, næste sving som viser forkert retning, næste sving virker kun med TTS slået til
+• Løst crash i CarPlay søgeresultater
+• Håndtering af biler, der begrænser visning af lister i CarPlay under kørsel
+• Løst usynlig indstillinger-ikon i CarPlay på iOS 27
+• Rettet pilens position når man starter navigation på dashboard og flytter over til hovedvisning
+• Forbedret kontrast i mørk tilstand: bedre synlig tekst og veje
+• Tilføjet farlige områder
+• Skel mellem vegetariske valgmuligheder og helt vegetarisk og veganske valgmuligheder og helt vegansk
+• Fjernet “Gå ligeud”-instruktion når man krydser store veje
+• Splittet Tanzania, Vietnam, Malaysia og Kina Guangdong i flere mindre kort
+• Tilføjet “?reviews” søgenøgleord, som finder steder der har anmeldelser
+• Vis filial og information om brugte produkter for interessepunkter tilføjet spillesteder, kantiner og mere
+• OpenStreetMap-data pr. 5. november og yderlige ugentlige opdateringer

@@ -91,29 +91,39 @@ public class MapObject implements PlacePageData
    */
   @NonNull
   private ArrayList<Review> mReviews;
+  /**
+   * The name of the app used to add/edit reviews.
+   */
+  @Nullable
+  private final String mReviewEditorAppName;
   @NonNull
   private String mWikiArticle;
   @NonNull
   private final String mOsmDescription;
   @Nullable
   private List<String> mRawTypes;
+  @NonNull
+  private String mTitleWithoutBranch = "";
+  @NonNull
+  private String mBranch = "";
 
   public MapObject(@NonNull FeatureId featureId, @MapObjectType int mapObjectType, String title,
                    @Nullable String secondaryTitle, String subtitle, String address, double lat, double lon,
                    String apiId, @Nullable RoutePointInfo routePointInfo, @OpeningMode int openingMode,
                    Popularity popularity, @Nullable Float starRating,
-                   int reviewCount, @NonNull String wikiArticle, @NonNull String osmDescription,
+                   int reviewCount, @Nullable String reviewEditorAppName, @NonNull String wikiArticle, @NonNull String osmDescription,
                    int roadWarningType, @Nullable String[] rawTypes)
   {
     this(featureId, mapObjectType, title, secondaryTitle, subtitle, address, lat, lon, new Metadata(), apiId,
-        routePointInfo, openingMode, popularity, starRating, reviewCount, wikiArticle, osmDescription, roadWarningType, rawTypes);
+        routePointInfo, openingMode, popularity, starRating, reviewCount, reviewEditorAppName, wikiArticle, osmDescription, roadWarningType, rawTypes);
   }
 
   public MapObject(@NonNull FeatureId featureId, @MapObjectType int mapObjectType, String title,
                    @Nullable String secondaryTitle, String subtitle, String address, double lat, double lon,
                    Metadata metadata, String apiId, @Nullable RoutePointInfo routePointInfo,
                    @OpeningMode int openingMode, Popularity popularity, @Nullable Float starRating,
-                   int reviewCount, @NonNull String wikiArticle, @NonNull String osmDescription, int roadWarningType, @Nullable String[] rawTypes)
+                   int reviewCount, @Nullable String reviewEditorAppName, @NonNull String wikiArticle, @NonNull String osmDescription, int roadWarningType,
+                   @Nullable String[] rawTypes)
   {
     mFeatureId = featureId;
     mMapObjectType = mapObjectType;
@@ -130,6 +140,7 @@ public class MapObject implements PlacePageData
     // mPopularity = popularity;
     mStarRating = starRating;
     mReviewCount = reviewCount;
+    mReviewEditorAppName = reviewEditorAppName;
     mReviews = new ArrayList<>();
     mWikiArticle = wikiArticle;
     mOsmDescription = osmDescription;
@@ -158,12 +169,15 @@ public class MapObject implements PlacePageData
             ParcelCompat.readParcelable(source, Popularity.class.getClassLoader(), Popularity.class)),
         (Float) source.readValue(Float.class.getClassLoader()), // mStarRating
         source.readInt(), // mReviewCount
+        source.readString(), // mReviewEditorAppName
         Objects.requireNonNull(source.readString()),
         source.readString(),
         source.readInt(),
         null // mRawTypes
     );
 
+    mTitleWithoutBranch = Objects.requireNonNull(source.readString());
+    mBranch = Objects.requireNonNull(source.readString());
     mRawTypes = readRawTypes(source);
     mReviews = readReviews(source);
   }
@@ -181,7 +195,7 @@ public class MapObject implements PlacePageData
                                           @NonNull String title, @NonNull String subtitle, double lat, double lon)
   {
     return new MapObject(featureId, mapObjectType, title, "", subtitle, "", lat, lon, null, "", null,
-        OPENING_MODE_PREVIEW, Popularity.defaultInstance(), null, 0, "", null,
+        OPENING_MODE_PREVIEW, Popularity.defaultInstance(), null, 0, null, "", null,
         RoadWarningMarkType.UNKNOWN.ordinal(), new String[0]);
   }
 
@@ -292,6 +306,12 @@ public class MapObject implements PlacePageData
     return mReviews;
   }
 
+  @Nullable
+  public String getReviewEditorAppName()
+  {
+    return mReviewEditorAppName;
+  }
+
   @NonNull
   public String getWikiArticle()
   {
@@ -307,6 +327,18 @@ public class MapObject implements PlacePageData
   public String getOsmDescription()
   {
     return mOsmDescription;
+  }
+
+  @NonNull
+  public String getTitleWithoutBranch()
+  {
+    return mTitleWithoutBranch;
+  }
+
+  @NonNull
+  public String getBranch()
+  {
+    return mBranch;
   }
 
   @NonNull
@@ -359,6 +391,14 @@ public class MapObject implements PlacePageData
     mMetadata.addMetadata(type, value);
   }
 
+  @Keep
+  @SuppressWarnings("unused")
+  public void setTitleAndBranch(@NonNull String titleWithoutBranch, @NonNull String branch)
+  {
+    mTitleWithoutBranch = titleWithoutBranch;
+    mBranch = branch;
+  }
+
   // Called from JNI.
   @Keep
   @SuppressWarnings("unused")
@@ -390,6 +430,11 @@ public class MapObject implements PlacePageData
   public String getOrganic()
   {
     return getFeatureType("organic-");
+  }
+
+  public String getSecondHand()
+  {
+    return getFeatureType("second_hand-");
   }
 
   public final boolean isMyPosition()
@@ -473,9 +518,12 @@ public class MapObject implements PlacePageData
     // dest.writeParcelable(mPopularity, 0);
     dest.writeValue(mStarRating);
     dest.writeInt(mReviewCount);
+    dest.writeString(mReviewEditorAppName);
     dest.writeString(mWikiArticle);
     dest.writeString(mOsmDescription);
     dest.writeInt(getRoadWarningMarkType().ordinal());
+    dest.writeString(mTitleWithoutBranch);
+    dest.writeString(mBranch);
     // All collections are deserialized AFTER non-collection and primitive type objects,
     // so collections must be always serialized at the end.
     dest.writeStringList(mRawTypes);

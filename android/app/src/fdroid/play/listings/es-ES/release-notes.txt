@@ -1,9 +1,9 @@
-• Mostrar nombres favoritos en el mapa (desactivar en ajustes)
-• Mostrar reseñas de usuarios de Mangrove en la página de información del PDI
-• Ajuste personalizado del tamaño de fuente del mapa
-• Posibilidad de leer el mapa para usuarios de TalkBack
-• Posibilidad de iniciar la grabación de la ruta tras comenzar navegación
-• "Abre mañana a las" en la página de información del PDI
-• Corregida la búsqueda en cualquier idioma del mapa configurado por el usuario
+• Mejora del contraste en modo oscuro: texto y carreteras más legibles
+• Inclusión de zonas peligrosas
+• Distinción entre opciones vegetarianas y solo vegetariano
+• Eliminada indicación «siga recto» al cruzar carreteras grandes
+• Modo de vista previa de la ruta (haz clic en un paso durante planificación de ruta)
+• Mejorada interfaz de Android Auto
+• Inclusión de nombres de sucursales en PDIs, info de segunda mano, locales de música...
 
-Más detalles en comaps.app/latest
+Más info en comaps.app/latest

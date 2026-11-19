@@ -1,13 +1,13 @@
-• Gebruikersinterface met transportmodusafhankelijke kaartstijlen
-• Toon namen van favorieten op de kaart (uitschakelbaar in instellingen)
-• Instelling voor aangepaste tekstgrootte op de kaart
-• Ondersteuning voor weglabels in Kirgizië, Oezbekistan, Tadzjikistan, Kazachstan en Georgië
-• Donkere en lichte varianten van afbeeldingen voor afslaan in CarPlay
-• OSM-editor: meer categorieën toegevoegd (prison, dojo, bowling_alley, lounger, shop=craft, golf_course, miniature_golf en attracties (roller_coaster, carousel...) en verzamelpunten)
-• Zoeken in elke door gebruiker ingestelde kaarttaal mogelijk gemaakt (niet alleen Engels en lokale taal)
-• Gebruik rijstroken zonder restrictie voor rijstrookbegeleiding in rechtdoor-instructies
-• Interpreteer fee=donation niet als betaald
-• Spraakinstructies in het Macedonisch mogelijk gemaakt
-• Vragen naar locatie vóór beschermde data beschikbaar is verholpen
-• Verdwijnende routevoorbeeld-knop verholpen
-• OpenStreetMap-data per 30 augustus, verder wekelijkse updates
+• CarPlay-routebegeleiding herschreven: Verschillende bugs opgelost, zoals: vertraging van de instructies, volgende bocht die verkeerde richting toont, volgende bocht werkt alleen met TTS aan
+• Crash in CarPlay zoekresultaten verholpen
+• Omgaan met auto’s die tijdens het rijden de weergave van lijsten in CarPlay beperken
+• Onzichtbaar instellingenpictogram in CarPlay op iOS 27 verholpen
+• Positie van de pijl bij het starten van een route op het dashboard en overgaan naar hoofdweergave gecorrigeerd
+• Verbeterd contrast in donkere modus: beter zichtbare text en wegen
+• Gevaarlijke gebieden toegevoegd
+• Onderscheid tussen volledig vegetarish en vegetarische opties en volledig vegan en vegan opties
+• “Ga rechtdoor”-instructie verwijderd bij oversteken grote wegen
+• Tanzania, Vietnam, Maleisië en China Guangdong uitgesplitst naar kleinere kaarten
+• Zoeksleutelwoord “?reviews” toegevoegd om plaatsen met recenties te vinden
+• Vestiging en tweedehands-informatie toegevoegd aan interessepunten, muziekpodia, kantines en meer toegevoegd
+• OpenStreetMap-gegevens per 5 november, verder weekelijkse updates

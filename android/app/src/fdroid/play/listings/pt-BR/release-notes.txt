@@ -1,10 +1,10 @@
-• Exibição de nomes de favoritos no mapa
-• Exibição de avaliações de usuários do Mangrove
-• Configuração do tamanho da fonte do mapa
-• TalkBack agora pode ler o mapa
-• Possibilidade de iniciar a gravação de trajeto após o início da navegação
-• Exibição de "Abre amanhã às..." na página de informações do POI
-• Correção da capacidade de pesquisar em qualquer idioma do mapa definido pelo usuário
-• Exibição de pontos de ônibus mais cedo na camada Metrô
+• Melhor contraste no modo escuro (texto e estradas mais legíveis)
+• Zonas de Perigo adicionadas
+• Distinção entre "opções" e "apenas" vegetariano
+• Sem aviso "siga em frente" ao cruzar estradas largas
+• Pré-visualização de rota (toque num passo ao planear)
+• Melhorias no Android Auto e troca carro/telemóvel
+• Nomes de filiais, artigos em 2.ª mão, espaços de música e cafetarias
+• Dados do OpenStreetMap à data de 5 de novembro e futuras atualizações semanais
 
 Mais detalhes em comaps.app/latest

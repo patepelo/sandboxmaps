@@ -723,7 +723,7 @@
     <!-- OpenStreetMap text on splash screen -->
     <string name="splash_subtitle">На основе карт OpenStreetMap</string>
     <!-- Telegram group url for the "?" About page -->
-    <string name="telegram_url">https://t.me/CoMaps_RU</string>
+    <string name="telegram_url">https://t.me/Sandbox Maps_RU</string>
     <!-- A link to the TTS FAQ -->
     <string name="tts_info_link">https://www.comaps.app/support/tts-configuration-guide-for-android/</string>
     <!-- Translated CoMaps site -->
@@ -854,12 +854,7 @@
     <string name="backup_interval_every_week">Еженедельно</string>
     <string name="backup_interval_manual_only">Выключено (только вручную)</string>
     <string name="dialog_report_error_missing_folder">Выбранная для резервного копирования папка отсутствует или доступна только для чтения. Пожалуйста, выберите другую папку.</string>
-    <string name="dialog_report_error_with_logs">Пожалуйста, отправьте нам отчет об ошибке:\n
-    - \"Включить запись логов\" в настройках\n
-    - воспроизведите проблему\n
-    - на экране \"О программе и помощь\" нажмите кнопку \"Сообщить о проблеме\" и отправьте нам отчет по почте или в чат\n
-    - отключите запись логов
-    </string>
+    <string name="dialog_report_error_with_logs">Пожалуйста, отправьте нам отчет об ошибке:\n - \"Включить запись логов\" в настройках\n - воспроизведите проблему\n - на экране \"О программе и помощь\" нажмите кнопку \"Сообщить о проблеме\" и отправьте нам отчет по почте или в чат\n - отключите запись логов</string>
     <string name="panoramax">Panoramax Фото</string>
     <string name="open_now">Открыто</string>
     <string name="closed_now">Закрыто</string>
@@ -960,7 +955,7 @@
     <string name="long_tap_disabled_toast">Чтобы скрыть интерфейс, включите долгий тап в настройках</string>
     <string name="downloader_check_updates_button">Проверить обновления</string>
     <string name="downloader_check_updates_checking">Проверка обновлений...</string>
-    <string name="downloader_check_updates_updated">Карта упешно обновлена!</string>
+    <string name="downloader_check_updates_updated">Доступны обновления карт</string>
     <string name="downloader_check_updates_no_updates">Нет доступных обновлений</string>
     <string name="downloader_check_updates_eol">Обновления карт недоступны для этой версии. Пожалуйста, обновите приложение!</string>
     <string name="downloader_check_updates_error">Ошибка проверки обновлений</string>
