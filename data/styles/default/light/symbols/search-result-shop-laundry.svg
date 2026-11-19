@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36" height="36" version="1.1" viewBox="0 0 36 36" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter id="filter1" x="-.147" y="-.147" width="1.294" height="1.294" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="1.5925"/>
+  </filter>
+  <linearGradient id="linearGradient1" x1="18" x2="18" y1="3" y2="29" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#3fa8f3" offset="0"/>
+   <stop stop-color="#2089d4" offset="1"/>
+  </linearGradient>
+  <linearGradient id="cutout" x1="0" x2="0" y1="0.6129" y2="17.39" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#3fa8f3" offset="0"/>
+   <stop stop-color="#2089d4" offset="1"/>
+  </linearGradient>
+ </defs>
+ <circle cx="18" cy="18" r="13" filter="url(#filter1)" opacity=".35"/>
+ <circle cx="18" cy="16" r="13" fill="url(#linearGradient1)" stroke="#fff" stroke-width="2"/>
+ <g transform="matrix(1.55 0 0 1.55 4.05 2.05)">
+  <rect xmlns="http://www.w3.org/2000/svg" height="10" rx="1" width="8" x="5" y="4" fill="#fff" />
+  <circle xmlns="http://www.w3.org/2000/svg" cx="9" cy="10" r="3" fill="url(#cutout)" />
+  <path xmlns="http://www.w3.org/2000/svg" d="m7.584 11.416c.78.78 2.052.78 2.832 0s.78-2.052 0-2.832z" fill="#fff" />
+  <circle xmlns="http://www.w3.org/2000/svg" cx="6.5" cy="5.5" r=".75" fill="url(#cutout)" />
+  <circle xmlns="http://www.w3.org/2000/svg" cx="8.5" cy="5.5" r=".75" fill="url(#cutout)" />
+ </g>
+</svg>
