@@ -3,6 +3,7 @@ package app.organicmaps.search;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,9 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ConcatAdapter;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 import app.organicmaps.MwmActivity;
 import app.organicmaps.MwmApplication;
 import app.organicmaps.R;
@@ -48,13 +50,13 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SearchFragment extends BaseMwmFragment implements SearchListener, CategoriesAdapter.CategoriesUiListener
 {
+  private static final int RECENT_PLACE_ZOOM = 17;
   private long mLastQueryTimestamp;
   private boolean compatibleContactsAppInstalled = true;
   @NonNull
@@ -86,6 +88,12 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
     {
       if (!isAdded())
         return;
+
+      if (mCategoryMode)
+      {
+        onCategoryFilterChanged(query);
+        return;
+      }
 
       if (TextUtils.isEmpty(query))
       {
@@ -145,7 +153,34 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
   }
 
   private View mResultsFrame;
+  // Start screen (no query yet): Recent and Categories sections in one grid list.
   private View mTabFrame;
+  @Nullable
+  private GridLayoutManager mStartLayout;
+  @Nullable
+  private SectionHeaderAdapter mRecentHeader;
+  @Nullable
+  private SearchHistoryAdapter mHistoryAdapter;
+  @Nullable
+  private SectionHeaderAdapter mCategoriesHeader;
+  @Nullable
+  private CategoriesAdapter mCategoriesAdapter;
+  // "All categories" mode: the bar filters place types shown in mCategoryFrame.
+  private View mCategoryFrame;
+  private boolean mCategoryMode;
+  @Nullable
+  private String mQueryBeforeCategories;
+  @Nullable
+  private GridLayoutManager mCategoryLayout;
+  @SuppressWarnings("NullableProblems")
+  @NonNull
+  private SectionHeaderAdapter mFeaturedHeader;
+  @SuppressWarnings("NullableProblems")
+  @NonNull
+  private CategoriesAdapter mFeaturedAdapter;
+  @SuppressWarnings("NullableProblems")
+  @NonNull
+  private CategoryTypesAdapter mTypesAdapter;
   private PlaceholderView mResultsPlaceholder;
   private ExtendedFloatingActionButton mShowOnMapFab;
   private FloatingActionButton mOpenContactPicker;
@@ -227,7 +262,8 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
 
   private void updateFrames()
   {
-    final boolean hasQuery = mToolbarController.hasQuery();
+    // In category mode the bar's text filters categories; it isn't a place search.
+    final boolean hasQuery = !mCategoryMode && mToolbarController.hasQuery();
     MaterialToolbar toolbar = mToolbarController.getToolbar();
     AppBarLayout.LayoutParams lp = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
     lp.setScrollFlags(hasQuery ? AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
@@ -236,14 +272,25 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
     toolbar.setLayoutParams(lp);
 
     UiUtils.showIf(hasQuery, mResultsFrame);
+    // Only one of results, start screen and category list shows at a time.
+    UiUtils.showIf(!hasQuery && !mCategoryMode, mTabFrame);
+    UiUtils.showIf(mCategoryMode, mCategoryFrame);
     UiUtils.showIf(hasQuery, mShowOnMapFab);
 
     if (hasQuery)
       mTabFrame.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
     else
+    {
       mTabFrame.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
-    UiUtils.showIf(!hasQuery && compatibleContactsAppInstalled, mOpenContactPicker);
-    if (hasQuery)
+      // A search may have just been added to Recent.
+      if (mHistoryAdapter != null)
+      {
+        mHistoryAdapter.refresh();
+        updateStartHeaders();
+      }
+    }
+    UiUtils.showIf(!hasQuery && !mCategoryMode && compatibleContactsAppInstalled, mOpenContactPicker);
+    if (hasQuery || mCategoryMode)
       hideDownloadSuggest();
     else if (doShowDownloadSuggest())
       showDownloadSuggest();
@@ -274,17 +321,11 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
 
     ViewGroup root = (ViewGroup) view;
     mTabFrame = root.findViewById(R.id.tab_frame);
-    ViewPager2 pager = mTabFrame.findViewById(R.id.pages);
 
     mToolbarController = new ToolbarController(view);
-    TabLayout tabLayout = root.findViewById(R.id.tabs);
-
-    if (Config.isSearchHistoryEnabled())
-      tabLayout.setVisibility(View.VISIBLE);
-    else
-      tabLayout.setVisibility(View.GONE);
-
-    final TabAdapter tabAdapter = new TabAdapter(this, pager, tabLayout);
+    setUpStartList((RecyclerView) mTabFrame);
+    mCategoryFrame = root.findViewById(R.id.category_frame);
+    setUpCategoryList((RecyclerView) mCategoryFrame);
 
     mResultsFrame = root.findViewById(R.id.results_frame);
     RecyclerView mResults = mResultsFrame.findViewById(R.id.recycler);
@@ -320,6 +361,8 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
     }
 
     ViewCompat.setOnApplyWindowInsetsListener(mResultsPlaceholder, new WindowInsetUtils.ScrollableContentInsetsListener(mResultsPlaceholder, mOpenContactPicker));
+    // Keep the last category row clear of the floating contacts button.
+    ViewCompat.setOnApplyWindowInsetsListener(mTabFrame, new WindowInsetUtils.ScrollableContentInsetsListener((RecyclerView) mTabFrame, mOpenContactPicker));
 
     mResults.setLayoutManager(new LinearLayoutManager(view.getContext()));
     mResults.setAdapter(mSearchAdapter);
@@ -332,8 +375,6 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
     mToolbarController.activate();
 
     SearchEngine.INSTANCE.addListener(this);
-
-    tabAdapter.setTabSelectedListener(tab -> mToolbarController.deactivate());
 
     if (mInitialSearchOnMap)
       showAllResultsOnMap();
@@ -446,14 +487,38 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
       final MapObject point =
           MapObject.createMapObject(FeatureId.EMPTY, MapObject.SEARCH, title, subtitle, result.lat, result.lon);
       RoutingController.get().onPoiSelected(point);
+      // Choosing it as a route point is a deliberate action: keep it in Recent.
+      RecentPlaces.saveNow(requireContext(), result);
     }
     else
     {
+      // Only a candidate: saved to Recent if the user then acts on the place page.
+      RecentPlaces.setCandidate(result);
       SearchEngine.INSTANCE.showResult(resultIndex);
     }
 
     mToolbarController.deactivate();
 
+    if (requireActivity() instanceof SearchActivity)
+      Utils.navigateToParent(requireActivity());
+  }
+
+  /// Opens a place from Recent the same way as a search result.
+  private void showRecentPlace(@NonNull RecentPlaces.Entry place)
+  {
+    if (RoutingController.get().isWaitingPoiPick())
+    {
+      final MapObject point = MapObject.createMapObject(FeatureId.EMPTY, MapObject.SEARCH, place.title,
+                                                        place.subtitle, place.lat, place.lon);
+      RoutingController.get().onPoiSelected(point);
+    }
+    else if (place.canShowFeature())
+      Framework.nativeShowFeature(place.featureId);
+    else
+      // Maps were updated since: the saved feature id may point elsewhere, so just go to the spot.
+      Framework.nativeSetViewportCenter(place.lat, place.lon, RECENT_PLACE_ZOOM);
+
+    mToolbarController.deactivate();
     if (requireActivity() instanceof SearchActivity)
       Utils.navigateToParent(requireActivity());
   }
@@ -551,7 +616,14 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
   @Override
   public void onSearchCategorySelected(@Nullable String category)
   {
+    leaveCategoryMode(false);
     mToolbarController.setQuery(category, true);
+  }
+
+  @Override
+  public void onAllCategoriesSelected()
+  {
+    enterCategoryMode();
   }
 
   private void refreshSearchResults(@NonNull SearchResult[] results)
@@ -565,6 +637,12 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
   @Override
   public boolean onBackPressed()
   {
+    if (mCategoryMode)
+    {
+      leaveCategoryMode(true);
+      return true;
+    }
+
     if (mToolbarController.hasQuery())
     {
       mToolbarController.clear();
@@ -590,6 +668,144 @@ public class SearchFragment extends BaseMwmFragment implements SearchListener, C
   {
     final Activity activity = requireActivity();
     activity.finish();
+  }
+
+  private void setUpStartList(@NonNull RecyclerView list)
+  {
+    final ConcatAdapter concat = new ConcatAdapter();
+    // Recent follows the "Search history" privacy setting, like the old History tab.
+    if (Config.isSearchHistoryEnabled())
+    {
+      final boolean showMyPosition = RoutingController.get().isWaitingPoiPick()
+                                  && MwmApplication.from(requireContext()).getLocationHelper().getMyPosition() != null;
+      mRecentHeader = new SectionHeaderAdapter(R.string.search_recent);
+      mHistoryAdapter = new SearchHistoryAdapter(mToolbarController, this::showRecentPlace, showMyPosition);
+      mHistoryAdapter.setOnCleared(this::updateStartHeaders);
+      concat.addAdapter(mRecentHeader);
+      concat.addAdapter(mHistoryAdapter);
+    }
+    mCategoriesHeader = new SectionHeaderAdapter(R.string.categories);
+    mCategoriesAdapter = new CategoriesAdapter(this, CategoriesAdapter.COMPACT);
+    mCategoriesAdapter.updateCategories(this);
+    concat.addAdapter(mCategoriesHeader);
+    concat.addAdapter(mCategoriesAdapter);
+
+    final int span = getResources().getInteger(R.integer.search_category_span);
+    mStartLayout = new GridLayoutManager(requireContext(), span);
+    // Category tiles fill one cell each; headers and Recent rows take the full width.
+    mStartLayout.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+      @Override
+      public int getSpanSize(int position)
+      {
+        int beforeTiles = mCategoriesHeader.getItemCount();
+        if (mHistoryAdapter != null)
+          beforeTiles += mRecentHeader.getItemCount() + mHistoryAdapter.getItemCount();
+        return position >= beforeTiles ? 1 : mStartLayout.getSpanCount();
+      }
+    });
+    mCategoriesAdapter.setCompactCount(span * 2);
+    list.setLayoutManager(mStartLayout);
+    list.setAdapter(concat);
+    setRecyclerScrollListener(list);
+    updateStartHeaders();
+  }
+
+  private void updateStartHeaders()
+  {
+    if (mHistoryAdapter != null && mRecentHeader != null)
+    {
+      final int count = mHistoryAdapter.getRecentCount();
+      mRecentHeader.setVisible(count > 0);
+      if (count > SearchHistoryAdapter.COLLAPSED_COUNT)
+      {
+        final boolean expanded = mHistoryAdapter.isExpanded();
+        mRecentHeader.setAction(expanded ? R.string.search_show_less : R.string.search_show_all, () -> {
+          mHistoryAdapter.setExpanded(!mHistoryAdapter.isExpanded());
+          updateStartHeaders();
+        });
+      }
+      else
+        mRecentHeader.setAction(0, null);
+    }
+  }
+
+  /// "All categories": Featured tiles (built-in categories and Random), then every place type in sections.
+  private void setUpCategoryList(@NonNull RecyclerView list)
+  {
+    mFeaturedHeader = new SectionHeaderAdapter(R.string.search_featured);
+    mFeaturedAdapter = new CategoriesAdapter(this, CategoriesAdapter.FEATURED);
+    mFeaturedAdapter.updateCategories(this);
+    mTypesAdapter = new CategoryTypesAdapter(requireContext(), type -> onSearchCategorySelected(type.query + " "));
+    final ConcatAdapter concat = new ConcatAdapter(mFeaturedHeader, mFeaturedAdapter, mTypesAdapter);
+
+    final int span = getResources().getInteger(R.integer.search_category_span);
+    mCategoryLayout = new GridLayoutManager(requireContext(), span);
+    // Featured tiles fill one cell each; headers and type rows take the full width.
+    mCategoryLayout.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+      @Override
+      public int getSpanSize(int position)
+      {
+        final int tilesStart = mFeaturedHeader.getItemCount();
+        final boolean tile = position >= tilesStart && position < tilesStart + mFeaturedAdapter.getItemCount();
+        return tile ? 1 : mCategoryLayout.getSpanCount();
+      }
+    });
+    list.setLayoutManager(mCategoryLayout);
+    list.setAdapter(concat);
+    setRecyclerScrollListener(list);
+  }
+
+  /// The search bar switches to filtering categories; a "Categories" chip shows the mode.
+  private void enterCategoryMode()
+  {
+    if (mCategoryMode)
+      return;
+    mQueryBeforeCategories = mToolbarController.getQuery();
+    mCategoryMode = true;
+    mSearchAdapter.clear();
+    stopSearch();
+    mToolbarController.showModeChip(R.string.search_categories_mode, () -> leaveCategoryMode(true));
+    mToolbarController.setHint(R.string.search_filter_categories);
+    mToolbarController.setQuery("");
+    onCategoryFilterChanged("");
+    ((RecyclerView) mCategoryFrame).scrollToPosition(0);
+    updateFrames();
+  }
+
+  /// Back to place search. restoreQuery brings back what was typed before entering the mode.
+  private void leaveCategoryMode(boolean restoreQuery)
+  {
+    if (!mCategoryMode)
+      return;
+    mCategoryMode = false;
+    final String query = restoreQuery && mQueryBeforeCategories != null ? mQueryBeforeCategories : "";
+    mQueryBeforeCategories = null;
+    mToolbarController.showModeChip(0, null);
+    mToolbarController.setHint(R.string.search);
+    mToolbarController.setQuery(query);
+    updateFrames();
+  }
+
+  private void onCategoryFilterChanged(@NonNull String filter)
+  {
+    mTypesAdapter.setFilter(filter);
+    final boolean filtering = mTypesAdapter.isFiltered();
+    mFeaturedHeader.setVisible(!filtering);
+    mFeaturedAdapter.setHidden(filtering);
+  }
+
+  @Override
+  public void onConfigurationChanged(@NonNull Configuration newConfig)
+  {
+    super.onConfigurationChanged(newConfig);
+    final int span = getResources().getInteger(R.integer.search_category_span);
+    if (mStartLayout != null && mCategoriesAdapter != null)
+    {
+      mStartLayout.setSpanCount(span);
+      mCategoriesAdapter.setCompactCount(span * 2);
+    }
+    if (mCategoryLayout != null)
+      mCategoryLayout.setSpanCount(span);
   }
 
   public void setRecyclerScrollListener(RecyclerView recycler)

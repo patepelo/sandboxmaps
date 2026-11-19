@@ -155,8 +155,24 @@ class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchDataViewHol
     // Same icon as on the map; rows without one keep the empty column so titles stay aligned.
     private void bindIcon()
     {
-      final Bitmap icon = MapIconCache.get(mFrame.getContext())
-                              .getIcon(mResult.description.iconName, ThemeUtils.isNightTheme());
+      final String name = mResult.description.iconName;
+      final boolean night = ThemeUtils.isNightTheme();
+      final MapIconCache cache = MapIconCache.get(mFrame.getContext());
+      mIcon.setTag(name);
+      final Bitmap icon = cache.peek(name, night);
+      showIcon(icon);
+      if (icon == null && !name.isEmpty())
+      {
+        // Loaded off the main thread; the row may have been reused for another result by then.
+        cache.request(name, night, (loaded, bitmap) -> {
+          if (loaded.equals(mIcon.getTag()))
+            showIcon(bitmap);
+        });
+      }
+    }
+
+    private void showIcon(@Nullable Bitmap icon)
+    {
       mIcon.setImageBitmap(icon);
       mIcon.setVisibility(icon == null ? View.INVISIBLE : View.VISIBLE);
     }

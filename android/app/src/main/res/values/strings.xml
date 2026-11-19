@@ -50,9 +50,27 @@
     <string name="about_developed_by_enthusiasts">Built on CoMaps, Organic Maps and MAPS.ME, under the Apache 2.0 license. Not endorsed by the CoMaps project.</string>
     <!-- About screen: where the map data comes from, written for people new to OpenStreetMap -->
     <string name="about_title">About</string>
-    <!-- Search categories: toggle for the extra categories -->
-    <string name="search_categories_more">More</string>
-    <string name="search_categories_less">Less</string>
+    <!-- Search start screen: sections and their expand/collapse actions -->
+    <string name="search_recent">Recent</string>
+    <string name="search_show_all">Show all</string>
+    <string name="search_show_less">Show less</string>
+    <string name="search_all_categories">All categories</string>
+    <!-- All categories: the search bar switches to filtering place types -->
+    <string name="search_filter_categories">Filter categories</string>
+    <string name="search_categories_mode">Categories</string>
+    <string name="search_featured">Featured</string>
+    <string name="search_no_matching_categories">No matching categories</string>
+    <string name="search_group_food">Food and drink</string>
+    <string name="search_group_shops">Shops</string>
+    <string name="search_group_health">Health</string>
+    <string name="search_group_services">Money and services</string>
+    <string name="search_group_transport">Transport</string>
+    <string name="search_group_stay">Places to stay</string>
+    <string name="search_group_sport">Sport and leisure</string>
+    <string name="search_group_culture">Culture and sights</string>
+    <string name="search_group_nature">Nature</string>
+    <string name="search_group_public">Public and education</string>
+    <string name="search_group_everyday">Everyday and outdoors</string>
     <string name="about_section_map_data">Map data</string>
     <string name="about_section_links">Source code</string>
     <string name="about_section_legal">Legal</string>

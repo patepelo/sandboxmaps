@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.LruCache;
 import android.util.Xml;
 import androidx.annotation.NonNull;
@@ -14,13 +16,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 /// Cuts single POI icons out of the map's symbol atlas (assets/symbols/<skin>/<light|dark>/symbols.png),
 /// so search results show the same icon as the map. Only the icon's region is decoded, never the whole atlas.
+///
+/// Decoding is slow (a PNG region is decoded row by row from the top of the atlas), so it runs on a
+/// background thread: use peek() for an icon that is already cached, and request() to load one.
 final class MapIconCache
 {
+  interface Callback
+  {
+    /// Called on the main thread. bitmap is null if the icon doesn't exist.
+    void onIcon(@NonNull String name, @Nullable Bitmap bitmap);
+  }
+
+  private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+  private final Handler mMainThread = new Handler(Looper.getMainLooper());
   private static final String TAG = MapIconCache.class.getSimpleName();
 
   // Same skins and scales as drape's VisualParams::GetResourcePostfix(), so icons match their size on the map.
@@ -44,7 +59,8 @@ final class MapIconCache
   private final String mSkin;
   // Bitmap density that maps one atlas pixel to its size on the map.
   private final int mBitmapDensity;
-  private final LruCache<String, Bitmap> mBitmaps = new LruCache<>(64);
+  // Keyed by "<style>/<name>", so light and dark icons don't mix. Thread-safe.
+  private final LruCache<String, Bitmap> mBitmaps = new LruCache<>(256);
 
   @Nullable
   private String mStyle; // "light" or "dark", whichever atlas is loaded
@@ -67,22 +83,44 @@ final class MapIconCache
     mBitmapDensity = Math.round(160 * SCALES[best]);
   }
 
-  /// @return the map icon called `name` (e.g. "cafe-m"), or null if it's empty or not in the atlas.
+  /// @return the map icon called `name` (e.g. "cafe-m") if it's already loaded, otherwise null.
   @Nullable
-  Bitmap getIcon(@NonNull String name, boolean night)
+  Bitmap peek(@NonNull String name, boolean night)
+  {
+    return name.isEmpty() ? null : mBitmaps.get(key(name, night));
+  }
+
+  /// Loads the icon on a background thread and passes it to `callback` on the main thread.
+  void request(@NonNull String name, boolean night, @NonNull Callback callback)
   {
     if (name.isEmpty())
-      return null;
+      return;
+    mExecutor.execute(() -> {
+      final Bitmap bitmap = decode(name, night);
+      mMainThread.post(() -> callback.onIcon(name, bitmap));
+    });
+  }
+
+  @NonNull
+  private static String key(@NonNull String name, boolean night)
+  {
+    return (night ? "dark/" : "light/") + name;
+  }
+
+  // Runs on the background thread only.
+  @Nullable
+  private Bitmap decode(@NonNull String name, boolean night)
+  {
+    final String key = key(name, night);
+    Bitmap bitmap = mBitmaps.get(key);
+    if (bitmap != null)
+      return bitmap;
 
     final String style = night ? "dark" : "light";
     if (!style.equals(mStyle))
       load(style);
     if (mDecoder == null || mRects == null)
       return null;
-
-    Bitmap bitmap = mBitmaps.get(name);
-    if (bitmap != null)
-      return bitmap;
 
     final Rect rect = mRects.get(name);
     if (rect == null)
@@ -91,14 +129,13 @@ final class MapIconCache
     if (bitmap == null)
       return null;
     bitmap.setDensity(mBitmapDensity);
-    mBitmaps.put(name, bitmap);
+    mBitmaps.put(key, bitmap);
     return bitmap;
   }
 
   private void load(@NonNull String style)
   {
     mStyle = style;
-    mBitmaps.evictAll();
     if (mDecoder != null)
       mDecoder.recycle();
     mDecoder = null;

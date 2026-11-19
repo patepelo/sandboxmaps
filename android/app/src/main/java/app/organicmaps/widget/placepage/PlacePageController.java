@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -38,6 +37,7 @@ import app.organicmaps.sdk.bookmarks.data.Track;
 import app.organicmaps.sdk.routing.RoutingController;
 import app.organicmaps.sdk.settings.RoadType;
 import app.organicmaps.sdk.util.log.Logger;
+import app.organicmaps.search.RecentPlaces;
 import app.organicmaps.util.ThemeUtils;
 import app.organicmaps.util.UiUtils;
 import app.organicmaps.util.bottomsheet.MenuBottomSheetFragment;
@@ -149,6 +149,10 @@ public class PlacePageController
             onHiddenInternal();
           else
             onVisibleInternal();
+
+          // Expanding the place page counts as acting on it (see RecentPlaces).
+          if (newState == BottomSheetBehavior.STATE_EXPANDED)
+            RecentPlaces.onPlacePageAction(requireContext(), mMapObject);
         }
 
         @Override
@@ -503,6 +507,10 @@ public class PlacePageController
   @Override
   public void onPlacePageButtonClick(PlacePageButtons.ButtonType item)
   {
+    if (item == PlacePageButtons.ButtonType.ROUTE_TO || item == PlacePageButtons.ButtonType.ROUTE_FROM
+        || item == PlacePageButtons.ButtonType.ROUTE_ADD || item == PlacePageButtons.ButtonType.BOOKMARK_SAVE)
+      RecentPlaces.onPlacePageAction(requireContext(), mMapObject);
+
     switch (item)
     {
     case BOOKMARK_SAVE, BOOKMARK_DELETE -> onBookmarkBtnClicked();
