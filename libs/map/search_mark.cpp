@@ -320,12 +320,15 @@ public:
 
   SearchMarkType GetSearchMarkType(uint32_t type) const
   {
-    auto const it = std::partition_point(m_searchMarkTypes.cbegin(), m_searchMarkTypes.cend(),
-                                         [type](auto && t) { return t.first < type; });
-    if (it == m_searchMarkTypes.cend() || it->first != type)
-      return SearchMarkType::Default;
-
-    return it->second;
+    for (uint8_t level = ftype::GetLevel(type); level > 0; --level)
+    {
+      uint32_t const t = ftype::Trunc(type, level);
+      auto const it = std::partition_point(m_searchMarkTypes.cbegin(), m_searchMarkTypes.cend(),
+                                           [t](auto && p) { return p.first < t; });
+      if (it != m_searchMarkTypes.cend() && it->first == t)
+        return it->second;
+    }
+    return SearchMarkType::Default;
   }
 
 private:
@@ -572,6 +575,10 @@ private:
         {{"leisure", "miniature_golf"}, SearchMarkType::MiniatureGolf},
         {{"leisure", "bowling_alley"}, SearchMarkType::BowlingAlley},
         {{"amenity", "nursing_home"}, SearchMarkType::NursingHome},
+        {{"shop"}, SearchMarkType::ShopMall},
+        {{"tourism"}, SearchMarkType::Attraction},
+        {{"historic"}, SearchMarkType::Monument},
+        {{"craft"}, SearchMarkType::ShopDoItYourself},
         {{"shop", "dry_cleaning"}, SearchMarkType::ShopLaundry},
         {{"healthcare", "alternative"}, SearchMarkType::Clinic},
         {{"healthcare", "audiologist"}, SearchMarkType::Clinic},
