@@ -1,6 +1,7 @@
 #pragma once
 
 #include "map/extrapolation/extrapolator.hpp"
+#include "map/route_details.hpp"
 #include "map/routing_mark.hpp"
 #include "map/transit/transit_display.hpp"
 
@@ -319,6 +320,11 @@ public:
   /// of the route point based on the route in RoutingSession.
   /// \return False if current route is invalid or doesn't have altitudes.
   bool GetRouteAltitudesAndDistancesM(DistanceAltitude & da) const;
+
+  using RouteDetailsCallback = std::function<void(route_details::RouteDetails const &)>;
+  /// Works out what the current route is made of on a background thread, then calls back on the GUI thread.
+  /// The details are empty when there's no valid route.
+  void RequestRouteDetails(RouteDetailsCallback && callback) const;
 
   uint32_t OpenRoutePointsTransaction();
   void ApplyRoutePointsTransaction(uint32_t transactionId);

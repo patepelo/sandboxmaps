@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Map mode picker: tap a mode to switch the map style and the router; tap the selected one for its route options.
+     One map_mode_button per mode is added in code (MapButtonsController). -->
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/map_mode_picker"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:contentDescription="@string/map_mode"
+  app:cardBackgroundColor="?menuBackground"
+  app:cardCornerRadius="@dimen/map_mode_picker_radius"
+  app:cardElevation="0dp"
+  app:contentPadding="4dp"
+  app:strokeWidth="0dp">
+  <LinearLayout
+    android:id="@+id/map_mode_buttons"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" />
+</com.google.android.material.card.MaterialCardView>

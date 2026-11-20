@@ -1720,16 +1720,8 @@ JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeSetAutoZoomEnabl
 JNIEXPORT void JNICALL Java_app_organicmaps_sdk_Framework_nativeSetTransitSchemeEnabled(JNIEnv * env, jclass,
                                                                                         jboolean enabled)
 {
-  if (enabled)
-  {
-    frm()->SwitchToMapMode(MapMode::PublicTransport);
-    frm()->PublicTransportMapModeSetTransitLines(true);
-  }
-  else
-  {
-    frm()->PublicTransportMapModeSetTransitLines(false);
-    frm()->SwitchToMapMode(MapMode::Default);
-  }
+  // The map mode picker chooses the mode; this only shows or hides the lines in Public transport mode.
+  frm()->PublicTransportMapModeSetTransitLines(static_cast<bool>(enabled));
 }
 
 JNIEXPORT jboolean JNICALL Java_app_organicmaps_sdk_Framework_nativeIsTransitSchemeEnabled(JNIEnv * env, jclass)

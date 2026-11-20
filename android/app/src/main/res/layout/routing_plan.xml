@@ -11,163 +11,254 @@
   <FrameLayout android:layout_width="match_parent"
                android:layout_height="wrap_content">
 
+    <!-- Planning is one card: the map mode pill (plus the ruler), from and to, and what the route avoids. -->
     <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/toolbar"
       style="@style/MwmWidget.ToolbarStyle"
-      android:theme="@style/MwmWidget.ToolbarTheme"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
       android:elevation="0dp">
 
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/back"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentStart="true"
-            android:background="?selectableItemBackgroundBorderless"
-            android:contentDescription="@string/abc_action_bar_up_description"
-            app:srcCompat="?homeAsUpIndicator"
-            android:scaleType="center" />
-
-        <RadioGroup
-            android:id="@+id/route_type"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/route_type"
-            android:orientation="horizontal">
-
-          <app.organicmaps.widget.RoutingToolbarButton
-              android:id="@+id/vehicle"
-              android:layout_width="@dimen/routing_toolbar_button"
-              android:layout_height="@dimen/routing_toolbar_button"
-              android:layout_marginStart="@dimen/routing_selector_wheel_margin"
-              android:contentDescription="@string/vehicle"
-              tools:button="@drawable/ic_car"
-              tools:buttonTint="?colorSecondary" />
-
-          <app.organicmaps.widget.RoutingToolbarButton
-              android:id="@+id/pedestrian"
-              android:layout_width="@dimen/routing_toolbar_button"
-              android:layout_height="@dimen/routing_toolbar_button"
-              android:layout_marginStart="12dp"
-              android:layout_marginEnd="12dp"
-              android:contentDescription="@string/pedestrian"
-              tools:button="@drawable/ic_pedestrian"
-              tools:buttonTint="?iconTintLight" />
-
-          <app.organicmaps.widget.RoutingToolbarButton
-              android:id="@+id/transit"
-              android:layout_width="@dimen/routing_toolbar_button"
-              android:layout_height="@dimen/routing_toolbar_button"
-              android:layout_marginEnd="@dimen/margin_half_plus"
-              android:contentDescription="@string/subway"
-              tools:button="@drawable/ic_route_planning_metro_40px"
-              tools:buttonTint="?iconTintLight" />
-
-          <app.organicmaps.widget.RoutingToolbarButton
-              android:id="@+id/bicycle"
-              android:layout_width="@dimen/routing_toolbar_button"
-              android:layout_height="@dimen/routing_toolbar_button"
-              android:layout_marginEnd="12dp"
-              android:contentDescription="@string/bicycle"
-              tools:button="@drawable/ic_bike"
-              tools:buttonTint="?iconTintLight" />
-
-          <app.organicmaps.widget.RoutingToolbarButton
-              android:id="@+id/ruler"
-              android:layout_width="@dimen/routing_toolbar_button"
-              android:layout_height="@dimen/routing_toolbar_button"
-              android:layout_marginEnd="12dp"
-              android:contentDescription="@string/ruler"
-              tools:button="@drawable/ic_ruler_route"
-              tools:buttonTint="?iconTintLight" />
-        </RadioGroup>
-
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/routing_plan_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_half"
+        app:cardBackgroundColor="?cardBackground"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="4dp"
+        app:strokeWidth="0dp">
         <LinearLayout
-          android:id="@+id/progress_frame"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignStart="@id/route_type"
-          android:layout_centerInParent="true"
-          android:orientation="horizontal">
-
-          <app.organicmaps.widget.WheelProgressView
-            android:id="@+id/progress_vehicle"
-            style="@style/MwmWidget.ProgressWheel.RoutingPlan"
-            android:layout_marginStart="@dimen/routing_selector_wheel_margin"
-            android:layout_marginTop="@dimen/routing_selector_wheel_margin"
-            android:layout_marginBottom="@dimen/routing_selector_wheel_margin"
-            tools:visibility="visible"/>
-
-          <app.organicmaps.widget.WheelProgressView
-            android:id="@+id/progress_pedestrian"
-            style="@style/MwmWidget.ProgressWheel.RoutingPlan"
-            android:layout_marginTop="@dimen/routing_selector_wheel_margin"
-            android:layout_marginBottom="@dimen/routing_selector_wheel_margin"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"/>
-
-          <app.organicmaps.widget.WheelProgressView
-            android:id="@+id/progress_transit"
-            style="@style/MwmWidget.ProgressWheel.RoutingPlan"
-            android:layout_marginTop="@dimen/routing_selector_wheel_margin"
-            android:layout_marginBottom="@dimen/routing_selector_wheel_margin"
-            android:layout_marginEnd="12dp"/>
-
-          <app.organicmaps.widget.WheelProgressView
-            android:id="@+id/progress_bicycle"
-            style="@style/MwmWidget.ProgressWheel.RoutingPlan"
-            android:layout_marginTop="@dimen/routing_selector_wheel_margin"
-            android:layout_marginBottom="@dimen/routing_selector_wheel_margin"
-            android:layout_marginEnd="12dp"/>
-
-          <app.organicmaps.widget.WheelProgressView
-            android:id="@+id/progress_ruler"
-            style="@style/MwmWidget.ProgressWheel.RoutingPlan"
-            android:layout_marginTop="@dimen/routing_selector_wheel_margin"
-            android:layout_marginBottom="@dimen/routing_selector_wheel_margin"
-            android:layout_marginEnd="12dp"/>
-        </LinearLayout>
-
-        <com.google.android.material.imageview.ShapeableImageView
-          android:id="@+id/routing_options_btn"
-          android:layout_width="?attr/actionBarSize"
-          android:layout_height="?attr/actionBarSize"
-          android:layout_alignParentEnd="true"
-          android:layout_centerVertical="true"
-          android:scaleType="center"
-          app:srcCompat="@drawable/ic_settings" />
-      </RelativeLayout>
-
-    </com.google.android.material.appbar.MaterialToolbar>
-  </FrameLayout>
-  <FrameLayout
-    android:id="@+id/routing_options_banner"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?drivingOptionsViewBg"
-    android:foreground="@drawable/shadow_top"
-    android:visibility="gone"
-    tools:visibility="visible">
-        <HorizontalScrollView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-        android:scrollbars="none"> <LinearLayout
-            android:id="@+id/routing_options_buttons_container"
-            android:layout_width="wrap_content"
+          android:orientation="vertical">
+
+          <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="4dp">
+            <com.google.android.material.imageview.ShapeableImageView
+              android:id="@+id/back"
+              android:layout_width="44dp"
+              android:layout_height="44dp"
+              android:background="?selectableItemBackgroundBorderless"
+              android:contentDescription="@string/abc_action_bar_up_description"
+              android:scaleType="center"
+              app:srcCompat="@drawable/ic_arrow_back"
+              app:tint="?iconTint" />
+            <FrameLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1">
+              <RadioGroup
+                android:id="@+id/route_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/route_type"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <app.organicmaps.widget.RoutingToolbarButton
+                  android:id="@+id/pedestrian"
+                  android:layout_width="@dimen/routing_toolbar_button"
+                  android:layout_height="@dimen/routing_toolbar_button"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap"
+                  android:contentDescription="@string/mode_walking" />
+                <app.organicmaps.widget.RoutingToolbarButton
+                  android:id="@+id/bicycle"
+                  android:layout_width="@dimen/routing_toolbar_button"
+                  android:layout_height="@dimen/routing_toolbar_button"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap"
+                  android:contentDescription="@string/mode_cycling" />
+                <app.organicmaps.widget.RoutingToolbarButton
+                  android:id="@+id/vehicle"
+                  android:layout_width="@dimen/routing_toolbar_button"
+                  android:layout_height="@dimen/routing_toolbar_button"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap"
+                  android:contentDescription="@string/mode_driving" />
+                <app.organicmaps.widget.RoutingToolbarButton
+                  android:id="@+id/transit"
+                  android:layout_width="@dimen/routing_toolbar_button"
+                  android:layout_height="@dimen/routing_toolbar_button"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap"
+                  android:contentDescription="@string/mode_public_transport" />
+                <View
+                  android:layout_width="1dp"
+                  android:layout_height="24dp"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap"
+                  android:background="?dividerHorizontal" />
+                <app.organicmaps.widget.RoutingToolbarButton
+                  android:id="@+id/ruler"
+                  android:layout_width="@dimen/routing_toolbar_button"
+                  android:layout_height="@dimen/routing_toolbar_button"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap"
+                  android:contentDescription="@string/ruler" />
+              </RadioGroup>
+              <LinearLayout
+                android:id="@+id/progress_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <app.organicmaps.widget.WheelProgressView
+                  android:id="@+id/progress_pedestrian"
+                  style="@style/MwmWidget.ProgressWheel.RoutingPill"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap" />
+                <app.organicmaps.widget.WheelProgressView
+                  android:id="@+id/progress_bicycle"
+                  style="@style/MwmWidget.ProgressWheel.RoutingPill"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap" />
+                <app.organicmaps.widget.WheelProgressView
+                  android:id="@+id/progress_vehicle"
+                  style="@style/MwmWidget.ProgressWheel.RoutingPill"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap" />
+                <app.organicmaps.widget.WheelProgressView
+                  android:id="@+id/progress_transit"
+                  style="@style/MwmWidget.ProgressWheel.RoutingPill"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap" />
+                <Space
+                  android:layout_width="1dp"
+                  android:layout_height="1dp"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap" />
+                <app.organicmaps.widget.WheelProgressView
+                  android:id="@+id/progress_ruler"
+                  style="@style/MwmWidget.ProgressWheel.RoutingPill"
+                  android:layout_marginHorizontal="@dimen/routing_pill_gap" />
+              </LinearLayout>
+            </FrameLayout>
+          </LinearLayout>
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/margin_base"
+            android:paddingBottom="@dimen/margin_half">
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:minHeight="30dp"
+              android:orientation="horizontal">
+              <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="@dimen/margin_half_plus"
+                android:background="@drawable/bg_map_mode_selected"
+                android:backgroundTint="@color/route_point_from" />
+              <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/route_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/MwmTextAppearance.Body3"
+                android:textColor="?android:textColorPrimary" />
+            </LinearLayout>
+            <LinearLayout
+              android:id="@+id/route_via_row"
+              android:visibility="gone"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:minHeight="30dp"
+              android:orientation="horizontal">
+              <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="@dimen/margin_half_plus"
+                android:background="@drawable/bg_map_mode_selected"
+                android:backgroundTint="@color/route_point_via" />
+              <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/route_via"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/MwmTextAppearance.Body3"
+                android:textColor="?android:textColorPrimary" />
+            </LinearLayout>
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:minHeight="30dp"
+              android:orientation="horizontal">
+              <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="@dimen/margin_half_plus"
+                android:background="@drawable/bg_map_mode_selected"
+                android:backgroundTint="@color/route_point_to" />
+              <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/route_to"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/MwmTextAppearance.Body3"
+                android:textColor="?android:textColorPrimary" />
+            </LinearLayout>
+          </LinearLayout>
+
+          <LinearLayout
+            android:id="@+id/route_avoid_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/height_block_base"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_base"
+            android:paddingEnd="@dimen/margin_half_plus">
+            <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/route_avoid_label"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="@dimen/margin_half"
+              android:text="@string/route_avoid_label"
+              android:textAppearance="@style/MwmTextAppearance.Body3"
+              android:textColor="?android:textColorSecondary" />
+            <com.google.android.material.textview.MaterialTextView
+              android:id="@+id/route_avoid_value"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:ellipsize="end"
+              android:maxLines="1"
+              android:textAppearance="@style/MwmTextAppearance.Body3"
+              android:textColor="?android:textColorPrimary" />
+            <ImageView
+              android:id="@+id/route_avoid_chevron"
+              android:layout_width="24dp"
+              android:layout_height="24dp"
+              android:importantForAccessibility="no"
+              app:srcCompat="@drawable/ic_expand_more"
+              app:tint="?iconTint" />
+          </LinearLayout>
         </LinearLayout>
-      </HorizontalScrollView>
+      </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.appbar.MaterialToolbar>
   </FrameLayout>
-  <FrameLayout
-    style="@style/MwmWidget.FrameLayout.Elevation"
+  <!-- Route options of the current mode, dropping down from the planning card. -->
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/route_options_dropdown"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_half"
+    android:visibility="gone"
+    style="@style/MapModeDropdownCard">
+    <androidx.fragment.app.FragmentContainerView
+      android:id="@+id/route_options_dropdown_content"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingVertical="@dimen/margin_half" />
+  </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

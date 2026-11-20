@@ -13,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +23,7 @@ import androidx.annotation.OptIn;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -29,6 +33,7 @@ import app.organicmaps.R;
 import app.organicmaps.leftbutton.LeftButton;
 import app.organicmaps.leftbutton.LeftToggleButton;
 import app.organicmaps.sdk.Framework;
+import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.downloader.MapManager;
 import app.organicmaps.sdk.downloader.UpdateInfo;
 import app.organicmaps.sdk.location.TrackRecorder;
@@ -71,6 +76,13 @@ public class MapButtonsController extends Fragment
   private LayersButton mToggleMapLayerButton;
   @Nullable
   FloatingActionButton mTrackRecordingStatusButton;
+  @Nullable
+  private View mModePicker;
+  @Nullable
+  private View mModeDropdown;
+  /// One button per MapModeUi.MODES entry, in the same order.
+  @Nullable
+  private View[] mModeButtons;
 
   @Nullable
   private MyPositionButton mNavMyPosition;
@@ -156,6 +168,10 @@ public class MapButtonsController extends Fragment
           view -> mMapButtonClickListener.onMapButtonClick(MapButtons.toggleMapLayer));
       mToggleMapLayerButton.setVisibility(View.VISIBLE);
     }
+    mModePicker = mFrame.findViewById(R.id.map_mode_picker);
+    mModeDropdown = mFrame.findViewById(R.id.map_mode_dropdown);
+    if (mModePicker != null)
+      initModePicker();
     mMapButtonsViewModel.setTopButtonsMarginTop(-1);
     mTrackRecordingStatusButton = mFrame.findViewById(R.id.track_recording_status);
     if (mTrackRecordingStatusButton != null)
@@ -177,8 +193,113 @@ public class MapButtonsController extends Fragment
       mButtonsMap.put(MapButtons.toggleMapLayer, mToggleMapLayerButton);
     if (mTrackRecordingStatusButton != null)
       mButtonsMap.put(MapButtons.trackRecordingStatus, mTrackRecordingStatusButton);
+    if (mModePicker != null)
+      mButtonsMap.put(MapButtons.mapMode, mModePicker);
     showButton(false, MapButtons.trackRecordingStatus);
     return mFrame;
+  }
+
+  private void initModePicker()
+  {
+    final ViewGroup container = mModePicker.findViewById(R.id.map_mode_buttons);
+    final LayoutInflater inflater = LayoutInflater.from(container.getContext());
+    mModeButtons = new View[MapModeUi.MODES.length];
+    for (int i = 0; i < MapModeUi.MODES.length; ++i)
+    {
+      final MapMode mode = MapModeUi.MODES[i];
+      final View button = inflater.inflate(R.layout.map_mode_button, container, false);
+      ((ImageView) button.findViewById(R.id.mode_icon)).setImageResource(MapModeUi.icon(mode));
+      button.setOnClickListener(v -> {
+        if (mode == MapMode.getChosen())
+        {
+          if (!closeModeDropdown())
+            openModeDropdown();
+          return;
+        }
+        MapMode.switchTo(mode);
+        updateLayerButton();
+        if (isModeDropdownOpen())
+          openModeDropdown(); // Also refreshes the picker.
+        else
+          updateModePicker();
+      });
+      container.addView(button);
+      mModeButtons[i] = button;
+    }
+    updateModePicker();
+  }
+
+  private boolean isModeDropdownOpen()
+  {
+    return mModeDropdown != null && UiUtils.isVisible(mModeDropdown);
+  }
+
+  /// Shows the route options of the current map mode under the pill: the same screens as the route settings.
+  private void openModeDropdown()
+  {
+    if (mModeDropdown == null)
+      return;
+    final Context context = mModeDropdown.getContext();
+    final MapMode mode = MapMode.getChosen();
+
+    final TextView title = mModeDropdown.findViewById(R.id.map_mode_dropdown_title);
+    title.setText(getString(R.string.map_mode_route_options_title, getString(MapModeUi.name(mode))));
+    final int size = getResources().getDimensionPixelSize(R.dimen.margin_half_plus);
+    final GradientDrawable dot = new GradientDrawable();
+    dot.setShape(GradientDrawable.OVAL);
+    dot.setColor(MapModeUi.color(context, mode));
+    dot.setSize(size, size);
+    title.setCompoundDrawablesRelativeWithIntrinsicBounds(dot, null, null, null);
+
+    final boolean hasOptions = MapModeUi.showRouteOptions(getChildFragmentManager(), R.id.map_mode_dropdown_options, mode);
+    UiUtils.showIf(!hasOptions, mModeDropdown.findViewById(R.id.map_mode_dropdown_empty));
+
+    // Not wider than a phone on big screens.
+    final ViewGroup.LayoutParams lp = mModeDropdown.getLayoutParams();
+    final int maxWidth = getResources().getDimensionPixelSize(R.dimen.map_mode_dropdown_max_width);
+    lp.width = mFrame.getWidth() > maxWidth ? maxWidth : ViewGroup.LayoutParams.MATCH_PARENT;
+    mModeDropdown.setLayoutParams(lp);
+    UiUtils.show(mModeDropdown);
+    updateModePicker();
+  }
+
+  /// @return true if the route options were open.
+  public boolean closeModeDropdown()
+  {
+    if (!isModeDropdownOpen())
+      return false;
+    UiUtils.hide(mModeDropdown);
+    updateModePicker();
+    MapModeUi.removeRouteOptions(getChildFragmentManager(), R.id.map_mode_dropdown_options);
+    return true;
+  }
+
+  /// Highlights the current map mode in the picker.
+  public void updateModePicker()
+  {
+    if (mModeButtons == null)
+      return;
+    final Context context = mModePicker.getContext();
+    final MapMode current = MapMode.getChosen();
+    final int iconTint = ThemeUtils.getColor(context, R.attr.iconTint);
+    final boolean dropdownOpen = isModeDropdownOpen();
+    for (int i = 0; i < MapModeUi.MODES.length; ++i)
+    {
+      final MapMode mode = MapModeUi.MODES[i];
+      final View button = mModeButtons[i];
+      final boolean selected = mode == current;
+      button.setSelected(selected);
+      button.setBackgroundTintList(
+          ColorStateList.valueOf(selected ? MapModeUi.color(context, mode) : Color.TRANSPARENT));
+      ImageViewCompat.setImageTintList(button.findViewById(R.id.mode_icon),
+                                       ColorStateList.valueOf(selected ? Color.WHITE : iconTint));
+      // The selected mode opens its route options: an arrow that flips while they're open.
+      final View arrow = button.findViewById(R.id.mode_arrow);
+      UiUtils.showIf(selected, arrow);
+      arrow.setRotation(selected && dropdownOpen ? 180 : 0);
+      final String name = getString(MapModeUi.name(mode));
+      button.setContentDescription(selected ? getString(R.string.map_mode_options_hint, name) : name);
+    }
   }
 
   private void initBottomButtons()
@@ -267,6 +388,11 @@ public class MapButtonsController extends Fragment
     case myPosition:
       if (mNavMyPosition != null)
         mNavMyPosition.showButton(show);
+      break;
+    case mapMode:
+      UiUtils.showIf(show && !isInNavigationMode(), buttonView);
+      if (!show)
+        closeModeDropdown();
       break;
     case search: mSearchWheel.show(show);
     case bookmarks:
@@ -357,8 +483,9 @@ public class MapButtonsController extends Fragment
   {
     if (mToggleMapLayerButton == null)
       return;
-    final boolean buttonSelected = TrafficManager.INSTANCE.isEnabled() || IsolinesManager.isEnabled()
-                                || SubwayManager.isEnabled() || Framework.nativeIsOutdoorsLayerEnabled();
+    final boolean transitLines = MapMode.get() == MapMode.PublicTransport && SubwayManager.isEnabled();
+    final boolean buttonSelected = TrafficManager.INSTANCE.isEnabled() || IsolinesManager.isEnabled() || transitLines
+                                || Framework.nativeIsOutdoorsLayerEnabled();
     mToggleMapLayerButton.setHasActiveLayers(buttonSelected);
   }
 
@@ -480,6 +607,7 @@ public class MapButtonsController extends Fragment
     mSearchWheel.onResume();
     updateMenuBadge();
     updateLayerButton();
+    updateModePicker();
     final WindowInsetUtils.PaddingInsetsListener insetsListener =
         new WindowInsetUtils.PaddingInsetsListener.Builder()
             .setInsetsTypeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout())
@@ -576,6 +704,7 @@ public class MapButtonsController extends Fragment
     menu,
     help,
     trackRecordingStatus,
+    mapMode,
     routePreviewPrevious,
     routePreviewNext,
     routePreviewCancel

@@ -74,7 +74,7 @@ public class ToggleMapLayerFragment extends Fragment
     SharedPropertiesUtils.setLayerMarkerShownForLayerMode(mode);
     mode.setEnabled(context, !mode.isEnabled(context));
     // TODO: dirty hack :(
-    if (mode == Mode.OUTDOORS)
+    if (mode == Mode.OUTDOORS || mode == Mode.NIGHT)
       ThemeSwitcher.INSTANCE.restart(true);
     mAdapter.notifyDataSetChanged();
     mMapButtonsController.updateLayerButton();

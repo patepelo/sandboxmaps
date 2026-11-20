@@ -33,6 +33,7 @@ import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.bookmarks.data.DistanceAndAzimut;
 import app.organicmaps.sdk.routing.RouteMarkData;
 import app.organicmaps.sdk.routing.RouteMarkType;
+import app.organicmaps.sdk.routing.RouteDetails;
 import app.organicmaps.sdk.routing.RoutingController;
 import app.organicmaps.sdk.routing.RoutingInfo;
 import app.organicmaps.sdk.routing.TransitRouteInfo;
@@ -61,6 +62,8 @@ final class RoutingBottomMenuController implements View.OnClickListener
   private final View mTimeElevationLine;
   @NonNull
   private final View mAltitudeChartFrame;
+  @Nullable
+  private final RouteDetailsPanel mRouteDetailsPanel;
   @NonNull
   private final View mTransitFrame;
   @NonNull
@@ -129,6 +132,7 @@ final class RoutingBottomMenuController implements View.OnClickListener
   {
     mContext = context;
     mAltitudeChartFrame = altitudeChartFrame;
+    mRouteDetailsPanel = RouteDetailsPanel.create(altitudeChartFrame);
     mTimeElevationLine = timeElevationLine;
     mTransitFrame = transitFrame;
     mError = error;
@@ -180,6 +184,34 @@ final class RoutingBottomMenuController implements View.OnClickListener
   void hideAltitudeChartAndRoutingDetails()
   {
     UiUtils.hide(mAltitudeChartFrame, mTransitFrame);
+    hideRouteDetails();
+  }
+
+  /// What the route is made of, under the summary. Walking and cycling only.
+  void showRouteDetails(@NonNull RouteDetails details, boolean bicycle)
+  {
+    final RoutingInfo info = RoutingController.get().getCachedRoutingInfo();
+    if (mRouteDetailsPanel == null || info == null || details.isEmpty())
+      return;
+    mRouteDetailsPanel.show(details, info.totalTimeInSeconds, bicycle);
+  }
+
+  /// Called when the route details open or close, e.g. to give the map more room while they're open.
+  void setOnRouteDetailsExpanded(@Nullable RouteDetailsPanel.OnExpandedListener listener)
+  {
+    if (mRouteDetailsPanel != null)
+      mRouteDetailsPanel.setOnExpandedListener(listener);
+  }
+
+  boolean collapseRouteDetails()
+  {
+    return mRouteDetailsPanel != null && mRouteDetailsPanel.collapse();
+  }
+
+  void hideRouteDetails()
+  {
+    if (mRouteDetailsPanel != null)
+      mRouteDetailsPanel.hide();
   }
 
   @SuppressLint("SetTextI18n")
@@ -358,7 +390,9 @@ final class RoutingBottomMenuController implements View.OnClickListener
     if (bm != null)
     {
       mAltitudeChart.setImageBitmap(bm);
-      UiUtils.show(mAltitudeChart);
+      // The coloured profile of the route details replaces the grey chart once it's known.
+      if (mRouteDetailsPanel == null || !mRouteDetailsPanel.isShown())
+        UiUtils.show(mAltitudeChart);
       final String unit = limits.isMetricUnits
                             ? mAltitudeDifference.getResources().getString(app.organicmaps.sdk.R.string.m)
                             : mAltitudeDifference.getResources().getString(app.organicmaps.sdk.R.string.ft);

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import app.organicmaps.sdk.Framework;
+import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.Router;
 import app.organicmaps.sdk.bookmarks.data.FeatureId;
 import app.organicmaps.sdk.bookmarks.data.MapObject;
@@ -413,6 +414,7 @@ public class RoutingController
       setPointsInternal(startPoint, endPoint);
 
     startPlanning(startPoint, endPoint);
+    MapMode.followRouter(mLastRouterType);
   }
 
   public void start()
@@ -891,6 +893,9 @@ public class RoutingController
 
     if (getStartPoint() != null && getEndPoint() != null)
       build();
+    // After build(): a map style switch redraws the current route, so ask for its removal first. This narrows,
+    // but doesn't close, a race in the renderer between that redraw and the removal.
+    MapMode.followRouter(router);
   }
 
   public Router getLastRouterType()
