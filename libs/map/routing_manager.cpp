@@ -1466,6 +1466,27 @@ bool RoutingManager::HasRouteAltitude() const
   return m_loadAltitudes && m_routingSession.HasRouteAltitude();
 }
 
+void RoutingManager::RequestRouteDetails(RouteDetailsCallback && callback) const
+{
+  route_details::RouteInput input;
+  if (!m_routingSession.GetRouteSegments(input.m_segments, input.m_start))
+  {
+    callback({});
+    return;
+  }
+  m_routingSession.GetRouteAltitudesAndDistancesM(input.m_distancesM, input.m_altitudesM);
+  input.m_bicycle = GetRouter() == RouterType::Bicycle;
+
+  DataSource const & dataSource = m_callbacks.m_dataSourceGetter();
+  GetPlatform().RunTask(Platform::Thread::Background,
+                        [&dataSource, input = std::move(input), callback = std::move(callback)]() mutable
+  {
+    auto details = route_details::Compute(dataSource, input);
+    GetPlatform().RunTask(Platform::Thread::Gui, [details = std::move(details), callback = std::move(callback)]()
+    { callback(details); });
+  });
+}
+
 bool RoutingManager::GetRouteAltitudesAndDistancesM(DistanceAltitude & da) const
 {
   return m_routingSession.GetRouteAltitudesAndDistancesM(da.m_distances, da.m_altitudes);
