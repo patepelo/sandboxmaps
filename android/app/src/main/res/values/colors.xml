@@ -167,5 +167,11 @@
   <color name="car_speed_sign_background_night">#FFD9D9D9</color>
   <color name="car_speed_current_alert_text_light">@color/dark_red</color>
   <color name="car_speed_current_alert_text_night">#FFFF5252</color>
+
+  <!-- Map modes, as on iOS -->
+  <color name="mode_walking">#8CA144</color>
+  <color name="mode_cycling">#685CAD</color>
+  <color name="mode_driving">#E28C12</color>
+  <color name="mode_public_transport">#25507A</color>
 </resources>
 

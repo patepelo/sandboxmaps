@@ -1110,4 +1110,17 @@
     <string name="stars_3">3-star</string>
     <string name="stars_4">4-star</string>
     <string name="stars_5">5-star</string>
+    <!-- Map modes: the picker on the map sets the map style and how routes are planned -->
+    <string name="mode_walking">Walking</string>
+    <string name="mode_cycling">Cycling</string>
+    <string name="mode_driving">Driving</string>
+    <string name="mode_public_transport">Public transport</string>
+    <string name="map_mode">Map mode</string>
+    <string name="map_mode_options_hint">%s, selected. Tap for its options</string>
+    <string name="map_mode_section_route_options">Route options</string>
+    <string name="map_mode_route_options_note">Used when you plan a route in this mode. The same as the route settings.</string>
+    <string name="map_mode_no_route_options">Public transport routes have no options.</string>
+    <string name="map_mode_layers_title">Layers · %s</string>
+    <string name="map_mode_layer_on">%s: on</string>
+    <string name="map_mode_layer_off">%s: off</string>
 </resources>

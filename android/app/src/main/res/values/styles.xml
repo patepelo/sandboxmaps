@@ -376,4 +376,16 @@
     <item name="cornerSizeTopLeft">10%</item>
     <item name="cornerSizeTopRight">50%</item>
   </style>
+
+  <style name="MapModeSectionTitle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:paddingStart">@dimen/margin_base</item>
+    <item name="android:paddingEnd">@dimen/margin_base</item>
+    <item name="android:paddingTop">@dimen/margin_base</item>
+    <item name="android:paddingBottom">@dimen/margin_quarter</item>
+    <item name="android:textAppearance">@style/MwmTextAppearance.Body4</item>
+    <item name="android:textColor">?colorAccent</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
 </resources>

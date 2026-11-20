@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.graphics.Color;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,7 @@ import androidx.annotation.OptIn;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
@@ -29,6 +32,7 @@ import app.organicmaps.R;
 import app.organicmaps.leftbutton.LeftButton;
 import app.organicmaps.leftbutton.LeftToggleButton;
 import app.organicmaps.sdk.Framework;
+import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.downloader.MapManager;
 import app.organicmaps.sdk.downloader.UpdateInfo;
 import app.organicmaps.sdk.location.TrackRecorder;
@@ -71,6 +75,8 @@ public class MapButtonsController extends Fragment
   private LayersButton mToggleMapLayerButton;
   @Nullable
   FloatingActionButton mTrackRecordingStatusButton;
+  @Nullable
+  private View mModePicker;
 
   @Nullable
   private MyPositionButton mNavMyPosition;
@@ -156,6 +162,9 @@ public class MapButtonsController extends Fragment
           view -> mMapButtonClickListener.onMapButtonClick(MapButtons.toggleMapLayer));
       mToggleMapLayerButton.setVisibility(View.VISIBLE);
     }
+    mModePicker = mFrame.findViewById(R.id.map_mode_picker);
+    if (mModePicker != null)
+      initModePicker();
     mMapButtonsViewModel.setTopButtonsMarginTop(-1);
     mTrackRecordingStatusButton = mFrame.findViewById(R.id.track_recording_status);
     if (mTrackRecordingStatusButton != null)
@@ -177,8 +186,84 @@ public class MapButtonsController extends Fragment
       mButtonsMap.put(MapButtons.toggleMapLayer, mToggleMapLayerButton);
     if (mTrackRecordingStatusButton != null)
       mButtonsMap.put(MapButtons.trackRecordingStatus, mTrackRecordingStatusButton);
+    if (mModePicker != null)
+      mButtonsMap.put(MapButtons.mapMode, mModePicker);
     showButton(false, MapButtons.trackRecordingStatus);
     return mFrame;
+  }
+
+  private static int modeButtonId(@NonNull MapMode mode)
+  {
+    return switch (mode)
+    {
+      case Cycling -> R.id.mode_cycling;
+      case Driving -> R.id.mode_driving;
+      case PublicTransport -> R.id.mode_public_transport;
+      default -> R.id.mode_walking;
+    };
+  }
+
+  private void initModePicker()
+  {
+    for (MapMode mode : MapModeUi.MODES)
+    {
+      mFrame.findViewById(modeButtonId(mode)).setOnClickListener(v -> {
+        if (mode == MapMode.getChosen())
+          mMapButtonClickListener.onMapButtonClick(MapButtons.mapMode);
+        else
+        {
+          MapModeUi.switchTo(mode, mFrame, mModePicker);
+          updateModePicker();
+          updateLayerButton();
+        }
+      });
+    }
+    updateModePicker();
+  }
+
+  /// Highlights the current map mode in the picker.
+  public void updateModePicker()
+  {
+    if (mModePicker == null)
+      return;
+    final Context context = mModePicker.getContext();
+    final MapMode current = MapMode.getChosen();
+    final int iconTint = ThemeUtils.getColor(context, R.attr.iconTint);
+    for (MapMode mode : MapModeUi.MODES)
+    {
+      final View button = mFrame.findViewById(modeButtonId(mode));
+      final ImageView icon = button.findViewById(iconId(mode));
+      final boolean selected = mode == current;
+      button.setSelected(selected);
+      button.setBackgroundTintList(
+          ColorStateList.valueOf(selected ? MapModeUi.color(context, mode) : Color.TRANSPARENT));
+      ImageViewCompat.setImageTintList(icon, ColorStateList.valueOf(selected ? Color.WHITE : iconTint));
+      UiUtils.showIf(selected, button.findViewById(badgeId(mode)));
+      final String name = getString(MapModeUi.name(mode));
+      button.setContentDescription(selected ? getString(R.string.map_mode_options_hint, name) : name);
+    }
+  }
+
+  private static int iconId(@NonNull MapMode mode)
+  {
+    return switch (mode)
+    {
+      case Cycling -> R.id.mode_cycling_icon;
+      case Driving -> R.id.mode_driving_icon;
+      case PublicTransport -> R.id.mode_public_transport_icon;
+      default -> R.id.mode_walking_icon;
+    };
+  }
+
+  private static int badgeId(@NonNull MapMode mode)
+  {
+    return switch (mode)
+    {
+      case Cycling -> R.id.mode_cycling_badge;
+      case Driving -> R.id.mode_driving_badge;
+      case PublicTransport -> R.id.mode_public_transport_badge;
+      default -> R.id.mode_walking_badge;
+    };
   }
 
   private void initBottomButtons()
@@ -268,6 +353,7 @@ public class MapButtonsController extends Fragment
       if (mNavMyPosition != null)
         mNavMyPosition.showButton(show);
       break;
+    case mapMode: UiUtils.showIf(show && !isInNavigationMode(), buttonView); break;
     case search: mSearchWheel.show(show);
     case bookmarks:
     case menu: UiUtils.showIf(show, buttonView); break;
@@ -357,8 +443,9 @@ public class MapButtonsController extends Fragment
   {
     if (mToggleMapLayerButton == null)
       return;
-    final boolean buttonSelected = TrafficManager.INSTANCE.isEnabled() || IsolinesManager.isEnabled()
-                                || SubwayManager.isEnabled() || Framework.nativeIsOutdoorsLayerEnabled();
+    final boolean transitLines = MapMode.get() == MapMode.PublicTransport && SubwayManager.isEnabled();
+    final boolean buttonSelected = TrafficManager.INSTANCE.isEnabled() || IsolinesManager.isEnabled() || transitLines
+                                || Framework.nativeIsOutdoorsLayerEnabled();
     mToggleMapLayerButton.setHasActiveLayers(buttonSelected);
   }
 
@@ -480,6 +567,7 @@ public class MapButtonsController extends Fragment
     mSearchWheel.onResume();
     updateMenuBadge();
     updateLayerButton();
+    updateModePicker();
     final WindowInsetUtils.PaddingInsetsListener insetsListener =
         new WindowInsetUtils.PaddingInsetsListener.Builder()
             .setInsetsTypeMask(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout())
@@ -576,6 +664,7 @@ public class MapButtonsController extends Fragment
     menu,
     help,
     trackRecordingStatus,
+    mapMode,
     routePreviewPrevious,
     routePreviewNext,
     routePreviewCancel

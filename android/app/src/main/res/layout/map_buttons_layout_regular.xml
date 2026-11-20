@@ -59,6 +59,13 @@
       app:layout_constraintEnd_toEndOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
   <include
+    layout="@layout/map_buttons_mode_picker"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/map_buttons_bottom"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="@dimen/margin_half" />
+  <include
     layout="@layout/map_buttons_bottom"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

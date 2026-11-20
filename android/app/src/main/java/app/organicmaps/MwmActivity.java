@@ -72,6 +72,7 @@ import app.organicmaps.leftbutton.LeftToggleButton;
 import app.organicmaps.location.TrackRecordingService;
 import app.organicmaps.maplayer.MapButtonsController;
 import app.organicmaps.maplayer.MapButtonsViewModel;
+import app.organicmaps.maplayer.MapModeFragment;
 import app.organicmaps.maplayer.ToggleMapLayerFragment;
 import app.organicmaps.routing.DirectionsPreviewBottomSheet;
 import app.organicmaps.routing.ManageRouteBottomSheet;
@@ -86,6 +87,7 @@ import app.organicmaps.routing.RoutingPlanInplaceController;
 import app.organicmaps.sdk.ChoosePositionMode;
 import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.Map;
+import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.MapController;
 import app.organicmaps.sdk.MapRenderingListener;
 import app.organicmaps.sdk.PlacePageActivationListener;
@@ -281,6 +283,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
   public void onRenderingInitializationFinished()
   {
     ThemeSwitcher.INSTANCE.restart(true);
+    MapMode.initialize();
 
     Framework.nativeRestoreDownloadQueue();
 
@@ -933,6 +936,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
       LocationState.nativeSwitchToNextMode();
     }
     case toggleMapLayer -> toggleMapLayerBottomSheet();
+    case mapMode -> showMapModeOptions();
     case bookmarks -> showBookmarks();
     case search -> showSearch("");
     case menu ->
@@ -957,6 +961,13 @@ public class MwmActivity extends BaseMwmFragmentActivity
   private void showBottomSheet(String id)
   {
     MenuBottomSheetFragment.newInstance(id).show(getSupportFragmentManager(), id);
+  }
+
+  /// Opens the current map mode's options, e.g. from the route options chip while planning.
+  public void showMapModeOptions()
+  {
+    if (!closeBottomSheet(MapModeFragment.MENU_ID))
+      showBottomSheet(MapModeFragment.MENU_ID);
   }
 
   private void toggleMapLayerBottomSheet()
@@ -1057,6 +1068,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
   public void closeFloatingPanels()
   {
     closeBottomSheet(LAYERS_MENU_ID);
+    closeBottomSheet(MapModeFragment.MENU_ID);
     closeBottomSheet(MAIN_MENU_ID);
     closePlacePage();
   }
@@ -1307,7 +1319,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
   public void onBackPressed()
   {
     final RoutingController routingController = RoutingController.get();
-    if (!closeBottomSheet(MAIN_MENU_ID) && !closeBottomSheet(LAYERS_MENU_ID) && !collapseNavMenu() && !closePlacePage()
+    if (!closeBottomSheet(MAIN_MENU_ID) && !closeBottomSheet(LAYERS_MENU_ID)
+        && !closeBottomSheet(MapModeFragment.MENU_ID) && !collapseNavMenu() && !closePlacePage()
         && !closeSearchToolbar(true, true) && !closeSidePanel() && !closePositionChooser()
         && !exitRoutePreviewIfPreviewing()
         && !routingController.resetToPlanningStateIfNavigating() && !routingController.cancel())
@@ -2610,6 +2623,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
   {
     if (id.equals(LAYERS_MENU_ID))
       return new ToggleMapLayerFragment();
+    if (id.equals(MapModeFragment.MENU_ID))
+      return new MapModeFragment();
     return null;
   }
 

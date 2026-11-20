@@ -65,4 +65,9 @@
   <color name="tourism">#6E4426</color>
   <color name="transport">#2F6499</color>
   <color name="water">#0A6074</color>
+
+  <color name="mode_walking">#6F7943</color>
+  <color name="mode_cycling">#535399</color>
+  <color name="mode_driving">#B47A2E</color>
+  <color name="mode_public_transport">#3B6A99</color>
 </resources>

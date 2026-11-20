@@ -998,4 +998,16 @@
     <string name="route_preview_next_turn">Siguiente giro</string>
     <string name="route_preview_cancel">Cerrar vista previa</string>
     <string name="route_preview_turn_position">%1$d de %2$d</string>
+    <string name="mode_walking">A pie</string>
+    <string name="mode_cycling">En bici</string>
+    <string name="mode_driving">En coche</string>
+    <string name="mode_public_transport">Transporte público</string>
+    <string name="map_mode">Modo del mapa</string>
+    <string name="map_mode_options_hint">%s, seleccionado. Toca para ver sus opciones</string>
+    <string name="map_mode_section_route_options">Opciones de ruta</string>
+    <string name="map_mode_route_options_note">Se usan al planificar una ruta en este modo. Son las mismas que en los ajustes de ruta.</string>
+    <string name="map_mode_no_route_options">Las rutas en transporte público no tienen opciones.</string>
+    <string name="map_mode_layers_title">Capas · %s</string>
+    <string name="map_mode_layer_on">%s: activado</string>
+    <string name="map_mode_layer_off">%s: desactivado</string>
 </resources>
