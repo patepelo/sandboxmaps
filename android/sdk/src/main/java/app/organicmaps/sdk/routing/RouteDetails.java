@@ -54,8 +54,11 @@ public final class RouteDetails
   /// Steepness from which a stretch counts as steep (route_details::kSteepGrade).
   public static final double STEEP_GRADE = 0.08;
 
+  // Used by JNI: release builds must not rename the callback.
+  @Keep
   public interface Listener
   {
+    @Keep
     void onRouteDetails(@NonNull RouteDetails details);
   }
 

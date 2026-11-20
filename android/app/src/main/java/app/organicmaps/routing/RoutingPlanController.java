@@ -26,6 +26,7 @@ import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.Router;
 import app.organicmaps.sdk.routing.RouteMarkData;
+import app.organicmaps.sdk.routing.RouteMarkType;
 import app.organicmaps.sdk.routing.RouteDetails;
 import app.organicmaps.sdk.routing.RoutingController;
 import app.organicmaps.sdk.routing.RoutingInfo;
@@ -158,6 +159,9 @@ public class RoutingPlanController extends ToolbarController
     mRouteFrom = mFrame.findViewById(R.id.route_from);
     mRouteTo = mFrame.findViewById(R.id.route_to);
     mRouteVia = mFrame.findViewById(R.id.route_via);
+    // Tap from or to to choose that point, as before.
+    mFrame.findViewById(R.id.route_from_row).setOnClickListener(v -> listener.onSearchRoutePoint(RouteMarkType.Start));
+    mFrame.findViewById(R.id.route_to_row).setOnClickListener(v -> listener.onSearchRoutePoint(RouteMarkType.Finish));
     mRouteViaRow = mFrame.findViewById(R.id.route_via_row);
     mAvoidRow = mFrame.findViewById(R.id.route_avoid_row);
     mAvoidValue = mFrame.findViewById(R.id.route_avoid_value);
