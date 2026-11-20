@@ -20,6 +20,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
@@ -87,11 +88,19 @@ public class RoutingPlanController extends ToolbarController
   @NonNull
   private final TextView mAvoidValue;
   @NonNull
+  private final ColorStateList mAvoidValueColors;
+  @NonNull
+  private final TextView mAvoidLabel;
+  private final int mAvoidRowMinHeight;
+  private final int mAvoidRowPadding;
+  @NonNull
   private final View mAvoidChevron;
   @NonNull
   private final View mOptionsDropdown;
   @Nullable
   private Router mOptionsDropdownRouter;
+  /// The last route uses roads the options asked to avoid.
+  private boolean mOptionsWarning;
   @NonNull
   private Set<RoadType> mOptionsAtOpen = Collections.emptySet();
 
@@ -146,6 +155,10 @@ public class RoutingPlanController extends ToolbarController
     mRouteTo = mFrame.findViewById(R.id.route_to);
     mAvoidRow = mFrame.findViewById(R.id.route_avoid_row);
     mAvoidValue = mFrame.findViewById(R.id.route_avoid_value);
+    mAvoidLabel = mFrame.findViewById(R.id.route_avoid_label);
+    mAvoidRowMinHeight = mAvoidRow.getMinimumHeight();
+    mAvoidRowPadding = mFrame.getResources().getDimensionPixelSize(R.dimen.margin_half);
+    mAvoidValueColors = mAvoidValue.getTextColors();
     mAvoidChevron = mFrame.findViewById(R.id.route_avoid_chevron);
     mOptionsDropdown = mFrame.findViewById(R.id.route_options_dropdown);
     mAvoidRow.setOnClickListener(v -> {
@@ -394,9 +407,9 @@ public class RoutingPlanController extends ToolbarController
     if (point == null)
       return "…";
     if (point.isMyPosition())
-      return context.getString(R.string.core_my_position);
+      return context.getString(app.organicmaps.sdk.R.string.core_my_position);
     final String title = point.getTitle();
-    return title.isEmpty() ? context.getString(R.string.core_my_position) : title;
+    return title.isEmpty() ? context.getString(app.organicmaps.sdk.R.string.core_my_position) : title;
   }
 
   /// "Avoiding: Unpaved, Stairs +1" on one line, whatever the number of options.
@@ -416,14 +429,24 @@ public class RoutingPlanController extends ToolbarController
       if (RoutingOptions.hasOption(type, router))
         names.add(context.getString(shortName(type)));
     }
+    // Nothing avoided: a quiet link to the options instead of "Avoiding: nothing".
+    final boolean quiet = names.isEmpty() && !mOptionsWarning;
+    UiUtils.showIf(!quiet, mAvoidLabel);
+    mAvoidRow.setMinimumHeight(quiet ? 0 : mAvoidRowMinHeight);
+    mAvoidRow.setPadding(mAvoidRow.getPaddingStart(), quiet ? 0 : mAvoidRowPadding, mAvoidRow.getPaddingEnd(),
+                         mAvoidRowPadding);
     final String summary;
     if (names.isEmpty())
-      summary = context.getString(R.string.route_avoid_none);
+      summary = context.getString(R.string.route_options_link);
     else if (names.size() <= 2)
       summary = String.join(", ", names);
     else
       summary = String.join(", ", names.subList(0, 2)) + " +" + (names.size() - 2);
-    mAvoidValue.setText(summary);
+    mAvoidValue.setText(mOptionsWarning ? "⚠ " + summary : summary);
+    if (mOptionsWarning)
+      mAvoidValue.setTextColor(ContextCompat.getColor(context, R.color.base_red));
+    else
+      mAvoidValue.setTextColor(quiet ? mAvoidLabel.getTextColors() : mAvoidValueColors);
   }
 
   @StringRes
@@ -491,14 +514,17 @@ public class RoutingPlanController extends ToolbarController
     return true;
   }
 
-  /// When a route can't avoid everything asked, the options open so they can be changed.
+  /// The route couldn't avoid everything asked: flag the summary, the options stay one tap away.
   public void showRoutingOptionsView()
   {
-    openRouteOptions();
+    mOptionsWarning = true;
+    updateRouteOptionsSummary();
   }
 
+  /// Called when a new route starts building.
   public void hideRoutingOptionsView()
   {
+    mOptionsWarning = false;
     updateRouteOptionsSummary();
     mRoutingPlanListener.onRoutingPlanStartAnimate(UiUtils.isVisible(getFrame()));
   }

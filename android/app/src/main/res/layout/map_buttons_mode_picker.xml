@@ -33,16 +33,14 @@
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_pedestrian" />
       <ImageView
-        android:id="@+id/mode_walking_badge"
+        android:id="@+id/mode_walking_arrow"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/bg_map_mode_options_badge"
+        android:layout_gravity="bottom|center_horizontal"
         android:importantForAccessibility="no"
-        android:padding="2dp"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_more"
-        app:tint="?iconTint" />
+        app:srcCompat="@drawable/ic_expand_more"
+        app:tint="@android:color/white" />
     </FrameLayout>
     <FrameLayout
       android:id="@+id/mode_cycling"
@@ -61,16 +59,14 @@
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_bike" />
       <ImageView
-        android:id="@+id/mode_cycling_badge"
+        android:id="@+id/mode_cycling_arrow"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/bg_map_mode_options_badge"
+        android:layout_gravity="bottom|center_horizontal"
         android:importantForAccessibility="no"
-        android:padding="2dp"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_more"
-        app:tint="?iconTint" />
+        app:srcCompat="@drawable/ic_expand_more"
+        app:tint="@android:color/white" />
     </FrameLayout>
     <FrameLayout
       android:id="@+id/mode_driving"
@@ -89,16 +85,14 @@
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_car" />
       <ImageView
-        android:id="@+id/mode_driving_badge"
+        android:id="@+id/mode_driving_arrow"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/bg_map_mode_options_badge"
+        android:layout_gravity="bottom|center_horizontal"
         android:importantForAccessibility="no"
-        android:padding="2dp"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_more"
-        app:tint="?iconTint" />
+        app:srcCompat="@drawable/ic_expand_more"
+        app:tint="@android:color/white" />
     </FrameLayout>
     <FrameLayout
       android:id="@+id/mode_public_transport"
@@ -117,16 +111,14 @@
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_route_planning_metro_40px" />
       <ImageView
-        android:id="@+id/mode_public_transport_badge"
+        android:id="@+id/mode_public_transport_arrow"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/bg_map_mode_options_badge"
+        android:layout_gravity="bottom|center_horizontal"
         android:importantForAccessibility="no"
-        android:padding="2dp"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_more"
-        app:tint="?iconTint" />
+        app:srcCompat="@drawable/ic_expand_more"
+        app:tint="@android:color/white" />
     </FrameLayout>
   </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

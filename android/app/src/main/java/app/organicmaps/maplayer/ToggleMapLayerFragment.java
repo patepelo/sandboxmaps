@@ -1,12 +1,10 @@
 package app.organicmaps.maplayer;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import app.organicmaps.MwmApplication;
 import app.organicmaps.R;
-import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.maplayer.Mode;
 import app.organicmaps.sdk.util.SharedPropertiesUtils;
 import app.organicmaps.util.ThemeSwitcher;
@@ -44,24 +41,8 @@ public class ToggleMapLayerFragment extends Fragment
     MaterialButton mCloseButton = mRoot.findViewById(R.id.close_button);
     mCloseButton.setOnClickListener(view -> closeLayerBottomSheet());
 
-    showModeInTitle(mRoot.findViewById(R.id.layers_text));
     initRecycler(mRoot);
     return mRoot;
-  }
-
-  /// Layers are remembered per map mode, so the title says which mode they belong to.
-  private void showModeInTitle(@NonNull TextView title)
-  {
-    final Context context = title.getContext();
-    final MapMode mode = MapMode.getChosen();
-    title.setText(getString(R.string.map_mode_layers_title, getString(MapModeUi.name(mode))));
-    final int size = getResources().getDimensionPixelSize(R.dimen.margin_half_plus);
-    final GradientDrawable dot = new GradientDrawable();
-    dot.setShape(GradientDrawable.OVAL);
-    dot.setColor(MapModeUi.color(context, mode));
-    dot.setSize(size, size);
-    title.setCompoundDrawablesRelativeWithIntrinsicBounds(dot, null, null, null);
-    title.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.margin_half));
   }
 
   private void initRecycler(@NonNull View root)
@@ -92,7 +73,6 @@ public class ToggleMapLayerFragment extends Fragment
     Context context = v.getContext();
     SharedPropertiesUtils.setLayerMarkerShownForLayerMode(mode);
     mode.setEnabled(context, !mode.isEnabled(context));
-    MapMode.rememberLayers();
     // TODO: dirty hack :(
     if (mode == Mode.OUTDOORS || mode == Mode.NIGHT)
       ThemeSwitcher.INSTANCE.restart(true);

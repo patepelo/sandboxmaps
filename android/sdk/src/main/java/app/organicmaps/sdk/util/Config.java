@@ -183,17 +183,6 @@ public final class Config
     setBool(KEY_DOWNLOADER_AUTO, enabled);
   }
 
-  /// A map layer remembered for one map mode, e.g. "MapModeCyclingOutdoor".
-  public static boolean getMapModeLayer(@NonNull String mapMode, @NonNull String layer, boolean def)
-  {
-    return getBool("MapMode" + mapMode + layer, def);
-  }
-
-  public static void setMapModeLayer(@NonNull String mapMode, @NonNull String layer, boolean enabled)
-  {
-    setBool("MapMode" + mapMode + layer, enabled);
-  }
-
   public static boolean showZoomButtons()
   {
     return getBool(KEY_PREF_ZOOM_BUTTONS, true);

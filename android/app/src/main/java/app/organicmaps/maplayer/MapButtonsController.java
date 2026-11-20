@@ -219,7 +219,7 @@ public class MapButtonsController extends Fragment
             openModeDropdown();
           return;
         }
-        MapModeUi.switchTo(mode, mFrame, mModePicker);
+        MapMode.switchTo(mode);
         updateModePicker();
         updateLayerButton();
         if (isModeDropdownOpen())
@@ -266,6 +266,7 @@ public class MapButtonsController extends Fragment
     lp.width = mFrame.getWidth() > maxWidth ? maxWidth : ViewGroup.LayoutParams.MATCH_PARENT;
     mModeDropdown.setLayoutParams(lp);
     UiUtils.show(mModeDropdown);
+    updateModePicker();
   }
 
   /// @return true if the route options were open.
@@ -274,6 +275,7 @@ public class MapButtonsController extends Fragment
     if (!isModeDropdownOpen())
       return false;
     UiUtils.hide(mModeDropdown);
+    updateModePicker();
     final FragmentManager fm = getChildFragmentManager();
     final Fragment current = fm.findFragmentById(R.id.map_mode_dropdown_options);
     if (current != null)
@@ -298,10 +300,24 @@ public class MapButtonsController extends Fragment
       button.setBackgroundTintList(
           ColorStateList.valueOf(selected ? MapModeUi.color(context, mode) : Color.TRANSPARENT));
       ImageViewCompat.setImageTintList(icon, ColorStateList.valueOf(selected ? Color.WHITE : iconTint));
-      UiUtils.showIf(selected, button.findViewById(badgeId(mode)));
+      // The selected mode opens its route options: an arrow that flips while they're open.
+      final View arrow = button.findViewById(arrowId(mode));
+      UiUtils.showIf(selected, arrow);
+      arrow.setRotation(selected && isModeDropdownOpen() ? 180 : 0);
       final String name = getString(MapModeUi.name(mode));
       button.setContentDescription(selected ? getString(R.string.map_mode_options_hint, name) : name);
     }
+  }
+
+  private static int arrowId(@NonNull MapMode mode)
+  {
+    return switch (mode)
+    {
+      case Cycling -> R.id.mode_cycling_arrow;
+      case Driving -> R.id.mode_driving_arrow;
+      case PublicTransport -> R.id.mode_public_transport_arrow;
+      default -> R.id.mode_walking_arrow;
+    };
   }
 
   private static int iconId(@NonNull MapMode mode)
@@ -312,17 +328,6 @@ public class MapButtonsController extends Fragment
       case Driving -> R.id.mode_driving_icon;
       case PublicTransport -> R.id.mode_public_transport_icon;
       default -> R.id.mode_walking_icon;
-    };
-  }
-
-  private static int badgeId(@NonNull MapMode mode)
-  {
-    return switch (mode)
-    {
-      case Cycling -> R.id.mode_cycling_badge;
-      case Driving -> R.id.mode_driving_badge;
-      case PublicTransport -> R.id.mode_public_transport_badge;
-      default -> R.id.mode_walking_badge;
     };
   }
 
