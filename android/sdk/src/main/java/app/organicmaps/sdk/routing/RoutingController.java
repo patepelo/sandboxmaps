@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import app.organicmaps.sdk.Framework;
+import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.Router;
 import app.organicmaps.sdk.bookmarks.data.FeatureId;
 import app.organicmaps.sdk.bookmarks.data.MapObject;
@@ -408,6 +409,7 @@ public class RoutingController
 
     mLastRouterType = routerType;
     Router.set(mLastRouterType);
+    MapMode.followRouter(mLastRouterType);
 
     if (startPoint != null || endPoint != null)
       setPointsInternal(startPoint, endPoint);
@@ -886,6 +888,7 @@ public class RoutingController
 
     mLastRouterType = router;
     Router.set(router);
+    MapMode.followRouter(router);
 
     cancelRemovingIntermediatePointsTransaction();
 
