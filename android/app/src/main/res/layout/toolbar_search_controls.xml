@@ -19,6 +19,18 @@
     android:scaleType="center"
     android:contentDescription="@string/back"/>
 
+  <!-- Shown while the bar filters categories instead of searching places ("All categories"). -->
+  <com.google.android.material.chip.Chip
+    android:id="@+id/mode_chip"
+    style="@style/Widget.Material3.Chip.Input"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_quarter"
+    android:checkable="false"
+    android:visibility="gone"
+    tools:text="@string/search_categories_mode"
+    tools:visibility="visible"/>
+
   <com.google.android.material.textfield.TextInputEditText
     android:id="@+id/query"
     style="@style/MwmTextAppearance.Toolbar.Search"

@@ -96,13 +96,13 @@
         "defaultMessage": "4Cosmetics|4Beauty Care|makeup|make-up"
     },
     "shop-convenience|@category_food|@shop": {
-        "defaultMessage": "4Convenience|mini-mart|mini-market|superette"
+        "defaultMessage": "4Convenience|mini-mart|mini-market|superette|convenience store|corner shop|bodega"
     },
     "shop-deli|@category_food|@shop": {
-        "defaultMessage": "4Delicatessen"
+        "defaultMessage": "4Delicatessen|deli"
     },
     "shop-farm|@category_food|@shop": {
-        "defaultMessage": "Farm food"
+        "defaultMessage": "Farm food|farm shop|farm store"
     },
     "shop-water|@category_water|@category_food|@shop": {
         "defaultMessage": "4Drinking Water|3Potable Water|4Bottled Water"
@@ -129,16 +129,16 @@
         "defaultMessage": "4Florist|U+1F337|U+1F338|U+1F339|U+1F33A|U+1F33B|U+1F33C|U+1F490|U+1F33E|4flowers|flower shop|floral shop|floral arrangements|same day flowers|bouquet"
     },
     "shop-butcher|@category_food|@shop": {
-        "defaultMessage": "4Butcher|meat|U+1F356|U+1F357"
+        "defaultMessage": "4Butcher|meat|U+1F356|U+1F357|butchery|meat shop"
     },
     "shop-furniture|@shop": {
-        "defaultMessage": "4Furniture"
+        "defaultMessage": "4Furniture|furniture store|home furnishings"
     },
     "shop-kitchen|@shop": {
         "defaultMessage": "4Kitchen|Kitchen Studio|kitchenware"
     },
     "shop-alcohol|@category_food|@shop": {
-        "defaultMessage": "4liquor|4alcohol|U+1F377"
+        "defaultMessage": "4liquor|4alcohol|U+1F377|liquor store|off-licence|bottle shop"
     },
     "shop-books|@shop": {
         "defaultMessage": "Bookstore|bookshop|3books|U+1F4D6|U+1F4DA|U+1F4D9|U+1F4D8|U+1F4D7|U+1F4D5"
@@ -156,10 +156,10 @@
         "defaultMessage": "4Housewares"
     },
     "shop-jewelry|@category_shopping|@shop": {
-        "defaultMessage": "4Jewelry|4Diamond|U+1F48D"
+        "defaultMessage": "4Jewelry|4Diamond|U+1F48D|Jewellery|jeweller|jeweler"
     },
     "shop-optician|@shop": {
-        "defaultMessage": "4Optician|glasses|sunglasses|U+1F453"
+        "defaultMessage": "4Optician|glasses|sunglasses|U+1F453|eyewear|eyeglasses|spectacles"
     },
     "shop-gift|@category_shopping|@shop": {
         "defaultMessage": "Gift|U+1F381|souvenir|souvenirs|3gifts|presents|4Souvenir shop|gift shop|giftshop"
@@ -171,16 +171,16 @@
         "defaultMessage": "4Nail salon|nail technician|nail tech|finger nails|toe nails|nails"
     },
     "shop-greengrocer|@category_food|@shop": {
-        "defaultMessage": "4Greengrocer|U+1F345|U+1F346|U+1F33D|U+1F360|U+1F348|U+1F347|U+1F349|U+1F34A|U+1F34C|U+1F34D|U+1F34E|U+1F34F|U+1F350|U+1F351|U+1F353"
+        "defaultMessage": "4Greengrocer|U+1F345|U+1F346|U+1F33D|U+1F360|U+1F348|U+1F347|U+1F349|U+1F34A|U+1F34C|U+1F34D|U+1F34E|U+1F34F|U+1F350|U+1F351|U+1F353|fruit and vegetables|fruit shop|vegetable shop"
     },
     "shop-sports|@category_shopping|@shop": {
         "defaultMessage": "4Sports Goods|U+1F3BF|U+1F3A3|U+1F3C2|U+1F6B4|U+26BD|U+1F3C0|U+1F3C8|U+26BE|U+1F3BE|U+1F3C9|U+26F3"
     },
     "shop-supermarket|@category_food|@shop": {
-        "defaultMessage": "3Supermarket"
+        "defaultMessage": "3Supermarket|grocery store|hypermarket"
     },
     "shop-mall|@category_shopping|@shop": {
-        "defaultMessage": "3Mall|Gallery|shopping arcade|entertainment center|retail"
+        "defaultMessage": "3Mall|shopping arcade|entertainment center|retail"
     },
     "shop-department_store|@category_shopping|@shop": {
         "defaultMessage": "4Department|department store"
@@ -198,7 +198,7 @@
         "defaultMessage": "4Laundry|Laundrette|laundromat|5washateria|coin laundry"
     },
     "shop-swimming_pool|@shop": {
-        "defaultMessage": "Swimming Pool|pool supplies|hot tub|sauna"
+        "defaultMessage": "Pool shop|pool supplies|hot tub"
     },
     "shop-tool_hire|@shop": {
         "defaultMessage": "Tool Hire|tools|U+1F529|U+1F528"
@@ -336,7 +336,7 @@
         "defaultMessage": "4City wall"
     },
     "historic-fort|@category_tourism": {
-        "defaultMessage": "Fort"
+        "defaultMessage": "Fort|fortification"
     },
     "historic-gallows|@category_tourism": {
         "defaultMessage": "Gallows"
@@ -414,19 +414,19 @@
         "defaultMessage": "4Dance|Dancing school"
     },
     "leisure-garden": {
-        "defaultMessage": "3Garden"
+        "defaultMessage": "3Garden|gardens|public garden"
     },
     "leisure-firepit": {
         "defaultMessage": "5Firepit"
     },
     "amenity-bench": {
-        "defaultMessage": "Bench"
+        "defaultMessage": "Bench|park bench"
     },
     "amenity-boat_rental": {
         "defaultMessage": "4Boat rental|boat|boats|3Rental"
     },
     "amenity-bicycle_rental": {
-        "defaultMessage": "4Bicycle rental|cycling|cycle|bike|3Rental|U+1F6B2|U+1F6B4|U+1F6B5|bicycle hire|bike rental"
+        "defaultMessage": "4Bicycle rental|cycle|bike|3Rental|U+1F6B2|U+1F6B4|U+1F6B5|bicycle hire|bike rental"
     },
     "amenity-bicycle_repair_station": {
         "defaultMessage": "4Bicycle repair station|cycle|bike|4repair of bicycles"
@@ -435,19 +435,19 @@
         "defaultMessage": "Car Share|3carsharing|car|sharing|U+1F697|U+1F698|U+1F699|carsharing services|car sharing|4rideshare"
     },
     "amenity-car_rental": {
-        "defaultMessage": "3Car rental|car|rental|U+1F697|U+1F698|U+1F699|car hire|rent a car|auto rental|vehicle rent"
+        "defaultMessage": "3Car rental|rental|U+1F697|U+1F698|U+1F699|car hire|rent a car|auto rental|vehicle rent"
     },
     "amenity-motorcycle_rental": {
-        "defaultMessage": "4Motorcycle rental|bike|hire|4scooter|4Rental motorcycles|motorcycles"
+        "defaultMessage": "4Motorcycle rental|motorcycle hire|4scooter|4Rental motorcycles|motorcycles"
     },
     "amenity-cinema|@category_entertainment": {
-        "defaultMessage": "3Cinema|3Movie theatre|Film|4Movies|U+1F3A6|U+1F3AC"
+        "defaultMessage": "3Cinema|3Movie theatre|Film|4Movies|U+1F3A6|U+1F3AC|movie theater"
     },
     "leisure-bowling_alley|@category_entertainment": {
         "defaultMessage": "4Bowling alley"
     },
     "amenity-theatre|@category_entertainment": {
-        "defaultMessage": "4Theatre|U+1F3AD"
+        "defaultMessage": "4Theatre|U+1F3AD|Theater|playhouse"
     },
     "amenity-nightclub|@category_entertainment|@category_nightlife": {
         "defaultMessage": "3Nightclub|night club|4disco|dance|U+1F378|U+1F379|U+1F46F|U+1F483|club|nightspot|night bar"
@@ -504,16 +504,16 @@
         "defaultMessage": "4Clinic|hospital|3doctor|U+1F3E5|U+1F489|diagnostics|health services"
     },
     "amenity-doctors|@category_hospital": {
-        "defaultMessage": "4Doctor|clinic|U+1F489|U+1F3E5|U+1F691"
+        "defaultMessage": "4Doctor|clinic|U+1F489|U+1F3E5|U+1F691|GP|general practitioner|physician|medical practice"
     },
     "amenity-dentist": {
-        "defaultMessage": "4Dentist"
+        "defaultMessage": "4Dentist|dental|dental clinic|dental practice|orthodontist"
     },
     "healthcare-laboratory": {
         "defaultMessage": "Medical Laboratory|lab|laboratory"
     },
     "healthcare-physiotherapist": {
-        "defaultMessage": "7Physiotherapist"
+        "defaultMessage": "7Physiotherapist|physio|physiotherapy|physical therapy|physical therapist"
     },
     "healthcare-alternative": {
         "defaultMessage": "alternative medicine"
@@ -546,10 +546,10 @@
         "defaultMessage": "5Kindergarten|U+1F476|U+1F37C|U+1F6BC|nursery|4Child Care|childcare"
     },
     "amenity-library": {
-        "defaultMessage": "3Library|3books|book|U+1F4D6"
+        "defaultMessage": "3Library|3books|book|U+1F4D6|public library"
     },
     "amenity-parking|amenity-parking_entrance|@category_parking": {
-        "defaultMessage": "car parking|U+1F697|U+1F17F|U+1F698|U+1F699"
+        "defaultMessage": "car parking|U+1F697|U+1F17F|U+1F698|U+1F699|car park|parking lot|parking garage"
     },
     "@category_pharmacy": {
         "defaultMessage": "3Pharmacy"
@@ -621,7 +621,7 @@
         "defaultMessage": "2RV Dump Station|5Holding Tank Dump Station|4Dump station|sanitary dump station|sewage|RV waste|5motorhome dump station|5camper dump station|4caravan dump station"
     },
     "amenity-school": {
-        "defaultMessage": "3School|U+1F392|U+1F3EB"
+        "defaultMessage": "3School|U+1F392|U+1F3EB|primary school|elementary school|secondary school|high school"
     },
     "amenity-shelter": {
         "defaultMessage": "4Shelter|refuge"
@@ -642,7 +642,7 @@
         "defaultMessage": "3Toilet|toilets|4Restroom|potty|WC|water closet"
     },
     "amenity-toilets|toilets-yes|@category_toilet": {
-        "defaultMessage": "wc|4Bathroom|loo|lavatory|5washroom|U+1F6BD|U+1F6BE|U+1F4A9|U+1F6BB|U+1F6B9|U+1F6BA"
+        "defaultMessage": "wc|4Bathroom|loo|lavatory|5washroom|U+1F6BD|U+1F6BE|U+1F4A9|U+1F6BB|U+1F6B9|U+1F6BA|restrooms|public toilet"
     },
     "amenity-tool_library": {
         "defaultMessage": "Tool Library|Tool Hire|tools|U+1F529|U+1F528"
@@ -711,7 +711,7 @@
         "defaultMessage": "Peak|mountain|mount|U+1F5FB|U+1F304"
     },
     "natural-peak|@mountain": {
-        "defaultMessage": "Peak"
+        "defaultMessage": "Peak|summit|mountain top"
     },
     "natural-saddle|mountain_pass": {
         "defaultMessage": "4Saddle|Pass"
@@ -723,22 +723,22 @@
         "defaultMessage": "Forest|U+1F332|U+1F333"
     },
     "leisure-park": {
-        "defaultMessage": "Park|U+1F332|U+1F333|U+1F60C"
+        "defaultMessage": "Park|U+1F332|U+1F333|U+1F60C|public park|city park|green space"
     },
     "tourism-aquarium|@category_tourism": {
         "defaultMessage": "Aquarium"
     },
     "tourism-hostel|@category_hotel": {
-        "defaultMessage": "3Hostel|motel|U+1F3E8|backpack|backpacking"
+        "defaultMessage": "3Hostel|U+1F3E8|backpack|backpacking"
     },
     "tourism-hotel|@category_hotel": {
         "defaultMessage": "motel|U+1F3E8|U+1F62A|U+1F634|tourist court"
     },
     "tourism-guest_house|@category_hotel": {
-        "defaultMessage": "4Guest House|hostel|U+1F3E8"
+        "defaultMessage": "4Guest House|U+1F3E8"
     },
     "tourism-motel|@category_hotel": {
-        "defaultMessage": "3Motel|hostel|U+1F3E8"
+        "defaultMessage": "3Motel|U+1F3E8"
     },
     "tourism-alpine_hut|@category_hotel": {
         "defaultMessage": "5Mountain Lodge|5backcountry hut|hut|lodge|alpine hut"
@@ -753,7 +753,7 @@
         "defaultMessage": "4Stadium|4sport|U+26BD|U+26BE|U+1F3BE|U+1F3C0|U+1F3C8|U+1F4AA|U+1F3C9|olympic stadium|sports stadium|sports complex|arena|sports arena"
     },
     "leisure-playground|@category_children": {
-        "defaultMessage": "4Playground"
+        "defaultMessage": "4Playground|play area|playpark|play park"
     },
     "leisure-sports_centre": {
         "defaultMessage": "4Sports Center|sport|sports|U+26BD|U+26BE|U+1F3BE|U+1F4AA|U+1F3C8|U+1F3C0|U+1F3C9|sports complex|sports forum"
@@ -846,16 +846,16 @@
         "defaultMessage": "Skiing"
     },
     "sport-soccer": {
-        "defaultMessage": "Soccer"
+        "defaultMessage": "Soccer|Football|football pitch|soccer field"
     },
     "sport-swimming": {
         "defaultMessage": "Swimming"
     },
     "sport-table_tennis": {
-        "defaultMessage": "Table Tennis"
+        "defaultMessage": "Table Tennis|ping pong|ping-pong"
     },
     "sport-tennis": {
-        "defaultMessage": "Tennis"
+        "defaultMessage": "Tennis|tennis court"
     },
     "sport-padel": {
         "defaultMessage": "Padel"
@@ -894,10 +894,10 @@
         "defaultMessage": "3Water|water source"
     },
     "amenity-drinking_water|drinking_water-yes|@category_water": {
-        "defaultMessage": "4Drinking Water|3Potable Water|U+1F6B0"
+        "defaultMessage": "4Drinking Water|3Potable Water|U+1F6B0|water fountain|drinking fountain|water refill"
     },
     "natural-hot_spring|@category_water": {
-        "defaultMessage": "3Hot Spring"
+        "defaultMessage": "3Hot Spring|hot springs|thermal spring"
     },
     "natural-spring|@category_water": {
         "defaultMessage": "3Spring|4Natural Spring"
@@ -909,7 +909,7 @@
         "defaultMessage": "5Water tank refill point|2RV water roint|water for rv|water for campervan|water for caravan"
     },
     "man_made-water_tap|@category_water": {
-        "defaultMessage": "5Water tap"
+        "defaultMessage": "5Water tap|faucet"
     },
     "@waterbody": {
         "defaultMessage": "Water body|water surface"
@@ -1005,7 +1005,7 @@
         "defaultMessage": "4Key cutting|Key duplication|Key copying"
     },
     "craft-locksmith": {
-        "defaultMessage": "Locksmith"
+        "defaultMessage": "Locksmith|lock repair"
     },
     "craft-painter": {
         "defaultMessage": "House Painter|painter|decorator"
@@ -1044,7 +1044,7 @@
         "defaultMessage": "3Internet|U+1F4F6"
     },
     "natural-beach|natural-beach-sand|natural-beach-gravel|leisure-beach_resort": {
-        "defaultMessage": "Beach|U+1F459"
+        "defaultMessage": "Beach|U+1F459|seaside"
     },
     "man_made-lighthouse": {
         "defaultMessage": "5Lighthouse"
@@ -1083,13 +1083,13 @@
         "defaultMessage": "4Outdoor Equipment|trekking|hiking|climbing|camping"
     },
     "shop-dry_cleaning": {
-        "defaultMessage": "3Dry Cleaner|cleaning"
+        "defaultMessage": "3Dry Cleaner|cleaning|dry cleaning|dry cleaners"
     },
     "shop-tyres|@shop": {
         "defaultMessage": "3Tyre|tyres|tyre shop|3Tires|tire|tire shop"
     },
     "amenity-car_wash": {
-        "defaultMessage": "3Car Wash"
+        "defaultMessage": "3Car Wash|carwash|car cleaning"
     },
     "man_made-telescope|man_made-telescope-optical|man_made-telescope-radio|man_made-telescope-gamma": {
         "defaultMessage": "4Telescope"
@@ -1098,7 +1098,7 @@
         "defaultMessage": "4Observatory"
     },
     "amenity-veterinary": {
-        "defaultMessage": "4Veterinary Doctor|3Veterinary|vet|veterinarian"
+        "defaultMessage": "4Veterinary Doctor|3Veterinary|vet|veterinarian|animal hospital|vet clinic"
     },
     "amenity-animal_shelter": {
         "defaultMessage": "6Animal Shelter|Pound"
@@ -1131,7 +1131,7 @@
         "defaultMessage": "4Covered Bicycle Parking|Covered Bike Parking"
     },
     "amenity-waste_basket": {
-        "defaultMessage": "4Trash Bin|4litter bin|5waste basket|bin|5dustbin"
+        "defaultMessage": "4Trash Bin|4litter bin|5waste basket|bin|5dustbin|trash can|garbage can|rubbish bin"
     },
     "emergency-phone": {
         "defaultMessage": "4Emergency Phone"
@@ -1149,7 +1149,7 @@
         "defaultMessage": "4Chemist|6Pharmacist|druggist"
     },
     "shop-pet|@shop": {
-        "defaultMessage": "3Pet"
+        "defaultMessage": "3Pet|pet shop|pet store|pet supplies|pet food"
     },
     "tourism-zoo|@category_tourism|@category_children": {
         "defaultMessage": "2Zoo|menagerie"
@@ -1164,7 +1164,7 @@
         "defaultMessage": "3Visitor centre|6Ranger station|Information"
     },
     "amenity-community_centre": {
-        "defaultMessage": "4Community centre"
+        "defaultMessage": "4Community centre|Community center|community hall|village hall"
     },
     "amenity-community_centre-youth_centre": {
         "defaultMessage": "4Youth centre"
@@ -1173,7 +1173,7 @@
         "defaultMessage": "6Compressed air"
     },
     "amenity-courthouse": {
-        "defaultMessage": "4Courthouse"
+        "defaultMessage": "4Courthouse|law court|court of law"
     },
     "amenity-vending_machine": {
         "defaultMessage": "Vending Machine"
@@ -1221,7 +1221,7 @@
         "defaultMessage": "Garage|car porch"
     },
     "highway-rest_area|highway-services": {
-        "defaultMessage": "4Rest area|4Service area|station|rest stop"
+        "defaultMessage": "4Rest area|4Service area|rest stop"
     },
     "man_made-chimney": {
         "defaultMessage": "Chimney|smokestack"
@@ -1233,7 +1233,7 @@
         "defaultMessage": "Tower"
     },
     "shop-bookmaker|@gambling": {
-        "defaultMessage": "4Bookmaker"
+        "defaultMessage": "4Bookmaker|betting shop|bookie|sports betting"
     },
     "shop-seafood|@category_food|@shop": {
         "defaultMessage": "4Fishmonger|4Seafood|fish market|fish|shellfish|marine|blue food"
@@ -1290,7 +1290,7 @@
         "defaultMessage": "4Windmill"
     },
     "natural-cave_entrance": {
-        "defaultMessage": "Cave"
+        "defaultMessage": "Cave|cavern|grotto"
     },
     "natural-volcano|@mountain": {
         "defaultMessage": "4Volcano"
@@ -1323,7 +1323,7 @@
         "defaultMessage": "5Biergarten|beer garden"
     },
     "amenity-driving_school": {
-        "defaultMessage": "4Driving school"
+        "defaultMessage": "4Driving school|driving lessons"
     },
     "amenity-sailing_school": {
         "defaultMessage": "4Sailing school|4Boating school"
@@ -1356,7 +1356,7 @@
         "defaultMessage": "4Carpooling|car pooling"
     },
     "amenity-nursing_home": {
-        "defaultMessage": "4Nursing Home"
+        "defaultMessage": "4Nursing Home|care home|retirement home|elderly care"
     },
     "amenity-payment_terminal": {
         "defaultMessage": "3Payment Terminal|card reader"
@@ -1365,10 +1365,10 @@
         "defaultMessage": "3Payment Centre"
     },
     "amenity-public_bath": {
-        "defaultMessage": "6Public bath"
+        "defaultMessage": "6Public bath|bathhouse|onsen|hammam"
     },
     "amenity-shower": {
-        "defaultMessage": "Shower"
+        "defaultMessage": "Shower|showers|public shower"
     },
     "emergency-access_point": {
         "defaultMessage": "5Emergency Rescue Point|Emergency Location|Emergency Marker|Emergency Access Point"
@@ -1401,7 +1401,7 @@
         "defaultMessage": "3Fitness Station|street workout|fitness|workout|4Exercise station|Exercise bench|outdoor gym|5Calisthenics park|trim trail"
     },
     "office-insurance": {
-        "defaultMessage": "4Insurance Office"
+        "defaultMessage": "4Insurance Office|insurance"
     },
     "office-ngo": {
         "defaultMessage": "4Non-Governmental Organization|NGO"
@@ -1425,10 +1425,10 @@
         "defaultMessage": "Newspaper Stand|4newspapers"
     },
     "shop-pawnbroker": {
-        "defaultMessage": "4Pawnbroker"
+        "defaultMessage": "4Pawnbroker|pawn shop|pawnshop"
     },
     "shop-stationery|@shop": {
-        "defaultMessage": "5Stationery"
+        "defaultMessage": "5Stationery|stationer|office supplies"
     },
     "shop-tattoo": {
         "defaultMessage": "Tattoo Parlour|4tattoos"
@@ -1470,7 +1470,7 @@
         "defaultMessage": "Ford|water crossing"
     },
     "leisure-marina": {
-        "defaultMessage": "3Marina"
+        "defaultMessage": "3Marina|harbour|harbor|yacht harbour"
     },
     "leisure-indoor_play": {
         "defaultMessage": "3Indoor Play Centre|indoor play|indoor playground"

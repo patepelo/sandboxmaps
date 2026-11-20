@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36" height="36" version="1.1" viewBox="0 0 36 36" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter id="filter1" x="-.147" y="-.147" width="1.294" height="1.294" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="1.5925"/>
+  </filter>
+  <linearGradient id="linearGradient1" x1="18" x2="18" y1="3" y2="29" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#3fa8f3" offset="0"/>
+   <stop stop-color="#2089d4" offset="1"/>
+  </linearGradient>
+ </defs>
+ <circle cx="18" cy="18" r="13" filter="url(#filter1)" opacity=".35"/>
+ <circle cx="18" cy="16" r="13" fill="url(#linearGradient1)" stroke="#fff" stroke-width="2"/>
+ <g transform="matrix(1.031 0 0 1.031 5.633 4.165)">
+  <path xmlns="http://www.w3.org/2000/svg" d="m19.05 6.3925h-1.88l-0.2103-0.42036c-0.1592-0.31845-0.4847-0.51962-0.8407-0.51964h-1.5752l-0.8013-0.80135c-0.2964-0.29609-0.8025-0.08636-0.8025 0.33223v4.4015l3.76 1.3427v-1.0452h0.9399c1.0384 0 1.88-0.84159 1.88-1.88v-0.93999c0-0.25968-0.2103-0.47-0.47-0.47zm-3.29 1.41c-0.2597 0-0.47-0.21032-0.47-0.47 0-0.25967 0.2103-0.47 0.47-0.47s0.47 0.21033 0.47 0.47c0 0.25968-0.2103 0.47-0.47 0.47zm-8.46 2.35c-0.51817 0-0.94-0.42181-0.94-0.93998 0-0.51905-0.42094-0.93999-0.93999-0.93999s-0.94 0.42094-0.94 0.93999c0 1.2237 0.78813 2.2575 1.88 2.6467v6.2833c0 0.2596 0.21032 0.47 0.47 0.47h1.88c0.25967 0 0.47-0.2104 0.47-0.47v-3.29h4.7v3.29c0 0.2596 0.2103 0.47 0.47 0.47h1.88c0.2597 0 0.47-0.2104 0.47-0.47v-6.4169l-4.4048-1.5731z" fill="#fff" fill-rule="nonzero" />
+  
+ </g>
+</svg>

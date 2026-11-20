@@ -1,5 +1,6 @@
 package app.organicmaps.widget.placepage;
 
+import app.organicmaps.search.RecentPlaces;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static app.organicmaps.sdk.util.Utils.getLocalizedFeatureType;
@@ -1341,6 +1342,7 @@ public class PlacePageView extends Fragment
 
   void shareClickListener(View v)
   {
+    RecentPlaces.onPlacePageAction(requireContext(), mMapObject);
     if (mMapObject.isTrack())
     {
       MenuBottomSheetFragment.newInstance(TRACK_SHARE_MENU_ID, getString(R.string.share_track))

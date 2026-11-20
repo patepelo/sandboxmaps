@@ -30,29 +30,23 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:layout_behavior="@string/appbar_scrolling_view_behavior">
-      <!-- Tabs -->
-      <LinearLayout
+      <!-- Start screen, shown while the search box is empty: Recent and Categories in one list. -->
+      <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tab_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.google.android.material.tabs.TabLayout
-          android:id="@+id/tabs"
-          style="@style/MwmWidget.TabLayout"
-          android:layout_width="match_parent"
-          android:layout_height="@dimen/tabs_height"
-          android:elevation="@dimen/appbar_elevation"/>
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_base"/>
 
-        <include
-          android:id="@+id/tabs_divider"
-          layout="@layout/item_divider" />
-
-        <androidx.viewpager2.widget.ViewPager2
-          android:id="@+id/pages"
-          style="@style/MwmWidget.Floating"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
-      </LinearLayout>
+      <!-- "All categories": Featured tiles and every place type in sections, filtered by the search bar. -->
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?appBackground"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_base"
+        android:visibility="gone"/>
 
       <!-- Results -->
       <FrameLayout

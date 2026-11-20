@@ -12,6 +12,7 @@ import app.organicmaps.R;
 import app.organicmaps.sdk.location.LocationHelper;
 import app.organicmaps.sdk.search.SearchRecents;
 import app.organicmaps.sdk.util.Config;
+import app.organicmaps.search.RecentPlaces;
 
 @Keep
 public class PrivacySettingsFragment extends BaseXmlSettingsFragment
@@ -84,7 +85,11 @@ public class PrivacySettingsFragment extends BaseXmlSettingsFragment
         if (newVal)
           SearchRecents.refresh();
         else
+        {
+          // Turning history off also forgets places opened from search.
           SearchRecents.clear();
+          RecentPlaces.clear(requireContext());
+        }
       }
       return true;
     });

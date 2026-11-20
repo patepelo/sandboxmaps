@@ -19,6 +19,7 @@ import app.organicmaps.sdk.util.Config;
 import app.organicmaps.sdk.util.StringUtils;
 import app.organicmaps.util.InputUtils;
 import app.organicmaps.util.UiUtils;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class SearchToolbarController extends ToolbarController implements View.OnClickListener
@@ -240,6 +241,28 @@ public class SearchToolbarController extends ToolbarController implements View.O
   public void setHint(@StringRes int hint)
   {
     mQuery.setHint(hint);
+  }
+
+  /// Shows a chip at the start of the bar naming what it searches (e.g. "Categories"), with a close
+  /// button that calls onClose. Pass 0 to hide it.
+  public void showModeChip(@StringRes int label, @Nullable Runnable onClose)
+  {
+    final Chip chip = mSearchContainer.findViewById(R.id.mode_chip);
+    if (chip == null)
+      return;
+    if (label == 0)
+    {
+      chip.setVisibility(View.GONE);
+      chip.setOnCloseIconClickListener(null);
+      return;
+    }
+    chip.setText(label);
+    chip.setCloseIconVisible(true);
+    chip.setOnCloseIconClickListener(v -> {
+      if (onClose != null)
+        onClose.run();
+    });
+    chip.setVisibility(View.VISIBLE);
   }
 
   @NonNull

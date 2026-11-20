@@ -2,9 +2,11 @@ package app.organicmaps.search;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -110,6 +112,8 @@ class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchDataViewHol
     final MaterialTextView mRegion;
     @NonNull
     final MaterialTextView mDistance;
+    @NonNull
+    final ImageView mIcon;
 
     @Override
     int getTintAttr()
@@ -126,6 +130,7 @@ class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchDataViewHol
       mDescription = view.findViewById(R.id.description);
       mRegion = view.findViewById(R.id.region);
       mDistance = view.findViewById(R.id.distance);
+      mIcon = view.findViewById(R.id.icon);
     }
 
     @Override
@@ -144,6 +149,32 @@ class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchDataViewHol
       UiUtils.setTextAndHideIfEmpty(mDescription, mResult.description.description);
       mRegion.setText(mResult.getFormattedAddress(mRegion.getContext()));
       UiUtils.setTextAndHideIfEmpty(mDistance, mResult.description.distance.toString(mFrame.getContext()));
+      bindIcon();
+    }
+
+    // Same icon as on the map; rows without one keep the empty column so titles stay aligned.
+    private void bindIcon()
+    {
+      final String name = mResult.description.iconName;
+      final boolean night = ThemeUtils.isNightTheme();
+      final MapIconCache cache = MapIconCache.get(mFrame.getContext());
+      mIcon.setTag(name);
+      final Bitmap icon = cache.peek(name, night);
+      showIcon(icon);
+      if (icon == null && !name.isEmpty())
+      {
+        // Loaded off the main thread; the row may have been reused for another result by then.
+        cache.request(name, night, (loaded, bitmap) -> {
+          if (loaded.equals(mIcon.getTag()))
+            showIcon(bitmap);
+        });
+      }
+    }
+
+    private void showIcon(@Nullable Bitmap icon)
+    {
+      mIcon.setImageBitmap(icon);
+      mIcon.setVisibility(icon == null ? View.INVISIBLE : View.VISIBLE);
     }
 
     private void formatOpeningHours(SearchResult result)
