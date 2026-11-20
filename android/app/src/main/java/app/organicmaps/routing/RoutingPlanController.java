@@ -20,7 +20,6 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
@@ -32,11 +31,13 @@ import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.Router;
 import app.organicmaps.sdk.bookmarks.data.MapObject;
+import app.organicmaps.sdk.routing.RouteDetails;
 import app.organicmaps.sdk.routing.RoutingController;
 import app.organicmaps.sdk.routing.RoutingInfo;
 import app.organicmaps.sdk.routing.RoutingOptions;
 import app.organicmaps.sdk.routing.TransitRouteInfo;
 import app.organicmaps.sdk.settings.RoadType;
+import app.organicmaps.sdk.util.log.Logger;
 import app.organicmaps.util.ThemeUtils;
 import app.organicmaps.util.UiUtils;
 import app.organicmaps.util.WindowInsetUtils.PaddingInsetsListener;
@@ -50,6 +51,7 @@ import java.util.Set;
 
 public class RoutingPlanController extends ToolbarController
 {
+  private static final String TAG = RoutingPlanController.class.getSimpleName();
   private static final String BUNDLE_HAS_DRIVING_OPTIONS_VIEW = "has_driving_options_view";
 
   private final View mFrame;
@@ -99,8 +101,6 @@ public class RoutingPlanController extends ToolbarController
   private final View mOptionsDropdown;
   @Nullable
   private Router mOptionsDropdownRouter;
-  /// The last route uses roads the options asked to avoid.
-  private boolean mOptionsWarning;
   @NonNull
   private Set<RoadType> mOptionsAtOpen = Collections.emptySet();
 
@@ -289,6 +289,35 @@ public class RoutingPlanController extends ToolbarController
     final boolean showStartButton = !RoutingController.get().isRulerRouterType();
     mRoutingBottomMenuController.setStartButton(showStartButton);
     mRoutingBottomMenuController.showAltitudeChartAndRoutingDetails();
+    requestRouteDetails();
+  }
+
+  /// What the route is made of, for the route details panel. For now only logged.
+  private void requestRouteDetails()
+  {
+    RouteDetails.request(details -> {
+      if (details.isEmpty())
+        return;
+      final StringBuilder sb = new StringBuilder("Route details: ").append(Math.round(details.totalM)).append(" m;");
+      for (RouteDetails.WayType type : RouteDetails.WayType.values())
+      {
+        final double m = details.getWayTypeMeters(type);
+        if (m > 0)
+          sb.append(' ').append(type).append('=').append(Math.round(m));
+      }
+      sb.append(';');
+      for (RouteDetails.Surface surface : RouteDetails.Surface.values())
+      {
+        final double m = details.getSurfaceMeters(surface);
+        if (m > 0)
+          sb.append(' ').append(surface).append('=').append(Math.round(m));
+      }
+      sb.append("; steep stretches: ").append(details.steepGrade.length).append("; stops:");
+      for (RouteDetails.Stop stop : details.stops)
+        sb.append(' ').append(stop.type).append('@').append(Math.round(stop.alongM)).append("m(")
+            .append(Math.round(stop.offsetM)).append("m off)");
+      Logger.i(TAG, sb.toString());
+    });
   }
 
   public void updateBuildProgress(int progress, @NonNull Router router)
@@ -430,7 +459,7 @@ public class RoutingPlanController extends ToolbarController
         names.add(context.getString(shortName(type)));
     }
     // Nothing avoided: a quiet link to the options instead of "Avoiding: nothing".
-    final boolean quiet = names.isEmpty() && !mOptionsWarning;
+    final boolean quiet = names.isEmpty();
     UiUtils.showIf(!quiet, mAvoidLabel);
     mAvoidRow.setMinimumHeight(quiet ? 0 : mAvoidRowMinHeight);
     mAvoidRow.setPadding(mAvoidRow.getPaddingStart(), quiet ? 0 : mAvoidRowPadding, mAvoidRow.getPaddingEnd(),
@@ -442,11 +471,8 @@ public class RoutingPlanController extends ToolbarController
       summary = String.join(", ", names);
     else
       summary = String.join(", ", names.subList(0, 2)) + " +" + (names.size() - 2);
-    mAvoidValue.setText(mOptionsWarning ? "⚠ " + summary : summary);
-    if (mOptionsWarning)
-      mAvoidValue.setTextColor(ContextCompat.getColor(context, R.color.base_red));
-    else
-      mAvoidValue.setTextColor(quiet ? mAvoidLabel.getTextColors() : mAvoidValueColors);
+    mAvoidValue.setText(summary);
+    mAvoidValue.setTextColor(quiet ? mAvoidLabel.getTextColors() : mAvoidValueColors);
   }
 
   @StringRes
@@ -514,17 +540,15 @@ public class RoutingPlanController extends ToolbarController
     return true;
   }
 
-  /// The route couldn't avoid everything asked: flag the summary, the options stay one tap away.
+  /// Called when route options are on: the summary already shows them.
   public void showRoutingOptionsView()
   {
-    mOptionsWarning = true;
     updateRouteOptionsSummary();
   }
 
   /// Called when a new route starts building.
   public void hideRoutingOptionsView()
   {
-    mOptionsWarning = false;
     updateRouteOptionsSummary();
     mRoutingPlanListener.onRoutingPlanStartAnimate(UiUtils.isVisible(getFrame()));
   }
