@@ -15,21 +15,6 @@
   android:orientation="vertical"
   tools:showIn="@layout/fragment_routing">
 
-  <!-- Drag up (or tap) to open the route details, drag down to close them. -->
-  <FrameLayout
-    android:id="@+id/route_details_handle"
-    android:layout_width="match_parent"
-    android:layout_height="20dp"
-    android:contentDescription="@string/route_details"
-    android:focusable="true"
-    android:visibility="gone">
-    <View
-      android:layout_width="36dp"
-      android:layout_height="4dp"
-      android:layout_gravity="center"
-      android:background="@drawable/bg_route_details_handle" />
-  </FrameLayout>
-
   <LinearLayout
     android:id="@+id/time_elevation_line"
     android:layout_width="match_parent"
@@ -76,12 +61,6 @@
         android:id="@+id/altitude_chart"
         android:layout_height="wrap_content"
         android:layout_width="match_parent" />
-      <!-- Replaces the grey chart once the route details are known. -->
-      <app.organicmaps.routing.RouteProfileView
-        android:id="@+id/route_profile_compact"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:visibility="gone" />
       <com.google.android.material.textview.MaterialTextView
         android:id="@+id/time_vehicle"
         android:layout_height="wrap_content"
@@ -104,8 +83,6 @@
       tools:showIn="@layout/menu_route_plan_line"
       android:layout_gravity="center_vertical" />
   </LinearLayout>
-
-  <include layout="@layout/route_details_panel" />
 
   <LinearLayout
     android:layout_width="match_parent"

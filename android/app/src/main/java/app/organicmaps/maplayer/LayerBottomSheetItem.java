@@ -57,16 +57,6 @@ public class LayerBottomSheetItem
         drawableResId = R.drawable.ic_layers_traffic;
         yield R.string.button_layer_traffic;
       }
-      case BUILDINGS_3D ->
-      {
-        drawableResId = R.drawable.ic_layers_3d;
-        yield R.string.pref_map_3d_buildings_title;
-      }
-      case NIGHT ->
-      {
-        drawableResId = R.drawable.ic_layers_night;
-        yield R.string.pref_map_style_title;
-      }
     };
     return new LayerBottomSheetItem(drawableResId, buttonTextResource, mode, layerItemClickListener);
   }

@@ -64,19 +64,4 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_alignParentEnd="true" />
-  <include
-    layout="@layout/map_buttons_mode_picker"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="@dimen/nav_frame_padding" />
-  <include
-    layout="@layout/map_mode_dropdown"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/map_mode_picker"
-    android:layout_centerHorizontal="true"
-    android:layout_marginHorizontal="@dimen/margin_base"
-    android:layout_marginTop="@dimen/margin_half" />
 </RelativeLayout>

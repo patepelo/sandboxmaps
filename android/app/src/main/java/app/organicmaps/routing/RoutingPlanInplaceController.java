@@ -2,7 +2,9 @@ package app.organicmaps.routing;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import app.organicmaps.MwmActivity;
@@ -17,10 +19,13 @@ public class RoutingPlanInplaceController extends RoutingPlanController
   @Nullable
   private Animator mAnimator;
 
-  public RoutingPlanInplaceController(@NonNull MwmActivity activity, @NonNull RoutingPlanListener routingPlanListener,
+  public RoutingPlanInplaceController(@NonNull MwmActivity activity,
+                                      ActivityResultLauncher<Intent> startDrivingOptionsForResult,
+                                      @NonNull RoutingPlanListener routingPlanListener,
                                       @NonNull RoutingBottomMenuListener listener)
   {
-    super(activity.findViewById(R.id.routing_plan_frame), activity, routingPlanListener, listener);
+    super(activity.findViewById(R.id.routing_plan_frame), activity, startDrivingOptionsForResult, routingPlanListener,
+          listener);
     mRoutingPlanListener = routingPlanListener;
   }
 

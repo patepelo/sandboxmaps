@@ -86,7 +86,6 @@ import app.organicmaps.routing.RoutingPlanInplaceController;
 import app.organicmaps.sdk.ChoosePositionMode;
 import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.Map;
-import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.MapController;
 import app.organicmaps.sdk.MapRenderingListener;
 import app.organicmaps.sdk.PlacePageActivationListener;
@@ -282,7 +281,6 @@ public class MwmActivity extends BaseMwmFragmentActivity
   public void onRenderingInitializationFinished()
   {
     ThemeSwitcher.INSTANCE.restart(true);
-    MapMode.initialize();
 
     Framework.nativeRestoreDownloadQueue();
 
@@ -586,8 +584,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
   private void refreshLightStatusBar()
   {
-    // The planning card floats over the map, so planning keeps the map's status bar.
-    UiUtils.setLightStatusBar(this, !(ThemeUtils.isNightTheme() || ChoosePositionMode.get() != ChoosePositionMode.None));
+    UiUtils.setLightStatusBar(this, !(ThemeUtils.isNightTheme() || RoutingController.get().isPlanning()
+                                      || ChoosePositionMode.get() != ChoosePositionMode.None));
   }
 
   private void updateViewsInsets()
@@ -628,7 +626,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
     if (!mIsTabletLayout)
     {
-      mRoutingPlanInplaceController = new RoutingPlanInplaceController(this, this, this);
+      mRoutingPlanInplaceController = new RoutingPlanInplaceController(this, startRoutingOptionsForResult, this, this);
       mRoutePreviewPanelController =
           new RoutePreviewPanelController(findViewById(R.id.map_container), mRoutePreviewController::exitPreview);
       removeCurrentFragment(false);
@@ -961,25 +959,6 @@ public class MwmActivity extends BaseMwmFragmentActivity
     MenuBottomSheetFragment.newInstance(id).show(getSupportFragmentManager(), id);
   }
 
-  /// @return true if the route details under the route summary were open.
-  private boolean collapseRouteDetails()
-  {
-    return mRoutingPlanInplaceController != null && mRoutingPlanInplaceController.collapseRouteDetails();
-  }
-
-  /// @return true if the route options under the planning card were open.
-  private boolean closeRouteOptions()
-  {
-    return mRoutingPlanInplaceController != null && mRoutingPlanInplaceController.closeRouteOptions();
-  }
-
-  /// @return true if the map mode's route options were open.
-  private boolean closeModeDropdown()
-  {
-    final Fragment buttons = getSupportFragmentManager().findFragmentById(R.id.map_buttons);
-    return buttons instanceof MapButtonsController controller && controller.closeModeDropdown();
-  }
-
   private void toggleMapLayerBottomSheet()
   {
     if (!closeBottomSheet(LAYERS_MENU_ID))
@@ -1078,7 +1057,6 @@ public class MwmActivity extends BaseMwmFragmentActivity
   public void closeFloatingPanels()
   {
     closeBottomSheet(LAYERS_MENU_ID);
-    closeModeDropdown();
     closeBottomSheet(MAIN_MENU_ID);
     closePlacePage();
   }
@@ -1329,8 +1307,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
   public void onBackPressed()
   {
     final RoutingController routingController = RoutingController.get();
-    if (!closeBottomSheet(MAIN_MENU_ID) && !closeBottomSheet(LAYERS_MENU_ID)
-        && !closeModeDropdown() && !closeRouteOptions() && !collapseRouteDetails() && !collapseNavMenu() && !closePlacePage()
+    if (!closeBottomSheet(MAIN_MENU_ID) && !closeBottomSheet(LAYERS_MENU_ID) && !collapseNavMenu() && !closePlacePage()
         && !closeSearchToolbar(true, true) && !closeSidePanel() && !closePositionChooser()
         && !exitRoutePreviewIfPreviewing()
         && !routingController.resetToPlanningStateIfNavigating() && !routingController.cancel())

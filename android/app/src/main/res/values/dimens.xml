@@ -88,6 +88,7 @@
 
   <!-- routing layout -->
   <dimen name="routing_selector_wheel_size">40dp</dimen>
+  <dimen name="routing_selector_wheel_margin">4dp</dimen>
   <dimen name="routing_transit_step_corner_radius">4dp</dimen>
   <dimen name="routing_transit_step_min_height">20dp</dimen>
   <dimen name="routing_transit_setp_min_acceptable_with">104dp</dimen>
@@ -185,9 +186,4 @@
 
   <dimen name="routing_toolbar_button">40dp</dimen>
   <dimen name="bookmark_category_margin_start">56dp</dimen>
-  <dimen name="map_mode_button_size">52dp</dimen>
-  <dimen name="map_mode_icon_size">42dp</dimen>
-  <dimen name="map_mode_dropdown_max_width">400dp</dimen>
-  <dimen name="map_mode_picker_radius">30dp</dimen>
-  <dimen name="routing_pill_gap">2dp</dimen>
 </resources>

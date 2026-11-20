@@ -39,11 +39,6 @@ android {
                     "-DUSE_PCH=${project.getPropertyValueForCMake("enablePCH")}",
                     "-DENABLE_TRACE=${project.getPropertyValueForCMake("enableTrace")}",
                     "-DENABLE_VULKAN_DIAGNOSTICS=${project.getPropertyValueForCMake("enableVulkanDiagnostics")}",
-                    // The NDK's default (legacy) toolchain file doesn't tell CMake the NDK version, so for LTO builds
-                    // CMake assumes NDK < 22 and adds -fuse-ld=gold. NDK 28 has no gold linker, which breaks
-                    // Beta/Release builds on hosts without a system gold (e.g. macOS). Pass the real version so the
-                    // NDK's own linker (LLD) is used.
-                    "-DCMAKE_ANDROID_NDK_VERSION=${ndkVersion.substringBeforeLast('.')}",
                 )
                 targets += "organicmaps"
             }

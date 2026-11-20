@@ -56,7 +56,6 @@
 
 #include "base/exception.hpp"
 #include "base/logging.hpp"
-#include "base/timer.hpp"
 #include "base/math.hpp"
 #include "base/scope_guard.hpp"
 #include "base/stl_helpers.hpp"
@@ -1465,35 +1464,6 @@ void RoutingManager::SetDrapeEngine(ref_ptr<df::DrapeEngine> engine, bool is3dAl
 bool RoutingManager::HasRouteAltitude() const
 {
   return m_loadAltitudes && m_routingSession.HasRouteAltitude();
-}
-
-void RoutingManager::RequestRouteDetails(RouteDetailsCallback && callback) const
-{
-  route_details::RouteInput input;
-  auto const addPoint = [&input](routing::RouteSegment const & s)
-  {
-    input.m_points.push_back(
-        {s.GetRoadNameInfo().m_mwmId, s.GetJunction().GetPoint(), s.GetDistFromBeginningMeters()});
-  };
-  if (!m_routingSession.ForEachRouteSegment(addPoint, input.m_start))
-  {
-    callback({});
-    return;
-  }
-  m_routingSession.GetRouteAltitudesAndDistancesM(input.m_distancesM, input.m_altitudesM);
-  input.m_bicycle = GetRouter() == RouterType::Bicycle;
-
-  DataSource const & dataSource = m_callbacks.m_dataSourceGetter();
-  GetPlatform().RunTask(Platform::Thread::Background,
-                        [&dataSource, input = std::move(input), callback = std::move(callback)]() mutable
-  {
-    base::Timer const timer;
-    auto details = route_details::Compute(dataSource, input);
-    LOG(LINFO, ("Route details:", input.m_points.size(), "points,", details.m_stops.size(), "stops,",
-                timer.ElapsedMilliseconds(), "ms"));
-    GetPlatform().RunTask(Platform::Thread::Gui, [details = std::move(details), callback = std::move(callback)]()
-    { callback(details); });
-  });
 }
 
 bool RoutingManager::GetRouteAltitudesAndDistancesM(DistanceAltitude & da) const

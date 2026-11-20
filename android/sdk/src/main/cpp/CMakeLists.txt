@@ -34,7 +34,6 @@ set(SRC
   app/organicmaps/sdk/routing/JunctionInfo.hpp
   app/organicmaps/sdk/routing/LaneInfo.cpp
   app/organicmaps/sdk/routing/LaneInfo.hpp
-  app/organicmaps/sdk/routing/RouteDetails.cpp
   app/organicmaps/sdk/routing/RouteMarkData.hpp
   app/organicmaps/sdk/routing/RouteMarkType.hpp
   app/organicmaps/sdk/routing/RoutePointInfo.hpp

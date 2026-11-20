@@ -927,18 +927,6 @@ bool RoutingSession::GetRouteJunctionPoints(std::vector<geometry::PointWithAltit
   return true;
 }
 
-bool RoutingSession::ForEachRouteSegment(std::function<void(RouteSegment const &)> const & fn,
-                                         m2::PointD & start) const
-{
-  CHECK_THREAD_CHECKER(m_threadChecker, ());
-  if (!m_route || !m_route->IsValid() || m_route->GetRouteSegments().empty())
-    return false;
-  for (auto const & s : m_route->GetRouteSegments())
-    fn(s);
-  start = m_route->GetPoly().Front();
-  return true;
-}
-
 bool RoutingSession::GetRouteAltitudesAndDistancesM(std::vector<double> & routeSegDistanceM,
                                                     geometry::Altitudes & routeAltitudesM) const
 {
