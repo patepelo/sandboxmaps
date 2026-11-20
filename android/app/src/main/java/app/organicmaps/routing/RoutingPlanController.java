@@ -25,14 +25,13 @@ import app.organicmaps.maplayer.MapModeUi;
 import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.Router;
-import app.organicmaps.sdk.bookmarks.data.MapObject;
+import app.organicmaps.sdk.routing.RouteMarkData;
 import app.organicmaps.sdk.routing.RouteDetails;
 import app.organicmaps.sdk.routing.RoutingController;
 import app.organicmaps.sdk.routing.RoutingInfo;
 import app.organicmaps.sdk.routing.RoutingOptions;
 import app.organicmaps.sdk.routing.TransitRouteInfo;
 import app.organicmaps.sdk.settings.RoadType;
-import app.organicmaps.sdk.util.log.Logger;
 import app.organicmaps.util.ThemeUtils;
 import app.organicmaps.util.UiUtils;
 import app.organicmaps.util.WindowInsetUtils.PaddingInsetsListener;
@@ -46,7 +45,6 @@ import java.util.Set;
 
 public class RoutingPlanController extends ToolbarController
 {
-  private static final String TAG = RoutingPlanController.class.getSimpleName();
 
   private final View mFrame;
   @NonNull
@@ -75,6 +73,10 @@ public class RoutingPlanController extends ToolbarController
   @NonNull
   private final TextView mRouteTo;
   @NonNull
+  private final TextView mRouteVia;
+  @NonNull
+  private final View mRouteViaRow;
+  @NonNull
   private final View mAvoidRow;
   @NonNull
   private final TextView mAvoidValue;
@@ -90,8 +92,9 @@ public class RoutingPlanController extends ToolbarController
   private final View mOptionsDropdown;
   @Nullable
   private Router mOptionsDropdownRouter;
-  /// Route details are worked out once per built route.
+  /// Route details are worked out once per built route; only the answer to the latest request is shown.
   private boolean mRouteDetailsRequested;
+  private int mRouteDetailsRequest;
   @NonNull
   private Set<RoadType> mOptionsAtOpen = Collections.emptySet();
 
@@ -145,9 +148,17 @@ public class RoutingPlanController extends ToolbarController
     //    mProgressTaxi = (WheelProgressView) progressFrame.findViewById(R.id.progress_taxi);
 
     mRoutingBottomMenuController = RoutingBottomMenuController.newInstance(requireActivity(), mFrame, listener);
+    // While the route details are open, the planning card steps aside so the route can be seen on the map.
+    mRoutingBottomMenuController.setOnRouteDetailsExpanded(expanded -> {
+      closeRouteOptions();
+      UiUtils.showIf(!expanded, getToolbar());
+      getFrame().post(() -> mRoutingPlanListener.onRoutingPlanStartAnimate(UiUtils.isVisible(getFrame())));
+    });
 
     mRouteFrom = mFrame.findViewById(R.id.route_from);
     mRouteTo = mFrame.findViewById(R.id.route_to);
+    mRouteVia = mFrame.findViewById(R.id.route_via);
+    mRouteViaRow = mFrame.findViewById(R.id.route_via_row);
     mAvoidRow = mFrame.findViewById(R.id.route_avoid_row);
     mAvoidValue = mFrame.findViewById(R.id.route_avoid_value);
     mAvoidLabel = mFrame.findViewById(R.id.route_avoid_label);
@@ -277,34 +288,27 @@ public class RoutingPlanController extends ToolbarController
     requestRouteDetails();
   }
 
-  /// What the route is made of, for the route details panel. For now only logged.
+  /// What the route is made of, shown under the summary for walking and cycling routes.
   private void requestRouteDetails()
   {
-    if (mRouteDetailsRequested)
+    // Only while planning: the panel isn't shown while navigating, so reroutes don't need the details.
+    // Not marked as requested then, so they come back when navigation returns to planning.
+    if (mRouteDetailsRequested || !RoutingController.get().isPlanning())
       return;
     mRouteDetailsRequested = true;
+    final Router router = RoutingController.get().getLastRouterType();
+    if (router != Router.Pedestrian && router != Router.Bicycle)
+    {
+      mRoutingBottomMenuController.hideRouteDetails();
+      return;
+    }
+    final int request = ++mRouteDetailsRequest;
     RouteDetails.request(details -> {
-      if (details.isEmpty())
+      // The route may have changed while the details were worked out.
+      if (request != mRouteDetailsRequest
+          || RoutingController.get().getBuildState() != RoutingController.BuildState.BUILT)
         return;
-      final StringBuilder sb = new StringBuilder("Route details: ").append(Math.round(details.totalM)).append(" m;");
-      for (RouteDetails.WayType type : RouteDetails.WayType.values())
-      {
-        final double m = details.getWayTypeMeters(type);
-        if (m > 0)
-          sb.append(' ').append(type).append('=').append(Math.round(m));
-      }
-      sb.append(';');
-      for (RouteDetails.Surface surface : RouteDetails.Surface.values())
-      {
-        final double m = details.getSurfaceMeters(surface);
-        if (m > 0)
-          sb.append(' ').append(surface).append('=').append(Math.round(m));
-      }
-      sb.append("; steep stretches: ").append(details.steepGrade.length).append("; stops:");
-      for (RouteDetails.Stop stop : details.stops)
-        sb.append(' ').append(stop.type).append('@').append(Math.round(stop.alongM)).append("m(")
-            .append(Math.round(stop.offsetM)).append("m off)");
-      Logger.i(TAG, sb.toString());
+      mRoutingBottomMenuController.showRouteDetails(details, router == Router.Bicycle);
     });
   }
 
@@ -409,20 +413,33 @@ public class RoutingPlanController extends ToolbarController
     mRoutingBottomMenuController.showAddFinishFrame();
   }
 
+  /// From, the stops added in between, and to.
   private void updatePoints()
   {
-    mRouteFrom.setText(pointName(RoutingController.get().getStartPoint()));
-    mRouteTo.setText(pointName(RoutingController.get().getEndPoint()));
+    String from = "…", to = "…";
+    final List<String> via = new ArrayList<>();
+    for (RouteMarkData point : Framework.nativeGetRoutePoints())
+    {
+      final String name = pointName(point);
+      switch (point.mPointType)
+      {
+      case Start -> from = name;
+      case Intermediate -> via.add(name);
+      case Finish -> to = name;
+      }
+    }
+    mRouteFrom.setText(from);
+    mRouteVia.setText(String.join(" · ", via));
+    UiUtils.showIf(!via.isEmpty(), mRouteViaRow);
+    mRouteTo.setText(to);
   }
 
   @NonNull
-  private String pointName(@Nullable MapObject point)
+  private String pointName(@NonNull RouteMarkData point)
   {
-    if (point == null)
-      return "…";
-    if (point.isMyPosition() || point.getTitle().isEmpty())
+    if (point.mIsMyPosition || point.mTitle == null || point.mTitle.isEmpty())
       return mFrame.getContext().getString(app.organicmaps.sdk.R.string.core_my_position);
-    return point.getTitle();
+    return point.mTitle;
   }
 
   /// "Avoiding: Unpaved, Stairs +1" on one line, whatever the number of options.
@@ -503,6 +520,12 @@ public class RoutingPlanController extends ToolbarController
     else
       updateRouteOptionsSummary();
     return true;
+  }
+
+  /// @return true if the route details were open.
+  public boolean collapseRouteDetails()
+  {
+    return mRoutingBottomMenuController.collapseRouteDetails();
   }
 
   @NonNull

@@ -84,6 +84,11 @@ public final class RouteDetails
   }
 
   public final double totalM;
+  /// Elevation profile: distance from the start and altitude of each route point. Empty without altitudes.
+  @NonNull
+  public final double[] profileDistM;
+  @NonNull
+  public final int[] profileAltM;
   @NonNull
   public final double[] stretchStartM;
   @NonNull
@@ -105,11 +110,13 @@ public final class RouteDetails
   public final Stop[] stops;
 
   // Used by JNI.
-  RouteDetails(double totalM, @NonNull double[] stretchStartM, @NonNull double[] stretchEndM, @NonNull int[] stretchWay,
+  RouteDetails(double totalM, @NonNull double[] profileDistM, @NonNull int[] profileAltM, @NonNull double[] stretchStartM, @NonNull double[] stretchEndM, @NonNull int[] stretchWay,
                @NonNull int[] stretchSurface, @NonNull int[] stretchWalkBike, @NonNull double[] steepStartM,
                @NonNull double[] steepEndM, @NonNull double[] steepGrade, @NonNull Stop[] stops)
   {
     this.totalM = totalM;
+    this.profileDistM = profileDistM;
+    this.profileAltM = profileAltM;
     this.stretchStartM = stretchStartM;
     this.stretchEndM = stretchEndM;
     mStretchWay = stretchWay;

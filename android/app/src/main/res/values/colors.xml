@@ -170,6 +170,7 @@
 
   <!-- From and to in the planning card -->
   <color name="route_point_from">#1E88E5</color>
+  <color name="route_point_via">#8E959B</color>
   <color name="route_point_to">#E53935</color>
 
   <!-- Map modes, as on iOS -->
@@ -177,5 +178,29 @@
   <color name="mode_cycling">#685CAD</color>
   <color name="mode_driving">#E28C12</color>
   <color name="mode_public_transport">#25507A</color>
+
+  <!-- Route details: steepness bands -->
+  <color name="route_grade_flat">#9CCF8F</color>
+  <color name="route_grade_moderate">#E9C24E</color>
+  <color name="route_grade_steep">#D9473B</color>
+  <!-- Route details: way types (same order as RouteDetails.WayType) -->
+  <color name="route_way_quiet">#8BC34A</color>
+  <color name="route_way_minor">#D6C84A</color>
+  <color name="route_way_main">#F2A531</color>
+  <color name="route_way_busy">#E5533D</color>
+  <color name="route_way_cycleway">#2E9E5B</color>
+  <color name="route_way_track">#A5763B</color>
+  <color name="route_way_path">#7A6A52</color>
+  <color name="route_way_footway">#8E959B</color>
+  <color name="route_way_steps">#7E57C2</color>
+  <color name="route_way_ferry">#2F9FBF</color>
+  <color name="route_way_other">#B0B4B8</color>
+  <!-- Route details: surfaces (same order as RouteDetails.Surface) -->
+  <color name="route_surface_paved">#3F7FBF</color>
+  <color name="route_surface_paved_bad">#86B4E0</color>
+  <color name="route_surface_unpaved">#C49A5B</color>
+  <color name="route_surface_unpaved_bad">#87582C</color>
+  <color name="route_surface_unknown">#B9B9B9</color>
+  <color name="route_details_handle">#4D000000</color>
 </resources>
 

@@ -70,4 +70,5 @@
   <color name="mode_cycling">#535399</color>
   <color name="mode_driving">#B47A2E</color>
   <color name="mode_public_transport">#3B6A99</color>
+  <color name="route_details_handle">#4DFFFFFF</color>
 </resources>

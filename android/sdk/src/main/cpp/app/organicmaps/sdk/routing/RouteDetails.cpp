@@ -48,11 +48,14 @@ jobject ToJava(JNIEnv * env, route_details::RouteDetails const & d)
   });
 
   static jclass const detailsClass = jni::GetGlobalClassRef(env, "app/organicmaps/sdk/routing/RouteDetails");
-  // RouteDetails(double totalM, double[] stretchStartM, double[] stretchEndM, int[] stretchWay, int[] stretchSurface,
-  //              int[] stretchWalkBike, double[] steepStartM, double[] steepEndM, double[] steepGrade, Stop[] stops)
+  // RouteDetails(double totalM, double[] profileDistM, int[] profileAltM, double[] stretchStartM, double[] stretchEndM,
+  //              int[] stretchWay, int[] stretchSurface, int[] stretchWalkBike, double[] steepStartM, double[] steepEndM,
+  //              double[] steepGrade, Stop[] stops)
   static jmethodID const detailsCtor = jni::GetConstructorID(
-      env, detailsClass, "(D[D[D[I[I[I[D[D[D[Lapp/organicmaps/sdk/routing/RouteDetails$Stop;)V");
+      env, detailsClass, "(D[D[I[D[D[I[I[I[D[D[D[Lapp/organicmaps/sdk/routing/RouteDetails$Stop;)V");
 
+  jni::TScopedLocalRef profileDist(env, ToDoubles(env, d.m_profileDistM, [](double m) { return m; }));
+  jni::TScopedLocalRef profileAlt(env, ToInts(env, d.m_profileAltM, [](geometry::Altitude a) { return static_cast<jint>(a); }));
   auto const & st = d.m_stretches;
   jni::TScopedLocalRef stretchStart(env, ToDoubles(env, st, [](Stretch const & s) { return s.m_startM; }));
   jni::TScopedLocalRef stretchEnd(env, ToDoubles(env, st, [](Stretch const & s) { return s.m_endM; }));
@@ -65,7 +68,7 @@ jobject ToJava(JNIEnv * env, route_details::RouteDetails const & d)
   jni::TScopedLocalRef steepGrade(env, ToDoubles(env, d.m_steep, [](SteepStretch const & s) { return s.m_maxGrade; }));
   jni::TScopedLocalRef stopsRef(env, stops);
 
-  return env->NewObject(detailsClass, detailsCtor, d.m_totalM, stretchStart.get(), stretchEnd.get(), stretchWay.get(),
+  return env->NewObject(detailsClass, detailsCtor, d.m_totalM, profileDist.get(), profileAlt.get(), stretchStart.get(), stretchEnd.get(), stretchWay.get(),
                         stretchSurface.get(), stretchWalkBike.get(), steepStart.get(), steepEnd.get(), steepGrade.get(),
                         stopsRef.get());
 }

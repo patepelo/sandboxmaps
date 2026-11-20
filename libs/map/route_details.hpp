@@ -86,6 +86,9 @@ struct Stop
 struct RouteDetails
 {
   double m_totalM = 0;
+  /// Elevation profile: distance from the start and altitude of each route point. Empty without altitudes.
+  std::vector<double> m_profileDistM;
+  geometry::Altitudes m_profileAltM;
   std::vector<Stretch> m_stretches;
   std::vector<SteepStretch> m_steep;
   std::vector<Stop> m_stops;

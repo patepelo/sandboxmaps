@@ -22,8 +22,10 @@ namespace route_details
 {
 namespace
 {
-/// Steepness is measured over this distance, so single noisy altitudes don't count.
-double constexpr kGradeWindowM = 50.0;
+/// Steepness is measured over this distance, so noisy altitudes and short bumps don't count.
+double constexpr kGradeWindowM = 100.0;
+/// Steep stretches closer than this, in the same direction, count as one.
+double constexpr kSteepMergeGapM = 150.0;
 /// The route is searched for stops in pieces of about this length, so the search boxes hug the route.
 double constexpr kStopChunkM = 250.0;
 size_t constexpr kMaxStops = 1000;
@@ -228,7 +230,8 @@ void CollectSteep(RouteInput const & input, RouteDetails & out)
     if (grade[k] == 0)
       continue;
     bool const up = grade[k] > 0;
-    if (!out.m_steep.empty() && out.m_steep.back().m_endM == d[k] && (out.m_steep.back().m_maxGrade > 0) == up)
+    if (!out.m_steep.empty() && d[k] - out.m_steep.back().m_endM < kSteepMergeGapM &&
+        (out.m_steep.back().m_maxGrade > 0) == up)
     {
       auto & last = out.m_steep.back();
       last.m_endM = d[k + 1];
@@ -325,6 +328,11 @@ RouteDetails Compute(DataSource const & dataSource, RouteInput const & input)
   if (input.m_points.empty())
     return out;
   out.m_totalM = input.m_points.back().m_distM;
+  if (input.m_distancesM.size() == input.m_altitudesM.size())
+  {
+    out.m_profileDistM = input.m_distancesM;
+    out.m_profileAltM = input.m_altitudesM;
+  }
 
   FeatureReader reader(dataSource);
   CollectStretches(reader, input, out);

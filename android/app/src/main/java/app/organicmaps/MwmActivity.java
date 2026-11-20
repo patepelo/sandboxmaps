@@ -961,6 +961,12 @@ public class MwmActivity extends BaseMwmFragmentActivity
     MenuBottomSheetFragment.newInstance(id).show(getSupportFragmentManager(), id);
   }
 
+  /// @return true if the route details under the route summary were open.
+  private boolean collapseRouteDetails()
+  {
+    return mRoutingPlanInplaceController != null && mRoutingPlanInplaceController.collapseRouteDetails();
+  }
+
   /// @return true if the route options under the planning card were open.
   private boolean closeRouteOptions()
   {
@@ -1324,7 +1330,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
   {
     final RoutingController routingController = RoutingController.get();
     if (!closeBottomSheet(MAIN_MENU_ID) && !closeBottomSheet(LAYERS_MENU_ID)
-        && !closeModeDropdown() && !closeRouteOptions() && !collapseNavMenu() && !closePlacePage()
+        && !closeModeDropdown() && !closeRouteOptions() && !collapseRouteDetails() && !collapseNavMenu() && !closePlacePage()
         && !closeSearchToolbar(true, true) && !closeSidePanel() && !closePositionChooser()
         && !exitRoutePreviewIfPreviewing()
         && !routingController.resetToPlanningStateIfNavigating() && !routingController.cancel())

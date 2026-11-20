@@ -56,6 +56,7 @@
 
 #include "base/exception.hpp"
 #include "base/logging.hpp"
+#include "base/timer.hpp"
 #include "base/math.hpp"
 #include "base/scope_guard.hpp"
 #include "base/stl_helpers.hpp"
@@ -1486,7 +1487,10 @@ void RoutingManager::RequestRouteDetails(RouteDetailsCallback && callback) const
   GetPlatform().RunTask(Platform::Thread::Background,
                         [&dataSource, input = std::move(input), callback = std::move(callback)]() mutable
   {
+    base::Timer const timer;
     auto details = route_details::Compute(dataSource, input);
+    LOG(LINFO, ("Route details:", input.m_points.size(), "points,", details.m_stops.size(), "stops,",
+                timer.ElapsedMilliseconds(), "ms"));
     GetPlatform().RunTask(Platform::Thread::Gui, [details = std::move(details), callback = std::move(callback)]()
     { callback(details); });
   });
