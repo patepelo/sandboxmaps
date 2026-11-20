@@ -409,12 +409,12 @@ public class RoutingController
 
     mLastRouterType = routerType;
     Router.set(mLastRouterType);
-    MapMode.followRouter(mLastRouterType);
 
     if (startPoint != null || endPoint != null)
       setPointsInternal(startPoint, endPoint);
 
     startPlanning(startPoint, endPoint);
+    MapMode.followRouter(mLastRouterType);
   }
 
   public void start()
@@ -888,12 +888,13 @@ public class RoutingController
 
     mLastRouterType = router;
     Router.set(router);
-    MapMode.followRouter(router);
 
     cancelRemovingIntermediatePointsTransaction();
 
     if (getStartPoint() != null && getEndPoint() != null)
       build();
+    // After build(): the new map style redraws the current route, so it must already be removed.
+    MapMode.followRouter(router);
   }
 
   public Router getLastRouterType()

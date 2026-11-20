@@ -8,23 +8,40 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import app.organicmaps.R;
 import app.organicmaps.sdk.Framework;
 import app.organicmaps.sdk.MapMode;
 import app.organicmaps.sdk.maplayer.isolines.IsolinesManager;
+import app.organicmaps.settings.CyclingOptionsFragment;
+import app.organicmaps.settings.DrivingOptionsFragment;
+import app.organicmaps.settings.WalkingOptionsFragment;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
 /// How each map mode looks in the picker and its options sheet.
-final class MapModeUi
+public final class MapModeUi
 {
-  static final MapMode[] MODES = {MapMode.Walking, MapMode.Cycling, MapMode.Driving, MapMode.PublicTransport};
+  public static final MapMode[] MODES = {MapMode.Walking, MapMode.Cycling, MapMode.Driving, MapMode.PublicTransport};
 
   private MapModeUi() {}
 
+  /// The route option screen of the route settings for this mode, or null if the mode has none.
+  @Nullable
+  public static Fragment newRouteOptionsFragment(@NonNull MapMode mode)
+  {
+    return switch (mode)
+    {
+      case Walking -> new WalkingOptionsFragment();
+      case Cycling -> new CyclingOptionsFragment();
+      case Driving -> new DrivingOptionsFragment();
+      default -> null;
+    };
+  }
+
   /// Switches the mode and, when that changes the layers the mode remembers, says which ones.
-  static void switchTo(@NonNull MapMode mode, @NonNull View view, @Nullable View anchor)
+  public static void switchTo(@NonNull MapMode mode, @NonNull View view, @Nullable View anchor)
   {
     final boolean outdoor = Framework.nativeIsOutdoorsLayerEnabled();
     final boolean contourLines = IsolinesManager.isEnabled();
@@ -54,7 +71,7 @@ final class MapModeUi
   }
 
   @StringRes
-  static int name(@NonNull MapMode mode)
+  public static int name(@NonNull MapMode mode)
   {
     return switch (mode)
     {
@@ -66,7 +83,7 @@ final class MapModeUi
   }
 
   @DrawableRes
-  static int icon(@NonNull MapMode mode)
+  public static int icon(@NonNull MapMode mode)
   {
     return switch (mode)
     {
@@ -78,7 +95,7 @@ final class MapModeUi
   }
 
   @ColorInt
-  static int color(@NonNull Context context, @NonNull MapMode mode)
+  public static int color(@NonNull Context context, @NonNull MapMode mode)
   {
     return ContextCompat.getColor(context, switch (mode)
     {

@@ -27,8 +27,8 @@
       android:clickable="true">
       <ImageView
         android:id="@+id/mode_walking_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/map_mode_icon_size"
+        android:layout_height="@dimen/map_mode_icon_size"
         android:layout_gravity="center"
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_pedestrian" />
@@ -55,8 +55,8 @@
       android:clickable="true">
       <ImageView
         android:id="@+id/mode_cycling_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/map_mode_icon_size"
+        android:layout_height="@dimen/map_mode_icon_size"
         android:layout_gravity="center"
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_bike" />
@@ -83,8 +83,8 @@
       android:clickable="true">
       <ImageView
         android:id="@+id/mode_driving_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/map_mode_icon_size"
+        android:layout_height="@dimen/map_mode_icon_size"
         android:layout_gravity="center"
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_car" />
@@ -111,8 +111,8 @@
       android:clickable="true">
       <ImageView
         android:id="@+id/mode_public_transport_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/map_mode_icon_size"
+        android:layout_height="@dimen/map_mode_icon_size"
         android:layout_gravity="center"
         android:importantForAccessibility="no"
         app:srcCompat="@drawable/ic_route_planning_metro_40px" />

@@ -121,6 +121,11 @@
     <item name="wheelThickness">@dimen/margin_eighth</item>
   </style>
   
+  <style name="MwmWidget.ProgressWheel.RoutingPill" parent="MwmWidget.ProgressWheel.RoutingPlan">
+    <item name="android:background">@null</item>
+    <item name="wheelProgressColor">@android:color/white</item>
+  </style>
+
   <style name="MwmWidget.Floating">
     <item name="android:elevation">@dimen/appbar_elevation</item>
   </style>
@@ -375,17 +380,5 @@
     <item name="cornerSizeBottomRight">50%</item>
     <item name="cornerSizeTopLeft">10%</item>
     <item name="cornerSizeTopRight">50%</item>
-  </style>
-
-  <style name="MapModeSectionTitle">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:paddingStart">@dimen/margin_base</item>
-    <item name="android:paddingEnd">@dimen/margin_base</item>
-    <item name="android:paddingTop">@dimen/margin_base</item>
-    <item name="android:paddingBottom">@dimen/margin_quarter</item>
-    <item name="android:textAppearance">@style/MwmTextAppearance.Body4</item>
-    <item name="android:textColor">?colorAccent</item>
-    <item name="android:textAllCaps">true</item>
   </style>
 </resources>

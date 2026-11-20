@@ -186,6 +186,9 @@
 
   <dimen name="routing_toolbar_button">40dp</dimen>
   <dimen name="bookmark_category_margin_start">56dp</dimen>
-  <dimen name="map_mode_button_size">46dp</dimen>
-  <dimen name="map_mode_picker_radius">27dp</dimen>
+  <dimen name="map_mode_button_size">52dp</dimen>
+  <dimen name="map_mode_icon_size">42dp</dimen>
+  <dimen name="map_mode_dropdown_max_width">400dp</dimen>
+  <dimen name="map_mode_picker_radius">30dp</dimen>
+  <dimen name="routing_pill_gap">2dp</dimen>
 </resources>

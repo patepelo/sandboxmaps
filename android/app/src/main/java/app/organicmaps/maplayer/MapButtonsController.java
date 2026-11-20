@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import app.organicmaps.MwmActivity;
@@ -77,6 +79,8 @@ public class MapButtonsController extends Fragment
   FloatingActionButton mTrackRecordingStatusButton;
   @Nullable
   private View mModePicker;
+  @Nullable
+  private View mModeDropdown;
 
   @Nullable
   private MyPositionButton mNavMyPosition;
@@ -163,6 +167,7 @@ public class MapButtonsController extends Fragment
       mToggleMapLayerButton.setVisibility(View.VISIBLE);
     }
     mModePicker = mFrame.findViewById(R.id.map_mode_picker);
+    mModeDropdown = mFrame.findViewById(R.id.map_mode_dropdown);
     if (mModePicker != null)
       initModePicker();
     mMapButtonsViewModel.setTopButtonsMarginTop(-1);
@@ -209,16 +214,71 @@ public class MapButtonsController extends Fragment
     {
       mFrame.findViewById(modeButtonId(mode)).setOnClickListener(v -> {
         if (mode == MapMode.getChosen())
-          mMapButtonClickListener.onMapButtonClick(MapButtons.mapMode);
-        else
         {
-          MapModeUi.switchTo(mode, mFrame, mModePicker);
-          updateModePicker();
-          updateLayerButton();
+          if (!closeModeDropdown())
+            openModeDropdown();
+          return;
         }
+        MapModeUi.switchTo(mode, mFrame, mModePicker);
+        updateModePicker();
+        updateLayerButton();
+        if (isModeDropdownOpen())
+          openModeDropdown();
       });
     }
     updateModePicker();
+  }
+
+  private boolean isModeDropdownOpen()
+  {
+    return mModeDropdown != null && UiUtils.isVisible(mModeDropdown);
+  }
+
+  /// Shows the route options of the current map mode under the pill: the same screens as the route settings.
+  private void openModeDropdown()
+  {
+    if (mModeDropdown == null)
+      return;
+    final Context context = mModeDropdown.getContext();
+    final MapMode mode = MapMode.getChosen();
+
+    final TextView title = mModeDropdown.findViewById(R.id.map_mode_dropdown_title);
+    title.setText(getString(R.string.map_mode_route_options_title, getString(MapModeUi.name(mode))));
+    final int size = getResources().getDimensionPixelSize(R.dimen.margin_half_plus);
+    final GradientDrawable dot = new GradientDrawable();
+    dot.setShape(GradientDrawable.OVAL);
+    dot.setColor(MapModeUi.color(context, mode));
+    dot.setSize(size, size);
+    title.setCompoundDrawablesRelativeWithIntrinsicBounds(dot, null, null, null);
+
+    final Fragment options = MapModeUi.newRouteOptionsFragment(mode);
+    UiUtils.showIf(options == null, mModeDropdown.findViewById(R.id.map_mode_dropdown_empty));
+    final FragmentManager fm = getChildFragmentManager();
+    final Fragment current = fm.findFragmentById(R.id.map_mode_dropdown_options);
+    if (options != null)
+      fm.beginTransaction().replace(R.id.map_mode_dropdown_options, options).commitNow();
+    else if (current != null)
+      fm.beginTransaction().remove(current).commitNow();
+
+    // Not wider than a phone on big screens.
+    final ViewGroup.LayoutParams lp = mModeDropdown.getLayoutParams();
+    final int maxWidth = getResources().getDimensionPixelSize(R.dimen.map_mode_dropdown_max_width);
+    lp.width = mFrame.getWidth() > maxWidth ? maxWidth : ViewGroup.LayoutParams.MATCH_PARENT;
+    mModeDropdown.setLayoutParams(lp);
+    UiUtils.show(mModeDropdown);
+  }
+
+  /// @return true if the route options were open.
+  public boolean closeModeDropdown()
+  {
+    if (!isModeDropdownOpen())
+      return false;
+    UiUtils.hide(mModeDropdown);
+    final FragmentManager fm = getChildFragmentManager();
+    final Fragment current = fm.findFragmentById(R.id.map_mode_dropdown_options);
+    if (current != null)
+      fm.beginTransaction().remove(current).commitNow();
+    return true;
   }
 
   /// Highlights the current map mode in the picker.
@@ -353,7 +413,11 @@ public class MapButtonsController extends Fragment
       if (mNavMyPosition != null)
         mNavMyPosition.showButton(show);
       break;
-    case mapMode: UiUtils.showIf(show && !isInNavigationMode(), buttonView); break;
+    case mapMode:
+      UiUtils.showIf(show && !isInNavigationMode(), buttonView);
+      if (!show)
+        closeModeDropdown();
+      break;
     case search: mSearchWheel.show(show);
     case bookmarks:
     case menu: UiUtils.showIf(show, buttonView); break;
