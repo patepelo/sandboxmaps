@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Map mode picker: tap a mode to switch the map style and the router; tap the selected one for its options. -->
+<!-- Map mode picker: tap a mode to switch the map style and the router; tap the selected one for its route options.
+     One map_mode_button per mode is added in code (MapButtonsController). -->
 <com.google.android.material.card.MaterialCardView
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,112 +14,8 @@
   app:contentPadding="4dp"
   app:strokeWidth="0dp">
   <LinearLayout
+    android:id="@+id/map_mode_buttons"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <FrameLayout
-      android:id="@+id/mode_walking"
-      android:layout_width="@dimen/map_mode_button_size"
-      android:layout_height="@dimen/map_mode_button_size"
-      android:background="@drawable/bg_map_mode_selected"
-      android:contentDescription="@string/mode_walking"
-      android:foreground="?selectableItemBackgroundBorderless"
-      android:focusable="true"
-      android:clickable="true">
-      <ImageView
-        android:id="@+id/mode_walking_icon"
-        android:layout_width="@dimen/map_mode_icon_size"
-        android:layout_height="@dimen/map_mode_icon_size"
-        android:layout_gravity="center"
-        android:importantForAccessibility="no"
-        app:srcCompat="@drawable/ic_pedestrian" />
-      <ImageView
-        android:id="@+id/mode_walking_arrow"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:importantForAccessibility="no"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_expand_more"
-        app:tint="@android:color/white" />
-    </FrameLayout>
-    <FrameLayout
-      android:id="@+id/mode_cycling"
-      android:layout_width="@dimen/map_mode_button_size"
-      android:layout_height="@dimen/map_mode_button_size"
-      android:background="@drawable/bg_map_mode_selected"
-      android:contentDescription="@string/mode_cycling"
-      android:foreground="?selectableItemBackgroundBorderless"
-      android:focusable="true"
-      android:clickable="true">
-      <ImageView
-        android:id="@+id/mode_cycling_icon"
-        android:layout_width="@dimen/map_mode_icon_size"
-        android:layout_height="@dimen/map_mode_icon_size"
-        android:layout_gravity="center"
-        android:importantForAccessibility="no"
-        app:srcCompat="@drawable/ic_bike" />
-      <ImageView
-        android:id="@+id/mode_cycling_arrow"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:importantForAccessibility="no"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_expand_more"
-        app:tint="@android:color/white" />
-    </FrameLayout>
-    <FrameLayout
-      android:id="@+id/mode_driving"
-      android:layout_width="@dimen/map_mode_button_size"
-      android:layout_height="@dimen/map_mode_button_size"
-      android:background="@drawable/bg_map_mode_selected"
-      android:contentDescription="@string/mode_driving"
-      android:foreground="?selectableItemBackgroundBorderless"
-      android:focusable="true"
-      android:clickable="true">
-      <ImageView
-        android:id="@+id/mode_driving_icon"
-        android:layout_width="@dimen/map_mode_icon_size"
-        android:layout_height="@dimen/map_mode_icon_size"
-        android:layout_gravity="center"
-        android:importantForAccessibility="no"
-        app:srcCompat="@drawable/ic_car" />
-      <ImageView
-        android:id="@+id/mode_driving_arrow"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:importantForAccessibility="no"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_expand_more"
-        app:tint="@android:color/white" />
-    </FrameLayout>
-    <FrameLayout
-      android:id="@+id/mode_public_transport"
-      android:layout_width="@dimen/map_mode_button_size"
-      android:layout_height="@dimen/map_mode_button_size"
-      android:background="@drawable/bg_map_mode_selected"
-      android:contentDescription="@string/mode_public_transport"
-      android:foreground="?selectableItemBackgroundBorderless"
-      android:focusable="true"
-      android:clickable="true">
-      <ImageView
-        android:id="@+id/mode_public_transport_icon"
-        android:layout_width="@dimen/map_mode_icon_size"
-        android:layout_height="@dimen/map_mode_icon_size"
-        android:layout_gravity="center"
-        android:importantForAccessibility="no"
-        app:srcCompat="@drawable/ic_route_planning_metro_40px" />
-      <ImageView
-        android:id="@+id/mode_public_transport_arrow"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:importantForAccessibility="no"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_expand_more"
-        app:tint="@android:color/white" />
-    </FrameLayout>
-  </LinearLayout>
+    android:orientation="horizontal" />
 </com.google.android.material.card.MaterialCardView>

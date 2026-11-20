@@ -149,7 +149,7 @@
                 android:layout_height="10dp"
                 android:layout_marginEnd="@dimen/margin_half_plus"
                 android:background="@drawable/bg_map_mode_selected"
-                android:backgroundTint="#1E88E5" />
+                android:backgroundTint="@color/route_point_from" />
               <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/route_from"
                 android:layout_width="0dp"
@@ -171,7 +171,7 @@
                 android:layout_height="10dp"
                 android:layout_marginEnd="@dimen/margin_half_plus"
                 android:background="@drawable/bg_map_mode_selected"
-                android:backgroundTint="#E53935" />
+                android:backgroundTint="@color/route_point_to" />
               <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/route_to"
                 android:layout_width="0dp"
@@ -230,35 +230,11 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_half"
     android:visibility="gone"
-    app:cardBackgroundColor="?cardBackground"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="4dp"
-    app:strokeWidth="0dp">
+    style="@style/MapModeDropdownCard">
     <androidx.fragment.app.FragmentContainerView
       android:id="@+id/route_options_dropdown_content"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:paddingVertical="@dimen/margin_half" />
   </com.google.android.material.card.MaterialCardView>
-  <!-- Old warning banner, no longer shown: the dropdown above replaces it. -->
-  <FrameLayout
-    android:id="@+id/routing_options_banner"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?drivingOptionsViewBg"
-    android:foreground="@drawable/shadow_top"
-    android:visibility="gone"
-    tools:visibility="visible">
-        <HorizontalScrollView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-        android:scrollbars="none"> <LinearLayout
-            android:id="@+id/routing_options_buttons_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="4dp">
-        </LinearLayout>
-      </HorizontalScrollView>
-  </FrameLayout>
 </LinearLayout>

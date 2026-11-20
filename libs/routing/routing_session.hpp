@@ -178,8 +178,8 @@ public:
   /// \brief returns points of route junctions.
   /// \returns true if there is valid route information. If the route is not valid returns false.
   bool GetRouteJunctionPoints(std::vector<geometry::PointWithAltitude> & routeJunctionPoints) const;
-  /// Copies the segments of a valid route and the point it starts at.
-  bool GetRouteSegments(std::vector<RouteSegment> & segments, m2::PointD & start) const;
+  /// Calls |fn| for each segment of a valid route and gives the point it starts at.
+  bool ForEachRouteSegment(std::function<void(RouteSegment const &)> const & fn, m2::PointD & start) const;
 
   SessionState OnLocationPositionChanged(location::GpsInfo const & info);
   void GetRouteFollowingInfo(FollowingInfo & info) const;

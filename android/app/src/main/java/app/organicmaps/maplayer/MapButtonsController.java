@@ -26,7 +26,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import app.organicmaps.MwmActivity;
@@ -81,6 +80,9 @@ public class MapButtonsController extends Fragment
   private View mModePicker;
   @Nullable
   private View mModeDropdown;
+  /// One button per MapModeUi.MODES entry, in the same order.
+  @Nullable
+  private View[] mModeButtons;
 
   @Nullable
   private MyPositionButton mNavMyPosition;
@@ -197,22 +199,17 @@ public class MapButtonsController extends Fragment
     return mFrame;
   }
 
-  private static int modeButtonId(@NonNull MapMode mode)
-  {
-    return switch (mode)
-    {
-      case Cycling -> R.id.mode_cycling;
-      case Driving -> R.id.mode_driving;
-      case PublicTransport -> R.id.mode_public_transport;
-      default -> R.id.mode_walking;
-    };
-  }
-
   private void initModePicker()
   {
-    for (MapMode mode : MapModeUi.MODES)
+    final ViewGroup container = mModePicker.findViewById(R.id.map_mode_buttons);
+    final LayoutInflater inflater = LayoutInflater.from(container.getContext());
+    mModeButtons = new View[MapModeUi.MODES.length];
+    for (int i = 0; i < MapModeUi.MODES.length; ++i)
     {
-      mFrame.findViewById(modeButtonId(mode)).setOnClickListener(v -> {
+      final MapMode mode = MapModeUi.MODES[i];
+      final View button = inflater.inflate(R.layout.map_mode_button, container, false);
+      ((ImageView) button.findViewById(R.id.mode_icon)).setImageResource(MapModeUi.icon(mode));
+      button.setOnClickListener(v -> {
         if (mode == MapMode.getChosen())
         {
           if (!closeModeDropdown())
@@ -220,11 +217,14 @@ public class MapButtonsController extends Fragment
           return;
         }
         MapMode.switchTo(mode);
-        updateModePicker();
         updateLayerButton();
         if (isModeDropdownOpen())
-          openModeDropdown();
+          openModeDropdown(); // Also refreshes the picker.
+        else
+          updateModePicker();
       });
+      container.addView(button);
+      mModeButtons[i] = button;
     }
     updateModePicker();
   }
@@ -251,14 +251,8 @@ public class MapButtonsController extends Fragment
     dot.setSize(size, size);
     title.setCompoundDrawablesRelativeWithIntrinsicBounds(dot, null, null, null);
 
-    final Fragment options = MapModeUi.newRouteOptionsFragment(mode);
-    UiUtils.showIf(options == null, mModeDropdown.findViewById(R.id.map_mode_dropdown_empty));
-    final FragmentManager fm = getChildFragmentManager();
-    final Fragment current = fm.findFragmentById(R.id.map_mode_dropdown_options);
-    if (options != null)
-      fm.beginTransaction().replace(R.id.map_mode_dropdown_options, options).commitNow();
-    else if (current != null)
-      fm.beginTransaction().remove(current).commitNow();
+    final boolean hasOptions = MapModeUi.showRouteOptions(getChildFragmentManager(), R.id.map_mode_dropdown_options, mode);
+    UiUtils.showIf(!hasOptions, mModeDropdown.findViewById(R.id.map_mode_dropdown_empty));
 
     // Not wider than a phone on big screens.
     final ViewGroup.LayoutParams lp = mModeDropdown.getLayoutParams();
@@ -276,59 +270,36 @@ public class MapButtonsController extends Fragment
       return false;
     UiUtils.hide(mModeDropdown);
     updateModePicker();
-    final FragmentManager fm = getChildFragmentManager();
-    final Fragment current = fm.findFragmentById(R.id.map_mode_dropdown_options);
-    if (current != null)
-      fm.beginTransaction().remove(current).commitNow();
+    MapModeUi.removeRouteOptions(getChildFragmentManager(), R.id.map_mode_dropdown_options);
     return true;
   }
 
   /// Highlights the current map mode in the picker.
   public void updateModePicker()
   {
-    if (mModePicker == null)
+    if (mModeButtons == null)
       return;
     final Context context = mModePicker.getContext();
     final MapMode current = MapMode.getChosen();
     final int iconTint = ThemeUtils.getColor(context, R.attr.iconTint);
-    for (MapMode mode : MapModeUi.MODES)
+    final boolean dropdownOpen = isModeDropdownOpen();
+    for (int i = 0; i < MapModeUi.MODES.length; ++i)
     {
-      final View button = mFrame.findViewById(modeButtonId(mode));
-      final ImageView icon = button.findViewById(iconId(mode));
+      final MapMode mode = MapModeUi.MODES[i];
+      final View button = mModeButtons[i];
       final boolean selected = mode == current;
       button.setSelected(selected);
       button.setBackgroundTintList(
           ColorStateList.valueOf(selected ? MapModeUi.color(context, mode) : Color.TRANSPARENT));
-      ImageViewCompat.setImageTintList(icon, ColorStateList.valueOf(selected ? Color.WHITE : iconTint));
+      ImageViewCompat.setImageTintList(button.findViewById(R.id.mode_icon),
+                                       ColorStateList.valueOf(selected ? Color.WHITE : iconTint));
       // The selected mode opens its route options: an arrow that flips while they're open.
-      final View arrow = button.findViewById(arrowId(mode));
+      final View arrow = button.findViewById(R.id.mode_arrow);
       UiUtils.showIf(selected, arrow);
-      arrow.setRotation(selected && isModeDropdownOpen() ? 180 : 0);
+      arrow.setRotation(selected && dropdownOpen ? 180 : 0);
       final String name = getString(MapModeUi.name(mode));
       button.setContentDescription(selected ? getString(R.string.map_mode_options_hint, name) : name);
     }
-  }
-
-  private static int arrowId(@NonNull MapMode mode)
-  {
-    return switch (mode)
-    {
-      case Cycling -> R.id.mode_cycling_arrow;
-      case Driving -> R.id.mode_driving_arrow;
-      case PublicTransport -> R.id.mode_public_transport_arrow;
-      default -> R.id.mode_walking_arrow;
-    };
-  }
-
-  private static int iconId(@NonNull MapMode mode)
-  {
-    return switch (mode)
-    {
-      case Cycling -> R.id.mode_cycling_icon;
-      case Driving -> R.id.mode_driving_icon;
-      case PublicTransport -> R.id.mode_public_transport_icon;
-      default -> R.id.mode_walking_icon;
-    };
   }
 
   private void initBottomButtons()

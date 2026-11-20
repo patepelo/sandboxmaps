@@ -168,6 +168,10 @@
   <color name="car_speed_current_alert_text_light">@color/dark_red</color>
   <color name="car_speed_current_alert_text_night">#FFFF5252</color>
 
+  <!-- From and to in the planning card -->
+  <color name="route_point_from">#1E88E5</color>
+  <color name="route_point_to">#E53935</color>
+
   <!-- Map modes, as on iOS -->
   <color name="mode_walking">#8CA144</color>
   <color name="mode_cycling">#685CAD</color>

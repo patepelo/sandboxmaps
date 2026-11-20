@@ -41,14 +41,9 @@ public enum MapMode
   public static void initialize()
   {
     if (get() == Default)
-    {
       switchTo(Walking);
-      return;
-    }
-    final RoutingController routing = RoutingController.get();
-    final Router router = get().router;
-    if (router != null && !routing.isPlanning() && !routing.isNavigating())
-      routing.setRouterType(router);
+    else
+      applyRouter(get());
   }
 
   /// Switches the map style and, outside route planning, the router. Layers are the same for all modes.
@@ -58,7 +53,12 @@ public enum MapMode
     if (mapMode == current)
       return;
     set(mapMode);
+    applyRouter(mapMode);
+  }
 
+  /// New routes are planned with the mode's router; a route being planned or followed keeps its own.
+  private static void applyRouter(@NonNull MapMode mapMode)
+  {
     final RoutingController routing = RoutingController.get();
     if (mapMode.router != null && !routing.isPlanning() && !routing.isNavigating())
       routing.setRouterType(mapMode.router);
@@ -67,14 +67,21 @@ public enum MapMode
   /// Picks the mode that matches a router chosen while planning a route. The ruler keeps the current mode.
   public static void followRouter(@NonNull Router router)
   {
+    final MapMode mode = forRouter(router);
+    if (mode != null)
+      switchTo(mode);
+  }
+
+  /// The mode that plans routes with this router, or null for the ruler.
+  @Nullable
+  public static MapMode forRouter(@NonNull Router router)
+  {
     for (MapMode mode : values())
     {
       if (mode.router == router)
-      {
-        switchTo(mode);
-        return;
-      }
+        return mode;
     }
+    return null;
   }
 
   public static boolean isBuildings3dEnabled()
@@ -89,13 +96,6 @@ public enum MapMode
     final Framework.Params3dMode params3d = new Framework.Params3dMode();
     Framework.nativeGet3dMode(params3d);
     Framework.nativeSet3dMode(params3d.enabled, enabled);
-  }
-
-  /// The router used to plan routes in this mode, null for Default.
-  @Nullable
-  public Router getRouter()
-  {
-    return router;
   }
 
   @NonNull

@@ -927,12 +927,14 @@ bool RoutingSession::GetRouteJunctionPoints(std::vector<geometry::PointWithAltit
   return true;
 }
 
-bool RoutingSession::GetRouteSegments(std::vector<RouteSegment> & segments, m2::PointD & start) const
+bool RoutingSession::ForEachRouteSegment(std::function<void(RouteSegment const &)> const & fn,
+                                         m2::PointD & start) const
 {
   CHECK_THREAD_CHECKER(m_threadChecker, ());
   if (!m_route || !m_route->IsValid() || m_route->GetRouteSegments().empty())
     return false;
-  segments = m_route->GetRouteSegments();
+  for (auto const & s : m_route->GetRouteSegments())
+    fn(s);
   start = m_route->GetPoly().Front();
   return true;
 }

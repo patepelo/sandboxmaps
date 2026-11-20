@@ -23,7 +23,7 @@ public class RoutingPlanFragment extends BaseMwmFragment
     final MwmActivity activity = (MwmActivity) requireActivity();
     View res = inflater.inflate(R.layout.fragment_routing, container, false);
     mPlanController =
-        new RoutingPlanController(res, activity, activity.startRoutingOptionsForResult, activity, activity);
+        new RoutingPlanController(res, activity, activity, activity);
     mRoutePreviewPanelController = new RoutePreviewPanelController(res, activity::exitRoutePreview);
 
     onTurnPreviewChanged(RoutingController.get().isPreviewingTurn(), activity.getPreviewedTurnInstruction());

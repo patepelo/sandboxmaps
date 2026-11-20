@@ -39,16 +39,13 @@ jobject ToJava(JNIEnv * env, route_details::RouteDetails const & d)
   static jclass const stopClass = jni::GetGlobalClassRef(env, "app/organicmaps/sdk/routing/RouteDetails$Stop");
   // Stop(int type, String name, double lat, double lon, double alongM, double offsetM)
   static jmethodID const stopCtor = jni::GetConstructorID(env, stopClass, "(ILjava/lang/String;DDDD)V");
-  jobjectArray stops = env->NewObjectArray(static_cast<jsize>(d.m_stops.size()), stopClass, nullptr);
-  for (size_t i = 0; i < d.m_stops.size(); ++i)
+  jobjectArray stops = jni::ToJavaArray(env, stopClass, d.m_stops, [](JNIEnv * env, Stop const & s)
   {
-    auto const & s = d.m_stops[i];
     auto const ll = mercator::ToLatLon(s.m_point);
     jni::TScopedLocalRef name(env, jni::ToJavaString(env, s.m_name));
-    jni::TScopedLocalRef stop(env, env->NewObject(stopClass, stopCtor, static_cast<jint>(s.m_type), name.get(), ll.m_lat,
-                                                  ll.m_lon, s.m_alongM, s.m_offsetM));
-    env->SetObjectArrayElement(stops, static_cast<jsize>(i), stop.get());
-  }
+    return env->NewObject(stopClass, stopCtor, static_cast<jint>(s.m_type), name.get(), ll.m_lat, ll.m_lon,
+                          s.m_alongM, s.m_offsetM);
+  });
 
   static jclass const detailsClass = jni::GetGlobalClassRef(env, "app/organicmaps/sdk/routing/RouteDetails");
   // RouteDetails(double totalM, double[] stretchStartM, double[] stretchEndM, int[] stretchWay, int[] stretchSurface,

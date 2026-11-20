@@ -628,7 +628,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
     if (!mIsTabletLayout)
     {
-      mRoutingPlanInplaceController = new RoutingPlanInplaceController(this, startRoutingOptionsForResult, this, this);
+      mRoutingPlanInplaceController = new RoutingPlanInplaceController(this, this, this);
       mRoutePreviewPanelController =
           new RoutePreviewPanelController(findViewById(R.id.map_container), mRoutePreviewController::exitPreview);
       removeCurrentFragment(false);

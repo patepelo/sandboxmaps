@@ -1469,7 +1469,12 @@ bool RoutingManager::HasRouteAltitude() const
 void RoutingManager::RequestRouteDetails(RouteDetailsCallback && callback) const
 {
   route_details::RouteInput input;
-  if (!m_routingSession.GetRouteSegments(input.m_segments, input.m_start))
+  auto const addPoint = [&input](routing::RouteSegment const & s)
+  {
+    input.m_points.push_back(
+        {s.GetRoadNameInfo().m_mwmId, s.GetJunction().GetPoint(), s.GetDistFromBeginningMeters()});
+  };
+  if (!m_routingSession.ForEachRouteSegment(addPoint, input.m_start))
   {
     callback({});
     return;

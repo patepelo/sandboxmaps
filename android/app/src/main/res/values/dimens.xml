@@ -88,7 +88,6 @@
 
   <!-- routing layout -->
   <dimen name="routing_selector_wheel_size">40dp</dimen>
-  <dimen name="routing_selector_wheel_margin">4dp</dimen>
   <dimen name="routing_transit_step_corner_radius">4dp</dimen>
   <dimen name="routing_transit_step_min_height">20dp</dimen>
   <dimen name="routing_transit_setp_min_acceptable_with">104dp</dimen>

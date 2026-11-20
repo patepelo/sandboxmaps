@@ -893,7 +893,8 @@ public class RoutingController
 
     if (getStartPoint() != null && getEndPoint() != null)
       build();
-    // After build(): the new map style redraws the current route, so it must already be removed.
+    // After build(): a map style switch redraws the current route, so ask for its removal first. This narrows,
+    // but doesn't close, a race in the renderer between that redraw and the removal.
     MapMode.followRouter(router);
   }
 

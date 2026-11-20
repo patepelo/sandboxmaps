@@ -47,6 +47,10 @@ public final class RouteDetails
     TRAIN_STATION
   }
 
+  private static final WayType[] WAY_TYPES = WayType.values();
+  private static final Surface[] SURFACES = Surface.values();
+  private static final StopType[] STOP_TYPES = StopType.values();
+
   /// Steepness from which a stretch counts as steep (route_details::kSteepGrade).
   public static final double STEEP_GRADE = 0.08;
 
@@ -70,7 +74,7 @@ public final class RouteDetails
     // Used by JNI.
     Stop(int type, @Nullable String name, double lat, double lon, double alongM, double offsetM)
     {
-      this.type = StopType.values()[type];
+      this.type = STOP_TYPES[type];
       this.name = name == null ? "" : name;
       this.lat = lat;
       this.lon = lon;
@@ -119,7 +123,7 @@ public final class RouteDetails
 
   public boolean isEmpty()
   {
-    return stretchStartM.length == 0;
+    return getStretchCount() == 0;
   }
 
   public int getStretchCount()
@@ -130,13 +134,13 @@ public final class RouteDetails
   @NonNull
   public WayType getWayType(int stretch)
   {
-    return WayType.values()[mStretchWay[stretch]];
+    return WAY_TYPES[mStretchWay[stretch]];
   }
 
   @NonNull
   public Surface getSurface(int stretch)
   {
-    return Surface.values()[mStretchSurface[stretch]];
+    return SURFACES[mStretchSurface[stretch]];
   }
 
   /// Cycling routes only: bikes aren't allowed on this stretch, so it's walked.

@@ -2,18 +2,13 @@ package app.organicmaps.routing;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
@@ -22,8 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import app.organicmaps.MwmApplication;
 import app.organicmaps.R;
 import app.organicmaps.maplayer.MapModeUi;
@@ -52,7 +47,6 @@ import java.util.Set;
 public class RoutingPlanController extends ToolbarController
 {
   private static final String TAG = RoutingPlanController.class.getSimpleName();
-  private static final String BUNDLE_HAS_DRIVING_OPTIONS_VIEW = "has_driving_options_view";
 
   private final View mFrame;
   @NonNull
@@ -77,11 +71,6 @@ public class RoutingPlanController extends ToolbarController
   private boolean mIsPreviewingTurn;
 
   @NonNull
-  private final FrameLayout mRoutingOptionsBanner;
-
-  @NonNull
-  private final View.OnLayoutChangeListener mRoutingOptionsLayoutListener;
-  @NonNull
   private final TextView mRouteFrom;
   @NonNull
   private final TextView mRouteTo;
@@ -101,8 +90,15 @@ public class RoutingPlanController extends ToolbarController
   private final View mOptionsDropdown;
   @Nullable
   private Router mOptionsDropdownRouter;
+  /// Route details are worked out once per built route.
+  private boolean mRouteDetailsRequested;
   @NonNull
   private Set<RoadType> mOptionsAtOpen = Collections.emptySet();
+
+  private void setupRouterButton(@IdRes int buttonId, @NonNull MapMode mode, View.OnClickListener clickListener)
+  {
+    setupRouterButton(buttonId, MapModeUi.icon(mode), MapModeUi.color(mFrame.getContext(), mode), clickListener);
+  }
 
   /// The selected mode gets its map mode colour, like the pill on the map.
   private void setupRouterButton(@IdRes int buttonId, final @DrawableRes int iconRes, @ColorInt int selectedColor,
@@ -128,7 +124,7 @@ public class RoutingPlanController extends ToolbarController
     rb.setOnClickListener(clickListener);
   }
 
-  RoutingPlanController(View root, Activity activity, ActivityResultLauncher<Intent> startRoutingOptionsForResult,
+  RoutingPlanController(View root, Activity activity,
                         @NonNull RoutingPlanInplaceController.RoutingPlanListener routingPlanListener,
                         @NonNull RoutingBottomMenuListener listener)
   {
@@ -150,7 +146,6 @@ public class RoutingPlanController extends ToolbarController
 
     mRoutingBottomMenuController = RoutingBottomMenuController.newInstance(requireActivity(), mFrame, listener);
 
-    mRoutingOptionsBanner = mFrame.findViewById(R.id.routing_options_banner);
     mRouteFrom = mFrame.findViewById(R.id.route_from);
     mRouteTo = mFrame.findViewById(R.id.route_to);
     mAvoidRow = mFrame.findViewById(R.id.route_avoid_row);
@@ -166,7 +161,6 @@ public class RoutingPlanController extends ToolbarController
         openRouteOptions();
     });
 
-    mRoutingOptionsLayoutListener = new SelfTerminatedRoutingOptionsLayoutListener();
     mAnimToggle =
         MwmApplication.from(activity.getApplicationContext()).getResources().getInteger(R.integer.anim_default);
 
@@ -187,23 +181,13 @@ public class RoutingPlanController extends ToolbarController
     return mFrame;
   }
 
-  @NonNull
-  private View getRoutingOptionsBtnContainer()
-  {
-    return mRoutingOptionsBanner;
-  }
-
   private void setupRouterButtons()
   {
     final Context context = mFrame.getContext();
-    setupRouterButton(R.id.vehicle, R.drawable.ic_car, MapModeUi.color(context, MapMode.Driving),
-                      this::onVehicleModeSelected);
-    setupRouterButton(R.id.pedestrian, R.drawable.ic_pedestrian, MapModeUi.color(context, MapMode.Walking),
-                      this::onPedestrianModeSelected);
-    setupRouterButton(R.id.transit, app.organicmaps.sdk.R.drawable.ic_route_planning_metro_40px,
-                      MapModeUi.color(context, MapMode.PublicTransport), this::onTransitModeSelected);
-    setupRouterButton(R.id.bicycle, R.drawable.ic_bike, MapModeUi.color(context, MapMode.Cycling),
-                      this::onBicycleModeSelected);
+    setupRouterButton(R.id.vehicle, MapMode.Driving, this::onVehicleModeSelected);
+    setupRouterButton(R.id.pedestrian, MapMode.Walking, this::onPedestrianModeSelected);
+    setupRouterButton(R.id.transit, MapMode.PublicTransport, this::onTransitModeSelected);
+    setupRouterButton(R.id.bicycle, MapMode.Cycling, this::onBicycleModeSelected);
     setupRouterButton(R.id.ruler, app.organicmaps.sdk.R.drawable.ic_ruler_route,
                       ThemeUtils.getColor(context, R.attr.iconTint), this::onRulerModeSelected);
   }
@@ -266,6 +250,7 @@ public class RoutingPlanController extends ToolbarController
 
     if (!ready)
     {
+      mRouteDetailsRequested = false;
       mRoutingBottomMenuController.hideAltitudeChartAndRoutingDetails();
       return;
     }
@@ -295,6 +280,9 @@ public class RoutingPlanController extends ToolbarController
   /// What the route is made of, for the route details panel. For now only logged.
   private void requestRouteDetails()
   {
+    if (mRouteDetailsRequested)
+      return;
+    mRouteDetailsRequested = true;
     RouteDetails.request(details -> {
       if (details.isEmpty())
         return;
@@ -357,8 +345,11 @@ public class RoutingPlanController extends ToolbarController
     button.progress();
 
     updateProgressLabels();
-    updatePoints();
-    updateRouteOptionsSummary();
+    if (progress == 0 || !RoutingController.get().isBuilding())
+    {
+      updatePoints();
+      updateRouteOptionsSummary();
+    }
     if (router != mOptionsDropdownRouter)
       closeRouteOptions();
 
@@ -398,7 +389,6 @@ public class RoutingPlanController extends ToolbarController
   void saveRoutingPanelState(@NonNull Bundle outState)
   {
     mRoutingBottomMenuController.saveRoutingPanelState(outState);
-    outState.putBoolean(BUNDLE_HAS_DRIVING_OPTIONS_VIEW, UiUtils.isVisible(mRoutingOptionsBanner));
   }
 
   void restoreRoutingPanelState(@NonNull Bundle state)
@@ -407,10 +397,6 @@ public class RoutingPlanController extends ToolbarController
       mRoutingBottomMenuController.hideAltitudeChartAndRoutingDetails();
     else
       mRoutingBottomMenuController.restoreRoutingPanelState(state);
-
-    boolean hasView = state.getBoolean(BUNDLE_HAS_DRIVING_OPTIONS_VIEW);
-    if (hasView)
-      showRoutingOptionsView();
   }
 
   public void showAddStartFrame()
@@ -432,20 +418,18 @@ public class RoutingPlanController extends ToolbarController
   @NonNull
   private String pointName(@Nullable MapObject point)
   {
-    final Context context = mFrame.getContext();
     if (point == null)
       return "…";
-    if (point.isMyPosition())
-      return context.getString(app.organicmaps.sdk.R.string.core_my_position);
-    final String title = point.getTitle();
-    return title.isEmpty() ? context.getString(app.organicmaps.sdk.R.string.core_my_position) : title;
+    if (point.isMyPosition() || point.getTitle().isEmpty())
+      return mFrame.getContext().getString(app.organicmaps.sdk.R.string.core_my_position);
+    return point.getTitle();
   }
 
   /// "Avoiding: Unpaved, Stairs +1" on one line, whatever the number of options.
   private void updateRouteOptionsSummary()
   {
     final Router router = RoutingController.get().getLastRouterType();
-    final boolean hasOptions = MapModeUi.newRouteOptionsFragment(modeOf(router)) != null;
+    final boolean hasOptions = MapModeUi.hasRouteOptions(MapMode.forRouter(router));
     UiUtils.showIf(hasOptions, mAvoidRow);
     if (!hasOptions)
       return;
@@ -465,8 +449,8 @@ public class RoutingPlanController extends ToolbarController
     mAvoidRow.setPadding(mAvoidRow.getPaddingStart(), quiet ? 0 : mAvoidRowPadding, mAvoidRow.getPaddingEnd(),
                          mAvoidRowPadding);
     final String summary;
-    if (names.isEmpty())
-      summary = context.getString(R.string.route_options_link);
+    if (quiet)
+      summary = context.getString(R.string.routing_options_title);
     else if (names.size() <= 2)
       summary = String.join(", ", names);
     else
@@ -489,29 +473,15 @@ public class RoutingPlanController extends ToolbarController
     };
   }
 
-  @NonNull
-  private static MapMode modeOf(@NonNull Router router)
-  {
-    for (MapMode mode : MapMode.values())
-    {
-      if (mode.getRouter() == router)
-        return mode;
-    }
-    return MapMode.Default;
-  }
-
   /// Shows the route options of the current mode under the card: the same screens as the route settings.
   public void openRouteOptions()
   {
     final Router router = RoutingController.get().getLastRouterType();
-    final Fragment options = MapModeUi.newRouteOptionsFragment(modeOf(router));
-    if (options == null || !(requireActivity() instanceof FragmentActivity activity))
+    final MapMode mode = MapMode.forRouter(router);
+    if (mode == null || !MapModeUi.showRouteOptions(getFragmentManager(), R.id.route_options_dropdown_content, mode))
       return;
     mOptionsDropdownRouter = router;
     mOptionsAtOpen = RoutingOptions.getActiveRoadTypes(router);
-    activity.getSupportFragmentManager().beginTransaction()
-        .replace(R.id.route_options_dropdown_content, options)
-        .commitNow();
     UiUtils.show(mOptionsDropdown);
     mAvoidChevron.setRotation(180);
   }
@@ -524,12 +494,7 @@ public class RoutingPlanController extends ToolbarController
       return false;
     UiUtils.hide(mOptionsDropdown);
     mAvoidChevron.setRotation(0);
-    if (requireActivity() instanceof FragmentActivity activity)
-    {
-      final Fragment current = activity.getSupportFragmentManager().findFragmentById(R.id.route_options_dropdown_content);
-      if (current != null)
-        activity.getSupportFragmentManager().beginTransaction().remove(current).commitNow();
-    }
+    MapModeUi.removeRouteOptions(getFragmentManager(), R.id.route_options_dropdown_content);
     final Router router = mOptionsDropdownRouter;
     mOptionsDropdownRouter = null;
     if (router != null && router == RoutingController.get().getLastRouterType()
@@ -538,6 +503,12 @@ public class RoutingPlanController extends ToolbarController
     else
       updateRouteOptionsSummary();
     return true;
+  }
+
+  @NonNull
+  private FragmentManager getFragmentManager()
+  {
+    return ((FragmentActivity) requireActivity()).getSupportFragmentManager();
   }
 
   /// Called when route options are on: the summary already shows them.
@@ -559,22 +530,8 @@ public class RoutingPlanController extends ToolbarController
     if (frameHeight == 0)
       return 0;
 
-    View driverOptionsView = getRoutingOptionsBtnContainer();
-    int extraOppositeOffset = UiUtils.isVisible(driverOptionsView) ? 0 : driverOptionsView.getHeight();
-
     // The route options drop over the map; they don't move the visible part of it.
     final int dropdownHeight = UiUtils.isVisible(mOptionsDropdown) ? mOptionsDropdown.getHeight() : 0;
-    return frameHeight - extraOppositeOffset - dropdownHeight;
-  }
-
-  private class SelfTerminatedRoutingOptionsLayoutListener implements View.OnLayoutChangeListener
-  {
-    @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight,
-                               int oldBottom)
-    {
-      mRoutingPlanListener.onRoutingPlanStartAnimate(UiUtils.isVisible(getFrame()));
-      mRoutingOptionsBanner.removeOnLayoutChangeListener(this);
-    }
+    return frameHeight - dropdownHeight;
   }
 }

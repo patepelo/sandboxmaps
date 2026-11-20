@@ -1,6 +1,6 @@
 #pragma once
 
-#include "routing/route.hpp"
+#include "indexer/feature_decl.hpp"
 
 #include "geometry/point2d.hpp"
 #include "geometry/point_with_altitude.hpp"
@@ -91,10 +91,18 @@ struct RouteDetails
   std::vector<Stop> m_stops;
 };
 
-/// A copy of the route taken on the routing thread, so the details can be computed on another one.
+/// The end of one route segment: the road it's on, where it is and how far from the start.
+struct RoutePoint
+{
+  FeatureID m_featureId;
+  m2::PointD m_point;
+  double m_distM = 0;
+};
+
+/// What's needed of the route, copied on the routing thread so the details can be computed on another one.
 struct RouteInput
 {
-  std::vector<routing::RouteSegment> m_segments;
+  std::vector<RoutePoint> m_points;
   m2::PointD m_start;
   /// From RoutingSession::GetRouteAltitudesAndDistancesM(); empty when the route has no altitudes.
   std::vector<double> m_distancesM;

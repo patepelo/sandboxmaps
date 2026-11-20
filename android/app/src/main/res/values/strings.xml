@@ -1120,7 +1120,6 @@
     <string name="map_mode_route_options_title">Route options · %s</string>
     <string name="map_mode_no_route_options">Public transport routes have no options.</string>
     <string name="route_avoid_label">Avoiding</string>
-    <string name="route_options_link">Route options</string>
     <string name="route_avoid_ferries">Ferries</string>
     <string name="route_avoid_unpaved">Unpaved</string>
     <string name="route_avoid_stairs">Stairs</string>

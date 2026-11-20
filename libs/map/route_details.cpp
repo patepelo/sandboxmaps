@@ -24,8 +24,8 @@ namespace
 {
 /// Steepness is measured over this distance, so single noisy altitudes don't count.
 double constexpr kGradeWindowM = 50.0;
-/// The route is searched for stops in pieces of about this length.
-double constexpr kStopChunkM = 1500.0;
+/// The route is searched for stops in pieces of about this length, so the search boxes hug the route.
+double constexpr kStopChunkM = 250.0;
 size_t constexpr kMaxStops = 1000;
 
 /// Maps classificator types to what the panel shows.
@@ -162,10 +162,10 @@ void CollectStretches(FeatureReader & reader, RouteInput const & input, RouteDet
   Stretch lastKind;
   bool hasKind = false;
   double startM = 0;
-  for (auto const & s : input.m_segments)
+  for (auto const & p : input.m_points)
   {
-    double const endM = s.GetDistFromBeginningMeters();
-    FeatureID const & id = s.GetRoadNameInfo().m_mwmId;
+    double const endM = p.m_distM;
+    FeatureID const & id = p.m_featureId;
     Stretch kind;
     if (hasKind && id == lastId)
       kind = lastKind;
@@ -247,10 +247,10 @@ void CollectStops(DataSource const & dataSource, RouteInput const & input, Route
   // The route as points with their distance from the start.
   std::vector<m2::PointD> points{input.m_start};
   std::vector<double> dist{0.0};
-  for (auto const & s : input.m_segments)
+  for (auto const & p : input.m_points)
   {
-    points.push_back(s.GetJunction().GetPoint());
-    dist.push_back(s.GetDistFromBeginningMeters());
+    points.push_back(p.m_point);
+    dist.push_back(p.m_distM);
   }
   if (points.size() < 2)
     return;
@@ -296,16 +296,15 @@ void CollectStops(DataSource const & dataSource, RouteInput const & input, Route
       }
       if (along < 0)
         return;
-      auto const it = best.find(ft.GetID());
-      if (it != best.end() && it->second.m_offsetM <= bestOffset)
+      auto const [it, added] = best.try_emplace(ft.GetID());
+      if (!added && it->second.m_offsetM <= bestOffset)
         return;
-      Stop stop;
+      Stop & stop = it->second;
       stop.m_type = type;
       stop.m_name = std::string(ft.GetName(localisation::kDefaultNameIndex));
       stop.m_point = center;
       stop.m_alongM = along;
       stop.m_offsetM = bestOffset;
-      best[ft.GetID()] = std::move(stop);
     }, rect, scales::GetUpperScale());
 
     chunkBegin = chunkEnd;
@@ -323,9 +322,9 @@ void CollectStops(DataSource const & dataSource, RouteInput const & input, Route
 RouteDetails Compute(DataSource const & dataSource, RouteInput const & input)
 {
   RouteDetails out;
-  if (input.m_segments.empty())
+  if (input.m_points.empty())
     return out;
-  out.m_totalM = input.m_segments.back().GetDistFromBeginningMeters();
+  out.m_totalM = input.m_points.back().m_distM;
 
   FeatureReader reader(dataSource);
   CollectStretches(reader, input, out);

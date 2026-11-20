@@ -1007,7 +1007,6 @@
     <string name="map_mode_route_options_title">Opciones de ruta · %s</string>
     <string name="map_mode_no_route_options">Las rutas en transporte público no tienen opciones.</string>
     <string name="route_avoid_label">Evitando</string>
-    <string name="route_options_link">Opciones de ruta</string>
     <string name="route_avoid_ferries">Ferris</string>
     <string name="route_avoid_unpaved">Sin asfaltar</string>
     <string name="route_avoid_stairs">Escaleras</string>
